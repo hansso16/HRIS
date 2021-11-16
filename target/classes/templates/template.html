@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:fragment="headfiles">
+			<meta charset="utf-8">
+	    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    	<title>SOSE'S - HRIS</title>
+	    	
+	    	<!-- <link rel="stylesheet" th:href="@{/css/roboto.min.css}" type="text/css" /> -->
+	    	<link rel="stylesheet" th:href="@{/css/public/bootstrap.min.css}" type="text/css" />
+		</th:block >
+	</head>
+	<body>
+		<th:block th:fragment="menu">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			 	<div class="container-fluid">
+			   		<a class="navbar-brand" href="#" th:href="@{/}">SOSE'S HRIS</a>
+			    	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			      		<span class="navbar-toggler-icon"></span>
+			    	</button>
+			    	
+				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				     	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					        <li class="nav-item">
+					         	<a class="nav-link active" aria-current="page" href="#" th:href="@{/}">Home</a>
+					        </li>
+					        <li>
+					        	<form class="d-flex" action="#" th:action="@{/employee/search}" method="GET" >
+							      	<input th:value="*{employee_id}" class="form-control me-2" type="search" placeholder="Search by Employee Id" name="employeeId" aria-label="Search" autocomplete="off" required>
+									<button class="btn btn-outline-success" type="submit">Search</button>
+						      	</form>
+					        </li>
+					        <!--<li class="nav-item">
+					         	<a class="nav-link" href="#">Link</a>
+					        </li>
+					        <li class="nav-item dropdown">
+					         	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					            	Dropdown
+					         	</a>
+					  			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						            <li><a class="dropdown-item" href="#">Action</a></li>
+						            <li><a class="dropdown-item" href="#">Another action</a></li>
+						            <li><hr class="dropdown-divider"></li>
+						            <li><a class="dropdown-item" href="#">Something else here</a></li>
+					        	</ul>
+					        </li>
+					        <li class="nav-item">
+					         	<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+					        </li> -->
+				     	</ul>
+		     			<a sec:authentication="name" class="btn btn-light disabled">username</a>
+		      			<div sec:authorize="isAuthenticated()">
+							<form action="#" th:action="@{/logout}" method="POST">
+								<button type="submit" class="btn btn-secondary" th:text="${#strings.toUpperCase('logout')}" >Logout</button>
+							</form>
+						</div>
+				    </div>
+			 	</div>
+			</nav>
+		</th:block>
+		
+		<th:block th:fragment="foooter">
+			<!--<footer class="footer mt-auto py-3 bg-light">
+				<div class="container">
+			    	<span class="text-muted">Place sticky footer content here.</span>
+				</div>
+			</footer>-->
+			<footer></footer>
+		</th:block>
+		<th:block th:fragment="scripts">
+			<script type="text/javascript" th:src="@{/js/public/bootstrap.bundle.min.js}"></script>
+		</th:block>
+	</body>
+</html >
