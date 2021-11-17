@@ -1,14 +1,16 @@
-package com.soses.hris.service;
+package com.soses.hris.service.impl;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeSearchResponse;
 import com.soses.hris.dto.EmployeeTO;
 import com.soses.hris.entity.Employee;
 import com.soses.hris.repository.EmployeeRepository;
+import com.soses.hris.service.EmployeeService;
 
 @Service
 @Transactional
@@ -53,5 +55,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		return employee;
+	}
+
+	@Override
+	public BaseEmployeeResponse getEmployeeDetails(int employeeId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

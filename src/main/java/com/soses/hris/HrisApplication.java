@@ -59,10 +59,10 @@ public class HrisApplication implements CommandLineRunner {
 		
 		
 		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 		
 //		Cache<ConfigParamPK, ConfigParam> p = cacheManager.getCache("configParamCache", ConfigParamPK.class, ConfigParam.class);
 		Cache p = cacheManager.getCache("configParamCache");

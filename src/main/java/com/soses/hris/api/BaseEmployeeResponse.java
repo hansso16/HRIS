@@ -1,8 +1,10 @@
 package com.soses.hris.api;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class BaseEmployeeResponse.
+ *
+ * @author hso
+ * @since 17 Nov 2021
  */
 public class BaseEmployeeResponse {
 

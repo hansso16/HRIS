@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,9 +21,11 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.soses.hris.api.BaseEmployeeRequest;
+import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.cache.CacheService;
 import com.soses.hris.entity.Employee;
-import com.soses.hris.service.EmployeeServiceImpl;
+import com.soses.hris.service.EmployeeService;
+import com.soses.hris.service.impl.EmployeeServiceImpl;
 
 /**
  * The Class EmployeeController.
@@ -43,10 +46,20 @@ public class EmployeeController {
 	
 	/** The Constant EMP_PAGE. */
 	private static final String EMP_PAGE = "/employee/employee";
+	private static final String EMP_LIST = "/employee/employee_list";
 	
 	/** The emp service. */
 	private EmployeeServiceImpl empService;
 	
+	private EmployeeService generalEmpService;
+	
+	
+	@Autowired
+	@Qualifier("GeneralEmployeeSerivceImpl")
+	public void seteService(EmployeeService generalEmpService) {
+		this.generalEmpService = generalEmpService;
+	}
+
 	/**
 	 * Sets the emp service.
 	 *
@@ -106,10 +119,9 @@ public class EmployeeController {
 		
 		// searchType? case 1 2 3 -> service
 		
-		Employee employee = empService.findEmployeeById(employeeId);
-		if (employee!= null) {
-			log.info(employee.toString());
-			model.addAttribute("employee", employee);
+		BaseEmployeeResponse res = generalEmpService.getEmployeeDetails(employeeId);
+		if (res!= null) {
+			model.addAttribute("res", res);
 			model.addAttribute("isUpdate", false);
 		} else {
 			model.addAttribute(EMP_SEARCH_ERR, "Employee id not found.");
