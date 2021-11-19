@@ -2,7 +2,6 @@ package com.soses.hris.api;
 
 import java.util.List;
 
-import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.dto.EmployeeTO;
 
 /**
@@ -14,44 +13,28 @@ import com.soses.hris.dto.EmployeeTO;
 public class EmployeeSearchResponse extends BaseEmployeeSearchResponse {
 
 	/** The employee. */
-	private EmployeeTO employee;
-	
-	/** The employee address list. */
-	private List<EmployeeAddressTO> employeeAddressList;
-	
+	private List<EmployeeTO> employeeList;
+
 	/**
-	 * Gets the employee.
+	 * Gets the employee list.
 	 *
-	 * @return the employee
+	 * @return the employee list
 	 */
-	public EmployeeTO getEmployee() {
-		return employee;
+	public List<EmployeeTO> getEmployeeList() {
+		return employeeList;
 	}
-	
+
 	/**
-	 * Sets the employee.
+	 * Sets the employee list.
 	 *
-	 * @param employee the new employee
+	 * @param employeeList the new employee list
 	 */
-	public void setEmployee(EmployeeTO employee) {
-		this.employee = employee;
+	public void setEmployeeList(List<EmployeeTO> employeeList) {
+		this.employeeList = employeeList;
 	}
-	
-	/**
-	 * Gets the employee address list.
-	 *
-	 * @return the employee address list
-	 */
-	public List<EmployeeAddressTO> getEmployeeAddressList() {
-		return employeeAddressList;
-	}
-	
-	/**
-	 * Sets the employee address list.
-	 *
-	 * @param employeeAddressList the new employee address list
-	 */
-	public void setEmployeeAddressList(List<EmployeeAddressTO> employeeAddressList) {
-		this.employeeAddressList = employeeAddressList;
+
+	@Override
+	public String toString() {
+		return "EmployeeSearchResponse [employeeList=" + employeeList + "]";
 	}
 }

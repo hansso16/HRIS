@@ -26,8 +26,8 @@
 					         	<a class="nav-link active" aria-current="page" href="#" th:href="@{/}">Home</a>
 					        </li>
 					        <li>
-					        	<form class="d-flex" action="#" th:action="@{/employee/search}" method="GET" >
-							      	<input th:value="*{employee_id}" class="form-control me-2" type="search" placeholder="Search by Employee Id" name="employeeId" aria-label="Search" autocomplete="off" required>
+					        	<form class="d-flex" action="#" th:action="@{/employee}" method="GET" >
+							      	<input th:value="*{employee_id}" class="form-control me-2" type="search" placeholder="Search by Employee Id" name="employeeId" aria-label="Search" autocomplete="off" >
 									<button class="btn btn-outline-success" type="submit">Search</button>
 						      	</form>
 					        </li>

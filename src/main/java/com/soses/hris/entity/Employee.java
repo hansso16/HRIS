@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class Employee implements Serializable {
     /** The employee id. */
     @Id
     @Column(name="EMPLOYEE_ID", unique=true, nullable=false, precision=10)
-    private int employeeId;
+    private String employeeId;
     
     /** The last name. */
     @Column(name="LAST_NAME", length=50)
@@ -111,7 +112,7 @@ public class Employee implements Serializable {
      *
      * @return the current value of employeeId
      */
-    public int getEmployeeId() {
+    public String getEmployeeId() {
         return employeeId;
     }
 
@@ -120,7 +121,7 @@ public class Employee implements Serializable {
      *
      * @param aEmployeeId the new value for employeeId
      */
-    public void setEmployeeId(int aEmployeeId) {
+    public void setEmployeeId(String aEmployeeId) {
         employeeId = aEmployeeId;
     }
 
@@ -450,31 +451,32 @@ public class Employee implements Serializable {
         return true;
     }
 
-    /**
-     * Compares this instance with another Employee.
-     *
-     * @param other The object to compare to
-     * @return True if the objects are the same
-     */
     @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof Employee)) return false;
-        return this.equalKeys(other) && ((Employee)other).equalKeys(this);
-    }
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Objects.equals(birthdate, other.birthdate) && Objects.equals(cellNo, other.cellNo)
+				&& Objects.equals(division, other.division) && Objects.equals(emailAddress, other.emailAddress)
+				&& Objects.equals(employeeId, other.employeeId) && Objects.equals(entryTimestamp, other.entryTimestamp)
+				&& Objects.equals(firstName, other.firstName) && Objects.equals(gender, other.gender)
+				&& Objects.equals(hiringDate, other.hiringDate) && Objects.equals(lastName, other.lastName)
+				&& Objects.equals(maritalStatus, other.maritalStatus) && Objects.equals(middleName, other.middleName)
+				&& Objects.equals(nickname, other.nickname) && Objects.equals(position, other.position)
+				&& Objects.equals(regularizationDate, other.regularizationDate) && Objects.equals(suffix, other.suffix)
+				&& Objects.equals(telNo, other.telNo) && Objects.equals(terminationDate, other.terminationDate);
+	}
 
-    /**
-     * Returns a hash code for this instance.
-     *
-     * @return Hash code
-     */
     @Override
-    public int hashCode() {
-        int i;
-        int result = 17;
-        i = getEmployeeId();
-        result = 37*result + i;
-        return result;
-    }
+	public int hashCode() {
+		return Objects.hash(birthdate, cellNo, division, emailAddress, employeeId, entryTimestamp, firstName, gender,
+				hiringDate, lastName, maritalStatus, middleName, nickname, position, regularizationDate, suffix, telNo,
+				terminationDate);
+	}
 
     /**
      * To string.

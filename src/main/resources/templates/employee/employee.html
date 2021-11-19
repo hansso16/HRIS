@@ -7,18 +7,19 @@
 		<th:block th:replace="~{template :: menu}"></th:block>
 		<br>
 		<div class="container-fluid">
+			<p th:if="${res != null && res.error != null && !#strings.isEmpty(res.error.message)}" th:text="${res.error.message}" style="color:red;"></p >
 			<p th:if="${!#strings.isEmpty(empSearchError)}" th:text="${empSearchError}" style="color:red;"></p >
-			<div class="card" th:if="${res.employee != null}">
+			<div class="card" th:if="${res != null && (res.employee != null || res.employeeAddressList != null)}">
 			    <div class="card-header text-center">
 			        <ul class="nav nav-tabs card-header-tabs">
 			            <li class="nav-item">
-			                <a class="nav-link active" aria-current="true" href="#">General</a>
+			                <a class="nav-link" th:classappend="${(viewType == '1' || viewType == '') ? 'active' : ''}" href="#" th:href="@{/employee/} + ${res.employee.employeeId} + @{?empViewType=1}">General</a>
 			            </li>
 			            <li class="nav-item">
-			                <a class="nav-link" href="#" th:href="@{/employee/} + ${res.employee.employeeId}">Info</a>
+			                <a class="nav-link" th:classappend="${viewType == '2' ? 'active' : ''}" href="#" th:href="@{/employee/} + ${res.employee.employeeId} + @{?empViewType=2}">Info</a>
 			            </li>
 			            <li class="nav-item">
-			                <a class="nav-link" href="#" th:href="@{/employee/} + ${res.employee.employeeId}" tabindex="-1" aria-disabled="true">Benefits</a>
+			                <a class="nav-link" th:classappend="${viewType == '3' ? 'active' : ''}" href="#" th:href="@{/employee/} + ${res.employee.employeeId} + @{?empViewType=3}">Benefits</a>
 			            </li>
 			        </ul>
 			    </div>

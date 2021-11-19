@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.soses.hris.common.GeneralUtil;
-import com.soses.hris.common.TransformerUtil;
+import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.dto.EmployeeTO;
 import com.soses.hris.entity.Employee;
@@ -26,34 +26,31 @@ public class GeneralEmployeeBO {
 	
 	@Autowired
 	public GeneralEmployeeBO(EmployeeRepository employeeRepo, EmployeeAddressRepository employeeAddressRepo) {
+		super();
 		this.employeeRepo = employeeRepo;
 		this.employeeAddressRepo = employeeAddressRepo;
 	}
-	
-	public EmployeeTO retrieveEmployeeDetails(int employeeId) {
+
+	public EmployeeTO retrieveEmployee(String employeeId) {
 		
 		Employee employee = employeeRepo.findByEmployeeId(employeeId);
-		EmployeeTO employeeTO = TransformerUtil.transformEmployeeEntity(employee);
-		
+		EmployeeTO employeeTO = null;
+		if (employee != null) {
+			employeeTO = EmployeeTransformerUtil.transformEmployeeEntity(employee);
+		}
 		return employeeTO;
 	}
 	
-	public List<EmployeeAddressTO> retrieveEmployeeAddress(int employeeId) {
+	public List<EmployeeAddressTO> retrieveEmployeeAddress(String employeeId) {
 
 		List<EmployeeAddress> empAddressList = employeeAddressRepo.findByIdEmployeeId(employeeId);
 		List<EmployeeAddressTO> empAddressTOList = new ArrayList<>();
-		
 		if (!GeneralUtil.isListEmpty(empAddressList)) {
 			for (EmployeeAddress empAddress : empAddressList) {
-				// transform
-				EmployeeAddressTO empAddressTO = TransformerUtil.transformEmployeeAddress(empAddress);
-				
+				EmployeeAddressTO empAddressTO = EmployeeTransformerUtil.transformEmployeeAddress(empAddress);
 				empAddressTOList.add(empAddressTO);
 			}
 		}
-		
-		
-		
 		return empAddressTOList;
 	}
 }

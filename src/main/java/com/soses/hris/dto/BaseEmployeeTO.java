@@ -6,14 +6,14 @@ package com.soses.hris.dto;
 public class BaseEmployeeTO {
 
 	/** The employee id. */
-	private int employeeId;
+	private String employeeId;
 
 	/**
 	 * Gets the employee id.
 	 *
 	 * @return the employee id
 	 */
-	public int getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
 
@@ -22,7 +22,7 @@ public class BaseEmployeeTO {
 	 *
 	 * @param employeeId the new employee id
 	 */
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 

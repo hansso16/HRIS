@@ -6,7 +6,7 @@ package com.soses.hris.api;
  * @author hso
  * @since 17 Nov 2021
  */
-public class BaseEmployeeResponse {
+public class BaseEmployeeResponse extends BaseResponse{
 
 	/** The employee id. */
 	private String employeeId;

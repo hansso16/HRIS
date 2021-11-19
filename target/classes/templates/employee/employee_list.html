@@ -6,51 +6,32 @@
 	<body>
 		<th:block th:replace="~{template :: menu}"></th:block>
 		<br>
-		<div class="container-fluid">
-			<p th:if="${!#strings.isEmpty(empSearchError)}" th:text="${empSearchError}" style="color:red;"></p >
-			
+		<div class="container-fluid" th:if="${res != null}">
+			<p th:if="${res.error != null && !#strings.isEmpty(res.error.message)}" th:text="${res.error.message}" style="color:red;"></p >
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th scope="col">Employee ID</th >
 						<th scope="col">First Name</th >
 						<th scope="col">Last Name</th >
+						<th scope="col">Birthdate</th>
 						<th scope="col">Division</th >
 						<th scope="col">Position</th >
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1234</td>
-						<td>asdf</td>
-						<td>fdas</td>
-						<td>AS</td>
-						<td>FD</td>
-					</tr>
-					<tr>
-						<td>1234</td>
-						<td>asdf</td>
-						<td>fdas</td>
-						<td>AS</td>
-						<td>FD</td>
-					</tr>
-					<tr>
-						<td>1234</td>
-						<td>asdf</td>
-						<td>fdas</td>
-						<td>AS</td>
-						<td>FD</td>
-					</tr>
-					<tr>
-						<td>1234</td>
-						<td>asdf</td>
-						<td>fdas</td>
-						<td>AS</td>
-						<td>FD</td>
-					</tr>
+					<tr th:if="${res.employeeList != null}" th:each="employee : ${res.employeeList}">
+						<th scope="row">
+							<a th:class="button" th:href="@{/employee/}+${employee.employeeId}" href="#" th:text="${employee.employeeId}">Employee Id</a>
+						</th >
+						<td th:text="${#strings.capitalize(employee.firstName)}"></td >
+						<td th:text="${employee.lastName}"></td >
+						<td th:text="${#temporals.format(employee.birthdate, 'MMMM dd, yyyy')}"></td >
+						<td th:text="${employee.Division}"></td >
+						<td th:text="${employee.Position}"></td >
+					</tr >
 				</tbody>
 			</table>
-			
 		</div>
 		
 		<th:block th:replace="~{template :: footer}"></th:block >

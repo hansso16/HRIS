@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.soses.hris.entity.EmployeeAddress;
 
 @Repository
-public interface EmployeeAddressRepository extends JpaRepository<EmployeeAddress, Integer> {
+public interface EmployeeAddressRepository extends JpaRepository<EmployeeAddress, String> {
 
-	List<EmployeeAddress> findByIdEmployeeId(int employeeId);
+	List<EmployeeAddress> findByIdEmployeeId(String employeeId);
 }
