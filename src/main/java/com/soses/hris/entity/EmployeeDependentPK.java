@@ -20,7 +20,7 @@ public class EmployeeDependentPK implements Serializable {
 
 	/** The employee id. */
 	@Column(name="EMPLOYEE_ID")
-	private int employeeId;
+	private String employeeId;
 	
 	/** The dependent id. */
 	@Column(name="DEPENDENT_ID")
@@ -36,16 +36,17 @@ public class EmployeeDependentPK implements Serializable {
 	 *
 	 * @return the employee id
 	 */
-	public int getEmployeeId() {
+	public String getEmployeeId() {
 		return employeeId;
 	}
+
 
 	/**
 	 * Sets the employee id.
 	 *
 	 * @param employeeId the new employee id
 	 */
-	public void setEmployeeId(int employeeId) {
+	public void setEmployeeId(String employeeId) {
 		this.employeeId = employeeId;
 	}
 

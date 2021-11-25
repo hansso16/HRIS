@@ -11,24 +11,24 @@ import com.soses.hris.dto.EmployeeBenefitsTO;
 public class EmployeeBenefitsSearchResponse extends BaseEmployeeSearchResponse {
 
 	/** The employee benefits TO. */
-	private EmployeeBenefitsTO employeeBenefitsTO;
+	private EmployeeBenefitsTO employeeBenefits;
 
 	/**
-	 * Gets the employee benefits TO.
+	 * Gets the employee benefits.
 	 *
-	 * @return the employee benefits TO
+	 * @return the employee benefits
 	 */
-	public EmployeeBenefitsTO getEmployeeBenefitsTO() {
-		return employeeBenefitsTO;
+	public EmployeeBenefitsTO getEmployeeBenefits() {
+		return employeeBenefits;
 	}
 
 	/**
-	 * Sets the employee benefits TO.
+	 * Sets the employee benefits.
 	 *
-	 * @param employeeBenefitsTO the new employee benefits TO
+	 * @param employeeBenefits the new employee benefits
 	 */
-	public void setEmployeeBenefitsTO(EmployeeBenefitsTO employeeBenefitsTO) {
-		this.employeeBenefitsTO = employeeBenefitsTO;
+	public void setEmployeeBenefits(EmployeeBenefitsTO employeeBenefits) {
+		this.employeeBenefits = employeeBenefits;
 	}
-	
+
 }

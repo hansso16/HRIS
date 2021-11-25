@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<HTML lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:replace="~{template :: headfiles}"></th:block>
+	</head>
+	<body>
+		<th:block th:replace="~{template :: menu}"></th:block >
+		<br>
+		<div class="container">
+			<form class="" action="#" th:action="@{/employee/add}" method="POST">
+				<div class="card">
+				 	<h4 class="card-header">Add Employee</h4>
+			 		<div class="card-body">
+			 			<h5>Employee</h5>
+			 			<th:block >
+				 			<div class="row">
+							    <div class="col">
+									<label for="firstName" class="form-label">First Name</label>
+									<input type="text" class="form-control" name="firstName" id="firstName">
+								</div>
+							    <div class="col">
+									<label for="firstName" class="form-label">First Name</label>
+									<input type="text" class="form-control" name="firstName" id="firstName">
+								</div>
+							    <div class="col">
+									<label for="firstName" class="form-label">First Name</label>
+									<input type="text" class="form-control" name="firstName" id="firstName">
+								</div>
+							    <div class="col">
+									<label for="nickname" class="form-label">NickName</label>
+									<input type="text" class="form-control" name="nickname" id="nickname">
+								</div>
+				 			</div>
+				 			<div class="row">
+							    <div class="col">
+									<label for="dependentName" class="form-label">Dependent Name</label>
+									<input type="text" class="form-control"  name="employeeDependentList[0].dependentName" id="dependentName">
+								</div>
+							    <div class="col-auto">
+									<label for="gender" class="form-label">Gender - select</label>
+									<input type="text" class="form-control"  name="employeeDependentList[0].gender" id="gender">
+								</div>
+				 			</div>
+				 			<div class="row">
+							    <div class="col">
+									<label for="dependentName" class="form-label">Dependent Name</label>
+									<input type="text" class="form-control"  name="employeeDependentList[1].dependentName" id="dependentName">
+								</div>
+							    <div class="col-auto">
+									<label for="gender" class="form-label">Gender - select</label>
+									<input type="text" class="form-control"  name="employeeDependentList[1].gender" id="gender">
+								</div>
+				 			</div>
+			 			</th:block>
+			 			<hr>
+					    <input class="btn btn-primary" type="submit" value="Submit">
+						<input class="btn btn-secondary" type="reset" value="Reset">
+				 	</div>
+				</div>
+			</form >
+		</div>
+		
+		<th:block th:replace="~{template :: footer}"></th:block >
+		<th:block th:replace="~{template :: scripts}"></th:block >
+	</body>
+</HTML>

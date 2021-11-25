@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ public class EmployeeInfo implements Serializable {
     /** The employee id. */
     @Id
     @Column(name="EMPLOYEE_ID", unique=true, nullable=false, precision=10)
-    private int employeeId;
+    private String employeeId;
     
     /** The emergency name. */
     @Column(name="EMERGENCY_NAME", length=50)
@@ -63,24 +64,24 @@ public class EmployeeInfo implements Serializable {
     }
 
     /**
-     * Access method for employeeId.
+     * Gets the employee id.
      *
-     * @return the current value of employeeId
+     * @return the employee id
      */
-    public int getEmployeeId() {
-        return employeeId;
-    }
+    public String getEmployeeId() {
+		return employeeId;
+	}
 
-    /**
-     * Setter method for employeeId.
-     *
-     * @param aEmployeeId the new value for employeeId
-     */
-    public void setEmployeeId(int aEmployeeId) {
-        employeeId = aEmployeeId;
-    }
+	/**
+	 * Sets the employee id.
+	 *
+	 * @param employeeId the new employee id
+	 */
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 
-    /**
+	/**
      * Access method for emergencyName.
      *
      * @return the current value of emergencyName
@@ -207,50 +208,40 @@ public class EmployeeInfo implements Serializable {
     }
 
     /**
-     * Compares the key for this instance with another EmployeeInfo.
+     * Hash code.
      *
-     * @param other The object to compare to
-     * @return True if other object is instance of class EmployeeInfo and the key objects are equal
-     */
-    private boolean equalKeys(Object other) {
-        if (this==other) {
-            return true;
-        }
-        if (!(other instanceof EmployeeInfo)) {
-            return false;
-        }
-        EmployeeInfo that = (EmployeeInfo) other;
-        if (this.getEmployeeId() != that.getEmployeeId()) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Compares this instance with another EmployeeInfo.
-     *
-     * @param other The object to compare to
-     * @return True if the objects are the same
+     * @return the int
      */
     @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof EmployeeInfo)) return false;
-        return this.equalKeys(other) && ((EmployeeInfo)other).equalKeys(this);
-    }
+	public int hashCode() {
+		return Objects.hash(emergencyAddress, emergencyContact, emergencyName, employeeId, fatherBirthdate, fatherName,
+				motherBirthdate, motherName);
+	}
 
-    /**
-     * Returns a hash code for this instance.
-     *
-     * @return Hash code
-     */
-    @Override
-    public int hashCode() {
-        int i;
-        int result = 17;
-        i = getEmployeeId();
-        result = 37*result + i;
-        return result;
-    }
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EmployeeInfo other = (EmployeeInfo) obj;
+		return Objects.equals(emergencyAddress, other.emergencyAddress)
+				&& Objects.equals(emergencyContact, other.emergencyContact)
+				&& Objects.equals(emergencyName, other.emergencyName) && Objects.equals(employeeId, other.employeeId)
+				&& Objects.equals(fatherBirthdate, other.fatherBirthdate)
+				&& Objects.equals(fatherName, other.fatherName)
+				&& Objects.equals(motherBirthdate, other.motherBirthdate)
+				&& Objects.equals(motherName, other.motherName);
+	}
+
 
     /**
      * Returns a debug-friendly String representation of this instance.

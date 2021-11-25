@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.soses.hris.cache.CacheService;
 import com.soses.hris.common.ConfigParamConstants;
+import com.soses.hris.common.EncryptionService;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.dao.EmployeeDAO;
 import com.soses.hris.entity.ConfigParam;
@@ -38,6 +39,9 @@ public class HrisApplication implements CommandLineRunner {
 	
 	@Autowired
 	private CacheManager cacheManager;
+	
+	@Autowired
+	private EncryptionService encryptionService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -74,6 +78,35 @@ public class HrisApplication implements CommandLineRunner {
 		ConfigParam result = p.get(id, ConfigParam.class);
 		System.out.println("RESULT FROM CACHE: " + result.toString());
 		
+		String origString = "fdsafasdfasdfasdf";
+		String enc = encryptionService.encrypt(origString);
+		String dec = encryptionService.decrypt(enc);
+		System.out.println("ORIG STRING: " + origString);
+		System.out.println("ENCRYPTED: " + enc);
+		System.out.println("DECRYPTED: " + dec);
+		
+	}
+	
+	public static String maskCardNumber(String cardNumber, String mask) {
+
+	    // format the number
+	    int index = 0;
+	    StringBuilder maskedNumber = new StringBuilder();
+	    for (int i = 0; i < mask.length(); i++) {
+	        char c = mask.charAt(i);
+	        if (c == '#') {
+	            maskedNumber.append(cardNumber.charAt(index));
+	            index++;
+	        } else if (c == 'x') {
+	            maskedNumber.append(c);
+	            index++;
+	        } else {
+	            maskedNumber.append(c);
+	        }
+	    }
+
+	    // return the masked number
+	    return maskedNumber.toString();
 	}
 
 }

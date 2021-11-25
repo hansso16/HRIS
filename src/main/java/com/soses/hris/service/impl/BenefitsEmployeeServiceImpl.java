@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeBenefitsSearchResponse;
-import com.soses.hris.bo.EmployeeBenefitsBO;
+import com.soses.hris.bo.BenefitsEmployeeBO;
 import com.soses.hris.dto.EmployeeBenefitsTO;
 import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.service.EmployeeService;
@@ -19,10 +19,10 @@ import com.soses.hris.service.EmployeeService;
 @Transactional
 public class BenefitsEmployeeServiceImpl implements EmployeeService {
 
-	private EmployeeBenefitsBO employeeBenefitsBO;
+	private BenefitsEmployeeBO employeeBenefitsBO;
 	
 	@Autowired
-	public BenefitsEmployeeServiceImpl(EmployeeBenefitsBO employeeBenefitsBO) {
+	public BenefitsEmployeeServiceImpl(BenefitsEmployeeBO employeeBenefitsBO) {
 		super();
 		this.employeeBenefitsBO = employeeBenefitsBO;
 	}
@@ -33,7 +33,7 @@ public class BenefitsEmployeeServiceImpl implements EmployeeService {
 		EmployeeBenefitsSearchResponse resp = new EmployeeBenefitsSearchResponse();
 		EmployeeBenefitsTO employeeBenefitsTO = employeeBenefitsBO.retrieveEmployeeBenefits(employeeId);
 		if (employeeBenefitsTO != null) {
-			resp.setEmployeeBenefitsTO(employeeBenefitsTO);
+			resp.setEmployeeBenefits(employeeBenefitsTO);
 		} else {
 			ErrorPageDTO error = new ErrorPageDTO();
 			error.setMessage("Employee ID not found: " + employeeId);

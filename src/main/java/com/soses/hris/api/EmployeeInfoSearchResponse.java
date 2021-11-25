@@ -17,7 +17,7 @@ public class EmployeeInfoSearchResponse extends BaseEmployeeSearchResponse {
 	private EmployeeInfoTO employeeInfo;
 	
 	/** The employee dependent. */
-	private List<EmployeeDependentTO> employeeDependent;
+	private List<EmployeeDependentTO> employeeDependentList;
 	
 	/**
 	 * Gets the employee info.
@@ -36,24 +36,34 @@ public class EmployeeInfoSearchResponse extends BaseEmployeeSearchResponse {
 	public void setEmployeeInfo(EmployeeInfoTO employeeInfo) {
 		this.employeeInfo = employeeInfo;
 	}
-	
+
 	/**
-	 * Gets the employee dependent.
+	 * Gets the employee dependent list.
 	 *
-	 * @return the employee dependent
+	 * @return the employee dependent list
 	 */
-	public List<EmployeeDependentTO> getEmployeeDependent() {
-		return employeeDependent;
-	}
-	
-	/**
-	 * Sets the employee dependent.
-	 *
-	 * @param employeeDependent the new employee dependent
-	 */
-	public void setEmployeeDependent(List<EmployeeDependentTO> employeeDependent) {
-		this.employeeDependent = employeeDependent;
+	public List<EmployeeDependentTO> getEmployeeDependentList() {
+		return employeeDependentList;
 	}
 
+	/**
+	 * Sets the employee dependent list.
+	 *
+	 * @param employeeDependentList the new employee dependent list
+	 */
+	public void setEmployeeDependentList(List<EmployeeDependentTO> employeeDependentList) {
+		this.employeeDependentList = employeeDependentList;
+	}
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return "EmployeeInfoSearchResponse [employeeInfo=" + employeeInfo + ", employeeDependentList="
+				+ employeeDependentList + "]";
+	}
 	
 }
