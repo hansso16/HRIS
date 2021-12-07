@@ -12,7 +12,7 @@
 			    <div class="card-header text-center">
 			        <ul class="nav nav-tabs card-header-tabs">
 			            <li class="nav-item">
-			                <a class="nav-link" th:classappend="${(viewType == '1' || viewType == '') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=1}">General</a>
+			                <a class="nav-link" th:classappend="${(viewType == '1' || viewType == '') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=1}">Profile</a>
 			            </li>
 			            <li class="nav-item">
 			                <a class="nav-link" th:classappend="${viewType == '2' ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=2}">Info</a>
