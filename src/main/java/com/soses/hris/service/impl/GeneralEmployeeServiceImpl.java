@@ -26,7 +26,7 @@ import com.soses.hris.service.EmployeeService;
 @Service("GeneralEmployeeSerivceImpl")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
-public class GeneralEmployeeSerivceImpl implements EmployeeService {
+public class GeneralEmployeeServiceImpl implements EmployeeService {
 
 	/** The gen emp bo. */
 	private GeneralEmployeeBO genEmpBo;
@@ -37,7 +37,7 @@ public class GeneralEmployeeSerivceImpl implements EmployeeService {
 	 * @param genEmpBo the gen emp bo
 	 */
 	@Autowired
-	public GeneralEmployeeSerivceImpl(GeneralEmployeeBO genEmpBo) {
+	public GeneralEmployeeServiceImpl(GeneralEmployeeBO genEmpBo) {
 		super();
 		this.genEmpBo = genEmpBo;
 	}
