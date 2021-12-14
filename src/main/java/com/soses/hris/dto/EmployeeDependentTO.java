@@ -19,6 +19,9 @@ public class EmployeeDependentTO extends BaseEmployeeTO {
 	/** The dependent birthdate. */
 	private LocalDate dependentBirthdate;
 	
+	/** The gender. */
+	private String gender;
+
 	/**
 	 * Sets the dependent birthdate.
 	 *
@@ -27,9 +30,6 @@ public class EmployeeDependentTO extends BaseEmployeeTO {
 	public void setDependentBirthdate(LocalDate dependentBirthdate) {
 		this.dependentBirthdate = dependentBirthdate;
 	}
-
-	/** The gender. */
-	private String gender;
 	
 	/**
 	 * Gets the dependent id.

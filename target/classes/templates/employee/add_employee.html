@@ -16,19 +16,19 @@
 				 			<div class="row">
 							    <div class="col">
 									<label for="firstName" class="form-label">First Name</label>
-									<input type="text" class="form-control" name="firstName" id="firstName">
+									<input type="text" class="form-control" name="firstName" id="firstName" placeholder="John" required>
 								</div>
 							    <div class="col">
 									<label for="lastName" class="form-label">Last Name</label>
-									<input type="text" class="form-control" name="lastName" id="lastName">
+									<input type="text" class="form-control" name="lastName" id="lastName" placeholder="Smith" required>
 								</div>
-							    <div class="col">
+							    <div class="col-1">
 									<label for="suffix" class="form-label">Suffix</label>
-									<input type="text" class="form-control" name="suffix" id="suffix">
+									<input type="text" class="form-control" name="suffix" id="suffix" placeholder="Jr.">
 								</div>
 							    <div class="col">
 									<label for="middleName" class="form-label">Middle Name</label>
-									<input type="text" class="form-control" name="middleName" id="middleName">
+									<input type="text" class="form-control" name="middleName" id="middleName" required>
 								</div>
 							    <div class="col">
 									<label for="nickname" class="form-label">Nickname</label>
@@ -38,15 +38,15 @@
 				 			<div class="row">
 							    <div class="col">
 									<label for="cellNo" class="form-label">Cellphone Number</label>
-									<input type="text" class="form-control" name="cellNo" id="cellNo">
+									<input type="text" class="form-control" name="cellNo" id="cellNo" placeholder="09123456789" required>
 								</div>
 							    <div class="col">
 									<label for="telNo" class="form-label">Telephone Number</label>
-									<input type="text" class="form-control" name="telNo" id="telNo">
+									<input type="text" class="form-control" name="telNo" id="telNo" placeholder="1234567">
 								</div>
-							    <div class="col">
+							    <div class="col-auto">
 									<label for="emailAddress" class="form-label">Email Address</label>
-									<input type="text" class="form-control" name="emailAddress" id="emailAddress">
+									<input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="juan.carlos@email.com">
 								</div>
 							    <div class="col">
 									<label for="gender" class="form-label">Gender</label>
@@ -58,17 +58,21 @@
 								</div>
 							    <div class="col">
 									<label for="birthdate" class="form-label">Birthdate</label>
-									<input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="dd/mm/yyyy">
+									<input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="mm/dd/yyyy" required>
 								</div>
 				 			</div>
 				 			<div class="row">
 							    <div class="col">
 									<label for="maritalStatus" class="form-label">Marital Status</label>
-									<input type="text" class="form-control" name="maritalStatus" id="maritalStatus">
+				                    <select id="maritalStatus" class="form-select form-control" aria-label="MaritalStatusSelect" name="maritalStatus" required>
+				            			<option th:value="''" th:text="''"></option >
+										<option th:value="S" th:text="Single"></option>
+										<option th:value="M" th:text="Married"></option>
+									</select>
 								</div>
 							    <div class="col">
 									<label for="hiringDate" class="form-label">Hiring Date</label>
-									<input type="date" class="form-control" name="hiringDate" id="hiringDate" placeholder="dd/mm/yyyy">
+									<input type="date" class="form-control" name="hiringDate" id="hiringDate" placeholder="mm/dd/yyyy" required>
 								</div>
 							    <div class="col">
 									<label for="division" class="form-label">Division - select?</label>
@@ -85,58 +89,58 @@
 				 			<h6>Present Address</h6>
 				 			<div class="row">
 							    <div class="col-2">
-									<label for="firstName" class="form-label">Province</label>
-									<input type="text" class="form-control" name="firstName" id="firstName">
+									<label for="presentProvince" class="form-label">Province - select</label>
+									<input type="text" class="form-control" name="presentProvince" id="presentProvince" required>
 								</div>
 							    <div class="col-2">
-									<label for="lastName" class="form-label">City/Municipality</label>
-									<input type="text" class="form-control" name="lastName" id="lastName">
+									<label for="presentCity" class="form-label">City - select</label>
+									<input type="text" class="form-control" name="presentCity" id="presentCity">
 								</div>
 							    <div class="col-2">
-									<label for="suffix" class="form-label">Barangay</label>
-									<input type="text" class="form-control" name="suffix" id="suffix">
+									<label for="presentBarangay" class="form-label">Barangay - select</label>
+									<input type="text" class="form-control" name="presentBarangay" id="presentBarangay">
 								</div>
 							    <div class="col">
-									<label for="middleName" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="middleName" id="middleName">
+									<label for="presentStreet" class="form-label">House Number/Street Name</label>
+									<input type="text" class="form-control" name="presentStreet" id="presentStreet">
 								</div>
 				 			</div>
 				 			<h6>Permanent Address</h6>
 				 			<div class="row">
 							    <div class="col-2">
-									<label for="firstName" class="form-label">Province</label>
-									<input type="text" class="form-control" name="firstName" id="firstName">
+									<label for="province" class="form-label">Province - select</label>
+									<input type="text" class="form-control" name="permanentProvince" id="province" required>
 								</div>
 							    <div class="col-2">
-									<label for="lastName" class="form-label">City/Municipality</label>
-									<input type="text" class="form-control" name="lastName" id="lastName">
+									<label for="city" class="form-label">City - select</label>
+									<input type="text" class="form-control" name="permanentCity" id="city">
 								</div>
 							    <div class="col-2">
-									<label for="suffix" class="form-label">Barangay</label>
-									<input type="text" class="form-control" name="suffix" id="suffix">
+									<label for="barangay" class="form-label">Barangay - select</label>
+									<input type="text" class="form-control" name="permanentBarangay" id="barangay">
 								</div>
 							    <div class="col">
-									<label for="middleName" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="middleName" id="middleName">
+									<label for="houseNo" class="form-label">House Number/Street Name</label>
+									<input type="text" class="form-control" name="permanentStreet" id="houseNo">
 								</div>
 				 			</div>
 				 			<h6>Provincial Address</h6>
 				 			<div class="row">
 							    <div class="col-2">
-									<label for="firstName" class="form-label">Province</label>
-									<input type="text" class="form-control" name="firstName" id="firstName">
+									<label for="province" class="form-label">Province - select</label>
+									<input type="text" class="form-control" name="provincialProvince" id="province" required>
 								</div>
 							    <div class="col-2">
-									<label for="lastName" class="form-label">City/Municipality</label>
-									<input type="text" class="form-control" name="lastName" id="lastName">
+									<label for="provincialCity" class="form-label">City - select</label>
+									<input type="text" class="form-control" name="provincialCity" id="provincialCity">
 								</div>
 							    <div class="col-2">
-									<label for="suffix" class="form-label">Barangay</label>
-									<input type="text" class="form-control" name="suffix" id="suffix">
+									<label for="provincialBarangay" class="form-label">Barangay - select</label>
+									<input type="text" class="form-control" name="provincialBarangay" id="provincialBarangay">
 								</div>
 							    <div class="col">
-									<label for="middleName" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="middleName" id="middleName">
+									<label for="houseNo" class="form-label">House Number/Street Name</label>
+									<input type="text" class="form-control" name="provincialStreet" id="provincialStreet">
 								</div>
 				 			</div>
 				 			<br>
@@ -145,15 +149,15 @@
 							<div class="row">
 					        	<div class="col">
 					        		<label for="emergencyName" class="form-label">Name</label >
-				                    <input type="text" class="form-control" name="emergencyName" id="emergencyName">
+				                    <input type="text" class="form-control" name="emergencyName" id="emergencyName" placeholder="John Smith">
 					        	</div >
 					        	<div class="col">
 					        		<label for="emergencyAddress" class="form-label">Address</label >
-				                    <input type="text" name="emergencyAddress" id="emergencyAddress" class="form-control">
+				                    <input type="text" name="emergencyAddress" id="emergencyAddress" class="form-control" placeholder="Angeles, Pampanga">
 					        	</div >
 					        	<div class="col">
 					        		<label for="emergencyContact" class="form-label">Contact No</label >
-				                    <input type="text" name="emergencyContact" id="emergencyContact" class="form-control">
+				                    <input type="text" name="emergencyContact" id="emergencyContact" class="form-control" placeholder="09123456789">
 					        	</div >
 					        </div>
 					        <br>
@@ -166,7 +170,7 @@
 					        	</div >
 					        	<div class="col">
 					        		<label for="fatherBirthdate" class="form-label">Father Birthdate</label >
-				                    <input type="text" name="fatherBirthdate" id="fatherBirthdate" class="form-control">
+				                    <input type="date" name="fatherBirthdate" id="fatherBirthdate" class="form-control">
 					        	</div >
 					        	<div class="col">
 					        		<label for="motherName" class="form-label">Mother Name</label >
@@ -174,7 +178,7 @@
 					        	</div >
 					        	<div class="col">
 					        		<label for="motherBirthdate" class="form-label">Mother Birthdate</label >
-				                    <input type="text" name="motherBirthdate" id="motherBirthdate" class="form-control">
+				                    <input type="date" name="motherBirthdate" id="motherBirthdate" class="form-control">
 					        	</div >
 					        </div>
 					        <br>
@@ -216,7 +220,7 @@
 					        	</div >
 					        	<div class="col-auto">
 					        		<label for="sssMembershipDate" class="form-label">SSS Membership Date</label >
-				                    <input type="text" name="sssMembershipDate" id="sssMembershipDate" class="form-control">
+				                    <input type="date" name="sssMembershipDate" id="sssMembershipDate" class="form-control">
 					        	</div >
 							</div>
 							<div class="row">
@@ -226,7 +230,7 @@
 					        	</div >
 					        	<div class="col-auto">
 					        		<label for="philHealthMembershipDate" class="form-label">PhilHealth Membership Date</label >
-				                    <input type="text" name="philHealthMembershipDate" id="philHealthMembershipDate" class="form-control">
+				                    <input type="date" name="philHealthMembershipDate" id="philHealthMembershipDate" class="form-control">
 					        	</div >
 							</div>
 							<div class="row">
@@ -236,7 +240,7 @@
 					        	</div >
 					        	<div class="col-auto">
 					        		<label for="pagibigMembershipDate" class="form-label">PAG-IBIG Membership Date</label >
-				                    <input type="text" name="pagibigMembershipDate" id="pagibigMembershipDate" class="form-control">
+				                    <input type="date" name="pagibigMembershipDate" id="pagibigMembershipDate" class="form-control">
 					        	</div >
 							</div>
 							<div class="row">

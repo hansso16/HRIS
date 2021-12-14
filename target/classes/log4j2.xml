@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Configuration>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false"
+                pattern="%style{%d{DEFAULT}}{black} %highlight{%-5level }[%style{%pid}{magenta}] [%style{%t}] %style{%C{1.}}{blue}: %msg%n%throwable" />
+        </Console>
+
+        <RollingFile name="RollingFile"
+            fileName="C:/apps/logs/hris.log"
+            filePattern="C:/apps/logs/hris-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <pattern>%d{DEFAULT} %p %C{1.}: %msg%n%throwable</pattern>
+            </PatternLayout>
+            <Policies>
+                <!-- rollover on startup, daily and when the file reaches 
+                    10 MegaBytes -->
+                <OnStartupTriggeringPolicy />
+                <SizeBasedTriggeringPolicy
+                    size="10 MB" />
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <!-- LOG everything at INFO level -->
+        <Root>
+            <AppenderRef ref="Console" />
+            <AppenderRef ref="RollingFile" />
+        </Root>
+
+        <!-- LOG "com.baeldung*" at TRACE level 
+        <Logger name="com.soses" level="trace"></Logger>-->
+    </Loggers>
+
+</Configuration>

@@ -2,6 +2,9 @@ package com.soses.hris;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +27,9 @@ import com.soses.hris.repository.UserRepository;
 @SpringBootApplication
 public class HrisApplication implements CommandLineRunner {
 
+	private static final Logger log = LoggerFactory.getLogger(HrisApplication.class);
+	private static final org.apache.logging.log4j.Logger log4 = LogManager.getLogger(HrisApplication.class);
+	
 	public static void main(String[] args) {
 		SpringApplication.run(HrisApplication.class, args);
 	}
@@ -47,26 +53,26 @@ public class HrisApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		User user = userRepo.findByUsername("admin");
-		System.out.println(user.toString());
+		log.info(user.toString());
 		
 		List<Role> roles = user.getRoles();		
 		if (roles != null) {
 			for(Role role : roles) {
-				System.out.println("ROLE: ROLE_" + role.getRoleCode());
+				log.info("ROLE: ROLE_" + role.getRoleCode());
 			}
 		}
 		
 		String ENCODED_PASSWORD = new BCryptPasswordEncoder().encode("test123");
-		System.out.println(ENCODED_PASSWORD);
+		log.info(ENCODED_PASSWORD);
 		
-		System.out.println(empDao.getCount());
+		log.info(empDao.getCount()+"");
 		
 		
-		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		System.out.println("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 		
 //		Cache<ConfigParamPK, ConfigParam> p = cacheManager.getCache("configParamCache", ConfigParamPK.class, ConfigParam.class);
 		Cache p = cacheManager.getCache("configParamCache");
@@ -76,15 +82,23 @@ public class HrisApplication implements CommandLineRunner {
 		id.setTableName(ConfigParamConstants.EMPLOYEE);
 		id.setFieldName(ConfigParamConstants.MARITAL_STATUS);
 		ConfigParam result = p.get(id, ConfigParam.class);
-		System.out.println("RESULT FROM CACHE: " + result.toString());
+		log.info("RESULT FROM CACHE: " + result.toString());
 		
 		String origString = "fdsafasdfasdfasdf";
 		String enc = encryptionService.encrypt(origString);
 		String dec = encryptionService.decrypt(enc);
-		System.out.println("ORIG STRING: " + origString);
-		System.out.println("ENCRYPTED: " + enc);
-		System.out.println("DECRYPTED: " + dec);
+		log.info("ORIG STRING: " + origString);
+		log.info("ENCRYPTED: " + enc);
+		log.info("DECRYPTED: " + dec);
+		log.error("ERROR");
+		log.warn("WARN");
+		log4.fatal("FATAL LOG4J2");
+		log4.info("LOG4J2 INFO");
+		log.info("LOGBACK INFO");
+		log.trace("LOGBACK TRACE");
 		
+		log4.info("LOG4J2 SYS ENV: " + System.getenv("SPRING_PROFILES_ACTIVE"));
+		log4.info("LOG4J2 SYS PROP: " + System.getProperty("SPRING_PROFILES_ACTIVE"));
 	}
 	
 	public static String maskCardNumber(String cardNumber, String mask) {

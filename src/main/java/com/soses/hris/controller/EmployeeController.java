@@ -179,16 +179,13 @@ public class EmployeeController {
 	
 	@GetMapping("/add")
 	public String addEmployee(Model model) {
-		
-		model.addAttribute("req", new AddEmployeeRequest());
-		
 		return ADD_EMP;
 	}
 
 	@PostMapping("/add")
 	public String addEmployee(@Valid @ModelAttribute AddEmployeeRequest addEmployeeRequest, Errors errors) {
 		
-		log.info(addEmployeeRequest.toString());
+		log.info("Add Employee Request: " + addEmployeeRequest.toString());
 		
 		return ADD_EMP;
 	}
