@@ -1,6 +1,10 @@
 package com.soses.hris;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
@@ -22,6 +26,7 @@ import com.soses.hris.entity.ConfigParam;
 import com.soses.hris.entity.ConfigParamPK;
 import com.soses.hris.entity.Role;
 import com.soses.hris.entity.User;
+import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.repository.UserRepository;
 
 @SpringBootApplication
@@ -48,6 +53,12 @@ public class HrisApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EncryptionService encryptionService;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private EntityManager em;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -99,6 +110,13 @@ public class HrisApplication implements CommandLineRunner {
 		
 		log4.info("LOG4J2 SYS ENV: " + System.getenv("SPRING_PROFILES_ACTIVE"));
 		log4.info("LOG4J2 SYS PROP: " + System.getProperty("SPRING_PROFILES_ACTIVE"));
+		
+		BigInteger employeeId = (BigInteger) em.createNativeQuery("SELECT NEXTVAL(SQX_EMPLOYEE_ID)").getSingleResult();
+		log4.info("Employee Id1: " + employeeId);
+		BigDecimal empId = employeeRepository.getNextEmployeeId();
+		log4.info("Employee Id2: " + empId);
+		int intId = empId.intValue();
+		log4.info("Employee Id2: " + intId);
 	}
 	
 	public static String maskCardNumber(String cardNumber, String mask) {

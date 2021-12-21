@@ -80,6 +80,11 @@ public class DatabaseConfig {
         additionalProperties.put("hibernate.hbm2ddl.auto", hbProperties.getHbm2DdlAuto());
         additionalProperties.put("hibernate.dialect.storage_engine", hbProperties.getStorageEngine());
         additionalProperties.put("hibernate.enable_lazy_load_no_trans", hbProperties.getEnableLazyLoadNoTrans());
+        
+        additionalProperties.put("hibernate.generate_statistics", hbProperties.isGenerateStatistics());
+        additionalProperties.put("hibernate.jdbc.batch_size", hbProperties.getBatchSize());
+        additionalProperties.put("hibernate.order_inserts", hbProperties.isOrderInserts());
+        
         entityManagerFactory.setJpaProperties(additionalProperties);
 
         return entityManagerFactory;

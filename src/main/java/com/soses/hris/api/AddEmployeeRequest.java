@@ -2,6 +2,8 @@ package com.soses.hris.api;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The Class AddEmployeeRequest.
  *
@@ -39,12 +41,14 @@ public class AddEmployeeRequest {
 	private String gender;
 	
 	/** The birthdate. */
-	private String birthdate;
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private LocalDate birthdate;
 	
 	/** The marital status. */
 	private String maritalStatus;
 	
 	/** The hiring date. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate hiringDate;
 	
 	/** The division. */
@@ -105,12 +109,14 @@ public class AddEmployeeRequest {
 	private String fatherName;
 	
 	/** The father birthdate. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate fatherBirthdate;
 	
 	/** The mother name. */
 	private String motherName;
 	
 	/** The mother birthdate. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate motherBirthdate;
 	
 	// Employee Dependent
@@ -118,31 +124,33 @@ public class AddEmployeeRequest {
 	private String depName;
 	
 	/** The dep gender. */
-	private LocalDate depGender;
+	private String depGender;
 	
 	// Employee Benefits
 	/** The sss no. */
 	private String sssNo;
 	
 	/** The sss membership date. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate sssMembershipDate;
 	
 	/** The phil health no. */
 	private String philHealthNo;
 	
 	/** The phil health membership date. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate philHealthMembershipDate;
 	
 	/** The pagibig no. */
 	private String pagibigNo;
 	
 	/** The pagibig membership date. */
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate pagibigMembershipDate;
 	
 	/** The tin no. */
 	private String tinNo;
-	
-	
+
 	/**
 	 * Gets the first name.
 	 *
@@ -151,7 +159,7 @@ public class AddEmployeeRequest {
 	public String getFirstName() {
 		return firstName;
 	}
-	
+
 	/**
 	 * Gets the last name.
 	 *
@@ -160,7 +168,7 @@ public class AddEmployeeRequest {
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	/**
 	 * Gets the suffix.
 	 *
@@ -169,7 +177,7 @@ public class AddEmployeeRequest {
 	public String getSuffix() {
 		return suffix;
 	}
-	
+
 	/**
 	 * Gets the middle name.
 	 *
@@ -178,7 +186,7 @@ public class AddEmployeeRequest {
 	public String getMiddleName() {
 		return middleName;
 	}
-	
+
 	/**
 	 * Gets the nickname.
 	 *
@@ -187,7 +195,7 @@ public class AddEmployeeRequest {
 	public String getNickname() {
 		return nickname;
 	}
-	
+
 	/**
 	 * Gets the cell no.
 	 *
@@ -196,7 +204,7 @@ public class AddEmployeeRequest {
 	public String getCellNo() {
 		return cellNo;
 	}
-	
+
 	/**
 	 * Gets the tel no.
 	 *
@@ -205,7 +213,7 @@ public class AddEmployeeRequest {
 	public String getTelNo() {
 		return telNo;
 	}
-	
+
 	/**
 	 * Gets the email address.
 	 *
@@ -214,7 +222,7 @@ public class AddEmployeeRequest {
 	public String getEmailAddress() {
 		return emailAddress;
 	}
-	
+
 	/**
 	 * Gets the gender.
 	 *
@@ -223,16 +231,16 @@ public class AddEmployeeRequest {
 	public String getGender() {
 		return gender;
 	}
-	
+
 	/**
 	 * Gets the birthdate.
 	 *
 	 * @return the birthdate
 	 */
-	public String getBirthdate() {
+	public LocalDate getBirthdate() {
 		return birthdate;
 	}
-	
+
 	/**
 	 * Gets the marital status.
 	 *
@@ -241,7 +249,7 @@ public class AddEmployeeRequest {
 	public String getMaritalStatus() {
 		return maritalStatus;
 	}
-	
+
 	/**
 	 * Gets the hiring date.
 	 *
@@ -250,7 +258,7 @@ public class AddEmployeeRequest {
 	public LocalDate getHiringDate() {
 		return hiringDate;
 	}
-	
+
 	/**
 	 * Gets the division.
 	 *
@@ -259,7 +267,7 @@ public class AddEmployeeRequest {
 	public String getDivision() {
 		return division;
 	}
-	
+
 	/**
 	 * Gets the position.
 	 *
@@ -268,7 +276,7 @@ public class AddEmployeeRequest {
 	public String getPosition() {
 		return position;
 	}
-	
+
 	/**
 	 * Gets the present province.
 	 *
@@ -277,7 +285,7 @@ public class AddEmployeeRequest {
 	public String getPresentProvince() {
 		return presentProvince;
 	}
-	
+
 	/**
 	 * Gets the present city.
 	 *
@@ -286,7 +294,7 @@ public class AddEmployeeRequest {
 	public String getPresentCity() {
 		return presentCity;
 	}
-	
+
 	/**
 	 * Gets the present barangay.
 	 *
@@ -295,7 +303,7 @@ public class AddEmployeeRequest {
 	public String getPresentBarangay() {
 		return presentBarangay;
 	}
-	
+
 	/**
 	 * Gets the present street.
 	 *
@@ -304,7 +312,7 @@ public class AddEmployeeRequest {
 	public String getPresentStreet() {
 		return presentStreet;
 	}
-	
+
 	/**
 	 * Gets the permanent province.
 	 *
@@ -313,7 +321,7 @@ public class AddEmployeeRequest {
 	public String getPermanentProvince() {
 		return permanentProvince;
 	}
-	
+
 	/**
 	 * Gets the permanent city.
 	 *
@@ -322,7 +330,7 @@ public class AddEmployeeRequest {
 	public String getPermanentCity() {
 		return permanentCity;
 	}
-	
+
 	/**
 	 * Gets the permanent barangay.
 	 *
@@ -331,7 +339,7 @@ public class AddEmployeeRequest {
 	public String getPermanentBarangay() {
 		return permanentBarangay;
 	}
-	
+
 	/**
 	 * Gets the permanent street.
 	 *
@@ -340,7 +348,7 @@ public class AddEmployeeRequest {
 	public String getPermanentStreet() {
 		return permanentStreet;
 	}
-	
+
 	/**
 	 * Gets the provincial province.
 	 *
@@ -349,7 +357,7 @@ public class AddEmployeeRequest {
 	public String getProvincialProvince() {
 		return provincialProvince;
 	}
-	
+
 	/**
 	 * Gets the provincial city.
 	 *
@@ -358,7 +366,7 @@ public class AddEmployeeRequest {
 	public String getProvincialCity() {
 		return provincialCity;
 	}
-	
+
 	/**
 	 * Gets the provincial barangay.
 	 *
@@ -367,7 +375,7 @@ public class AddEmployeeRequest {
 	public String getProvincialBarangay() {
 		return provincialBarangay;
 	}
-	
+
 	/**
 	 * Gets the provincial street.
 	 *
@@ -376,7 +384,7 @@ public class AddEmployeeRequest {
 	public String getProvincialStreet() {
 		return provincialStreet;
 	}
-	
+
 	/**
 	 * Gets the emergency name.
 	 *
@@ -385,7 +393,7 @@ public class AddEmployeeRequest {
 	public String getEmergencyName() {
 		return emergencyName;
 	}
-	
+
 	/**
 	 * Gets the emergency address.
 	 *
@@ -394,7 +402,7 @@ public class AddEmployeeRequest {
 	public String getEmergencyAddress() {
 		return emergencyAddress;
 	}
-	
+
 	/**
 	 * Gets the emergency contact.
 	 *
@@ -403,7 +411,7 @@ public class AddEmployeeRequest {
 	public String getEmergencyContact() {
 		return emergencyContact;
 	}
-	
+
 	/**
 	 * Gets the father name.
 	 *
@@ -412,7 +420,7 @@ public class AddEmployeeRequest {
 	public String getFatherName() {
 		return fatherName;
 	}
-	
+
 	/**
 	 * Gets the father birthdate.
 	 *
@@ -421,7 +429,7 @@ public class AddEmployeeRequest {
 	public LocalDate getFatherBirthdate() {
 		return fatherBirthdate;
 	}
-	
+
 	/**
 	 * Gets the mother name.
 	 *
@@ -430,7 +438,7 @@ public class AddEmployeeRequest {
 	public String getMotherName() {
 		return motherName;
 	}
-	
+
 	/**
 	 * Gets the mother birthdate.
 	 *
@@ -439,7 +447,7 @@ public class AddEmployeeRequest {
 	public LocalDate getMotherBirthdate() {
 		return motherBirthdate;
 	}
-	
+
 	/**
 	 * Gets the dep name.
 	 *
@@ -448,16 +456,16 @@ public class AddEmployeeRequest {
 	public String getDepName() {
 		return depName;
 	}
-	
+
 	/**
 	 * Gets the dep gender.
 	 *
 	 * @return the dep gender
 	 */
-	public LocalDate getDepGender() {
+	public String getDepGender() {
 		return depGender;
 	}
-	
+
 	/**
 	 * Gets the sss no.
 	 *
@@ -466,7 +474,7 @@ public class AddEmployeeRequest {
 	public String getSssNo() {
 		return sssNo;
 	}
-	
+
 	/**
 	 * Gets the sss membership date.
 	 *
@@ -475,7 +483,7 @@ public class AddEmployeeRequest {
 	public LocalDate getSssMembershipDate() {
 		return sssMembershipDate;
 	}
-	
+
 	/**
 	 * Gets the phil health no.
 	 *
@@ -484,7 +492,7 @@ public class AddEmployeeRequest {
 	public String getPhilHealthNo() {
 		return philHealthNo;
 	}
-	
+
 	/**
 	 * Gets the phil health membership date.
 	 *
@@ -493,7 +501,7 @@ public class AddEmployeeRequest {
 	public LocalDate getPhilHealthMembershipDate() {
 		return philHealthMembershipDate;
 	}
-	
+
 	/**
 	 * Gets the pagibig no.
 	 *
@@ -502,7 +510,7 @@ public class AddEmployeeRequest {
 	public String getPagibigNo() {
 		return pagibigNo;
 	}
-	
+
 	/**
 	 * Gets the pagibig membership date.
 	 *
@@ -511,7 +519,7 @@ public class AddEmployeeRequest {
 	public LocalDate getPagibigMembershipDate() {
 		return pagibigMembershipDate;
 	}
-	
+
 	/**
 	 * Gets the tin no.
 	 *
@@ -520,7 +528,7 @@ public class AddEmployeeRequest {
 	public String getTinNo() {
 		return tinNo;
 	}
-	
+
 	/**
 	 * Sets the first name.
 	 *
@@ -529,7 +537,7 @@ public class AddEmployeeRequest {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	/**
 	 * Sets the last name.
 	 *
@@ -538,7 +546,7 @@ public class AddEmployeeRequest {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	/**
 	 * Sets the suffix.
 	 *
@@ -547,7 +555,7 @@ public class AddEmployeeRequest {
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
-	
+
 	/**
 	 * Sets the middle name.
 	 *
@@ -556,7 +564,7 @@ public class AddEmployeeRequest {
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
-	
+
 	/**
 	 * Sets the nickname.
 	 *
@@ -565,7 +573,7 @@ public class AddEmployeeRequest {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
+
 	/**
 	 * Sets the cell no.
 	 *
@@ -574,7 +582,7 @@ public class AddEmployeeRequest {
 	public void setCellNo(String cellNo) {
 		this.cellNo = cellNo;
 	}
-	
+
 	/**
 	 * Sets the tel no.
 	 *
@@ -583,7 +591,7 @@ public class AddEmployeeRequest {
 	public void setTelNo(String telNo) {
 		this.telNo = telNo;
 	}
-	
+
 	/**
 	 * Sets the email address.
 	 *
@@ -592,7 +600,7 @@ public class AddEmployeeRequest {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
-	
+
 	/**
 	 * Sets the gender.
 	 *
@@ -601,16 +609,16 @@ public class AddEmployeeRequest {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
+
 	/**
 	 * Sets the birthdate.
 	 *
 	 * @param birthdate the new birthdate
 	 */
-	public void setBirthdate(String birthdate) {
+	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
-	
+
 	/**
 	 * Sets the marital status.
 	 *
@@ -619,7 +627,7 @@ public class AddEmployeeRequest {
 	public void setMaritalStatus(String maritalStatus) {
 		this.maritalStatus = maritalStatus;
 	}
-	
+
 	/**
 	 * Sets the hiring date.
 	 *
@@ -628,7 +636,7 @@ public class AddEmployeeRequest {
 	public void setHiringDate(LocalDate hiringDate) {
 		this.hiringDate = hiringDate;
 	}
-	
+
 	/**
 	 * Sets the division.
 	 *
@@ -637,7 +645,7 @@ public class AddEmployeeRequest {
 	public void setDivision(String division) {
 		this.division = division;
 	}
-	
+
 	/**
 	 * Sets the position.
 	 *
@@ -646,7 +654,7 @@ public class AddEmployeeRequest {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	
+
 	/**
 	 * Sets the present province.
 	 *
@@ -655,7 +663,7 @@ public class AddEmployeeRequest {
 	public void setPresentProvince(String presentProvince) {
 		this.presentProvince = presentProvince;
 	}
-	
+
 	/**
 	 * Sets the present city.
 	 *
@@ -664,7 +672,7 @@ public class AddEmployeeRequest {
 	public void setPresentCity(String presentCity) {
 		this.presentCity = presentCity;
 	}
-	
+
 	/**
 	 * Sets the present barangay.
 	 *
@@ -673,7 +681,7 @@ public class AddEmployeeRequest {
 	public void setPresentBarangay(String presentBarangay) {
 		this.presentBarangay = presentBarangay;
 	}
-	
+
 	/**
 	 * Sets the present street.
 	 *
@@ -682,7 +690,7 @@ public class AddEmployeeRequest {
 	public void setPresentStreet(String presentStreet) {
 		this.presentStreet = presentStreet;
 	}
-	
+
 	/**
 	 * Sets the permanent province.
 	 *
@@ -691,7 +699,7 @@ public class AddEmployeeRequest {
 	public void setPermanentProvince(String permanentProvince) {
 		this.permanentProvince = permanentProvince;
 	}
-	
+
 	/**
 	 * Sets the permanent city.
 	 *
@@ -700,7 +708,7 @@ public class AddEmployeeRequest {
 	public void setPermanentCity(String permanentCity) {
 		this.permanentCity = permanentCity;
 	}
-	
+
 	/**
 	 * Sets the permanent barangay.
 	 *
@@ -709,7 +717,7 @@ public class AddEmployeeRequest {
 	public void setPermanentBarangay(String permanentBarangay) {
 		this.permanentBarangay = permanentBarangay;
 	}
-	
+
 	/**
 	 * Sets the permanent street.
 	 *
@@ -718,7 +726,7 @@ public class AddEmployeeRequest {
 	public void setPermanentStreet(String permanentStreet) {
 		this.permanentStreet = permanentStreet;
 	}
-	
+
 	/**
 	 * Sets the provincial province.
 	 *
@@ -727,7 +735,7 @@ public class AddEmployeeRequest {
 	public void setProvincialProvince(String provincialProvince) {
 		this.provincialProvince = provincialProvince;
 	}
-	
+
 	/**
 	 * Sets the provincial city.
 	 *
@@ -736,7 +744,7 @@ public class AddEmployeeRequest {
 	public void setProvincialCity(String provincialCity) {
 		this.provincialCity = provincialCity;
 	}
-	
+
 	/**
 	 * Sets the provincial barangay.
 	 *
@@ -745,7 +753,7 @@ public class AddEmployeeRequest {
 	public void setProvincialBarangay(String provincialBarangay) {
 		this.provincialBarangay = provincialBarangay;
 	}
-	
+
 	/**
 	 * Sets the provincial street.
 	 *
@@ -754,7 +762,7 @@ public class AddEmployeeRequest {
 	public void setProvincialStreet(String provincialStreet) {
 		this.provincialStreet = provincialStreet;
 	}
-	
+
 	/**
 	 * Sets the emergency name.
 	 *
@@ -763,7 +771,7 @@ public class AddEmployeeRequest {
 	public void setEmergencyName(String emergencyName) {
 		this.emergencyName = emergencyName;
 	}
-	
+
 	/**
 	 * Sets the emergency address.
 	 *
@@ -772,7 +780,7 @@ public class AddEmployeeRequest {
 	public void setEmergencyAddress(String emergencyAddress) {
 		this.emergencyAddress = emergencyAddress;
 	}
-	
+
 	/**
 	 * Sets the emergency contact.
 	 *
@@ -781,7 +789,7 @@ public class AddEmployeeRequest {
 	public void setEmergencyContact(String emergencyContact) {
 		this.emergencyContact = emergencyContact;
 	}
-	
+
 	/**
 	 * Sets the father name.
 	 *
@@ -790,7 +798,7 @@ public class AddEmployeeRequest {
 	public void setFatherName(String fatherName) {
 		this.fatherName = fatherName;
 	}
-	
+
 	/**
 	 * Sets the father birthdate.
 	 *
@@ -799,7 +807,7 @@ public class AddEmployeeRequest {
 	public void setFatherBirthdate(LocalDate fatherBirthdate) {
 		this.fatherBirthdate = fatherBirthdate;
 	}
-	
+
 	/**
 	 * Sets the mother name.
 	 *
@@ -808,7 +816,7 @@ public class AddEmployeeRequest {
 	public void setMotherName(String motherName) {
 		this.motherName = motherName;
 	}
-	
+
 	/**
 	 * Sets the mother birthdate.
 	 *
@@ -817,7 +825,7 @@ public class AddEmployeeRequest {
 	public void setMotherBirthdate(LocalDate motherBirthdate) {
 		this.motherBirthdate = motherBirthdate;
 	}
-	
+
 	/**
 	 * Sets the dep name.
 	 *
@@ -826,16 +834,16 @@ public class AddEmployeeRequest {
 	public void setDepName(String depName) {
 		this.depName = depName;
 	}
-	
+
 	/**
 	 * Sets the dep gender.
 	 *
 	 * @param depGender the new dep gender
 	 */
-	public void setDepGender(LocalDate depGender) {
+	public void setDepGender(String depGender) {
 		this.depGender = depGender;
 	}
-	
+
 	/**
 	 * Sets the sss no.
 	 *
@@ -844,7 +852,7 @@ public class AddEmployeeRequest {
 	public void setSssNo(String sssNo) {
 		this.sssNo = sssNo;
 	}
-	
+
 	/**
 	 * Sets the sss membership date.
 	 *
@@ -853,7 +861,7 @@ public class AddEmployeeRequest {
 	public void setSssMembershipDate(LocalDate sssMembershipDate) {
 		this.sssMembershipDate = sssMembershipDate;
 	}
-	
+
 	/**
 	 * Sets the phil health no.
 	 *
@@ -862,7 +870,7 @@ public class AddEmployeeRequest {
 	public void setPhilHealthNo(String philHealthNo) {
 		this.philHealthNo = philHealthNo;
 	}
-	
+
 	/**
 	 * Sets the phil health membership date.
 	 *
@@ -871,7 +879,7 @@ public class AddEmployeeRequest {
 	public void setPhilHealthMembershipDate(LocalDate philHealthMembershipDate) {
 		this.philHealthMembershipDate = philHealthMembershipDate;
 	}
-	
+
 	/**
 	 * Sets the pagibig no.
 	 *
@@ -880,7 +888,7 @@ public class AddEmployeeRequest {
 	public void setPagibigNo(String pagibigNo) {
 		this.pagibigNo = pagibigNo;
 	}
-	
+
 	/**
 	 * Sets the pagibig membership date.
 	 *
@@ -889,7 +897,7 @@ public class AddEmployeeRequest {
 	public void setPagibigMembershipDate(LocalDate pagibigMembershipDate) {
 		this.pagibigMembershipDate = pagibigMembershipDate;
 	}
-	
+
 	/**
 	 * Sets the tin no.
 	 *
@@ -898,7 +906,7 @@ public class AddEmployeeRequest {
 	public void setTinNo(String tinNo) {
 		this.tinNo = tinNo;
 	}
-	
+
 	/**
 	 * To string.
 	 *
@@ -923,5 +931,4 @@ public class AddEmployeeRequest {
 				+ ", philHealthMembershipDate=" + philHealthMembershipDate + ", pagibigNo=" + pagibigNo
 				+ ", pagibigMembershipDate=" + pagibigMembershipDate + ", tinNo=" + tinNo + "]";
 	}
-	
 }

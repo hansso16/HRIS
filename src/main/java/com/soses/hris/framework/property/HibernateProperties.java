@@ -6,6 +6,9 @@ import org.springframework.context.annotation.PropertySource;
 
 /**
  * The Class HibernateProperties.
+ *
+ * @author hso
+ * @since Dec 21, 2021
  */
 @Configuration
 @PropertySource("classpath:/properties/${hris.env}/hibernate.properties")
@@ -38,6 +41,46 @@ public class HibernateProperties {
     /** Entity manager factory persistence name. */
     @Value("${hb.entitymanager.persistenceUnitName}")
     protected String persistenceUnitName;
+    
+    /** The generate statistics. */
+    @Value("${hb.generate_statistics}")
+    protected boolean generateStatistics;
+    
+    /** The batch size. */
+    @Value("${hb.jdbc.batch_size}")
+    protected String batchSize;
+    
+    /** The order inserts. */
+    @Value("${hb.order_inserts}")
+    protected boolean orderInserts;
+    
+
+	/**
+	 * Checks if is generate statistics.
+	 *
+	 * @return true, if is generate statistics
+	 */
+	public boolean isGenerateStatistics() {
+		return generateStatistics;
+	}
+
+	/**
+	 * Gets the batch size.
+	 *
+	 * @return the batch size
+	 */
+	public String getBatchSize() {
+		return batchSize;
+	}
+
+	/**
+	 * Checks if is order inserts.
+	 *
+	 * @return true, if is order inserts
+	 */
+	public boolean isOrderInserts() {
+		return orderInserts;
+	}
 
 	/**
 	 * Gets the dialect.
@@ -102,7 +145,9 @@ public class HibernateProperties {
 	public String toString() {
 		return "HibernateProperties [dialect=" + dialect + ", showSql=" + showSql + ", hbm2DdlAuto=" + hbm2DdlAuto
 				+ ", storageEngine=" + storageEngine + ", enableLazyLoadNoTrans=" + enableLazyLoadNoTrans
-				+ ", packagesToScan=" + packagesToScan + ", persistenceUnitName=" + persistenceUnitName + "]";
+				+ ", packagesToScan=" + packagesToScan + ", persistenceUnitName=" + persistenceUnitName
+				+ ", generateStatistics=" + generateStatistics + ", batchSize=" + batchSize + ", orderInserts="
+				+ orderInserts + "]";
 	}
 
 	/**

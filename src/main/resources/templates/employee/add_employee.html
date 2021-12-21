@@ -7,8 +7,8 @@
 		<th:block th:replace="~{template :: menu}"></th:block >
 		<br>
 		<div class="container">
-			<form class="" action="#" th:action="@{/employee/add}" method="POST">
-				<div class="card">
+			<form class="" action="#" th:action="@{/employee/add}" method="POST" autocomplete="off">
+				<div class="card mb-4">
 				 	<h4 class="card-header">Register Employee</h4>
 			 		<div class="card-body">
 			 			<h5>Employee</h5>
@@ -94,15 +94,15 @@
 								</div>
 							    <div class="col-2">
 									<label for="presentCity" class="form-label">City - select</label>
-									<input type="text" class="form-control" name="presentCity" id="presentCity">
+									<input type="text" class="form-control" name="presentCity" id="presentCity" required>
 								</div>
 							    <div class="col-2">
 									<label for="presentBarangay" class="form-label">Barangay - select</label>
-									<input type="text" class="form-control" name="presentBarangay" id="presentBarangay">
+									<input type="text" class="form-control" name="presentBarangay" id="presentBarangay" required>
 								</div>
 							    <div class="col">
 									<label for="presentStreet" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="presentStreet" id="presentStreet">
+									<input type="text" class="form-control" name="presentStreet" id="presentStreet" required>
 								</div>
 				 			</div>
 				 			<h6>Permanent Address</h6>
@@ -113,15 +113,15 @@
 								</div>
 							    <div class="col-2">
 									<label for="city" class="form-label">City - select</label>
-									<input type="text" class="form-control" name="permanentCity" id="city">
+									<input type="text" class="form-control" name="permanentCity" id="city" required>
 								</div>
 							    <div class="col-2">
 									<label for="barangay" class="form-label">Barangay - select</label>
-									<input type="text" class="form-control" name="permanentBarangay" id="barangay">
+									<input type="text" class="form-control" name="permanentBarangay" id="barangay" required>
 								</div>
 							    <div class="col">
 									<label for="houseNo" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="permanentStreet" id="houseNo">
+									<input type="text" class="form-control" name="permanentStreet" id="houseNo" required>
 								</div>
 				 			</div>
 				 			<h6>Provincial Address</h6>
@@ -132,15 +132,15 @@
 								</div>
 							    <div class="col-2">
 									<label for="provincialCity" class="form-label">City - select</label>
-									<input type="text" class="form-control" name="provincialCity" id="provincialCity">
+									<input type="text" class="form-control" name="provincialCity" id="provincialCity" required>
 								</div>
 							    <div class="col-2">
 									<label for="provincialBarangay" class="form-label">Barangay - select</label>
-									<input type="text" class="form-control" name="provincialBarangay" id="provincialBarangay">
+									<input type="text" class="form-control" name="provincialBarangay" id="provincialBarangay" required>
 								</div>
 							    <div class="col">
 									<label for="houseNo" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="provincialStreet" id="provincialStreet">
+									<input type="text" class="form-control" name="provincialStreet" id="provincialStreet" required>
 								</div>
 				 			</div>
 				 			<br>
@@ -149,7 +149,7 @@
 							<div class="row">
 					        	<div class="col">
 					        		<label for="emergencyName" class="form-label">Name</label >
-				                    <input type="text" class="form-control" name="emergencyName" id="emergencyName" placeholder="John Smith">
+				                    <input type="text" class="form-control" name="emergencyName" id="emergencyName" placeholder="John Smith" required>
 					        	</div >
 					        	<div class="col">
 					        		<label for="emergencyAddress" class="form-label">Address</label >
@@ -157,7 +157,7 @@
 					        	</div >
 					        	<div class="col">
 					        		<label for="emergencyContact" class="form-label">Contact No</label >
-				                    <input type="text" name="emergencyContact" id="emergencyContact" class="form-control" placeholder="09123456789">
+				                    <input type="text" name="emergencyContact" id="emergencyContact" class="form-control" placeholder="09123456789" required>
 					        	</div >
 					        </div>
 					        <br>
@@ -186,12 +186,12 @@
 				 			<h5>Employee Dependent</h5>
 				 			<div class="row">
 							    <div class="col">
-									<label for="dependentName" class="form-label">Dependent Name</label>
-									<input type="text" class="form-control"  name="employeeDependentList[0].dependentName" id="dependentName">
+									<label for="empDependentName" class="form-label">Dependent Name</label>
+									<input type="text" class="form-control"  name="empDependentName" id="empDependentName">
 								</div>
 							    <div class="col-auto">
-									<label for="gender" class="form-label">Gender - select</label>
-									<select class="form-select form-control" aria-label="GenderSelect" name="employeeDependentList[0].gender" id="gender">
+									<label for="empDependentGender" class="form-label">Gender - select</label>
+									<select class="form-select form-control" aria-label="GenderSelect" name="empDependentGender" id="empDependentGender">
 										<option th:value="'M'" th:text="Male"></option>
 										<option th:value="'F'" th:text="Female"></option>
 									</select>
@@ -199,12 +199,12 @@
 				 			</div>
 				 			<div class="row">
 							    <div class="col"> 
-									<label for="dependentName" class="form-label">Dependent Name</label>
-									<input type="text" class="form-control"  name="employeeDependentList[1].dependentName" id="dependentName">
+									<label for="empDependentName" class="form-label">Dependent Name</label>
+									<input type="text" class="form-control"  name="empDependentName" id="empDependentName">
 								</div>
 							    <div class="col-auto">
-									<label for="gender" class="form-label">Gender - select</label>
-									<select class="form-select form-control" aria-label="GenderSelect" name="employeeDependentList[1].gender" id="gender">
+									<label for="empDependentGender" class="form-label">Gender - select</label>
+									<select class="form-select form-control" aria-label="GenderSelect" name="empDependentGender" id="empDependentGender">
 										<option th:value="'M'" th:text="Male"></option>
 										<option th:value="'F'" th:text="Female"></option>
 									</select>
@@ -216,7 +216,7 @@
 				 			<div class="row">
 					        	<div class="col-auto">
 					        		<label for="sssNo" class="form-label">SSS No</label >
-				                    <input type="text" name="sssNo" id="sssNo" class="form-control">
+				                    <input type="text" name="sssNo" id="sssNo" class="form-control" required>
 					        	</div >
 					        	<div class="col-auto">
 					        		<label for="sssMembershipDate" class="form-label">SSS Membership Date</label >
@@ -226,7 +226,7 @@
 							<div class="row">
 					        	<div class="col-auto">
 					        		<label for="philHealthNo" class="form-label">PhilHealth No</label >
-				                    <input type="text" name="philHealthNo" id="philHealthNo" class="form-control">
+				                    <input type="text" name="philHealthNo" id="philHealthNo" class="form-control" required>
 					        	</div >
 					        	<div class="col-auto">
 					        		<label for="philHealthMembershipDate" class="form-label">PhilHealth Membership Date</label >
@@ -236,7 +236,7 @@
 							<div class="row">
 					        	<div class="col-auto">
 					        		<label for="pagibigNo" class="form-label">PAG-IBIG No</label >
-				                    <input type="text" name="pagibigNo" id="pagibigNo" class="form-control">
+				                    <input type="text" name="pagibigNo" id="pagibigNo" class="form-control" required>
 					        	</div >
 					        	<div class="col-auto">
 					        		<label for="pagibigMembershipDate" class="form-label">PAG-IBIG Membership Date</label >
@@ -246,14 +246,14 @@
 							<div class="row">
 					        	<div class="col-auto">
 					        		<label for="tinNo" class="form-label">TIN No</label >
-				                    <input type="text" name="tinNo" id="tinNo" class="form-control">
+				                    <input type="text" name="tinNo" id="tinNo" class="form-control" required>
 					        	</div >
 					        </div>
 			 			</th:block>
 			 			<hr>
 					    <input class="btn btn-primary" type="submit" value="Submit">
 						<input class="btn btn-secondary" type="reset" value="Reset">
-				 	</div>
+				 	</div> 
 				</div>
 			</form >
 		</div>

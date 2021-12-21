@@ -14,16 +14,13 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.cache.CacheService;
@@ -50,9 +47,6 @@ public class EmployeeController {
 	
 	/** The Constant EMP_PAGE. */
 	private static final String EMP_PAGE = "/employee/employee";
-
-	/** The Constant ADD_EMP. */
-	private static final String ADD_EMP = "/employee/add_employee";
 	
 	/** The Constant EMP_LIST. */
 	private static final String EMP_LIST = "/employee/employee_list";
@@ -175,19 +169,6 @@ public class EmployeeController {
 			model.addAttribute("isUpdate", false);
 		}
 		return EMP_PAGE;
-	}
-	
-	@GetMapping("/add")
-	public String addEmployee(Model model) {
-		return ADD_EMP;
-	}
-
-	@PostMapping("/add")
-	public String addEmployee(@Valid @ModelAttribute AddEmployeeRequest addEmployeeRequest, Errors errors) {
-		
-		log.info("Add Employee Request: " + addEmployeeRequest.toString());
-		
-		return ADD_EMP;
 	}
 	
 	/**

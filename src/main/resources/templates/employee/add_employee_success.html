@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<HTML lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:replace="~{template :: headfiles}"></th:block>
+	</head>
+	<body>
+		<th:block th:replace="~{template :: menu}"></th:block >
+		<br>
+		
+		<div class="container">
+			<div class="p-5 mb-4 bg-light rounded-3" th:if="${res != null && !#strings.isEmpty(res.employeeId)}">
+			  <p class="lead">Employee has been successfully registered.</p>
+			  <p class="lead">Employee Id: <strong><span th:text="${res.employeeId}">1234</span ></strong></p>
+			  <hr class="my-4">
+			  <p class="lead">
+			    <a class="btn btn-primary btn-lg" href="#" th:href="@{/employee/add}" role="button">Register another Employee</a>
+			  </p>
+			</div>
+		</div>
+		
+		<th:block th:replace="~{template :: footer}"></th:block >
+		<th:block th:replace="~{template :: scripts}"></th:block >
+	</body>
+</HTML>
