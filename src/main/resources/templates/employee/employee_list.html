@@ -17,18 +17,21 @@
 						<th scope="col">Birthdate</th>
 						<th scope="col">Division</th >
 						<th scope="col">Position</th >
+						<!--<th scope="col">Action</th >-->
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:if="${res.employeeList != null}" th:each="employee : ${res.employeeList}">
 						<th scope="row">
 							<a th:class="button" th:href="@{/employee/}+${employee.employeeId}" href="#" th:text="${employee.employeeId}">Employee Id</a>
+							<!--<span th:text="${employee.employeeId}"></span>-->
 						</th >
 						<td th:text="${#strings.capitalize(employee.firstName)}"></td >
 						<td th:text="${employee.lastName}"></td >
 						<td th:text="${#temporals.format(employee.birthdate, 'MMMM dd, yyyy')}"></td >
 						<td th:text="${employee.Division}"></td >
 						<td th:text="${employee.Position}"></td >
+						<!--<td ><button class="btn btn-secondary">View</button ><button class="btn btn-primary">Update</button ></td >-->
 					</tr >
 				</tbody>
 			</table>

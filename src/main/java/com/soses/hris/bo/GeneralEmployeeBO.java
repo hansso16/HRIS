@@ -53,4 +53,22 @@ public class GeneralEmployeeBO {
 		}
 		return empAddressTOList;
 	}
+	
+	public boolean updateEmployee(Employee employee) {
+		
+		if(employee != null) {
+			employeeRepo.save(employee);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean updateEmployeeAddress(EmployeeAddress employeeAddress) {
+		
+		if (employeeAddress != null) {
+			employeeAddressRepo.save(employeeAddress);
+			return true;
+		}
+		return false;
+	}
 }

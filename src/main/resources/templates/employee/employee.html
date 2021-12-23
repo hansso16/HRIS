@@ -10,15 +10,18 @@
 			<p th:if="${res != null && res.error != null && !#strings.isEmpty(res.error.message)}" th:text="${res.error.message}" style="color:red;"></p >
 			<div class="card mb-4" th:if="${res != null}">
 			    <div class="card-header text-center">
-			        <ul class="nav nav-tabs card-header-tabs">
+			        <ul class="nav nav-tabs card-header-tabs me-auto">
 			            <li class="nav-item">
 			                <a class="nav-link" th:classappend="${(viewType == '1' || viewType == '') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=1}">Profile</a>
 			            </li>
 			            <li class="nav-item">
 			                <a class="nav-link" th:classappend="${viewType == '2' ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=2}">Info</a>
 			            </li>
-			            <li class="nav-item">
+			            <li class="nav-item me-auto">
 			                <a class="nav-link" th:classappend="${viewType == '3' ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=3}">Benefits</a>
+			            </li>
+			            <li class="nav-item" th:if="${!isUpdate}">
+			                <a class="nav-link" href="#" th:href="@{/employee/} + ${res.employeeId} + @{?empViewType=} + ${viewType} + @{&isUpdate=true}">Update</a>
 			            </li>
 			        </ul>
 			    </div>
@@ -38,6 +41,12 @@
 		</div>
 		
 		<th:block th:replace="~{template :: footer}"></th:block >
+		<script type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/employee_profile.js}"></script>
+		<script th:inline="javascript">
+			var employeeId = /*[[${res.employeeId}]]*/ '';
+			console.log(employeeId);
+		</script >
 		<th:block th:replace="~{template :: scripts}"></th:block>
 	</body>
 </HTML >

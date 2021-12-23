@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,6 +24,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 
 import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
+import com.soses.hris.api.UpdateRequest;
 import com.soses.hris.cache.CacheService;
 import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.common.StringUtil;
@@ -143,7 +145,8 @@ public class EmployeeController {
 	 */
 	@GetMapping("/{employeeId}")
 	@Validated
-	public String getEmployee(@PathVariable String employeeId, Model model, @RequestParam(required = false, defaultValue = "") String empViewType) {
+	public String getEmployee(@PathVariable String employeeId, Model model, @RequestParam(required = false, defaultValue = "") String empViewType
+			, @RequestParam(required = false, defaultValue = "false") boolean isUpdate) {
 		
 		// searchType? case 1 2 3 -> service
 		BaseEmployeeResponse res = null;
@@ -166,8 +169,20 @@ public class EmployeeController {
 		model.addAttribute("viewType", empViewType);
 		if (res!= null) {
 			model.addAttribute("res", res);
-			model.addAttribute("isUpdate", false);
+			if(isUpdate) {
+				model.addAttribute("isUpdate", true);
+			} else {
+				model.addAttribute("isUpdate", false);
+			}
 		}
+		return EMP_PAGE;
+	}
+	
+	@PostMapping("/{employeeId}/{viewType}")
+	public String updateEmployee(@PathVariable String employeeId, @PathVariable String viewType, @Valid UpdateRequest request) {
+		
+		log.info("EmployeeId: " + employeeId + ". ViewType: " + viewType);
+		log.info("Request: " + request.toString());
 		return EMP_PAGE;
 	}
 	
