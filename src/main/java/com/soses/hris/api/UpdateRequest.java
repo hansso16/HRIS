@@ -239,7 +239,7 @@ public class UpdateRequest extends BaseEmployeeRequest {
 				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", division=" + division
 				+ ", position=" + position + ", employeeAddressArr=" + Arrays.toString(employeeAddressArr)
 				+ ", employeeAddressList=" + employeeAddressList + ", street=" + street + ", barangay=" + barangay
-				+ ", city=" + city + ", province=" + province + "]";
+				+ ", city=" + city + ", province=" + province + ", toString()=" + super.toString() + "]";
 	}
 	
 	

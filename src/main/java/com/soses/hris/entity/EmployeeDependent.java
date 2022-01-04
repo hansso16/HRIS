@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The Class EmployeeDependent.
  *
@@ -34,6 +36,7 @@ public class EmployeeDependent implements Serializable {
     
     /** The dependent birthdate. */
     @Column(name="DEPENDENT_BIRTHDATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dependentBirthdate;
     
     /** The gender. */
@@ -119,4 +122,13 @@ public class EmployeeDependent implements Serializable {
     public void setGender(String aGender) {
         gender = aGender;
     }
+
+
+	@Override
+	public String toString() {
+		return "EmployeeDependent [id=" + id + ", dependentName=" + dependentName + ", dependentBirthdate="
+				+ dependentBirthdate + ", gender=" + gender + ", toString()=" + super.toString() + "]";
+	}
+    
+    
 }

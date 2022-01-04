@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
@@ -28,7 +30,7 @@ import com.soses.hris.api.UpdateRequest;
 import com.soses.hris.cache.CacheService;
 import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.common.StringUtil;
-import com.soses.hris.service.EmployeeService;
+import com.soses.hris.service.BaseEmployeeService;
 
 /**
  * The Class EmployeeController.
@@ -54,16 +56,16 @@ public class EmployeeController {
 	private static final String EMP_LIST = "/employee/employee_list";
 	
 	/** The general emp service. */
-	private EmployeeService generalEmpService;
+	private BaseEmployeeService generalEmpService;
 	
 	/** The info emp service. */
-	private EmployeeService infoEmpService;
+	private BaseEmployeeService infoEmpService;
 	
 	/** The employee search service. */
-	private EmployeeService employeeSearchService;
+	private BaseEmployeeService employeeSearchService;
 	
 	/** The benefits employee service. */
-	private EmployeeService benefitsEmployeeService;
+	private BaseEmployeeService benefitsEmployeeService;
 	
 	/**
 	 * Sets the benefits employee service.
@@ -72,7 +74,7 @@ public class EmployeeController {
 	 */
 	@Autowired
 	@Qualifier("BenefitsEmployeeServiceImpl")
-	public void setBenefitsEmployeeService(EmployeeService benefitsEmployeeService) {
+	public void setBenefitsEmployeeService(BaseEmployeeService benefitsEmployeeService) {
 		this.benefitsEmployeeService = benefitsEmployeeService;
 	}
 
@@ -83,7 +85,7 @@ public class EmployeeController {
 	 */
 	@Autowired
 	@Qualifier("EmployeeSearchServiceImpl")
-	public void setEmployeeSearchService(EmployeeService employeeSearchService) {
+	public void setEmployeeSearchService(BaseEmployeeService employeeSearchService) {
 		this.employeeSearchService = employeeSearchService;
 	}
 
@@ -94,7 +96,7 @@ public class EmployeeController {
 	 */
 	@Autowired
 	@Qualifier("GeneralEmployeeSerivceImpl")
-	public void seteService(EmployeeService generalEmpService) {
+	public void seteService(BaseEmployeeService generalEmpService) {
 		this.generalEmpService = generalEmpService;
 	}
 
@@ -105,7 +107,7 @@ public class EmployeeController {
 	 */
 	@Autowired
 	@Qualifier("InfoEmployeeServiceImpl")
-	public void setInfoEmpService(EmployeeService infoEmpService) {
+	public void setInfoEmpService(BaseEmployeeService infoEmpService) {
 		this.infoEmpService = infoEmpService;
 	}
 
@@ -179,10 +181,36 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/{employeeId}/{viewType}")
-	public String updateEmployee(@PathVariable String employeeId, @PathVariable String viewType, @Valid UpdateRequest request) {
+	@ResponseBody
+	public String updateEmployee(@PathVariable String employeeId, @PathVariable String viewType, @Valid @RequestBody UpdateRequest request
+			, Model model) {
 		
 		log.info("EmployeeId: " + employeeId + ". ViewType: " + viewType);
 		log.info("Request: " + request.toString());
+		// searchType? case 1 2 3 -> service
+//		BaseEmployeeResponse res = null;
+//		switch (viewType) {
+//			case GlobalConstants.EMP_VIEW_GENERAL:
+//				res = generalEmpService.updateEmployeeDetails();
+//				break;
+//			case GlobalConstants.EMP_VIEW_INFO:
+//				res = infoEmpService.updateEmployeeDetails();
+//				break;
+//			case GlobalConstants.EMP_VIEW_BENEFITS:
+//				res = benefitsEmployeeService.updateEmployeeDetails();
+//				break;
+//			default:
+//				// throw error
+//				viewType = GlobalConstants.EMP_VIEW_GENERAL;
+//				res = generalEmpService.updateEmployeeDetails();
+//				break;
+//		}
+//		res.setEmployeeId(employeeId);
+//		model.addAttribute("viewType", viewType);
+//		if (res!= null) {
+//			model.addAttribute("res", res);
+//			
+//		}
 		return EMP_PAGE;
 	}
 	

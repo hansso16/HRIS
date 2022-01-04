@@ -9,16 +9,17 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeInfoSearchResponse;
 import com.soses.hris.bo.InfoEmployeeBO;
 import com.soses.hris.dto.EmployeeDependentTO;
 import com.soses.hris.dto.EmployeeInfoTO;
-import com.soses.hris.service.EmployeeService;
+import com.soses.hris.service.BaseEmployeeService;
 
 @Service("InfoEmployeeServiceImpl")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
-public class InfoEmployeeServiceImpl implements EmployeeService  {
+public class InfoEmployeeServiceImpl implements BaseEmployeeService  {
 
 	private InfoEmployeeBO employeeInfoBO;
 
@@ -42,6 +43,12 @@ public class InfoEmployeeServiceImpl implements EmployeeService  {
 		resp.setEmployeeDependentList(employeeDependentTOList);
 
 		return resp;
+	}
+
+	@Override
+	public BaseEmployeeResponse updateEmployeeDetails() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

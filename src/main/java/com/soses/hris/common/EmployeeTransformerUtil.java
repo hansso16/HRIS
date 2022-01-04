@@ -1,5 +1,6 @@
 package com.soses.hris.common;
 
+import com.soses.hris.api.EmployeeProfileRequest;
 import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.dto.EmployeeBenefitsTO;
 import com.soses.hris.dto.EmployeeDependentTO;
@@ -104,7 +105,8 @@ public class EmployeeTransformerUtil {
 		if (empAddress != null) {
 			employeeAddressTO = new EmployeeAddressTO();
 			employeeAddressTO.setEmployeeId(empAddress.getId().getEmployeeId());
-			employeeAddressTO.setAddressType(empAddress.getId().getAddressType()); // derive
+			employeeAddressTO.setAddressType(empAddress.getId().getAddressType());
+			employeeAddressTO.setAddressTypeName(""); //derive
 			employeeAddressTO.setStreet(empAddress.getStreet());
 			employeeAddressTO.setBarangay(empAddress.getBarangay());
 			employeeAddressTO.setCity(empAddress.getCity());
@@ -135,5 +137,31 @@ public class EmployeeTransformerUtil {
 		}
 	
 		return employeeBenefitsTO;
+	}
+	
+	public static Employee transformEmployeeProfileRequest(EmployeeProfileRequest request) {
+		Employee employee = null;
+		if (request != null) {
+			employee = new Employee();
+			employee.setEmployeeId(request.getEmployeeId());
+			employee.setLastName(request.getLastName());
+			employee.setFirstName(request.getFirstName());
+			employee.setMiddleName(request.getMiddleName());
+			employee.setSuffix(request.getSuffix());
+			employee.setNickname(request.getNickname());
+			employee.setCellNo(request.getCellNo());
+			employee.setTelNo(request.getTelNo());
+			employee.setEmailAddress(request.getEmailAddress());
+			employee.setGender(request.getGender()); //derive
+			employee.setBirthdate(request.getBirthdate()); //date format
+			employee.setMaritalStatus(request.getMaritalStatus()); //derive
+			employee.setHiringDate(request.getHiringDate()); //date format
+			employee.setTerminationDate(request.getTerminationDate()); //date format
+			employee.setRegularizationDate(request.getRegularizationDate()); //date format
+			employee.setDivision(request.getDivision()); // derive
+			employee.setPosition(request.getPosition()); // derive
+		}
+		
+		return employee;
 	}
 }

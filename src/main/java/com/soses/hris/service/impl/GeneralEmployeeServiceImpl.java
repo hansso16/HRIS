@@ -9,13 +9,15 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeGeneralSearchResponse;
+import com.soses.hris.api.UpdateRequest;
 import com.soses.hris.bo.GeneralEmployeeBO;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.dto.EmployeeTO;
 import com.soses.hris.dto.ErrorPageDTO;
-import com.soses.hris.service.EmployeeService;
+import com.soses.hris.service.BaseEmployeeService;
 
 /**
  * The Class GeneralEmployeeSerivceImpl.
@@ -26,7 +28,7 @@ import com.soses.hris.service.EmployeeService;
 @Service("GeneralEmployeeSerivceImpl")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
-public class GeneralEmployeeServiceImpl implements EmployeeService {
+public class GeneralEmployeeServiceImpl implements BaseEmployeeService {
 
 	/** The gen emp bo. */
 	private GeneralEmployeeBO genEmpBo;
@@ -68,6 +70,12 @@ public class GeneralEmployeeServiceImpl implements EmployeeService {
 		}
 		
 		return resp;
+	}
+
+	@Override
+	public BaseEmployeeResponse updateEmployeeDetails() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

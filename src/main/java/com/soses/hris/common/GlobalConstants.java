@@ -25,4 +25,13 @@ public class GlobalConstants {
 	
 	/** The Constant ADDRESS_TYPE_PROVINCIAL. */
 	public static final String ADDRESS_TYPE_PROVINCIAL = "3";
+	
+	/** The Constant SUCCESS_MESSAGE. */
+	public static final String SUCCESS_MESSAGE = "successMessage";
+	
+	/** The Constant ERROR_MESSAGE. */
+	public static final String ERROR_MESSAGE = "errorMessage";
+	
+	/** The Constant GENERIC_ERROR_MESSAGE_DESC. */
+	public static final String GENERIC_ERROR_MESSAGE_DESC = "Something went wrong. Please try again. If problem persists, please contact your system administrator.";
 }

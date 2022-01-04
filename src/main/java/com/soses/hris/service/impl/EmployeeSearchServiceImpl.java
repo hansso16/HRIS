@@ -9,17 +9,18 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeSearchResponse;
 import com.soses.hris.bo.SearchEmployeeBO;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.dto.EmployeeTO;
 import com.soses.hris.dto.ErrorPageDTO;
-import com.soses.hris.service.EmployeeService;
+import com.soses.hris.service.BaseEmployeeService;
 
 @Service("EmployeeSearchServiceImpl")
 @Transactional
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class EmployeeSearchServiceImpl implements EmployeeService {
+public class EmployeeSearchServiceImpl implements BaseEmployeeService {
 
 	private SearchEmployeeBO searchEmpBo;
 	
@@ -41,6 +42,12 @@ public class EmployeeSearchServiceImpl implements EmployeeService {
 			resp.setError(error);
 		}
 		return resp;
+	}
+
+	@Override
+	public BaseEmployeeResponse updateEmployeeDetails() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -12,12 +12,12 @@ import com.soses.hris.api.EmployeeBenefitsSearchResponse;
 import com.soses.hris.bo.BenefitsEmployeeBO;
 import com.soses.hris.dto.EmployeeBenefitsTO;
 import com.soses.hris.dto.ErrorPageDTO;
-import com.soses.hris.service.EmployeeService;
+import com.soses.hris.service.BaseEmployeeService;
 
 @Service("BenefitsEmployeeServiceImpl")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
-public class BenefitsEmployeeServiceImpl implements EmployeeService {
+public class BenefitsEmployeeServiceImpl implements BaseEmployeeService {
 
 	private BenefitsEmployeeBO employeeBenefitsBO;
 	
@@ -41,6 +41,12 @@ public class BenefitsEmployeeServiceImpl implements EmployeeService {
 		}
 		resp.setEmployeeId(employeeId);
 		return resp;
+	}
+
+	@Override
+	public BaseEmployeeResponse updateEmployeeDetails() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

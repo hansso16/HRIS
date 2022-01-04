@@ -11,6 +11,9 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	/** The address type. */
 	private String addressType;
 	
+	/** The address type name. */
+	private String addressTypeName;
+	
 	/** The street. */
 	private String street;
 	
@@ -23,6 +26,24 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	/** The province. */
 	private String province;
 	
+	/**
+	 * Gets the address type name.
+	 *
+	 * @return the address type name
+	 */
+	public String getAddressTypeName() {
+		return addressTypeName;
+	}
+
+	/**
+	 * Sets the address type name.
+	 *
+	 * @param addressTypeName the new address type name
+	 */
+	public void setAddressTypeName(String addressTypeName) {
+		this.addressTypeName = addressTypeName;
+	}
+
 	/**
 	 * Gets the address type.
 	 *
@@ -113,15 +134,11 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 		this.province = province;
 	}
 
-	/**
-	 * To string.
-	 *
-	 * @return the string
-	 */
 	@Override
 	public String toString() {
-		return "EmployeeAddressDTO [addressType=" + addressType + ", street=" + street + ", barangay=" + barangay
-				+ ", city=" + city + ", province=" + province + "]";
+		return "EmployeeAddressTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName + ", street="
+				+ street + ", barangay=" + barangay + ", city=" + city + ", province=" + province + ", toString()="
+				+ super.toString() + "]";
 	}
 	
 }

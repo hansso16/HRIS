@@ -23,7 +23,7 @@
 				<tbody>
 					<tr th:if="${res.employeeList != null}" th:each="employee : ${res.employeeList}">
 						<th scope="row">
-							<a th:class="button" th:href="@{/employee/}+${employee.employeeId}" href="#" th:text="${employee.employeeId}">Employee Id</a>
+							<a th:class="button" th:href="@{/employee/}+${employee.employeeId} + @{/profile}" href="#" th:text="${employee.employeeId}">Employee Id</a>
 							<!--<span th:text="${employee.employeeId}"></span>-->
 						</th >
 						<td th:text="${#strings.capitalize(employee.firstName)}"></td >

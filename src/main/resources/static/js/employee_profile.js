@@ -1,17 +1,21 @@
 $("#employeeForm").submit(function(e){
-	e.preventDefault();
+	//e.preventDefault();
     //return false;
 });
 
 $(document).ready(function() {
-	$("#submitBtn").click(submitForm);
+	//$("#submitBtn").click(submitForm);
 	
 });
+
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
 
 function submitForm() {
 	$("#submitBtn").prop('disabled', true);
 	
 	var data = {};
+	data["employeeId"] = employeeId;
 	data["firstName"] = $("#firstName").val();
 	data["lastName"] = $("#lastName").val();
 	data["middleName"] = $("#middleName").val();
@@ -32,35 +36,40 @@ function submitForm() {
 	console.log(json)
 	console.log("employee id: " + employeeId);
 	// validate data . if true then ajax
-	var isFormPopulated = false;
+	var isFormPopulated = true;
 	var isValidPolNo = true;
+	console.log(token);
+	console.log(header);
 	
 	if (isFormPopulated && isValidPolNo) {
 		$.ajax({
 			type:'POST',
-			url: '/employee/'+ employeeId + '/1',
+			url: '/employee/'+ employeeId + '/profile',
 			contentType: 'application/json',
 			dataType: 'json',
 			data: JSON.stringify(data),
 			async: true,
+			headers: {
+		        header :token
+		    },
 			//processData: false,
-			beforeSend: triggerProgress(),
+			beforeSend: function(request) {
+		    	request.setRequestHeader(header, token);
+		  	},
 			success: function(res) {
-				console.log(res);
-				handleResponse(res);
-				
-				//alert("SUCCESS");
+				alert("Update completed successfully.");
+				window.location.href = "/employee/" + employeeId + "/profile";
 			}, error: function(res, error) {
-				handleResponse(res);
+				//handleResponse(res);
 				console.log(res);
 				console.log(JSON.stringify(res));
 				console.log("ERROR: " + error);
-				alert("ERROR: " + res.responseJSON.message);
-			},
-			complete: function() {
-				$("#submitBtn").prop('disabled', false);
-				triggerProgress()
+				//alert("ERROR: " + res.responseJSON.message);
 			}
+			//complete: function() {
+			//	$("#submitBtn").prop('disabled', false);
+			//	triggerProgress()
+			//}
 		});
 	} else {
 		$("#submitBtn").prop('disabled', false);

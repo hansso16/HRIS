@@ -3,6 +3,7 @@ package com.soses.hris.api;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Positive;
 
+
 /**
  * The Class BaseEmployeeRequest.
  *

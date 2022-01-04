@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The Class EmployeeBenefits.
  *
@@ -37,6 +39,7 @@ public class EmployeeBenefits implements Serializable {
     
     /** The sss membership date. */
     @Column(name="SSS_MEMBERSHIP_DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate sssMembershipDate;
     
     /** The philhealth no. */
@@ -45,6 +48,7 @@ public class EmployeeBenefits implements Serializable {
     
     /** The philhealth membership date. */
     @Column(name="PHILHEALTH_MEMBERSHIP_DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate philhealthMembershipDate;
     
     /** The pagibig no. */
@@ -53,6 +57,7 @@ public class EmployeeBenefits implements Serializable {
     
     /** The pagibig membership date. */
     @Column(name="PAGIBIG_MEMBERSHIP_DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate pagibigMembershipDate;
     
     /** The tin no. */

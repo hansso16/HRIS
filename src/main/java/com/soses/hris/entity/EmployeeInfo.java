@@ -10,6 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The Class EmployeeInfo.
  *
@@ -48,6 +50,7 @@ public class EmployeeInfo implements Serializable {
     
     /** The mother birthdate. */
     @Column(name="MOTHER_BIRTHDATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate motherBirthdate;
     
     /** The father name. */
@@ -56,6 +59,7 @@ public class EmployeeInfo implements Serializable {
     
     /** The father birthdate. */
     @Column(name="FATHER_BIRTHDATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate fatherBirthdate;
 
     /** Default constructor. */
