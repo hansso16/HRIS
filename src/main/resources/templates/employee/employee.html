@@ -34,7 +34,7 @@
 			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('info') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/info}">Info</a>
 			            </li>
 			            <li class="nav-item">
-			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('dependent') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/dependent}">Dependents</a>
+			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().contains('dependent') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/dependent}">Dependents</a>
 			            </li>
 			            <li class="nav-item me-auto">
 			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('benefits') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/benefits}">Benefits</a>
@@ -63,12 +63,11 @@
 		</div>
 		
 		<th:block th:replace="~{template :: footer}"></th:block >
-		<!--<script type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>-->
+		<script th:if="${viewType} == 5" type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
 		<th:block th:replace="~{template :: scripts}"></th:block>
-		<!--<script type="text/javascript" th:if="${'1'.equalsIgnoreCase(viewType)}" th:src="@{/js/employee_profile.js}"></script>
+		<script th:if="${viewType} == 5" type="text/javascript" th:src="@{/js/employee_dependent.js}"></script>
 		<script th:inline="javascript">
 			var employeeId = /*[[${res.employeeId}]]*/ '';
-			console.log(employeeId);
-		</script >-->
+		</script >
 	</body>
 </HTML >

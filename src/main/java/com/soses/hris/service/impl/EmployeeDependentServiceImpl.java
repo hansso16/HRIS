@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
@@ -15,9 +16,11 @@ import com.soses.hris.api.EmployeeDependentRequest;
 import com.soses.hris.api.EmployeeDependentResponse;
 import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.common.GeneralUtil;
+import com.soses.hris.common.StringUtil;
 import com.soses.hris.dto.EmployeeDependentTO;
 import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.entity.EmployeeDependent;
+import com.soses.hris.entity.EmployeeDependentPK;
 import com.soses.hris.repository.EmployeeDependentRepository;
 import com.soses.hris.service.EmployeeDependentService;
 
@@ -74,6 +77,45 @@ public class EmployeeDependentServiceImpl implements EmployeeDependentService {
 		if (!GeneralUtil.isListEmpty(employeeDependentList)) {
 			employeeDependentList = employeeDependentRepo.saveAll(employeeDependentList);
 			isSaved = true;
+		}
+		
+		return isSaved;
+	}
+
+	@Override
+	public boolean deleteEmployeeDependent(String employeeId, short dependentId) {
+		
+		boolean isDeleted = false;
+		if (!StringUtils.isEmpty(employeeId) && dependentId >= 0) {
+			EmployeeDependentPK employeeDependentPK = new EmployeeDependentPK();
+			employeeDependentPK.setDependentId(dependentId);
+			employeeDependentPK.setEmployeeId(employeeId);
+			employeeDependentRepo.deleteById(employeeDependentPK);
+			isDeleted = true;
+		}
+		
+		return isDeleted;
+	}
+
+	@Override
+	public boolean addEmployeeDependents(EmployeeDependentRequest request) {
+		
+		boolean isSaved = false;
+		if (request != null) {
+			List<EmployeeDependent> employeeDependentList = request.getEmployeeDependent();
+			if (!GeneralUtil.isListEmpty(employeeDependentList)) {
+				List<EmployeeDependent> employeeDependentEntityList = new ArrayList<>();
+				short maxDependentId = employeeDependentRepo.getMaxDependentIdByEmployee(request.getEmployeeId());
+				for (EmployeeDependent employeeDependent : employeeDependentList) {
+					if (employeeDependent != null && !StringUtil.isEmpty(employeeDependent.getDependentName())
+							&& employeeDependent.getId() != null && !StringUtil.isEmpty(employeeDependent.getId().getEmployeeId())) {
+						employeeDependent.getId().setDependentId(++maxDependentId);
+						employeeDependentEntityList.add(employeeDependent);
+					}
+				}
+				employeeDependentEntityList = employeeDependentRepo.saveAll(employeeDependentEntityList);
+				isSaved = true;
+			}
 		}
 		
 		return isSaved;

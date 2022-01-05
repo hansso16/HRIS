@@ -11,52 +11,52 @@
 		        <div class="row ">
 		        	<div class="offset-4 col-4 text-center">
 		        		<label for="lastName" class="form-label">First Name : <span th:text="${isUpdate}"></span ></label >
-	                    <input type="text" name="firstName" id="firstName" class="form-control" th:value="${res.employee.firstName}" th:readonly="${!isUpdate}">
+	                    <input type="text" name="firstName" id="firstName" class="form-control" th:value="${res.employee.firstName}" th:readonly="${!isUpdate}" required>
 		        	</div >
 		        </div>
 		        <div class="row">
 		        	<div class="col text-center">
 		        		<label for="lastName" class="form-label">Last Name</label >
-	                    <input type="text" name="lastName" id="lastName" class="form-control" th:value="${res.employee.lastName}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="lastName" id="lastName" class="form-control" th:value="${res.employee.lastName}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <div class="row">
 		        	<div class="col">
 		        		<label for="middleName" class="form-label">Middle Name</label >
-	                    <input type="text" name="middleName" id="middleName" class="form-control" th:value="${res.employee.middleName}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="middleName" id="middleName" class="form-control" th:value="${res.employee.middleName}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="suffix" class="form-label">Suffix</label >
-	                    <input type="text" name="suffix" id="suffix" class="form-control" th:value="${res.employee.suffix}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="suffix" id="suffix" class="form-control" th:value="${res.employee.suffix}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="nickname" class="form-label">Nickname</label >
-	                    <input type="text" name="nickname" id="nickname" class="form-control" th:value="${res.employee.nickname}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="nickname" id="nickname" class="form-control" th:value="${res.employee.nickname}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <div class="row">
 		        	<div class="col">
 		        		<label for="cellNo" class="form-label">Cellphone Number</label >
-	                    <input type="text" name="cellNo" id="cellNo" class="form-control" th:value="${res.employee.cellNo}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="cellNo" id="cellNo" class="form-control" th:value="${res.employee.cellNo}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="telNo" class="form-label">Telephone Number</label >
-	                    <input type="text" name="telNo" id="telNo" class="form-control" th:value="${res.employee.teleNo}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="telNo" id="telNo" class="form-control" th:value="${res.employee.teleNo}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="gender" class="form-label">Gender</label >
-	                    <select id="gender" class="form-select form-control" th:name="gender" name="gender" aria-label="GenderSelect"  th:disabled="${!isUpdate}">
+	                    <select id="gender" class="form-select form-control" th:name="gender" name="gender" aria-label="GenderSelect"  th:disabled="${!isUpdate}" required>
 							<option th:selected="${res.employee.gender == 'F'}" th:value="'F'" th:text="Female"></option>
 							<option th:selected="${res.employee.gender == 'M'}" th:value="'M'" th:text="Male"></option>
 						</select>
 		        	</div >
 		        	<div class="col">
 		        		<label for="birthdate" class="form-label">Birthdate</label >
-	                    <input type="date" name="birthdate" id="birthdate" class="form-control" th:value="${res.employee.birthdate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="birthdate" id="birthdate" class="form-control" th:value="${res.employee.birthdate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="maritalStatus" class="form-label">Marital Status</label >
-	                    <select id="maritalStatus" class="form-select form-control" name="maritalStatus" aria-label="MaritalStatusSelect" th:disabled="${!isUpdate}">
+	                    <select id="maritalStatus" class="form-select form-control" name="maritalStatus" aria-label="MaritalStatusSelect" th:disabled="${!isUpdate}" required>
 							<option th:selected="${res.employee.maritalStatus == 'M'}" th:value="M" th:text="Married"></option>
 							<option th:selected="${res.employee.maritalStatus == 'S'}" th:value="S" th:text="Single"></option>
 						</select>
@@ -65,23 +65,23 @@
 		        <div class="row">
 		        	<div class="col">
 		        		<label for="hiringDate" class="form-label">Hiring Date</label >
-	                    <input type="date" name="hiringDate" id="hiringDate" class="form-control" th:value="${res.employee.hiringDate}" th:readonly="true" readonly>
+	                    <input type="date" name="hiringDate" id="hiringDate" class="form-control" th:value="${res.employee.hiringDate}" th:readonly="true" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="regularizationDate" class="form-label">Regularized on</label >
-	                    <input type="date" name="regularizationDate" id="regularizationDate" class="form-control" th:value="${res.employee.regularizationDate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="regularizationDate" id="regularizationDate" class="form-control" th:value="${res.employee.regularizationDate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="terminationDate" class="form-label">Termination Date</label >
-	                    <input type="date" name="terminationDate" id="terminationDate" class="form-control" th:value="${res.employee.terminationDate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="terminationDate" id="terminationDate" class="form-control" th:value="${res.employee.terminationDate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="division" class="form-label">Division</label >
-	                    <input type="text" name="division" id="division" class="form-control" th:value="${res.employee.division}" th:readonly="true" disabled>
+	                    <input type="text" name="division" id="division" class="form-control" th:value="${res.employee.division}" th:readonly="true" required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="position" class="form-label">Position</label >
-	                    <input type="text" name="position" id="position" class="form-control" th:value="${res.employee.position}" th:readonly="true" disabled>
+	                    <input type="text" name="position" id="position" class="form-control" th:value="${res.employee.position}" th:readonly="true" required>
 		        	</div >
 		        </div>
 		        <!--
@@ -127,19 +127,19 @@
 		        	<h5 th:text="${empAddress.addressType}"></h5 >
 		        	<div class="col-4">
 		        		<label for="street" class="form-label">Street</label >
-	                    <input type="text" name="street" id="street" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].street'" th:value="${empAddress.street}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="street" id="street" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].street'" th:value="${empAddress.street}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="barangay" class="form-label">Barangay</label >
-	                    <input type="text" name="barangay" id="barangay" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].barangay'" th:value="${empAddress.barangay}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="barangay" id="barangay" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].barangay'" th:value="${empAddress.barangay}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="city" class="form-label">City</label >
-	                    <input type="text" name="city" id="city" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].city'" th:value="${empAddress.city}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="city" id="city" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].city'" th:value="${empAddress.city}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="province" class="form-label">Province</label >
-	                    <input type="text" name="province" id="province" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].province'" th:value="${empAddress.province}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="province" id="province" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].province'" th:value="${empAddress.province}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <div th:if="${isUpdate}">
@@ -160,15 +160,15 @@
 				<div class="row">
 		        	<div class="col">
 		        		<label for="emergencyName" class="form-label">Name</label >
-	                    <input type="text" name="emergencyName" th:name="employeeInfo.emergencyName" id="emergencyName" class="form-control" th:value="${res.employeeInfo.emergencyName}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="emergencyName" th:name="employeeInfo.emergencyName" id="emergencyName" class="form-control" th:value="${res.employeeInfo.emergencyName}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="emergencyAddress" class="form-label">Address</label >
-	                    <input type="text" name="emergencyAddress" th:name="employeeInfo.emergencyAddress" id="emergencyAddress" class="form-control" th:value="${res.employeeInfo.emergencyAddress}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="emergencyAddress" th:name="employeeInfo.emergencyAddress" id="emergencyAddress" class="form-control" th:value="${res.employeeInfo.emergencyAddress}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="emergencyContact" class="form-label">Contact No</label >
-	                    <input type="text" name="emergencyContact" th:name="employeeInfo.emergencyContact" id="emergencyContact" class="form-control" th:value="${res.employeeInfo.emergencyContact}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="emergencyContact" th:name="employeeInfo.emergencyContact" id="emergencyContact" class="form-control" th:value="${res.employeeInfo.emergencyContact}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <hr>
@@ -176,19 +176,19 @@
 				<div class="row">
 		        	<div class="col">
 		        		<label for="fatherName" class="form-label">Father Name</label >
-	                    <input type="text" name="fatherName" th:name="employeeInfo.fatherName" id="fatherName" class="form-control" th:value="${res.employeeInfo.fatherName}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="fatherName" th:name="employeeInfo.fatherName" id="fatherName" class="form-control" th:value="${res.employeeInfo.fatherName}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="fatherBirthdate" class="form-label">Father Birthdate</label >
-	                    <input type="date" name="fatherBirthdate" th:name="employeeInfo.fatherBirthdate" id="fatherBirthdate" class="form-control" th:value="${res.employeeInfo.fatherBirthdate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="fatherBirthdate" th:name="employeeInfo.fatherBirthdate" id="fatherBirthdate" class="form-control" th:value="${res.employeeInfo.fatherBirthdate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="motherName" class="form-label">Mother Name</label >
-	                    <input type="text" name="motherName" th:name="employeeInfo.motherName" id="motherName" class="form-control" th:value="${res.employeeInfo.motherName}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="motherName" th:name="employeeInfo.motherName" id="motherName" class="form-control" th:value="${res.employeeInfo.motherName}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="motherBirthdate" class="form-label">Mother Birthdate</label >
-	                    <input type="date" name="motherBirthdate" th:name="employeeInfo.motherBirthdate" id="motherBirthdate" class="form-control" th:value="${res.employeeInfo.motherBirthdate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="motherBirthdate" th:name="employeeInfo.motherBirthdate" id="motherBirthdate" class="form-control" th:value="${res.employeeInfo.motherBirthdate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <div th:if="${isUpdate}">
@@ -209,20 +209,29 @@
 					<input type="hidden" th:name="'employeeDependent[' + ${iter.index} + '].id.dependentId'" th:value="${employeeDependent.dependentId}" />
 					<input type="hidden" th:name="'employeeDependent[' + ${iter.index} + '].id.employeeId'" th:value="${res.employeeId}" />
 		        	<div class="col">
-		        		<label for="dependentName" class="form-label">Name</label >
-	                    <input type="text" name="dependentName" th:name="'employeeDependent[' + ${iter.index} + '].dependentName'" id="dependentName" class="form-control" th:value="${employeeDependent.dependentName}" th:readonly="${!isUpdate}" readonly>
+		        		<label for="dependentName" class="form-label">Dependent Name</label >
+	                    <input type="text" name="dependentName" th:name="'employeeDependent[' + ${iter.index} + '].dependentName'" id="dependentName" class="form-control" th:value="${employeeDependent.dependentName}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col-auto">
 		        		<label for="dependentBirthdate" class="form-label">Birthdate</label >
-	                    <input type="date" name="dependentBirthdate" th:name="'employeeDependent[' + ${iter.index} + '].dependentBirthdate'" id="dependentBirthdate" class="form-control" th:value="${employeeDependent.dependentBirthdate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="dependentBirthdate" th:name="'employeeDependent[' + ${iter.index} + '].dependentBirthdate'" id="dependentBirthdate" class="form-control" th:value="${employeeDependent.dependentBirthdate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col-auto">
 		        		<label for="gender" class="form-label">Gender</label >
-	                    <select name="gender" th:name="'employeeDependent[' + ${iter.index} + '].gender'" class="form-select form-control" aria-label="GenderSelect" th:disabled="${!isUpdate}">
-							<option th:value="'M'" th:selected="${employeeDependent.gender == 'M'}" th:text="Male"></option>
-							<option th:value="'F'" th:selected="${employeeDependent.gender == 'F'}" th:text="Female"></option>
-						</select>
+		        		<div class="input-group mb-2">
+		                    <select name="gender" th:name="'employeeDependent[' + ${iter.index} + '].gender'" class="form-select form-control" aria-label="GenderSelect" th:disabled="${!isUpdate}" required>
+								<option th:value="'M'" th:selected="${employeeDependent.gender == 'M'}" th:text="Male"></option>
+								<option th:value="'F'" th:selected="${employeeDependent.gender == 'F'}" th:text="Female"></option>
+							</select>
+			        		<a th:if="${isUpdate}" type="button" class="btn btn-outline-danger" th:text="Remove" 
+			        			th:href="@{__${#httpServletRequest.requestURI}__/delete?dependentId=} + ${employeeDependent.dependentId}"></a >
+		        		</div>
 		        	</div >
+		        </div>
+		        <div class="row justify-content-center" th:if="${!isUpdate}">
+		        	<div class="col-4">
+		        		<a class="btn btn-outline-primary w-100" th:text="'Add Dependent'" href="#"  th:href="@{__${#httpServletRequest.requestURI}__/add}">Add</a>
+		        	</div>
 		        </div>
 		        <div th:if="${isUpdate}">
 		        	<hr>
@@ -234,43 +243,68 @@
 			</form>
 		</tr>
 		
-		<!-- Employee Benefits -->
+		<!-- Register Employee Dependents -->
 		<tr th:fragment="5">
+			<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="employeeForm" >
+		        <h5>Add an Employee Dependent(s)</h5>
+		        <input type="hidden" th:name="employeeId" th:value="${res.employeeId}" />
+		        <div class="" id="addDependentForm">
+		        </div>
+		        <div class="row justify-content-center">
+		        	<div class="col-4">
+		        		<a class="btn btn-outline-primary w-100" th:text="'Add Dependent'" id="addDependent" href="#">Add</a>
+		        	</div>
+		        </div>
+		        <div>
+		        	<hr>
+			        <button class="btn btn-primary" type="submit" id="submitBtn">Save</button >
+			        <button class="btn btn-secondary" type="reset">Reset</button >
+			        <!--<input class="btn btn-secondary" type="reset" value="Reset">-->
+			        <!--<a class="btn btn-secondary" href="#" th:href="@{__${#httpServletRequest.requestURI}__}">Refresh</a>-->
+			        <a class="btn btn-secondary" href="#" th:href="@{/employee/}+${res.employeeId}+@{/dependent}">Cancel</a>
+		        </div >
+			</form>
+		</tr>
+		
+		<!-- Employee Benefits -->
+		<tr th:fragment="6">
 			<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="employeeForm" >
 			<input type="hidden" th:name="employeeBenefits.employeeId" th:value="${res.employeeId}" />
 				<h5>Benefits Information</h5>
 				<div class="row">
 		        	<div class="col-3">
 		        		<label for="sssNo" class="form-label">SSS No</label >
-	                    <input type="text" name="sssNo" th:name="employeeBenefits.sssNo" id="sssNo" class="form-control" th:value="${res.employeeBenefits.sssNo}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="sssNo" th:name="employeeBenefits.sssNo" id="sssNo" class="form-control" th:value="${res.employeeBenefits.sssNo}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col-3">
 		        		<label for="sssMembershipDate" class="form-label">SSS Membership Date</label >
-	                    <input type="date" name="sssMembershipDate" th:name="employeeBenefits.sssMembershipDate" id="sssMembershipDate" class="form-control" th:value="${res.employeeBenefits.sssMembershipDate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="sssMembershipDate" th:name="employeeBenefits.sssMembershipDate" id="sssMembershipDate" class="form-control" th:value="${res.employeeBenefits.sssMembershipDate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
-		        	<div class="col-3">
+				</div>
+				<div class="row">
+					<div class="col-3">
 		        		<label for="philHealthNo" class="form-label">PhilHealth No</label >
-	                    <input type="text" name="philHealthNo" th:name="employeeBenefits.philHealthNo" id="philHealthNo" class="form-control" th:value="${res.employeeBenefits.philHealthNo}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="philHealthNo" th:name="employeeBenefits.philhealthNo" id="philHealthNo" class="form-control" th:value="${res.employeeBenefits.philHealthNo}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col-3">
 		        		<label for="philHealthMembershipDate" class="form-label">PhilHealth Membership Date</label >
-	                    <input type="date" name="philHealthMembershipDate" th:name="employeeBenefits.philHealthMembershipDate" id="philHealthMembershipDate" class="form-control" th:value="${res.employeeBenefits.philHealthMembershipDate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="philHealthMembershipDate" th:name="employeeBenefits.philhealthMembershipDate" id="philHealthMembershipDate" class="form-control" th:value="${res.employeeBenefits.philHealthMembershipDate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 				</div>
 				<div class="row">
 		        	<div class="col-3">
 		        		<label for="pagibigNo" class="form-label">PAG-IBIG No</label >
-	                    <input type="text" name="pagibigNo" th:name="employeeBenefits.pagibigNo" id="pagibigNo" class="form-control" th:value="${res.employeeBenefits.pagibigNo}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="pagibigNo" th:name="employeeBenefits.pagibigNo" id="pagibigNo" class="form-control" th:value="${res.employeeBenefits.pagibigNo}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col-3">
 		        		<label for="pagibigMembershipDate" class="form-label">PAG-IBIG Membership Date</label >
-	                    <input type="date" name="pagibigMembershipDate" th:name="employeeBenefits.pagibigMembershipDate" id="pagibigMembershipDate" class="form-control" th:value="${res.employeeBenefits.pagibigMembershipDate}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="date" name="pagibigMembershipDate" th:name="employeeBenefits.pagibigMembershipDate" id="pagibigMembershipDate" class="form-control" th:value="${res.employeeBenefits.pagibigMembershipDate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 				</div>
 				<div class="row">
 		        	<div class="col-3">
 		        		<label for="tinNo" class="form-label">TIN No</label >
-	                    <input type="text" name="tinNo" id="tinNo" th:name="employeeBenefits.tinNo" class="form-control" th:value="${res.employeeBenefits.tinNo}" th:readonly="${!isUpdate}" readonly>
+	                    <input type="text" name="tinNo" id="tinNo" th:name="employeeBenefits.tinNo" class="form-control" th:value="${res.employeeBenefits.tinNo}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <div th:if="${isUpdate}">

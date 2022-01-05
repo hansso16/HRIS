@@ -249,18 +249,13 @@ public class EmployeeBenefits implements Serializable {
 	}
 
 
-    /**
-     * Returns a debug-friendly String representation of this instance.
-     *
-     * @return String representation of this instance
-     */
     @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer("[EmployeeBenefits |");
-        sb.append(" employeeId=").append(getEmployeeId());
-        sb.append("]");
-        return sb.toString();
-    }
+	public String toString() {
+		return "EmployeeBenefits [employeeId=" + employeeId + ", sssNo=" + sssNo + ", sssMembershipDate="
+				+ sssMembershipDate + ", philhealthNo=" + philhealthNo + ", philhealthMembershipDate="
+				+ philhealthMembershipDate + ", pagibigNo=" + pagibigNo + ", pagibigMembershipDate="
+				+ pagibigMembershipDate + ", tinNo=" + tinNo + "]";
+	}
 
     /**
      * Return all elements of the primary key.

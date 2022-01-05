@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeDependentRequest;
@@ -51,11 +53,7 @@ public class EmployeeDependentController {
 		model.addAttribute("viewType", "4");
 		if (res!= null) {
 			model.addAttribute("res", res);
-			if(isUpdate) {
-				model.addAttribute("isUpdate", true);
-			} else {
-				model.addAttribute("isUpdate", false);
-			}
+			model.addAttribute("isUpdate", isUpdate);
 		}
 		return EMP_PAGE;
 	}
@@ -74,5 +72,61 @@ public class EmployeeDependentController {
 		}
 		
 		return getEmployee(employeeId, model, false);
+	}
+	
+	@GetMapping(value="/{employeeId}/dependent/delete")
+	public RedirectView deleteDependent(@PathVariable String employeeId, @RequestParam String dependentId, Model model, RedirectAttributes redirectAttrs) {
+		
+		log.info("DELETE DEPENDENT");
+		String redirectUrl="/employee/" + employeeId + "/dependent";
+		RedirectView redirectView = new RedirectView(redirectUrl, true);
+		redirectView.setExposeModelAttributes(false);
+		short dId = 0; 
+		try {
+			dId = Short.parseShort(dependentId);
+			if (employeeDependentService.deleteEmployeeDependent(employeeId, dId)) {
+				redirectAttrs.addFlashAttribute(GlobalConstants.SUCCESS_MESSAGE, "Successfully deleted dependent.");
+			} else {
+				redirectAttrs.addFlashAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			redirectAttrs.addFlashAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
+		}
+//		return getEmployee(employeeId, model, false);
+		return redirectView;
+	}
+	
+	@GetMapping("/{employeeId}/dependent/add")
+	@Validated
+	public String addEmployeeDependent(@PathVariable String employeeId, Model model) {
+		
+		log.info("REGISTER EMPLOYEE DEPENDENT CONTROLLER");
+		// searchType? case 1 2 3 -> service
+		model.addAttribute("viewType", "5");
+		BaseEmployeeResponse res = new BaseEmployeeResponse();
+		res.setEmployeeId(employeeId);
+		model.addAttribute("res", res);
+		model.addAttribute("isUpdate", true);
+		return EMP_PAGE;
+	}
+	
+	@PostMapping(value="/{employeeId}/dependent/add")
+	public RedirectView saveEmployeeDependent(@PathVariable String employeeId, @Valid EmployeeDependentRequest request, Model model
+			, RedirectAttributes redirectAttrs) {
+		
+		log.info("EmployeeId: " + employeeId);
+		log.info("Request: " + request.toString());
+		String redirectUrl="/employee/" + employeeId + "/dependent";
+		RedirectView redirectView = new RedirectView(redirectUrl, true);
+		redirectView.setExposeModelAttributes(false);
+		if (employeeDependentService.addEmployeeDependents(request)) {
+			// set error
+			redirectAttrs.addFlashAttribute(GlobalConstants.SUCCESS_MESSAGE, "Successfully added employee dependent.");
+		} else {
+			redirectAttrs.addFlashAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
+		}
+		
+		return redirectView;
 	}
 }

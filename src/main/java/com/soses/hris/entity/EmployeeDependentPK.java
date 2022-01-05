@@ -5,6 +5,9 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 
 /**
  * The Class EmployeeDependentPK.
@@ -24,6 +27,8 @@ public class EmployeeDependentPK implements Serializable {
 	
 	/** The dependent id. */
 	@Column(name="DEPENDENT_ID")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@SequenceGenerator(name="sqx_emp_dependent_id", sequenceName="sqx_emp_dependent_id", allocationSize=1)
 	private short dependentId;
 	
 	/**

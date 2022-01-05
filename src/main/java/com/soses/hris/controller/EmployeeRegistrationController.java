@@ -17,6 +17,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
+import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.common.StringUtil;
 import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.service.EmployeeRegistrationService;
@@ -53,9 +54,11 @@ public class EmployeeRegistrationController {
 		
 		if (response == null || StringUtil.isEmpty(response.getEmployeeId())) {
 			// failure message
-			ErrorPageDTO error = new ErrorPageDTO();
-			error.setMessage("Registration failed. Please try again. If issue persists, please contact your system admin.");
-			response.setError(error);
+//			ErrorPageDTO error = new ErrorPageDTO();
+//			error.setMessage("Registration failed. Please try again. If issue persists, please contact your system admin.");
+//			response.setError(error);
+			model.addAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
+			return ADD_EMP;
 		}
 		model.addAttribute("res", response);
 		

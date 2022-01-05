@@ -13,6 +13,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The Class Employee.
  *
@@ -72,6 +74,7 @@ public class Employee implements Serializable {
     
     /** The birthdate. */
     @Column(name="BIRTHDATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthdate;
     
     /** The marital status. */
@@ -80,6 +83,7 @@ public class Employee implements Serializable {
     
     /** The hiring date. */
     @Column(name="HIRING_DATE")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate hiringDate;
     
     /** The termination date. */

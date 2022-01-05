@@ -1,6 +1,5 @@
 package com.soses.hris.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -14,15 +13,17 @@ import org.springframework.stereotype.Service;
 
 import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
-import com.soses.hris.common.GlobalConstants;
+import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.controller.EmployeeRegistrationController;
 import com.soses.hris.entity.Employee;
 import com.soses.hris.entity.EmployeeAddress;
-import com.soses.hris.entity.EmployeeAddressPK;
 import com.soses.hris.entity.EmployeeBenefits;
+import com.soses.hris.entity.EmployeeDependent;
+import com.soses.hris.entity.EmployeeDependentPK;
 import com.soses.hris.entity.EmployeeInfo;
 import com.soses.hris.repository.EmployeeAddressRepository;
 import com.soses.hris.repository.EmployeeBenefitsRepository;
+import com.soses.hris.repository.EmployeeDependentRepository;
 import com.soses.hris.repository.EmployeeInfoRepository;
 import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeRegistrationService;
@@ -38,6 +39,7 @@ import com.soses.hris.service.EmployeeRegistrationService;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationService {
 	
+	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(EmployeeRegistrationController.class);
 
 	/** The employee repository. */
@@ -49,48 +51,35 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	/** The employee info repository. */
 	private EmployeeInfoRepository employeeInfoRepository;
 	
+	/** The employee dependent repository. */
+	private EmployeeDependentRepository employeeDependentRepository;
+	
 	/** The employee benefits repository. */
 	private EmployeeBenefitsRepository employeeBenefitsRepository;
-	
+
 	/**
-	 * Sets the employee repository.
+	 * Instantiates a new employee registration service impl.
 	 *
-	 * @param employeeRepository the new employee repository
+	 * @param employeeRepository the employee repository
+	 * @param employeeAddressRepository the employee address repository
+	 * @param employeeInfoRepository the employee info repository
+	 * @param employeeDependentRepository the employee dependent repository
+	 * @param employeeBenefitsRepository the employee benefits repository
 	 */
 	@Autowired
-	public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+	public EmployeeRegistrationServiceImpl(EmployeeRepository employeeRepository,
+			EmployeeAddressRepository employeeAddressRepository, EmployeeInfoRepository employeeInfoRepository,
+			EmployeeDependentRepository employeeDependentRepository,
+			EmployeeBenefitsRepository employeeBenefitsRepository) {
+		super();
 		this.employeeRepository = employeeRepository;
-	}
-
-	/**
-	 * Sets the employee address repository.
-	 *
-	 * @param employeeAddressRepository the new employee address repository
-	 */
-	@Autowired
-	public void setEmployeeAddressRepository(EmployeeAddressRepository employeeAddressRepository) {
 		this.employeeAddressRepository = employeeAddressRepository;
-	}
-
-	/**
-	 * Sets the employee info repository.
-	 *
-	 * @param employeeInfoRepository the new employee info repository
-	 */
-	@Autowired
-	public void setEmployeeInfoRepository(EmployeeInfoRepository employeeInfoRepository) {
 		this.employeeInfoRepository = employeeInfoRepository;
-	}
-
-	/**
-	 * Sets the employee benefits repository.
-	 *
-	 * @param employeeBenefitsRepository the new employee benefits repository
-	 */
-	@Autowired
-	public void setEmployeeBenefitsRepository(EmployeeBenefitsRepository employeeBenefitsRepository) {
+		this.employeeDependentRepository = employeeDependentRepository;
 		this.employeeBenefitsRepository = employeeBenefitsRepository;
 	}
+
+
 
 	/**
 	 * Register employee.
@@ -106,86 +95,57 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 		log.info("EmployeeId: " + employeeId);
 		
 		// Employee
-		Employee employee = new Employee();
+		Employee employee = request.getEmployee();
+		if (employee == null) {
+			//throw error
+		}
 		employee.setEmployeeId(employeeId);
-		employee.setFirstName(request.getFirstName());
-		employee.setLastName(request.getLastName());
-		employee.setSuffix(request.getSuffix());
-		employee.setMiddleName(request.getMiddleName());
-		employee.setNickname(request.getNickname());
-		employee.setCellNo(request.getCellNo());
-		employee.setTelNo(request.getTelNo());
-		employee.setGender(request.getGender());
-		employee.setBirthdate(request.getBirthdate());
-		employee.setMaritalStatus(request.getMaritalStatus());
-		employee.setHiringDate(request.getHiringDate());
-		employee.setDivision(request.getDivision());
-		employee.setPosition(request.getPosition());
-		
 		employee = employeeRepository.save(employee);
 		
 		//permanent address
-		List<EmployeeAddress> empAddressList = new ArrayList<>();
-		EmployeeAddress address1 = new EmployeeAddress();
-		EmployeeAddressPK addressPk1 = new EmployeeAddressPK();
-		addressPk1.setEmployeeId(employeeId);
-		addressPk1.setAddressType(GlobalConstants.ADDRESS_TYPE_PERMANENT);
-		address1.setId(addressPk1);
-		address1.setStreet(request.getPermanentStreet());
-		address1.setBarangay(request.getPermanentBarangay());
-		address1.setCity(request.getPermanentCity());
-		address1.setProvince(request.getPermanentProvince());
-		empAddressList.add(address1);
-		//present address
-		EmployeeAddress address2 = new EmployeeAddress();
-		EmployeeAddressPK addressPk2 = new EmployeeAddressPK();
-		addressPk2.setAddressType(GlobalConstants.ADDRESS_TYPE_PRESENT);
-		addressPk2.setEmployeeId(employeeId);
-		address2.setId(addressPk2);
-		address2.setStreet(request.getPresentStreet());
-		address2.setBarangay(request.getPresentBarangay());
-		address2.setCity(request.getPresentCity());
-		address2.setProvince(request.getPresentProvince());
-		empAddressList.add(address2);
-		//provincial address
-		EmployeeAddress address3 = new EmployeeAddress();
-		EmployeeAddressPK addressPk3 = new EmployeeAddressPK();
-		addressPk3.setEmployeeId(employeeId);
-		addressPk3.setAddressType(GlobalConstants.ADDRESS_TYPE_PROVINCIAL);
-		address3.setId(addressPk3);
-		address3.setStreet(request.getProvincialStreet());
-		address3.setBarangay(request.getProvincialBarangay());
-		address3.setCity(request.getProvincialCity());
-		address3.setProvince(request.getProvincialProvince());
-		empAddressList.add(address3);
-		empAddressList = employeeAddressRepository.saveAll(empAddressList);
+		List<EmployeeAddress> empAddressList = request.getEmployeeAddress();
+		if (!GeneralUtil.isListEmpty(empAddressList)) {
+			for (EmployeeAddress empAddress : empAddressList) {
+				if (empAddress != null && empAddress.getId() != null) {
+					empAddress.getId().setEmployeeId(employeeId);
+				}
+			}
+			empAddressList = employeeAddressRepository.saveAll(empAddressList);
+		}
 		
 		//employee info
-		EmployeeInfo employeeInfo = new EmployeeInfo();
-		employeeInfo.setEmployeeId(employeeId);
-		employeeInfo.setEmergencyName(request.getEmergencyName());
-		employeeInfo.setEmergencyAddress(request.getEmergencyAddress());
-		employeeInfo.setEmergencyContact(request.getEmergencyContact());
-		employeeInfo.setMotherBirthdate(request.getMotherBirthdate());
-		employeeInfo.setMotherName(request.getMotherName());
-		employeeInfo.setFatherBirthdate(request.getFatherBirthdate());
-		employeeInfo.setFatherName(request.getFatherName());
-		employeeInfo = employeeInfoRepository.save(employeeInfo);
+		EmployeeInfo employeeInfo = request.getEmployeeInfo();
+		if (employeeInfo != null) {
+			employeeInfo.setEmployeeId(employeeId);
+			employeeInfo = employeeInfoRepository.save(employeeInfo);
+		}
+		
+		//employee dependents
+		List<EmployeeDependent> empDependentList = request.getEmployeeDependent();
+		if (!GeneralUtil.isListEmpty(empDependentList)) {
+			short dependentId = 0;
+			for (EmployeeDependent empDependent : empDependentList) {
+				if (empDependent != null) {
+					EmployeeDependentPK empDependentPK = empDependent.getId();
+					if (empDependentPK == null) {
+						empDependentPK = new EmployeeDependentPK();
+					}
+					empDependentPK.setEmployeeId(employeeId);
+					empDependentPK.setDependentId(++dependentId);
+					empDependent.setId(empDependentPK);
+				}
+			}
+			employeeDependentRepository.saveAll(empDependentList);
+		}
 		
 		//employee benefits
-		EmployeeBenefits employeeBenefits = new EmployeeBenefits();
-		employeeBenefits.setEmployeeId(employeeId);
-		employeeBenefits.setSssMembershipDate(request.getSssMembershipDate());
-		employeeBenefits.setSssNo(request.getSssNo());
-		employeeBenefits.setPhilhealthMembershipDate(request.getPhilHealthMembershipDate());
-		employeeBenefits.setPhilhealthNo(request.getPhilHealthNo());
-		employeeBenefits.setPagibigMembershipDate(request.getPagibigMembershipDate());
-		employeeBenefits.setPagibigNo(request.getPagibigNo());
-		employeeBenefits.setTinNo(request.getTinNo());
-		employeeBenefits = employeeBenefitsRepository.save(employeeBenefits);
+		EmployeeBenefits employeeBenefits = request.getEmployeeBenefits();
+		if (employeeBenefits != null) {
+			employeeBenefits.setEmployeeId(employeeId);
+			employeeBenefits = employeeBenefitsRepository.save(employeeBenefits);
+		}
 		
 		response.setEmployeeId(String.valueOf(employeeId));
-		
 		return response;
 	}
 

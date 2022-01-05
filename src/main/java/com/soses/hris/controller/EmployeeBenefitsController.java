@@ -48,7 +48,7 @@ public class EmployeeBenefitsController {
 		// searchType? case 1 2 3 -> service
 		BaseEmployeeResponse res = employeeBenefitsService.getEmployeeDetails(employeeId);
 		res.setEmployeeId(employeeId);
-		model.addAttribute("viewType", "5");
+		model.addAttribute("viewType", "6");
 		if (res!= null) {
 			model.addAttribute("res", res);
 			if(isUpdate) {

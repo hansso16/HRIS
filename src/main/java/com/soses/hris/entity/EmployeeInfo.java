@@ -247,18 +247,13 @@ public class EmployeeInfo implements Serializable {
 	}
 
 
-    /**
-     * Returns a debug-friendly String representation of this instance.
-     *
-     * @return String representation of this instance
-     */
     @Override
-    public String toString() {
-        StringBuffer sb = new StringBuffer("[EmployeeInfo |");
-        sb.append(" employeeId=").append(getEmployeeId());
-        sb.append("]");
-        return sb.toString();
-    }
+	public String toString() {
+		return "EmployeeInfo [employeeId=" + employeeId + ", emergencyName=" + emergencyName + ", emergencyAddress="
+				+ emergencyAddress + ", emergencyContact=" + emergencyContact + ", motherName=" + motherName
+				+ ", motherBirthdate=" + motherBirthdate + ", fatherName=" + fatherName + ", fatherBirthdate="
+				+ fatherBirthdate + "]";
+	}
 
     /**
      * Return all elements of the primary key.
@@ -271,4 +266,5 @@ public class EmployeeInfo implements Serializable {
         return ret;
     }
 
+    
 }
