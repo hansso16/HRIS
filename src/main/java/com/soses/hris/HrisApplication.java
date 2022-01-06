@@ -1,15 +1,12 @@
 package com.soses.hris;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 
 import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,20 +14,19 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.soses.hris.bo.GeneralEmployeeBO;
+import com.soses.hris.api.user.BaseUserRequest;
+import com.soses.hris.api.user.BaseUserResponse;
 import com.soses.hris.cache.CacheService;
 import com.soses.hris.common.ConfigParamConstants;
 import com.soses.hris.common.EncryptionService;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.dao.EmployeeDAO;
-import com.soses.hris.dto.EmployeeTO;
 import com.soses.hris.entity.ConfigParam;
 import com.soses.hris.entity.ConfigParamPK;
-import com.soses.hris.entity.Employee;
 import com.soses.hris.entity.Role;
 import com.soses.hris.entity.User;
-import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.repository.UserRepository;
+import com.soses.hris.service.user.UserSearchService;
 
 @SpringBootApplication
 public class HrisApplication implements CommandLineRunner {
@@ -57,14 +53,8 @@ public class HrisApplication implements CommandLineRunner {
 	@Autowired
 	private EncryptionService encryptionService;
 	
-	@Autowired
-	private EmployeeRepository employeeRepository;
-	
-	@Autowired
-	private EntityManager em;
-	
-	@Autowired
-	private GeneralEmployeeBO generalEmpBo;
+	@Autowired @Qualifier("UserSearchServiceImpl")
+	private UserSearchService userSearchService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -114,22 +104,12 @@ public class HrisApplication implements CommandLineRunner {
 		log.info("LOGBACK INFO");
 		log.trace("LOGBACK TRACE");
 		
-		log4.info("LOG4J2 SYS ENV: " + System.getenv("SPRING_PROFILES_ACTIVE"));
-		log4.info("LOG4J2 SYS PROP: " + System.getProperty("SPRING_PROFILES_ACTIVE"));
-		
-		BigInteger employeeId = (BigInteger) em.createNativeQuery("SELECT NEXTVAL(SQX_EMPLOYEE_ID)").getSingleResult();
-		log4.info("Employee Id1: " + employeeId);
-		BigDecimal empId = employeeRepository.getNextEmployeeId();
-		log4.info("Employee Id2: " + empId);
-		int intId = empId.intValue();
-		log4.info("Employee Id2: " + intId);
-		
-		EmployeeTO employeeTO = generalEmpBo.retrieveEmployee("10051");
-		Employee employee = new Employee();
-		employee.setEmployeeId(employeeTO.getEmployeeId());
-		employee.setLastName("LAST_NAME");
-		generalEmpBo.updateEmployee(employee);
-		log.info("UPDATE DONE");
+		BaseUserRequest req = new BaseUserRequest();
+		req.setUsername("admin");
+//		BaseUserResponse res = userSearchService.searchUser(req);
+//		if (res != null) {
+//			log.info(res.toString());
+//		}
 	}
 	
 	public static String maskCardNumber(String cardNumber, String mask) {

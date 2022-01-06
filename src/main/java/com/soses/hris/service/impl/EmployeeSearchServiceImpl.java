@@ -1,53 +1,52 @@
 package com.soses.hris.service.impl;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.soses.hris.api.BaseEmployeeResponse;
-import com.soses.hris.api.EmployeeSearchResponse;
-import com.soses.hris.bo.SearchEmployeeBO;
-import com.soses.hris.common.GeneralUtil;
-import com.soses.hris.dto.EmployeeTO;
-import com.soses.hris.dto.ErrorPageDTO;
-import com.soses.hris.service.BaseEmployeeService;
+import com.soses.hris.api.employee.EmployeeSearchRequest;
+import com.soses.hris.common.StringUtil;
+import com.soses.hris.entity.Employee;
+import com.soses.hris.repository.EmployeeRepository;
+import com.soses.hris.service.EmployeeSearchService;
 
 @Service("EmployeeSearchServiceImpl")
 @Transactional
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class EmployeeSearchServiceImpl implements BaseEmployeeService {
+public class EmployeeSearchServiceImpl implements EmployeeSearchService {
 
-	private SearchEmployeeBO searchEmpBo;
+	private EmployeeRepository employeeRepo;
 	
 	@Autowired
-	public void setGenEmpBo(SearchEmployeeBO searchEmpBo) {
-		this.searchEmpBo = searchEmpBo;
+	public EmployeeSearchServiceImpl(EmployeeRepository employeeRepo) {
+		super();
+		this.employeeRepo = employeeRepo;
 	}
 
 	@Override
-	public EmployeeSearchResponse getEmployeeDetails(String employeeId) {
-		
-		EmployeeSearchResponse resp = new EmployeeSearchResponse();
-		List<EmployeeTO> employeeTOList = searchEmpBo.searchEmployeeDetailsById(employeeId);
-		if (!GeneralUtil.isListEmpty(employeeTOList)) {
-			resp.setEmployeeList(employeeTOList);
-		} else {
-			ErrorPageDTO error = new ErrorPageDTO();
-			error.setMessage("Employee ID not found: " + employeeId);
-			resp.setError(error);
+	public Page<Employee> searchEmployee(EmployeeSearchRequest request) {
+
+		String employeeId = request.getEmployeeId();
+		Page<Employee> employeePage = null;
+		if (!StringUtil.isEmpty(employeeId)) {
+			int pageSize = 5;
+			if (!StringUtil.isEmpty(request.getSize())) {
+				pageSize = Integer.parseInt(request.getSize());
+			}
+	        int currentPage = 0;
+	        if (!StringUtil.isEmpty(request.getPage())) {
+	        	currentPage = Integer.parseInt(request.getPage()) - 1;
+	        }
+	        Pageable page = PageRequest.of(currentPage, pageSize);
+	        employeePage = employeeRepo.findByEmployeeIdContains(employeeId, page);
 		}
-		return resp;
-	}
-
-	@Override
-	public BaseEmployeeResponse updateEmployeeDetails() {
-		// TODO Auto-generated method stub
-		return null;
+		return employeePage;
 	}
 
 }

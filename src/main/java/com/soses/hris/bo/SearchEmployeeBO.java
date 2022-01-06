@@ -24,18 +24,18 @@ public class SearchEmployeeBO {
 		this.employeeRepo = employeeRepo;
 	}
 	
-	public List<EmployeeTO> searchEmployeeDetailsById(String employeeId) {
-		
-		Pageable page = PageRequest.of(0, 2);
-		List<Employee> employeeList = employeeRepo.findByEmployeeIdContains(employeeId, page);
-		List<EmployeeTO> employeeTOList = null;
-		if (!GeneralUtil.isListEmpty(employeeList)) {
-			employeeTOList = new ArrayList<>();
-			for (Employee employee : employeeList) {
-				EmployeeTO employeeTO = EmployeeTransformerUtil.transformEmployeeEntity(employee);
-				employeeTOList.add(employeeTO);
-			}
-		}
-		return employeeTOList;
-	}
+//	public List<EmployeeTO> searchEmployeeDetailsById(String employeeId) {
+//		
+//		Pageable page = PageRequest.of(0, 2);
+//		List<Employee> employeeList = employeeRepo.findByEmployeeIdContains(employeeId, page);
+//		List<EmployeeTO> employeeTOList = null;
+//		if (!GeneralUtil.isListEmpty(employeeList)) {
+//			employeeTOList = new ArrayList<>();
+//			for (Employee employee : employeeList) {
+//				EmployeeTO employeeTO = EmployeeTransformerUtil.transformEmployeeEntity(employee);
+//				employeeTOList.add(employeeTO);
+//			}
+//		}
+//		return employeeTOList;
+//	}
 }

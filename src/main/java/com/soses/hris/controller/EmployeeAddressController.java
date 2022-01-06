@@ -51,11 +51,7 @@ public class EmployeeAddressController {
 		model.addAttribute("viewType", "2");
 		if (res!= null) {
 			model.addAttribute("res", res);
-			if(isUpdate) {
-				model.addAttribute("isUpdate", true);
-			} else {
-				model.addAttribute("isUpdate", false);
-			}
+			model.addAttribute("isUpdate", isUpdate);
 		}
 		return EMP_PAGE;
 	}

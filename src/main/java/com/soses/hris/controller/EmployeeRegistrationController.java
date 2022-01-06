@@ -19,33 +19,60 @@ import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.common.StringUtil;
-import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.service.EmployeeRegistrationService;
 
+/**
+ * The Class EmployeeRegistrationController.
+ *
+ * @author hso
+ * @since Jan 6, 2022
+ */
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class EmployeeRegistrationController {
 
+	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(EmployeeRegistrationController.class);
 	
+	/** The Constant ADD_EMP. */
 	private static final String ADD_EMP = "/employee/add_employee";
 
+	/** The Constant ADD_EMP_SUC. */
 	private static final String ADD_EMP_SUC = "/employee/add_employee_success";
 	
+	/** The employee registration service. */
 	private EmployeeRegistrationService employeeRegistrationService;
 	
+	/**
+	 * Instantiates a new employee registration controller.
+	 *
+	 * @param employeeRegistrationService the employee registration service
+	 */
 	@Autowired
 	public EmployeeRegistrationController(EmployeeRegistrationService employeeRegistrationService) {
 		this.employeeRegistrationService = employeeRegistrationService;
 	}
 	
+	/**
+	 * Adds the employee.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("/add")
 	public String addEmployee(Model model) {
-//		return ADD_EMP;
 		return ADD_EMP;
 	}
 
+	/**
+	 * Adds the employee.
+	 *
+	 * @param addEmployeeRequest the add employee request
+	 * @param errors the errors
+	 * @param model the model
+	 * @return the string
+	 */
 	@PostMapping("/add")
 	public String addEmployee(@Valid @ModelAttribute AddEmployeeRequest addEmployeeRequest, Errors errors, Model model) {
 		

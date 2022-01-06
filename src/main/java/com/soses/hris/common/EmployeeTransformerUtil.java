@@ -106,7 +106,7 @@ public class EmployeeTransformerUtil {
 			employeeAddressTO = new EmployeeAddressTO();
 			employeeAddressTO.setEmployeeId(empAddress.getId().getEmployeeId());
 			employeeAddressTO.setAddressType(empAddress.getId().getAddressType());
-			employeeAddressTO.setAddressTypeName(""); //derive
+			employeeAddressTO.setAddressTypeName(AddressTypeEnum.valueOfAddressType(employeeAddressTO.getAddressType()).getAddressTypeName()); //derive
 			employeeAddressTO.setStreet(empAddress.getStreet());
 			employeeAddressTO.setBarangay(empAddress.getBarangay());
 			employeeAddressTO.setCity(empAddress.getCity());
