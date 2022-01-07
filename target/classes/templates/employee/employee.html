@@ -66,7 +66,42 @@
 		<th:block th:replace="~{template :: scripts}"></th:block>
 		<script th:if="${viewType} == 5" type="text/javascript" th:src="@{/js/employee_dependent.js}"></script>
 		<script th:inline="javascript">
-			var employeeId = /*[[${res.employeeId}]]*/ '';
+			var employeeId = /*[[${employeeId}]]*/ '';
+			function isNumber(evt) {
+			    evt = (evt) ? evt : window.event;
+			    var charCode  = (evt.which) ? evt.which : evt.keyCode;
+			    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+			        return false;
+			    }
+			    return true;
+			}
+			// Restricts input for the given textbox to the given inputFilter function.
+			function setInputFilter(textbox, inputFilter) {
+			  ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+			    textbox.addEventListener(event, function() {
+			      if (inputFilter(this.value)) {
+			        this.oldValue = this.value;
+			        this.oldSelectionStart = this.selectionStart;
+			        this.oldSelectionEnd = this.selectionEnd;
+			      } else if (this.hasOwnProperty("oldValue")) {
+			        this.value = this.oldValue;
+			        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+			      } else {
+			        this.value = "";
+			      }
+			    });
+			  });
+			}
+			
+			setInputFilter(document.getElementById("cellNo"), function(value) {
+			  return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+			});
+			setInputFilter(document.getElementById("telNo"), function(value) {
+			  return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+			});
+			setInputFilter(document.getElementById("emergencyContact"), function(value) {
+			  return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+			});
 		</script >
 	</body>
 </HTML >
