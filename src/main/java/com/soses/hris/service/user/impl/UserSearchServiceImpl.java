@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.soses.hris.api.user.BaseUserRequest;
 import com.soses.hris.api.user.UserSearchRequest;
 import com.soses.hris.common.StringUtil;
 import com.soses.hris.entity.User;
@@ -35,8 +34,9 @@ public class UserSearchServiceImpl implements UserSearchService{
 	}
 
 	@Override
-	public Page<User> searchUser(BaseUserRequest request, UserSearchRequest userReq) {
+	public Page<User> searchUser(UserSearchRequest request, UserSearchRequest userReq) {
 		log.info("ENTER searchUser(request, userReq)");
+		
 		String username = request.getUsername();
 		Page<User> userPage = null;
 		if (!StringUtil.isEmpty(username)) {

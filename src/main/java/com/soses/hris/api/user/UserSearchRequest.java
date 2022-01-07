@@ -1,53 +1,34 @@
 package com.soses.hris.api.user;
 
+import com.soses.hris.api.BaseSearchRequest;
+
 /**
  * The Class UserSearchRequest.
  *
  * @author hso
  * @since Jan 6, 2022
  */
-public class UserSearchRequest extends BaseUserRequest {
+public class UserSearchRequest extends BaseSearchRequest {
 
-	/** The page number. */
-	private String page;
-	
-	/** The size. */
-	private String size;
+	/** The username. */
+	private String username;
 
 	/**
-	 * Gets the size.
+	 * Gets the username.
 	 *
-	 * @return the size
+	 * @return the username
 	 */
-	public String getSize() {
-		return size;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
-	 * Sets the size.
+	 * Sets the username.
 	 *
-	 * @param size the new size
+	 * @param username the new username
 	 */
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	/**
-	 * Gets the page.
-	 *
-	 * @return the page
-	 */
-	public String getPage() {
-		return page;
-	}
-
-	/**
-	 * Sets the page.
-	 *
-	 * @param page the new page
-	 */
-	public void setPage(String page) {
-		this.page = page;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -57,7 +38,7 @@ public class UserSearchRequest extends BaseUserRequest {
 	 */
 	@Override
 	public String toString() {
-		return "UserSearchRequest [page=" + page + ", size=" + size + ", toString()=" + super.toString() + "]";
+		return "UserSearchRequest [username=" + username + ", toString()=" + super.toString() + "]";
 	}
 	
 }

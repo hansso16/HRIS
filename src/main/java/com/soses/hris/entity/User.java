@@ -7,10 +7,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  * The Class User.
@@ -49,7 +51,12 @@ public class User implements Serializable {
     private LocalDate terminationDate;
     
     /** The roles. */
-    @ManyToMany
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
+    private Employee employee;
+    
+    /** The roles. */
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
     		name = "user_role",
     		joinColumns = @JoinColumn(
@@ -65,6 +72,24 @@ public class User implements Serializable {
     }
 
     /**
+     * Gets the employee.
+     *
+     * @return the employee
+     */
+    public Employee getEmployee() {
+		return employee;
+	}
+
+	/**
+	 * Sets the employee.
+	 *
+	 * @param employee the new employee
+	 */
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	/**
      * Access method for employeeId.
      *
      * @return the current value of employeeId
@@ -180,7 +205,8 @@ public class User implements Serializable {
     @Override
 	public String toString() {
 		return "User [employeeId=" + employeeId + ", username=" + username + ", password=" + password
-				+ ", entryTimestamp=" + entryTimestamp + ", terminationDate=" + terminationDate + "]";
+				+ ", entryTimestamp=" + entryTimestamp + ", terminationDate=" + terminationDate + ", employee="
+				+ employee + ", roles=" + roles + "]";
 	}
 
 }

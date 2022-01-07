@@ -15,13 +15,14 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.user.UserSearchRequest;
 import com.soses.hris.common.StringUtil;
+import com.soses.hris.controller.BaseSearchController;
 import com.soses.hris.entity.User;
 import com.soses.hris.service.user.UserSearchService;
 
 @Controller
 @RequestMapping("/user")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class UserSearchController {
+public class UserSearchController extends BaseSearchController {
 
 	private static final String USER_LIST = "/user/user_list";
 	
@@ -35,26 +36,15 @@ public class UserSearchController {
 
 
 	@GetMapping("")
-	public String employee(@Valid UserSearchRequest userReq, Errors errors, Model model) {
+	public String searchEntity(@Valid UserSearchRequest userReq, Errors errors, Model model) {
 		
 		String username = userReq.getUsername();
 		if (!StringUtil.isEmpty(username)) {
 			Page<User> userPage = userSearchService.searchUser(userReq, userReq);
 			if (userPage != null) {
-				model.addAttribute("currentPage", userPage.getNumber());
-				model.addAttribute("userPage", userPage);
-				model.addAttribute("totalPages", userPage.getTotalPages());
-				model.addAttribute("totalRows", userPage.getTotalElements());
-//				if (totalPages > 0) {
-//					List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-//					model.addAttribute("pageNumbers", pageNumbers);
-//				}
+				setPaginationVariables(userPage, model);
+				model.addAttribute("username", username);
 			}
-			
-//			res = userSearchService.searchUser(userReq);
-//			if (res != null) {
-//				model.addAttribute("res", res);
-//			}
 		}
 		return USER_LIST;
 	}

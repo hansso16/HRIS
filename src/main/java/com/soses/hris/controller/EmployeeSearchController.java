@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.soses.hris.api.BaseSearchRequest;
 import com.soses.hris.api.employee.EmployeeSearchRequest;
 import com.soses.hris.common.StringUtil;
 import com.soses.hris.entity.Employee;
@@ -28,7 +29,7 @@ import com.soses.hris.service.EmployeeSearchService;
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeSearchController {
+public class EmployeeSearchController extends BaseSearchController{
 
 	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(EmployeeSearchController.class);
@@ -44,7 +45,6 @@ public class EmployeeSearchController {
 		this.employeeSearchService = employeeSearchService;
 	}
 
-
 	/**
 	 * Employee.
 	 *
@@ -54,7 +54,7 @@ public class EmployeeSearchController {
 	 * @return the string
 	 */
 	@GetMapping("")
-	public String employee(@Valid EmployeeSearchRequest employeeReq, Errors errors, Model model) {
+	public String searchEntity(@Valid EmployeeSearchRequest employeeReq, Errors errors, Model model) {
 		
 		log.info("ENTER employee(employeeReq,errors,model): employeeReq -> " + employeeReq.toString());
 		Page<Employee> employeePage = null;
@@ -62,13 +62,15 @@ public class EmployeeSearchController {
 		if (!StringUtil.isEmpty(employeeId)) {
 			employeePage = employeeSearchService.searchEmployee(employeeReq);
 			if (employeePage != null) {
+				setPaginationVariables(employeePage, model);
 				model.addAttribute("employeeId", employeeId);
-				model.addAttribute("employeePage", employeePage);
-				model.addAttribute("currentPage", employeePage.getNumber());
-				model.addAttribute("totalPages", employeePage.getTotalPages());
-				model.addAttribute("totalRows", employeePage.getTotalElements());
 			}
 		}
 		return EMP_LIST;
+	}
+
+	String searchEntity(BaseSearchRequest request, Errors erorrs, Model model) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
