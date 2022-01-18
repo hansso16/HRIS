@@ -8,14 +8,15 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeInfoRequest;
 import com.soses.hris.api.EmployeeInfoResponse;
 import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.dto.EmployeeInfoTO;
-import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.entity.EmployeeInfo;
 import com.soses.hris.repository.EmployeeInfoRepository;
+import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeInfoService;
 
 @Service("EmployeeInfoServiceImpl")
@@ -25,10 +26,13 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 
 	private EmployeeInfoRepository employeeInfoRepo;
 	
+	private EmployeeRepository employeeRepo;
+	
 	@Autowired
-	public EmployeeInfoServiceImpl(EmployeeInfoRepository employeeInfoRepo) {
+	public EmployeeInfoServiceImpl(EmployeeInfoRepository employeeInfoRepo, EmployeeRepository employeeRepo) {
 		super();
 		this.employeeInfoRepo = employeeInfoRepo;
+		this.employeeRepo = employeeRepo;
 	}
 
 	@Override
@@ -40,27 +44,22 @@ public class EmployeeInfoServiceImpl implements EmployeeInfoService {
 		EmployeeInfoTO employeeInfoTO = null;
 		if (employeeInfo != null) {
 			employeeInfoTO = EmployeeTransformerUtil.transformEmployeeInfoEntity(employeeInfo);
-			if (employeeInfoTO != null) {
-				resp.setEmployeeInfo(employeeInfoTO);
+		} else {
+			if (employeeRepo.existsById(employeeId)) {
+				employeeInfoTO = new EmployeeInfoTO();
 			} else {
-				ErrorPageDTO error = new ErrorPageDTO();
-				error.setMessage("Employee Information not found for employee ID: " + employeeId);
-				resp.setError(error);
+				//error
 			}
 		}
 		
+		resp.setEmployeeInfo(employeeInfoTO);
 		return resp;
 	}
 
 	@Override
-	public BaseEmployeeResponse updateEmployeeDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public boolean updateEmployeeDetails(BaseEmployeeRequest formReq) {
 
-	@Override
-	public boolean updateEmployeeDetails(EmployeeInfoRequest request) {
-		
+		EmployeeInfoRequest request = (EmployeeInfoRequest) formReq;
 		boolean isSaved = false;
 		EmployeeInfo employeeInfo = request.getEmployeeInfo();
 		if (employeeInfo != null) {

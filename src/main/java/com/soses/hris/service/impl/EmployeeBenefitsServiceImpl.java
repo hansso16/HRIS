@@ -7,14 +7,15 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeBenefitsRequest;
 import com.soses.hris.api.EmployeeBenefitsResponse;
 import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.dto.EmployeeBenefitsTO;
-import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.entity.EmployeeBenefits;
 import com.soses.hris.repository.EmployeeBenefitsRepository;
+import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeBenefitsService;
 
 @Service("EmployeeBenefitsServiceImpl")
@@ -24,10 +25,13 @@ public class EmployeeBenefitsServiceImpl implements EmployeeBenefitsService {
 
 	private EmployeeBenefitsRepository employeeBenefitsRepo;
 	
+	private EmployeeRepository employeeRepo;
+	
 	@Autowired
-	public EmployeeBenefitsServiceImpl(EmployeeBenefitsRepository employeeBenefitsRepo) {
+	public EmployeeBenefitsServiceImpl(EmployeeBenefitsRepository employeeBenefitsRepo, EmployeeRepository employeeRepo) {
 		super();
 		this.employeeBenefitsRepo = employeeBenefitsRepo;
+		this.employeeRepo = employeeRepo;
 	}
 	
 	@Override
@@ -39,27 +43,22 @@ public class EmployeeBenefitsServiceImpl implements EmployeeBenefitsService {
 		EmployeeBenefitsTO employeeBenefitsTO = null;
 		if (employeeBenefits != null) {
 			employeeBenefitsTO = EmployeeTransformerUtil.transformEmployeeBenefits(employeeBenefits);
-			if (employeeBenefitsTO != null) {
-				resp.setEmployeeBenefits(employeeBenefitsTO);
+		} else {
+			if (employeeRepo.existsById(employeeId)) {
+				employeeBenefitsTO = new EmployeeBenefitsTO();
 			} else {
-				ErrorPageDTO error = new ErrorPageDTO();
-				error.setMessage("Employee Benefits Information not found for employee ID: " + employeeId);
-				resp.setError(error);
+				//error
 			}
 		}
-		
+
+		resp.setEmployeeBenefits(employeeBenefitsTO);
 		return resp;
 	}
 
 	@Override
-	public BaseEmployeeResponse updateEmployeeDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public boolean updateEmployeeDetails(BaseEmployeeRequest formReq) {
 
-	@Override
-	public boolean updateEmployeeDetails(EmployeeBenefitsRequest request) {
-
+		EmployeeBenefitsRequest request = (EmployeeBenefitsRequest) formReq;
 		boolean isSaved = false;
 		EmployeeBenefits employeeBenefits = request.getEmployeeBenefits();
 		if (employeeBenefits != null) {

@@ -10,15 +10,17 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeAddressRequest;
 import com.soses.hris.api.EmployeeAddressResponse;
+import com.soses.hris.common.AddressTypeEnum;
 import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.dto.EmployeeAddressTO;
-import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.entity.EmployeeAddress;
 import com.soses.hris.repository.EmployeeAddressRepository;
+import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeAddressService;
 
 @Service("EmployeeAddressServiceImpl")
@@ -28,10 +30,13 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 
 	private EmployeeAddressRepository employeeAddressRepo;
 	
+	private EmployeeRepository employeeRepo;
+	
 	@Autowired
-	public EmployeeAddressServiceImpl(EmployeeAddressRepository employeeAddressRepo) {
+	public EmployeeAddressServiceImpl(EmployeeAddressRepository employeeAddressRepo, EmployeeRepository employeeRepo) {
 		super();
 		this.employeeAddressRepo = employeeAddressRepo;
+		this.employeeRepo = employeeRepo;
 	}
 
 	@Override
@@ -46,36 +51,34 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 				EmployeeAddressTO empAddressTO = EmployeeTransformerUtil.transformEmployeeAddress(empAddress);
 				empAddressTOList.add(empAddressTO);
 			}
+		} else {
+			if (employeeRepo.existsById(employeeId)) {
+				empAddressTOList.add(new EmployeeAddressTO("1", AddressTypeEnum.valueOfAddressType("1").getAddressTypeName()));
+				empAddressTOList.add(new EmployeeAddressTO("2", AddressTypeEnum.valueOfAddressType("2").getAddressTypeName()));
+				empAddressTOList.add(new EmployeeAddressTO("3", AddressTypeEnum.valueOfAddressType("3").getAddressTypeName()));
+			} else {
+				//return error;
+			}
 		}
 		
-		if (!GeneralUtil.isListEmpty(empAddressTOList)) {
-			resp.setEmployeeAddressList(empAddressTOList);
-		} else {
-			ErrorPageDTO error = new ErrorPageDTO();
-			error.setMessage("Employee Address not found for employee ID: " + employeeId);
-			resp.setError(error);
-			return resp;
-		}
+		
+		resp.setEmployeeAddressList(empAddressTOList);
 		
 		return resp;
 	}
 
 	@Override
-	public BaseEmployeeResponse updateEmployeeDetails() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public boolean updateEmployeeDetails(BaseEmployeeRequest formReq) {
 
-	@Override
-	public boolean updateEmployeeDetails(EmployeeAddressRequest request) {
-
+		EmployeeAddressRequest request = (EmployeeAddressRequest) formReq;
+		
 		List<EmployeeAddress> employeeAddressList = request.getEmployeeAddress();
 		boolean isSaved = false;
 		if (!GeneralUtil.isListEmpty(employeeAddressList)) {
 			employeeAddressList = employeeAddressRepo.saveAll(employeeAddressList);
 			isSaved = true;
 		}
-		
+
 		return isSaved;
 	}
 

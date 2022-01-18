@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.soses.hris.entity.Employee;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
+public interface EmployeeRepository extends JpaRepository<Employee, String>{
 
 	List<Employee> findByEmployeeIdContains(String employeeId);
 

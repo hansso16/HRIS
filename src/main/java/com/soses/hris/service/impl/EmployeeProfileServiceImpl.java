@@ -7,6 +7,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeProfileRequest;
 import com.soses.hris.api.EmployeeProfileResponse;
@@ -39,22 +40,15 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 
 		EmployeeProfileResponse resp = new EmployeeProfileResponse();
 		EmployeeTO employeeTO = employeeBO.retrieveEmployee(employeeId);
-		if (employeeTO != null) {
-			resp.setEmployee(employeeTO);
-		} else {
+		if (employeeTO == null) {
 			ErrorPageDTO error = new ErrorPageDTO();
 			error.setMessage("Employee ID not found: " + employeeId);
 			resp.setError(error);
 			return resp;
 		}
 		
+		resp.setEmployee(employeeTO);
 		return resp;
-	}
-
-	@Override
-	public BaseEmployeeResponse updateEmployeeDetails() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -70,6 +64,12 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 			isSuccess=true;
 		}
 		return isSuccess;
+	}
+
+	@Override
+	public boolean updateEmployeeDetails(BaseEmployeeRequest request) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

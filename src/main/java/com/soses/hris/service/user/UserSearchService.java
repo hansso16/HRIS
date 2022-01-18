@@ -1,11 +1,17 @@
 package com.soses.hris.service.user;
 
-import org.springframework.data.domain.Page;
+import com.soses.hris.service.BaseSearchService;
 
-import com.soses.hris.api.user.UserSearchRequest;
-import com.soses.hris.entity.User;
+/**
+ * The Interface UserSearchService.
+ *
+ * @author hso
+ * @param <T> the generic type
+ * @since Jan 17, 2022
+ */
+public interface UserSearchService<T> extends BaseSearchService<T>{
 
-public interface UserSearchService {
+	//Page<User> searchUser(BaseSearchRequest request);
 
-	Page<User> searchUser(UserSearchRequest request, UserSearchRequest userSearchRequest);
+	
 }

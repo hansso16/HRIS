@@ -18,7 +18,20 @@ public interface EmployeeDependentService extends BaseEmployeeService {
 	 */
 	boolean updateEmployeeDetails(EmployeeDependentRequest request);
 	
+	/**
+	 * Delete employee dependent.
+	 *
+	 * @param employeeId the employee id
+	 * @param dependentId the dependent id
+	 * @return true, if successful
+	 */
 	boolean deleteEmployeeDependent(String employeeId, short dependentId);
 	
+	/**
+	 * Adds the employee dependents.
+	 *
+	 * @param request the request
+	 * @return true, if successful
+	 */
 	boolean addEmployeeDependents(EmployeeDependentRequest request);
 }

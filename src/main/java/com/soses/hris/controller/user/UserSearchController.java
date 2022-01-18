@@ -26,10 +26,10 @@ public class UserSearchController extends BaseSearchController {
 
 	private static final String USER_LIST = "/user/user_list";
 	
-	private UserSearchService userSearchService;
+	private UserSearchService<User> userSearchService;
 	
 	@Autowired
-	public UserSearchController(@Qualifier("UserSearchServiceImpl")UserSearchService userSearchService) {
+	public UserSearchController(@Qualifier("UserSearchServiceImpl")UserSearchService<User> userSearchService) {
 		super();
 		this.userSearchService = userSearchService;
 	}
@@ -40,7 +40,7 @@ public class UserSearchController extends BaseSearchController {
 		
 		String username = userReq.getUsername();
 		if (!StringUtil.isEmpty(username)) {
-			Page<User> userPage = userSearchService.searchUser(userReq, userReq);
+			Page<User> userPage = userSearchService.searchUser(userReq);
 			if (userPage != null) {
 				setPaginationVariables(userPage, model);
 				model.addAttribute("username", username);

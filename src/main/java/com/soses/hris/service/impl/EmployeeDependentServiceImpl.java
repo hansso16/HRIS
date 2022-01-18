@@ -11,6 +11,7 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeDependentRequest;
 import com.soses.hris.api.EmployeeDependentResponse;
@@ -18,10 +19,10 @@ import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.common.StringUtil;
 import com.soses.hris.dto.EmployeeDependentTO;
-import com.soses.hris.dto.ErrorPageDTO;
 import com.soses.hris.entity.EmployeeDependent;
 import com.soses.hris.entity.EmployeeDependentPK;
 import com.soses.hris.repository.EmployeeDependentRepository;
+import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeDependentService;
 
 @Service("EmployeeDependentServiceImpl")
@@ -31,10 +32,13 @@ public class EmployeeDependentServiceImpl implements EmployeeDependentService {
 
 	private EmployeeDependentRepository employeeDependentRepo;
 	
+	private EmployeeRepository employeeRepo;
+	
 	@Autowired
-	public EmployeeDependentServiceImpl(EmployeeDependentRepository employeeDependentRepo) {
+	public EmployeeDependentServiceImpl(EmployeeDependentRepository employeeDependentRepo, EmployeeRepository employeeRepo) {
 		super();
 		this.employeeDependentRepo = employeeDependentRepo;
+		this.employeeRepo = employeeRepo;
 	}
 
 	@Override
@@ -49,24 +53,14 @@ public class EmployeeDependentServiceImpl implements EmployeeDependentService {
 				EmployeeDependentTO empDependentTO = EmployeeTransformerUtil.transformEmployeeDependentEntity(empDependent);
 				empDependentTOList.add(empDependentTO);
 			}
-		}
-		
-		if (!GeneralUtil.isListEmpty(empDependentTOList)) {
-			resp.setEmployeeDependentList(empDependentTOList);
 		} else {
-			ErrorPageDTO error = new ErrorPageDTO();
-			error.setMessage("Employee Address not found for employee ID: " + employeeId);
-			resp.setError(error);
-			return resp;
+			if (!employeeRepo.existsById(employeeId)) {
+				// error
+			}
 		}
 		
+		resp.setEmployeeDependentList(empDependentTOList);
 		return resp;
-	}
-
-	@Override
-	public BaseEmployeeResponse updateEmployeeDetails() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -119,6 +113,12 @@ public class EmployeeDependentServiceImpl implements EmployeeDependentService {
 		}
 		
 		return isSaved;
+	}
+
+	@Override
+	public boolean updateEmployeeDetails(BaseEmployeeRequest request) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.BaseSearchRequest;
 import com.soses.hris.api.user.UserSearchRequest;
 import com.soses.hris.common.StringUtil;
 import com.soses.hris.entity.User;
@@ -21,7 +22,7 @@ import com.soses.hris.service.user.UserSearchService;
 @Service("UserSearchServiceImpl")
 @Transactional
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class UserSearchServiceImpl implements UserSearchService{
+public class UserSearchServiceImpl implements UserSearchService<User> {
 
 	private static final Logger log = LoggerFactory.getLogger(UserSearchServiceImpl.class);
 	
@@ -34,19 +35,25 @@ public class UserSearchServiceImpl implements UserSearchService{
 	}
 
 	@Override
-	public Page<User> searchUser(UserSearchRequest request, UserSearchRequest userReq) {
+	public Page<User> searchUser(BaseSearchRequest userReq) {
 		log.info("ENTER searchUser(request, userReq)");
 		
-		String username = request.getUsername();
+		UserSearchRequest request = null; 
+		String username = null;
 		Page<User> userPage = null;
-		if (!StringUtil.isEmpty(username)) {
+		if (userReq != null) {
+			request = (UserSearchRequest) userReq;
+			username = request.getUsername();
+		}
+		
+		if (!StringUtil.isEmpty(username) && request != null) {
 			int pageSize = 5;
-			if (!StringUtil.isEmpty(userReq.getSize())) {
-				pageSize = Integer.parseInt(userReq.getSize());
+			if (!StringUtil.isEmpty(request.getSize())) {
+				pageSize = Integer.parseInt(request.getSize());
 			}
 	        int currentPage = 0;
-	        if (!StringUtil.isEmpty(userReq.getPage())) {
-	        	currentPage = Integer.parseInt(userReq.getPage()) - 1;
+	        if (!StringUtil.isEmpty(request.getPage())) {
+	        	currentPage = Integer.parseInt(request.getPage()) - 1;
 	        }
 	        Pageable page = PageRequest.of(currentPage, pageSize);
 	        userPage = userRepo.findByUsernameContains(username, page);

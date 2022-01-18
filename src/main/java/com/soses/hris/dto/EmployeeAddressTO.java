@@ -134,6 +134,28 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 		this.province = province;
 	}
 
+	/**
+	 * Instantiates a new employee address TO.
+	 */
+	public EmployeeAddressTO() {}
+	
+	/**
+	 * Instantiates a new employee address TO.
+	 *
+	 * @param addressType the address type
+	 * @param addressTypeName the address type name
+	 */
+	public EmployeeAddressTO(String addressType, String addressTypeName) {
+		super();
+		this.addressType = addressType;
+		this.addressTypeName = addressTypeName;
+	}
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "EmployeeAddressTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName + ", street="
