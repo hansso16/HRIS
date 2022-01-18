@@ -6,7 +6,6 @@ import org.apache.logging.log4j.LogManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +13,6 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.soses.hris.api.user.BaseUserRequest;
-import com.soses.hris.api.user.BaseUserResponse;
 import com.soses.hris.cache.CacheService;
 import com.soses.hris.common.ConfigParamConstants;
 import com.soses.hris.common.EncryptionService;
@@ -26,7 +23,6 @@ import com.soses.hris.entity.ConfigParamPK;
 import com.soses.hris.entity.Role;
 import com.soses.hris.entity.User;
 import com.soses.hris.repository.UserRepository;
-import com.soses.hris.service.user.UserSearchService;
 
 @SpringBootApplication
 public class HrisApplication implements CommandLineRunner {
@@ -52,9 +48,6 @@ public class HrisApplication implements CommandLineRunner {
 	
 	@Autowired
 	private EncryptionService encryptionService;
-	
-	@Autowired @Qualifier("UserSearchServiceImpl")
-	private UserSearchService userSearchService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -97,19 +90,14 @@ public class HrisApplication implements CommandLineRunner {
 		log.info("ORIG STRING: " + origString);
 		log.info("ENCRYPTED: " + enc);
 		log.info("DECRYPTED: " + dec);
-		log.error("ERROR");
-		log.warn("WARN");
-		log4.fatal("FATAL LOG4J2");
-		log4.info("LOG4J2 INFO");
-		log.info("LOGBACK INFO");
-		log.trace("LOGBACK TRACE");
+//		log.error("ERROR");
+//		log.warn("WARN");
+//		log4.fatal("FATAL LOG4J2");
+//		log4.info("LOG4J2 INFO");
+//		log.info("LOGBACK INFO");
+//		log.trace("LOGBACK TRACE");
+//		log.info("TEST");
 		
-		BaseUserRequest req = new BaseUserRequest();
-		req.setUsername("admin");
-//		BaseUserResponse res = userSearchService.searchUser(req);
-//		if (res != null) {
-//			log.info(res.toString());
-//		}
 	}
 	
 	public static String maskCardNumber(String cardNumber, String mask) {

@@ -4,15 +4,15 @@ function validatePassword() {
     var changePasswordForm = document.getElementById('changePassword');
     var password1 = changePasswordForm.newPwd1.value;
     var password2 = changePasswordForm.newPwd2.value;
-    //alert(password1 + password2);
+    alert(password1 + password2);
     
     if (password1 !== password2) {
     	//alert('same');
     }
     
     if((!regularExpression.test(password1)) && (password1 != password2)) {
-        //alert("password should contain atleast one number and one special character");
-        //return false;
+        alert("password should contain atleast one number and one special character");
+        return false;
     }
 }
 

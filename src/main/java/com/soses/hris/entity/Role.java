@@ -36,6 +36,10 @@ public class Role implements Serializable {
     /** The role code. */
     @Column(name="ROLE_CODE", length=20)
     private String roleCode;
+
+    /** The role code. */
+    @Column(name="FULL_ROLE_CODE", length=30)
+    private String fullRoleCode;
     
     
 
@@ -99,13 +103,32 @@ public class Role implements Serializable {
 	}
 
 	/**
+	 * Gets the full role code.
+	 *
+	 * @return the full role code
+	 */
+	public String getFullRoleCode() {
+		return fullRoleCode;
+	}
+
+	/**
+	 * Sets the full role code.
+	 *
+	 * @param fullRoleCode the new full role code
+	 */
+	public void setFullRoleCode(String fullRoleCode) {
+		this.fullRoleCode = fullRoleCode;
+	}
+
+	/**
 	 * To string.
 	 *
 	 * @return the string
 	 */
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleCode=" + roleCode + "]";
+		return "Role [roleId=" + roleId + ", roleName=" + roleName + ", roleCode=" + roleCode + ", fullRoleCode="
+				+ fullRoleCode + "]";
 	}
 
 

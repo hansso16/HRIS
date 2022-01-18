@@ -1,5 +1,9 @@
 package com.soses.hris.config;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -14,14 +18,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.soses.hris.auth.UserDetailsServiceImp;
+import com.soses.hris.common.GeneralUtil;
+import com.soses.hris.entity.AntMatcher;
+import com.soses.hris.repository.AntMatcherRepository;
+import com.soses.hris.repository.RoleHierarchyRepository;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//	private final String ENCODED_PASSWORD = passwordEncoder().encode("test123");
+	private AntMatcherRepository antMatcherRepo;
 	
-    @Bean
+	private RoleHierarchyRepository roleHierarchyRepo;
+	
+	@Autowired
+    public SecurityConfig(AntMatcherRepository antMatcherRepo, RoleHierarchyRepository roleHierarchyRepo) {
+		super();
+		this.antMatcherRepo = antMatcherRepo;
+		this.roleHierarchyRepo = roleHierarchyRepo;
+	}
+
+	@Bean
     public UserDetailsService userDetailsService() {
         return new UserDetailsServiceImp();
     }
@@ -42,48 +59,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public RoleHierarchy roleHierarchy() {
+		
 	    RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-	    String hierarchy = "ROLE_ADMIN > ROLE_MANAGER \n"
-	    				+ " ROLE_MANAGER > ROLE_SUPV \n"
-	    				+ " ROLE_SUPV > ROLE_EMPLOYEE"
-	    				;
-	    roleHierarchy.setHierarchy(hierarchy);
+	    List<com.soses.hris.entity.RoleHierarchy> rhList = roleHierarchyRepo.findAllByEndDateGreaterThanAndEffDateLessThanEqual(LocalDate.now(), LocalDate.now());	
+	    if (!GeneralUtil.isListEmpty(rhList)) {
+	    	StringBuilder hierarchy = new StringBuilder();
+	    	for (com.soses.hris.entity.RoleHierarchy role : rhList) {
+	    		if (role.getChildRole() != null && role.getParentRole() != null) {
+	    			hierarchy.append(role.getParentRole().getFullRoleCode()).append(" > ").append(role.getChildRole().getFullRoleCode()).append(" \n");
+	    		}
+	    	}
+	    	roleHierarchy.setHierarchy(hierarchy.toString());
+	    }
 	    return roleHierarchy;
 	}
-	
-//	@Bean
-//	public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
-//	    DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
-//	    expressionHandler.setRoleHierarchy(roleHierarchy());
-//	    return expressionHandler;
-//	}
 
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
+		
         http
 //        	.addFilter(null)
 //        	.addFilterBefore(null, null)
         	.authorizeRequests()
         	.antMatchers("/favicon.ico").permitAll()
         	.antMatchers("/css/public/**").permitAll()
-        	.antMatchers("/js/public/**").permitAll()
-        	.anyRequest().authenticated()
+        	.antMatchers("/js/public/**").permitAll();
+        	
+        List<AntMatcher> matchers = antMatcherRepo.findAllByEndDateGreaterThanAndEffDateLessThanEqual(LocalDate.now(), LocalDate.now());
+        for (AntMatcher matcher : matchers) {
+        	http.authorizeRequests().antMatchers(matcher.getPath()).access(matcher.getRoleInfo());
+        }
+        
+    	http
+    		.authorizeRequests()
+    		.anyRequest().authenticated()
         	.and().formLogin().loginPage("/login").permitAll()
-        	//.loginProcessUrl("/authenticate").permitAll()
         	.and().logout().permitAll()
         	;
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		
 		auth.authenticationProvider(authenticationProvider());
-		
-//		auth.inMemoryAuthentication()
-//			.passwordEncoder(passwordEncoder())
-//			.withUser("john").password(ENCODED_PASSWORD).roles("EMPLOYEE")
-//			.and().withUser("mary").password(ENCODED_PASSWORD).roles("MANAGER")
-//			.and().withUser("foo").password(ENCODED_PASSWORD).roles("ADMIN");
-		
 	}
 }

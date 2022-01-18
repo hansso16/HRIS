@@ -436,25 +436,11 @@ public class Employee implements Serializable {
     }
 
     /**
-     * Compares the key for this instance with another Employee.
+     * Equals.
      *
-     * @param other The object to compare to
-     * @return True if other object is instance of class Employee and the key objects are equal
+     * @param obj the obj
+     * @return true, if successful
      */
-    private boolean equalKeys(Object other) {
-        if (this==other) {
-            return true;
-        }
-        if (!(other instanceof Employee)) {
-            return false;
-        }
-        Employee that = (Employee) other;
-        if (this.getEmployeeId() != that.getEmployeeId()) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -475,6 +461,11 @@ public class Employee implements Serializable {
 				&& Objects.equals(telNo, other.telNo) && Objects.equals(terminationDate, other.terminationDate);
 	}
 
+    /**
+     * Hash code.
+     *
+     * @return the int
+     */
     @Override
 	public int hashCode() {
 		return Objects.hash(birthdate, cellNo, division, emailAddress, employeeId, entryTimestamp, firstName, gender,

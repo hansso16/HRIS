@@ -30,7 +30,7 @@ public class UserDetailsImp implements UserDetails {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.terminationDate = user.getTerminationDate();
-		if(terminationDate != null && terminationDate.isAfter(java.time.LocalDate.now())) {
+		if(terminationDate != null && terminationDate.isBefore(java.time.LocalDate.now())) {
 			this.isEnabled = false;
 		} else { 
 			this.isEnabled = true;
@@ -44,7 +44,7 @@ public class UserDetailsImp implements UserDetails {
 		List<GrantedAuthority> authorities = new ArrayList<>();
     	if (roles != null && !roles.isEmpty()) {
             for (Role role: roles) {
-            	authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleCode()));
+            	authorities.add(new SimpleGrantedAuthority(role.getFullRoleCode()));
             }
         }
         return authorities;
