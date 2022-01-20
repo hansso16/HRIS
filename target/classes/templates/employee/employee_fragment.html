@@ -50,8 +50,8 @@
 		        	<div class="col">
 		        		<label for="gender" class="form-label">Gender</label >
 	                    <select id="gender" class="form-select form-control" th:name="gender" name="gender" aria-label="GenderSelect"  th:disabled="${!isUpdate}" required>
-							<option th:selected="${res.employee.gender == 'F'}" th:value="'F'" th:text="Female"></option>
-							<option th:selected="${res.employee.gender == 'M'}" th:value="'M'" th:text="Male"></option>
+							<option th:each="gender : ${genderList}" th:value="${gender.id.code}" th:text="${gender.description}" 
+								th:selected="${res.employee.gender == gender.id.code}" >MaritalStatus</option>
 						</select>
 		        	</div >
 		        	<div class="col">
@@ -62,9 +62,13 @@
 		        <div class="row">
 		        	<div class="col">
 		        		<label for="maritalStatus" class="form-label">Marital Status</label >
-	                    <select id="maritalStatus" class="form-select form-control" name="maritalStatus" aria-label="MaritalStatusSelect" th:disabled="${!isUpdate}" required>
+	                    <!--<select id="maritalStatus" class="form-select form-control" name="maritalStatus" aria-label="MaritalStatusSelect" th:disabled="${!isUpdate}" required>
 							<option th:selected="${res.employee.maritalStatus == 'M'}" th:value="M" th:text="Married"></option>
 							<option th:selected="${res.employee.maritalStatus == 'S'}" th:value="S" th:text="Single"></option>
+						</select>-->
+	                    <select id="maritalStatus" class="form-select form-control" name="maritalStatus" aria-label="MaritalStatusSelect" th:disabled="${!isUpdate}" required>
+							<option th:each="maritalStatus : ${maritalStatusList}" th:value="${maritalStatus.id.code}" th:text="${#strings.capitalize(maritalStatus.description)}" 
+								th:selected="${res.employee.maritalStatus == maritalStatus.id.code}" >MaritalStatus</option>
 						</select>
 		        	</div >
 		        	<div class="col">
@@ -88,28 +92,6 @@
 	                    <input type="text" name="position" id="position" class="form-control" th:value="${res.employee.position}" th:readonly="true" required>
 		        	</div >
 		        </div>
-		        <!--
-		        <hr>
-		    	<h5>Employee Address</h5>
-		        <div class="row" th:each="empAddress : ${res.employeeAddressList}">
-		        	<h5 th:text="${empAddress.addressType}"></h5 >
-		        	<div class="col-4">
-		        		<label for="street" class="form-label">Street</label >
-	                    <input type="text" name="employeeAddressArr.street" id="street" class="form-control" th:value="${empAddress.street}" th:readonly="${!isUpdate}" readonly>
-		        	</div >
-		        	<div class="col">
-		        		<label for="barangay" class="form-label">Barangay</label >
-	                    <input type="text" name="employeeAddressArr.barangay" id="barangay" class="form-control" th:value="${empAddress.barangay}" th:readonly="${!isUpdate}" readonly>
-		        	</div >
-		        	<div class="col">
-		        		<label for="city" class="form-label">City</label >
-	                    <input type="text" name="employeeAddressArr.city" id="city" class="form-control" th:value="${empAddress.city}" th:readonly="${!isUpdate}" readonly>
-		        	</div >
-		        	<div class="col">
-		        		<label for="province" class="form-label">Province</label >
-	                    <input type="text" name="employeeAddressArr.province" id="province" class="form-control" th:value="${empAddress.province}" th:readonly="${!isUpdate}" readonly>
-		        	</div >
-		        </div>-->
 		        <div th:if="${isUpdate}">
 		        	<hr>
 			        <button class="btn btn-primary" type="submit" id="submitBtn">Save</button >
@@ -138,8 +120,8 @@
 	                    <input type="text" name="barangay" id="barangay" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].barangay'" th:value="${empAddress.barangay}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
-		        		<label for="city" class="form-label">City</label >
-	                    <input type="text" name="city" id="city" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].city'" th:value="${empAddress.city}" th:readonly="${!isUpdate}" readonly required>
+		        		<label for="municipal" class="form-label">Municipal/City</label >
+	                    <input type="text" name="municipal" id="municipal" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].municipal'" th:value="${empAddress.municipal}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
 		        		<label for="province" class="form-label">Province</label >
@@ -224,8 +206,8 @@
 		        		<label for="gender" class="form-label">Gender</label >
 		        		<div class="input-group mb-2">
 		                    <select name="gender" th:name="'employeeDependent[' + ${iter.index} + '].gender'" class="form-select form-control" aria-label="GenderSelect" th:disabled="${!isUpdate}" required>
-								<option th:value="'M'" th:selected="${employeeDependent.gender == 'M'}" th:text="Male"></option>
-								<option th:value="'F'" th:selected="${employeeDependent.gender == 'F'}" th:text="Female"></option>
+								<option th:each="gender : ${genderList}" th:value="${gender.id.code}" th:text="${gender.description}" 
+									th:selected="${employeeDependent.gender == gender.id.code}" >MaritalStatus</option>
 							</select>
 			        		<a th:if="${isUpdate}" type="button" class="btn btn-outline-danger" th:text="Remove" 
 			        			th:href="@{__${#httpServletRequest.requestURI}__/delete?dependentId=} + ${employeeDependent.dependentId}"></a >

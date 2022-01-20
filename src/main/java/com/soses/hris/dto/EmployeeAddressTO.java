@@ -21,7 +21,7 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	private String barangay;
 	
 	/** The city. */
-	private String city;
+	private String municipal;
 	
 	/** The province. */
 	private String province;
@@ -99,23 +99,23 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	}
 	
 	/**
-	 * Gets the city.
+	 * Gets the municipal.
 	 *
-	 * @return the city
+	 * @return the municipal
 	 */
-	public String getCity() {
-		return city;
+	public String getMunicipal() {
+		return municipal;
 	}
-	
+
 	/**
-	 * Sets the city.
+	 * Sets the municipal.
 	 *
-	 * @param city the new city
+	 * @param municipal the new municipal
 	 */
-	public void setCity(String city) {
-		this.city = city;
+	public void setMunicipal(String municipal) {
+		this.municipal = municipal;
 	}
-	
+
 	/**
 	 * Gets the province.
 	 *
@@ -159,8 +159,7 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	@Override
 	public String toString() {
 		return "EmployeeAddressTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName + ", street="
-				+ street + ", barangay=" + barangay + ", city=" + city + ", province=" + province + ", toString()="
-				+ super.toString() + "]";
+				+ street + ", barangay=" + barangay + ", municipal=" + municipal + ", province=" + province + "]";
 	}
 	
 }

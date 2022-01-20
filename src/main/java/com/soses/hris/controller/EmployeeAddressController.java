@@ -45,7 +45,6 @@ public class EmployeeAddressController {
 	public String getEmployee(@PathVariable String employeeId, Model model, @RequestParam(required = false, defaultValue = "false") boolean isUpdate) {
 		
 		log.info("EMPLOYEE ADDRESS CONTROLLER");
-		// searchType? case 1 2 3 -> service
 		BaseEmployeeResponse res = employeeAddressService.getEmployeeDetails(employeeId);
 		res.setEmployeeId(employeeId);
 		model.addAttribute("viewType", "2");
@@ -62,11 +61,11 @@ public class EmployeeAddressController {
 		log.info("EmployeeId: " + employeeId);
 		log.info("Request: " + request.toString());
 
-		if (!employeeAddressService.updateEmployeeDetails(request)) {
+		if (employeeAddressService.updateEmployeeDetails(request)) {
 			// set error
-			model.addAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
-		} else {
 			model.addAttribute(GlobalConstants.SUCCESS_MESSAGE, "Successfully updated employee address.");
+		} else {
+			model.addAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
 		}
 		
 		return getEmployee(employeeId, model, false);

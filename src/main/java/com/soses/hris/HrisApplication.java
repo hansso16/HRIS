@@ -52,44 +52,44 @@ public class HrisApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User user = userRepo.findByUsername("admin");
-		log.info(user.toString());
+//		User user = userRepo.findByUsername("admin");
+//		log.info(user.toString());
+//		
+//		List<Role> roles = user.getRoles();		
+//		if (roles != null) {
+//			for(Role role : roles) {
+//				log.info("ROLE: ROLE_" + role.getRoleCode());
+//			}
+//		}
+//		
+//		String ENCODED_PASSWORD = new BCryptPasswordEncoder().encode("test123");
+//		log.info(ENCODED_PASSWORD);
+//		
+//		log.info(empDao.getCount()+"");
 		
-		List<Role> roles = user.getRoles();		
-		if (roles != null) {
-			for(Role role : roles) {
-				log.info("ROLE: ROLE_" + role.getRoleCode());
-			}
-		}
 		
-		String ENCODED_PASSWORD = new BCryptPasswordEncoder().encode("test123");
-		log.info(ENCODED_PASSWORD);
-		
-		log.info(empDao.getCount()+"");
-		
-		
-		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
+//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 //		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 //		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 //		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 //		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
 		
 //		Cache<ConfigParamPK, ConfigParam> p = cacheManager.getCache("configParamCache", ConfigParamPK.class, ConfigParam.class);
-		Cache p = cacheManager.getCache("configParamCache");
-		ConfigParamPK id = new ConfigParamPK();
-		id.setCode("S");
-		id.setEndDate(GeneralUtil.getMaxDate());
-		id.setTableName(ConfigParamConstants.EMPLOYEE);
-		id.setFieldName(ConfigParamConstants.MARITAL_STATUS);
-		ConfigParam result = p.get(id, ConfigParam.class);
-		log.info("RESULT FROM CACHE: " + result.toString());
+//		Cache p = cacheManager.getCache("configParamCache");
+//		ConfigParamPK id = new ConfigParamPK();
+//		id.setCode("S");
+//		id.setEndDate(GeneralUtil.getMaxDate());
+//		id.setTableName(ConfigParamConstants.EMPLOYEE);
+//		id.setFieldName(ConfigParamConstants.MARITAL_STATUS);
+//		ConfigParam result = p.get(id, ConfigParam.class);
+//		log.info("RESULT FROM CACHE: " + result.toString());
 		
-		String origString = "fdsafasdfasdfasdf";
-		String enc = encryptionService.encrypt(origString);
-		String dec = encryptionService.decrypt(enc);
-		log.info("ORIG STRING: " + origString);
-		log.info("ENCRYPTED: " + enc);
-		log.info("DECRYPTED: " + dec);
+//		String origString = "fdsafasdfasdfasdf";
+//		String enc = encryptionService.encrypt(origString);
+//		String dec = encryptionService.decrypt(enc);
+//		log.info("ORIG STRING: " + origString);
+//		log.info("ENCRYPTED: " + enc);
+//		log.info("DECRYPTED: " + dec);
 //		log.error("ERROR");
 //		log.warn("WARN");
 //		log4.fatal("FATAL LOG4J2");

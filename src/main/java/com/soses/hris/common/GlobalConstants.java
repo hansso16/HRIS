@@ -34,4 +34,13 @@ public class GlobalConstants {
 	
 	/** The Constant GENERIC_ERROR_MESSAGE_DESC. */
 	public static final String GENERIC_ERROR_MESSAGE_DESC = "Something went wrong. Please try again. If problem persists, please contact your system administrator.";
+	
+	/** The Constant EMPLOYEE. */
+	public static final String EMPLOYEE = "EMPLOYEE";
+	
+	/** The Constant MARITAL_STATUS. */
+	public static final String MARITAL_STATUS = "MARITAL_STATUS";
+	
+	/** The Constant GENDER. */
+	public static final String GENDER = "GENDER";
 }

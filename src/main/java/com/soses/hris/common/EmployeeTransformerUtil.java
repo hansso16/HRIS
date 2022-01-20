@@ -109,7 +109,7 @@ public class EmployeeTransformerUtil {
 			employeeAddressTO.setAddressTypeName(AddressTypeEnum.valueOfAddressType(employeeAddressTO.getAddressType()).getAddressTypeName()); //derive
 			employeeAddressTO.setStreet(empAddress.getStreet());
 			employeeAddressTO.setBarangay(empAddress.getBarangay());
-			employeeAddressTO.setCity(empAddress.getCity());
+			employeeAddressTO.setMunicipal(empAddress.getMunicipal());
 			employeeAddressTO.setProvince(empAddress.getProvince());
 		}
 	

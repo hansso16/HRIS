@@ -1,5 +1,7 @@
 package com.soses.hris.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -19,74 +21,99 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeProfileRequest;
+import com.soses.hris.cache.configparam.GenderCache;
+import com.soses.hris.cache.configparam.MaritalStatusCache;
 import com.soses.hris.common.GlobalConstants;
+import com.soses.hris.entity.ConfigParam;
 import com.soses.hris.service.EmployeeProfileService;
 
+/**
+ * The Class EmployeeProfileController.
+ *
+ * @author hso
+ * @since Jan 20, 2022
+ */
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class EmployeeProfileController {
 
+	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(EmployeeProfileController.class);
 	
+	/** The Constant EMP_PAGE. */
 	private static final String EMP_PAGE = "/employee/employee";
 	
+	/** The employee service. */
 	private EmployeeProfileService employeeService;
 	
+	/** The marital status cache. */
+	private MaritalStatusCache maritalStatusCache;
+
+	/** The gender cache. */
+	private GenderCache genderCache;
+	
+	/**
+	 * Instantiates a new employee profile controller.
+	 *
+	 * @param employeeService the employee service
+	 * @param maritalStatusCache the marital status cache
+	 * @param genderCache the gender cache
+	 */
 	@Autowired
-	public EmployeeProfileController(@Qualifier("EmployeeProfileServiceImpl") EmployeeProfileService employeeService) {
+	public EmployeeProfileController(@Qualifier("EmployeeProfileServiceImpl") EmployeeProfileService employeeService, MaritalStatusCache maritalStatusCache
+			, GenderCache genderCache) {
 		super();
 		this.employeeService = employeeService;
+		this.maritalStatusCache = maritalStatusCache;
+		this.genderCache = genderCache;
 	}
 
 
+	/**
+	 * Gets the employee.
+	 *
+	 * @param employeeId the employee id
+	 * @param model the model
+	 * @param isUpdate the is update
+	 * @return the employee
+	 */
 	@GetMapping("/{employeeId}/profile")
 	@Validated
 	public String getEmployee(@PathVariable String employeeId, Model model, @RequestParam(required = false, defaultValue = "false") boolean isUpdate) {
 		
 		log.info("EMPLOYEE PROFILE CONTROLLER");
-		// searchType? case 1 2 3 -> service
 		BaseEmployeeResponse res = employeeService.getEmployeeDetails(employeeId);
 		res.setEmployeeId(employeeId);
 		model.addAttribute("viewType", "1");
 		if (res!= null) {
+			List<ConfigParam> maritalStatusList = maritalStatusCache.getMaritalStatusList();
+			List<ConfigParam> genderList = genderCache.getGenderList();
+			model.addAttribute("maritalStatusList", maritalStatusList);
+			model.addAttribute("genderList", genderList);
 			model.addAttribute("res", res);
-			if(isUpdate) {
-				model.addAttribute("isUpdate", true);
-			} else {
-				model.addAttribute("isUpdate", false);
-			}
+			model.addAttribute("isUpdate", isUpdate);
 		}
 		model.addAttribute("employeeProfileRequest", new EmployeeProfileRequest());
 		return EMP_PAGE;
 	}
 	
-//	@PostMapping(value="/{employeeId}/profile", produces="application/json")
-//	@ResponseBody
-//	public ResponseEntity<BaseEmployeeResponse> updateEmployee(@PathVariable String employeeId, @Valid @RequestBody EmployeeProfileRequest request, Model model) {
-//		
-//		log.info("EmployeeId: " + employeeId);
-//		log.info("Request: " + request.toString());
-//
-//		BaseEmployeeResponse res = new BaseEmployeeResponse();
-//		res.setEmployeeId(employeeId);
-//		if (employeeService.updateEmployeeDetails(request)) {
-//			return ResponseEntity.ok(res);
-//		}
-//		return new ResponseEntity<BaseEmployeeResponse>(HttpStatus.BAD_REQUEST);
-//	}
-	
+	/**
+	 * Update employee.
+	 *
+	 * @param employeeId the employee id
+	 * @param request the request
+	 * @param model the model
+	 * @return the string
+	 */
 	@PostMapping(value="/{employeeId}/profile", produces="application/json")
 	public String updateEmployee(@PathVariable String employeeId, @Valid EmployeeProfileRequest request, Model model) {
 		
-		log.info("EmployeeId: " + employeeId);
 		log.info("Request: " + request.toString());
-		
-		if (!employeeService.updateEmployeeDetails(request)) {
-			// error
-			model.addAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
-		} else {
+		if (employeeService.updateEmployeeDetails(request)) {
 			model.addAttribute(GlobalConstants.SUCCESS_MESSAGE, "Successfully updated employee profile.");
+		} else {
+			model.addAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);
 		}
 		
 		return getEmployee(employeeId, model, false);

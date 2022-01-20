@@ -55,9 +55,7 @@
 							    <div class="col">
 									<label for="gender" class="form-label">Gender</label>
 									<select class="form-select form-control" aria-label="GenderSelect" name="employee.gender" id="gender" required>
-										<option th:value="''" th:text="''"></option>
-										<option th:value="'M'" th:text="Male"></option>
-										<option th:value="'F'" th:text="Female"></option>
+										<option th:each="gender : ${genderList}" th:value="${gender.id.code}" th:text="${gender.description}">MaritalStatus</option>
 									</select>
 								</div>
 							    <div class="col">
@@ -69,9 +67,8 @@
 							    <div class="col">
 									<label for="maritalStatus" class="form-label">Marital Status</label>
 				                    <select id="maritalStatus" class="form-select form-control" aria-label="MaritalStatusSelect" name="employee.maritalStatus" required>
-				            			<option th:value="''" th:text="''"></option >
-										<option th:value="S" th:text="Single"></option>
-										<option th:value="M" th:text="Married"></option>
+										<option th:each="maritalStatus : ${maritalStatusList}" th:value="${maritalStatus.id.code}" 
+											th:text="${maritalStatus.description}" >MaritalStatus</option>
 									</select>
 								</div>
 							    <div class="col">
@@ -94,16 +91,27 @@
 				 			<div class="row">
 				 				<input type="hidden" th:name="employeeAddress[0].id.addressType" name="addressType" th:value="1" value="1" />
 							    <div class="col-2">
-									<label for="presentProvince" class="form-label">Province - select</label>
-									<input type="text" class="form-control" name="employeeAddress[0].province" id="presentProvince" required>
+									<label for="presentRegion" class="form-label">Region</label>
+									<select id="presentRegion" class="form-select form-control" aria-label="PresentRegionSelect" name="employeeAddress[0].region" required>
+										<option></option>
+										<option th:each="region : ${regionList}" th:value="${region.regionId}" 
+											th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
+									</select>
 								</div>
 							    <div class="col-2">
-									<label for="presentCity" class="form-label">City - select</label>
-									<input type="text" class="form-control" name="employeeAddress[0].city" id="presentCity" required>
+									<label for="presentProvince" class="form-label">Province</label>
+									<select id="presentProvince" class="form-select form-control" aria-label="PresentProvinceSelect" name="employeeAddress[0].province" required></select>
+									<!--<input type="text" class="form-control" name="employeeAddress[0].province" id="presentProvince" required>-->
 								</div>
 							    <div class="col-2">
-									<label for="presentBarangay" class="form-label">Barangay - select</label>
-									<input type="text" class="form-control" name="employeeAddress[0].barangay" id="presentBarangay" required>
+									<label for="presentMunicipal" class="form-label">Municipal/City</label>
+									<!--<input type="text" class="form-control" name="employeeAddress[0].city" id="presentCity" required>-->
+									<select id="presentMunicipal" class="form-select form-control" aria-label="PresentMunicipalSelect" name="employeeAddress[0].city" required></select>
+								</div>
+							    <div class="col-2">
+									<label for="presentBarangay" class="form-label">Barangay</label>
+									<!--<input type="text" class="form-control" name="employeeAddress[0].barangay" id="presentBarangay" required>-->
+									<select id="presentBarangay" class="form-select form-control" aria-label="PresentBarangaySelect" name="employeeAddress[0].barangay" required></select>
 								</div>
 							    <div class="col">
 									<label for="presentStreet" class="form-label">House Number/Street Name</label>
@@ -195,7 +203,7 @@
 				 			</div>
 				 			<div class="row justify-content-center">
 					        	<div class="col-4">
-					        		<a class="btn btn-outline-primary w-100" th:text="'Add Dependent'" id="addDependent" href="#">Add</a>
+					        		<a class="btn btn-outline-primary w-100" th:text="'Add Dependent'" id="addDependent">Add</a>
 					        	</div>
 					        </div>
 				 			<br>
@@ -249,6 +257,7 @@
 		<th:block th:replace="~{template :: footer}"></th:block >
 		<script type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
 		<th:block th:replace="~{template :: scripts}"></th:block>
+		<script type="text/javascript" th:src="@{/js/employee_address.js}"></script>
 		<script type="text/javascript" th:src="@{/js/employee_dependent.js}"></script>
 		<script th:inline="javascript">
 			var employeeId = '';

@@ -32,6 +32,24 @@ public class ConfigParam implements Serializable {
 	private LocalDate effDate;
 	
 	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(ConfigParamPK id) {
+		this.id = id;
+	}
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public ConfigParamPK getId() {
+		return id;
+	}
+
+	/**
 	 * Gets the description.
 	 *
 	 * @return the description
@@ -67,6 +85,11 @@ public class ConfigParam implements Serializable {
 		this.effDate = effDate;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		return "ConfigParam [id=" + id + ", description=" + description + ", effDate=" + effDate + "]";
