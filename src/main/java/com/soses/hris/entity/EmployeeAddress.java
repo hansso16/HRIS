@@ -8,6 +8,9 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * The Class EmployeeAddress.
@@ -34,28 +37,25 @@ public class EmployeeAddress implements Serializable {
     private String street;
     
     /** The barangay. */
-    @Column(name="BARANGAY", length=50)
-    private String barangay;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="barangay", referencedColumnName = "barangay_id")
+    private Barangay barangay;
     
     /** The municipal. */
-    @Column(name="MUNICIPAL", length=50)
-    private String municipal;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="municipal", referencedColumnName = "municipal_id")
+    private Municipal municipal;
     
     /** The province. */
-    @Column(name="PROVINCE", length=50)
-    private String province;
-	
-	/**
-	 * To string.
-	 *
-	 * @return the string
-	 */
-	@Override
-	public String toString() {
-		return "EmployeeAddress [id=" + id + ", street=" + street + ", barangay=" + barangay + ", municipal="
-				+ municipal + ", province=" + province + "]";
-	}
-	
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="province", referencedColumnName = "province_id")
+    private Province province;
+    
+    /** The region. */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="region", referencedColumnName = "region_id")
+    private Region region;
+
 	/**
 	 * Gets the id.
 	 *
@@ -64,7 +64,7 @@ public class EmployeeAddress implements Serializable {
 	public EmployeeAddressPK getId() {
 		return id;
 	}
-	
+
 	/**
 	 * Gets the street.
 	 *
@@ -73,34 +73,43 @@ public class EmployeeAddress implements Serializable {
 	public String getStreet() {
 		return street;
 	}
-	
+
 	/**
 	 * Gets the barangay.
 	 *
 	 * @return the barangay
 	 */
-	public String getBarangay() {
+	public Barangay getBarangay() {
 		return barangay;
 	}
-	
+
 	/**
 	 * Gets the municipal.
 	 *
 	 * @return the municipal
 	 */
-	public String getMunicipal() {
+	public Municipal getMunicipal() {
 		return municipal;
 	}
-	
+
 	/**
 	 * Gets the province.
 	 *
 	 * @return the province
 	 */
-	public String getProvince() {
+	public Province getProvince() {
 		return province;
 	}
-	
+
+	/**
+	 * Gets the region.
+	 *
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
 	/**
 	 * Sets the id.
 	 *
@@ -109,7 +118,7 @@ public class EmployeeAddress implements Serializable {
 	public void setId(EmployeeAddressPK id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * Sets the street.
 	 *
@@ -118,34 +127,54 @@ public class EmployeeAddress implements Serializable {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	
+
 	/**
 	 * Sets the barangay.
 	 *
 	 * @param barangay the new barangay
 	 */
-	public void setBarangay(String barangay) {
+	public void setBarangay(Barangay barangay) {
 		this.barangay = barangay;
 	}
-	
+
 	/**
 	 * Sets the municipal.
 	 *
 	 * @param municipal the new municipal
 	 */
-	public void setMunicipal(String municipal) {
+	public void setMunicipal(Municipal municipal) {
 		this.municipal = municipal;
 	}
-	
+
 	/**
 	 * Sets the province.
 	 *
 	 * @param province the new province
 	 */
-	public void setProvince(String province) {
+	public void setProvince(Province province) {
 		this.province = province;
 	}
-	
+
+	/**
+	 * Sets the region.
+	 *
+	 * @param region the new region
+	 */
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return "EmployeeAddress [id=" + id + ", street=" + street + ", barangay=" + barangay + ", municipal="
+				+ municipal + ", province=" + province + ", region=" + region + "]";
+	}
+
 	/**
 	 * Hash code.
 	 *
@@ -153,9 +182,9 @@ public class EmployeeAddress implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(barangay, id, municipal, province, street);
+		return Objects.hash(barangay, id, municipal, province, region, street);
 	}
-	
+
 	/**
 	 * Equals.
 	 *
@@ -173,6 +202,6 @@ public class EmployeeAddress implements Serializable {
 		EmployeeAddress other = (EmployeeAddress) obj;
 		return Objects.equals(barangay, other.barangay) && Objects.equals(id, other.id)
 				&& Objects.equals(municipal, other.municipal) && Objects.equals(province, other.province)
-				&& Objects.equals(street, other.street);
+				&& Objects.equals(region, other.region) && Objects.equals(street, other.street);
 	}
 }

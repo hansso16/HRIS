@@ -111,6 +111,7 @@ public class EmployeeTransformerUtil {
 			employeeAddressTO.setBarangay(empAddress.getBarangay());
 			employeeAddressTO.setMunicipal(empAddress.getMunicipal());
 			employeeAddressTO.setProvince(empAddress.getProvince());
+			employeeAddressTO.setRegion(empAddress.getRegion());
 		}
 	
 		return employeeAddressTO;

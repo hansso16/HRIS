@@ -1,5 +1,12 @@
 package com.soses.hris.dto;
 
+import java.util.List;
+
+import com.soses.hris.entity.Barangay;
+import com.soses.hris.entity.Municipal;
+import com.soses.hris.entity.Province;
+import com.soses.hris.entity.Region;
+
 /**
  * The Class EmployeeAddressDTO.
  *
@@ -18,14 +25,111 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	private String street;
 	
 	/** The barangay. */
-	private String barangay;
+	private Barangay barangay;
 	
 	/** The city. */
-	private String municipal;
+	private Municipal municipal;
 	
 	/** The province. */
-	private String province;
+	private Province province;
 	
+	/** The region. */
+	private Region region;
+	
+	/** The region list. */
+	private List<Region> regionList;
+	
+	/** The province list. */
+	private List<Province> provinceList;
+	
+	/** The municipal list. */
+	private List<Municipal> municipalList;
+	
+	/** The barangay list. */
+	private List<Barangay> barangayList;
+
+	
+	/**
+	 * Gets the region list.
+	 *
+	 * @return the region list
+	 */
+	public List<Region> getRegionList() {
+		return regionList;
+	}
+
+	/**
+	 * Gets the province list.
+	 *
+	 * @return the province list
+	 */
+	public List<Province> getProvinceList() {
+		return provinceList;
+	}
+
+	/**
+	 * Gets the municipal list.
+	 *
+	 * @return the municipal list
+	 */
+	public List<Municipal> getMunicipalList() {
+		return municipalList;
+	}
+
+	/**
+	 * Gets the barangay list.
+	 *
+	 * @return the barangay list
+	 */
+	public List<Barangay> getBarangayList() {
+		return barangayList;
+	}
+
+	/**
+	 * Sets the region list.
+	 *
+	 * @param regionList the new region list
+	 */
+	public void setRegionList(List<Region> regionList) {
+		this.regionList = regionList;
+	}
+
+	/**
+	 * Sets the province list.
+	 *
+	 * @param provinceList the new province list
+	 */
+	public void setProvinceList(List<Province> provinceList) {
+		this.provinceList = provinceList;
+	}
+
+	/**
+	 * Sets the municipal list.
+	 *
+	 * @param municipalList the new municipal list
+	 */
+	public void setMunicipalList(List<Municipal> municipalList) {
+		this.municipalList = municipalList;
+	}
+
+	/**
+	 * Sets the barangay list.
+	 *
+	 * @param barangayList the new barangay list
+	 */
+	public void setBarangayList(List<Barangay> barangayList) {
+		this.barangayList = barangayList;
+	}
+
+	/**
+	 * Gets the address type.
+	 *
+	 * @return the address type
+	 */
+	public String getAddressType() {
+		return addressType;
+	}
+
 	/**
 	 * Gets the address type name.
 	 *
@@ -33,6 +137,60 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	 */
 	public String getAddressTypeName() {
 		return addressTypeName;
+	}
+
+	/**
+	 * Gets the street.
+	 *
+	 * @return the street
+	 */
+	public String getStreet() {
+		return street;
+	}
+
+	/**
+	 * Gets the barangay.
+	 *
+	 * @return the barangay
+	 */
+	public Barangay getBarangay() {
+		return barangay;
+	}
+
+	/**
+	 * Gets the municipal.
+	 *
+	 * @return the municipal
+	 */
+	public Municipal getMunicipal() {
+		return municipal;
+	}
+
+	/**
+	 * Gets the province.
+	 *
+	 * @return the province
+	 */
+	public Province getProvince() {
+		return province;
+	}
+
+	/**
+	 * Gets the region.
+	 *
+	 * @return the region
+	 */
+	public Region getRegion() {
+		return region;
+	}
+
+	/**
+	 * Sets the address type.
+	 *
+	 * @param addressType the new address type
+	 */
+	public void setAddressType(String addressType) {
+		this.addressType = addressType;
 	}
 
 	/**
@@ -45,33 +203,6 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	}
 
 	/**
-	 * Gets the address type.
-	 *
-	 * @return the address type
-	 */
-	public String getAddressType() {
-		return addressType;
-	}
-	
-	/**
-	 * Sets the address type.
-	 *
-	 * @param addressType the new address type
-	 */
-	public void setAddressType(String addressType) {
-		this.addressType = addressType;
-	}
-	
-	/**
-	 * Gets the street.
-	 *
-	 * @return the street
-	 */
-	public String getStreet() {
-		return street;
-	}
-	
-	/**
 	 * Sets the street.
 	 *
 	 * @param street the new street
@@ -79,32 +210,14 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	
-	/**
-	 * Gets the barangay.
-	 *
-	 * @return the barangay
-	 */
-	public String getBarangay() {
-		return barangay;
-	}
-	
+
 	/**
 	 * Sets the barangay.
 	 *
 	 * @param barangay the new barangay
 	 */
-	public void setBarangay(String barangay) {
+	public void setBarangay(Barangay barangay) {
 		this.barangay = barangay;
-	}
-	
-	/**
-	 * Gets the municipal.
-	 *
-	 * @return the municipal
-	 */
-	public String getMunicipal() {
-		return municipal;
 	}
 
 	/**
@@ -112,33 +225,41 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	 *
 	 * @param municipal the new municipal
 	 */
-	public void setMunicipal(String municipal) {
+	public void setMunicipal(Municipal municipal) {
 		this.municipal = municipal;
 	}
 
-	/**
-	 * Gets the province.
-	 *
-	 * @return the province
-	 */
-	public String getProvince() {
-		return province;
-	}
-	
 	/**
 	 * Sets the province.
 	 *
 	 * @param province the new province
 	 */
-	public void setProvince(String province) {
+	public void setProvince(Province province) {
 		this.province = province;
 	}
 
 	/**
-	 * Instantiates a new employee address TO.
+	 * Sets the region.
+	 *
+	 * @param region the new region
 	 */
-	public EmployeeAddressTO() {}
-	
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return "EmployeeAddressTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName + ", street="
+				+ street + ", barangay=" + barangay + ", municipal=" + municipal + ", province=" + province
+				+ ", region=" + region + ", regionList=" + regionList + ", provinceList=" + provinceList
+				+ ", municipalList=" + municipalList + ", barangayList=" + barangayList + "]";
+	}
+
 	/**
 	 * Instantiates a new employee address TO.
 	 *
@@ -150,16 +271,10 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 		this.addressType = addressType;
 		this.addressTypeName = addressTypeName;
 	}
-
+	
 	/**
-	 * To string.
-	 *
-	 * @return the string
+	 * Instantiates a new employee address TO.
 	 */
-	@Override
-	public String toString() {
-		return "EmployeeAddressTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName + ", street="
-				+ street + ", barangay=" + barangay + ", municipal=" + municipal + ", province=" + province + "]";
-	}
+	public EmployeeAddressTO() { }
 	
 }

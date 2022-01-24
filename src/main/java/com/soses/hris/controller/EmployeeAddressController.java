@@ -62,7 +62,6 @@ public class EmployeeAddressController {
 		log.info("Request: " + request.toString());
 
 		if (employeeAddressService.updateEmployeeDetails(request)) {
-			// set error
 			model.addAttribute(GlobalConstants.SUCCESS_MESSAGE, "Successfully updated employee address.");
 		} else {
 			model.addAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);

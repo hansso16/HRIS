@@ -1,7 +1,6 @@
 package com.soses.hris.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.Column;
