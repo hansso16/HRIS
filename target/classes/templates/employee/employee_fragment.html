@@ -112,9 +112,10 @@
 					<input type="hidden" th:name="'employeeAddress[' + ${iter.index} + '].id.employeeId'" th:value="${res.employeeId}" />
 		        	<h5 th:text="${empAddress.addressTypeName}"></h5 >
 		        	<div class="col">
-		        		<label for="region" class="form-label">Region</label >
+		        		<label th:for="'region'+${iter.index}" class="form-label">Region</label >
 	                    <!--<input th:if="${!isUpdate}" type="text" name="region" th:id="'region'+${iter.index}" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].region'" th:value="${empAddress.region.regionName}" th:readonly="${!isUpdate}" readonly required>-->
-	                    <select th:disabled="${!isUpdate}" th:id="'region'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].region'" class="form-select form-control" aria-label="RegionSelect" required>
+	                    <select th:disabled="${!isUpdate}" th:id="'region'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].region'" 
+	                    	class="form-select form-control" aria-label="RegionSelect" onchange="deriveAddress(this)" required>
 							<option></option>
 							<option th:each="regionIter : ${empAddress.regionList}" th:value="${regionIter.regionId}" 
 								th:text="${regionIter.regionName}+' - '+${regionIter.regionDescription}"
@@ -122,25 +123,27 @@
 						</select>
 		        	</div >
 		        	<div class="col">
-		        		<label for="province" class="form-label">Province</label >
+		        		<label th:for="'province'+${iter.index}" class="form-label">Province</label >
 	                    <!--<input th:if="${!isUpdate}"type="text" name="province" th:id="'province'+${iter.index}" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].province'" th:value="${empAddress.province.provinceName}" th:readonly="${!isUpdate}" readonly required>-->
-	                    <select th:disabled="${!isUpdate}" th:id="'province'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].province'" class="form-select form-control" aria-label="RegionSelect" required>
+	                    <select th:disabled="${!isUpdate}" th:id="'province'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].province'" 
+	                    	class="form-select form-control" aria-label="RegionSelect" onchange="deriveAddress(this)" required>
 							<option></option>
 							<option th:each="provinceIter : ${empAddress.provinceList}" th:value="${provinceIter.provinceId}" th:text="${provinceIter.provinceName}" 
 							th:selected="${empAddress.province.provinceId == provinceIter.provinceId}" >Province</option>
 						</select>
 		        	</div >
 		        	<div class="col">
-		        		<label for="municipal" class="form-label">Municipal/City</label >
+		        		<label th:for="'municipal'+${iter.index}" class="form-label">Municipal/City</label >
 	                    <!--<input th:if="${!isUpdate}"type="text" name="municipal" th:id="'municipal'+${iter.index}" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].municipal'" th:value="${empAddress.municipal.municipalName}" th:readonly="${!isUpdate}" readonly required>-->
-	                    <select th:disabled="${!isUpdate}" th:id="'municipal'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].municipal'" class="form-select form-control" aria-label="RegionSelect" required>
+	                    <select th:disabled="${!isUpdate}" th:id="'municipal'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].municipal'" 
+	                    	class="form-select form-control" aria-label="RegionSelect" onchange="deriveAddress(this)" required>
 							<option></option>
 							<option th:each="municipalIter : ${empAddress.municipalList}" th:value="${municipalIter.municipalId}" 
 								th:text="${municipalIter.municipalName}" th:selected="${empAddress.municipal.municipalId == municipalIter.municipalId}" >Municipal</option>
 						</select>
 		        	</div >
 		        	<div class="col">
-		        		<label for="barangay" class="form-label">Barangay</label >
+		        		<label th:for="'barangay'+${iter.index}" class="form-label">Barangay</label >
 	                    <!--<input th:if="${!isUpdate}" type="text" name="barangay" th:id="'barangay'+${iter.index}" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].barangay'" th:value="${empAddress.barangay.barangayName}" th:readonly="${!isUpdate}" readonly required>-->
 	                    <select th:disabled="${!isUpdate}" th:id="'barangay'+${iter.index}" th:name="'employeeAddress[' + ${iter.index} + '].barangay'" class="form-select form-control" aria-label="RegionSelect" required>
 							<option></option>
@@ -150,8 +153,8 @@
 						</select>
 		        	</div >
 		        	<div class="col-4">
-		        		<label for="street" class="form-label">Street</label >
-	                    <input type="text" name="street" id="street" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].street'" th:value="${empAddress.street}" th:readonly="${!isUpdate}" readonly required>
+		        		<label th:for="'street'+${iter.index}" class="form-label">Street</label >
+	                    <input type="text" name="street" th:id="'street'+${iter.index}" class="form-control" th:name="'employeeAddress[' + ${iter.index} + '].street'" th:value="${empAddress.street}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        </div>
 		        <div th:if="${isUpdate}">

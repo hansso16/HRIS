@@ -27,6 +27,10 @@ public class ConfigParamPK implements Serializable {
 	@Column(name="FIELD_NAME", length=10)
 	private String fieldName;
 	
+	/** The seq no. */
+	@Column(name="SEQ_NO")
+	private int seqNo;
+	
 	/** The code. */
 	@Column(name="CODE", length=100)
 	private String code;
@@ -108,13 +112,31 @@ public class ConfigParamPK implements Serializable {
 	}
 	
 	/**
+	 * Gets the seq no.
+	 *
+	 * @return the seq no
+	 */
+	public int getSeqNo() {
+		return seqNo;
+	}
+
+	/**
+	 * Sets the seq no.
+	 *
+	 * @param seqNo the new seq no
+	 */
+	public void setSeqNo(int seqNo) {
+		this.seqNo = seqNo;
+	}
+
+	/**
 	 * Hash code.
 	 *
 	 * @return the int
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(code, fieldName, tableName);
+		return Objects.hash(code, endDate, fieldName, seqNo, tableName);
 	}
 	
 	/**
@@ -132,7 +154,8 @@ public class ConfigParamPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		ConfigParamPK other = (ConfigParamPK) obj;
-		return Objects.equals(code, other.code) && Objects.equals(fieldName, other.fieldName)
+		return Objects.equals(code, other.code) && Objects.equals(endDate, other.endDate)
+				&& Objects.equals(fieldName, other.fieldName) && seqNo == other.seqNo
 				&& Objects.equals(tableName, other.tableName);
 	}
 	
@@ -143,7 +166,8 @@ public class ConfigParamPK implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "ConfigParameterPK [tableName=" + tableName + ", fieldName=" + fieldName + ", code=" + code + "]";
+		return "ConfigParamPK [tableName=" + tableName + ", fieldName=" + fieldName + ", seqNo=" + seqNo + ", code="
+				+ code + ", endDate=" + endDate + "]";
 	}
 	
 }

@@ -11,28 +11,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.soses.hris.cache.municipality.MunicipalCache;
-import com.soses.hris.entity.Municipal;
+import com.soses.hris.cache.barangay.BarangayCache;
+import com.soses.hris.entity.Barangay;
 
 @Controller
 @RequestMapping("/util")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class MunicipalUtilController {
 
-	private MunicipalCache municipalCache;
+	private BarangayCache barangayCache;
 	
 	@Autowired
-	public MunicipalUtilController(MunicipalCache municipalCache) {
+	public MunicipalUtilController(BarangayCache barangayCache) {
 		super();
-		this.municipalCache = municipalCache;
+		this.barangayCache = barangayCache;
 	}
 
 
-	@GetMapping(value="/municipal/{provinceId}", produces="application/json")
-	public @ResponseBody List<Municipal> test(@PathVariable String provinceId) {
+	@GetMapping(value="/municipal/{municipalId}", produces="application/json")
+	public @ResponseBody List<Barangay> test(@PathVariable String municipalId) {
 		
-		List<Municipal> municipalList = municipalCache.getMunicipalListByProvince(provinceId);
+		List<Barangay> barangayList = barangayCache.getBarangayListByMunicipal(municipalId);
 		
-		return municipalList;
+		return barangayList;
 	}
 }

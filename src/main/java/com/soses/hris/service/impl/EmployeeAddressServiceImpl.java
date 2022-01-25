@@ -127,13 +127,4 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 			}
 		}
 	}
-	
-	private void deriveAddressCache(List<EmployeeAddress> empAddressList) {
-		
-		for (EmployeeAddress empAddress : empAddressList) {
-			System.out.println(empAddress.toString());
-		}
-		
-	}
-
 }

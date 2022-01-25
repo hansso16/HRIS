@@ -1,9 +1,23 @@
 
-$('#presentRegion').on('change', function() {
-	let regionId = this.value;
+function deriveAddress(element) {
+	let elementId = element.id;
+	let iter = elementId.slice(-1);
+	let type = elementId.slice(0,-1);
+	let val = document.getElementById(elementId).value;
+	if (val === '') {return;}
+	if ('region' == type) {
+		getAddressDetails(val, '#province'+iter, type)
+	} else if ('province' === type) {
+		getAddressDetails(val, '#municipal'+iter, type)
+	} else if ('municipal' === type) {
+		getAddressDetails(val, '#barangay'+iter, type)
+	}
+}
+
+function getAddressDetails(elementValue, nextChild, type) {
 	$.ajax({
 		type:'GET',
-		url: '/util/province/'+regionId,
+		url: '/util/'+ type + '/'+elementValue,
 		contentType: 'application/json',
 		dataType: 'json',
 		//data: JSON.stringify(data),
@@ -11,13 +25,13 @@ $('#presentRegion').on('change', function() {
 		//processData: false,
 		//beforeSend: triggerProgress(),
 		success: function(res) {
-			$('#presentProvince').find('option').remove().end();
+			$(nextChild).find('option').remove().end();
 			if (res !== null) {
-				$('#presentProvince').append($('<option>'));
-				$.each(res, function (i, province) {
-					$('#presentProvince').append($('<option>', {
-						value: province.provinceId,
-						text: province.provinceName
+				$(nextChild).append($('<option>'));
+				$.each(res, function (i, address) {
+					$(nextChild).append($('<option>', {
+						value: deriveAddressId(address, type),
+						text: deriveAddressName(address, type)
 					}));
 				});
 			}
@@ -33,60 +47,24 @@ $('#presentRegion').on('change', function() {
 			//triggerProgress()
 		}*/
 	});
-});
+}
 
-$('#presentProvince').on('change', function() {
-	let provinceId = this.value;
-	$.ajax({
-		type:'GET',
-		url: '/util/municipal/'+provinceId,
-		contentType: 'application/json',
-		dataType: 'json',
-		async: true,
-		success: function(res) {
-			$('#presentMunicipal').find('option').remove().end();
-			if (res !== null) {
-				$('#presentMunicipal').append($('<option>'));
-				$.each(res, function (i, municipal) {
-					$('#presentMunicipal').append($('<option>', {
-						value: municipal.municipalId,
-						text: municipal.municipalName
-					}));
-				});
-			}
-		}, error: function(res, error) {
-			console.log(res);
-			console.log(JSON.stringify(res));
-			console.log("ERROR: " + error);
-			alert("Something went wrong. Please try again.");
-		}
-	});
-});
+function deriveAddressId(res, type) {
+	if ('region' == type) {
+		return res.provinceId;
+	} else if ('province' === type) {
+		return res.municipalId;
+	} else if ('municipal' === type) {
+		return res.barangayId;
+	}
+}
 
-$('#presentMunicipal').on('change', function() {
-	let municipalId = this.value;
-	$.ajax({
-		type:'GET',
-		url: '/util/barangay/'+municipalId,
-		contentType: 'application/json',
-		dataType: 'json',
-		async: true,
-		success: function(res) {
-			$('#presentBarangay').find('option').remove().end();
-			if (res !== null) {
-				$('#presentBarangay').append($('<option>'));
-				$.each(res, function (i, barangay) {
-					$('#presentBarangay').append($('<option>', {
-						value: barangay.barangayId,
-						text: barangay.barangayName
-					}));
-				});
-			}
-		}, error: function(res, error) {
-			console.log(res);
-			console.log(JSON.stringify(res));
-			console.log("ERROR: " + error);
-			alert("Something went wrong. Please try again.");
-		}
-	});
-});
+function deriveAddressName(res, type) {
+	if ('region' == type) {
+		return res.provinceName;
+	} else if ('province' === type) {
+		return res.municipalName;
+	} else if ('municipal' === type) {
+		return res.barangayName;
+	}
+}
