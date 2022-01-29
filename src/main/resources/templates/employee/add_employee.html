@@ -95,7 +95,7 @@
 									<select id="region0" class="form-select form-control" aria-label="region0" name="employeeAddress[0].region" onchange="deriveAddress(this)" required>
 										<option></option>
 										<option th:each="region : ${regionList}" th:value="${region.regionId}" 
-											th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
+											th:text="${region.regionName}+' - '+${region.regionDescription}"  >Region</option>
 									</select>
 								</div>
 							    <div class="col-2">

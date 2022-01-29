@@ -1,5 +1,6 @@
 package com.soses.hris.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -100,6 +101,7 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 			//throw error
 		}
 		employee.setEmployeeId(employeeId);
+		employee.setEntryTimestamp(LocalDateTime.now());
 		employee = employeeRepository.save(employee);
 		
 		//permanent address

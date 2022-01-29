@@ -9,19 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.soses.hris.cache.CacheService;
-import com.soses.hris.common.ConfigParamConstants;
+import com.soses.hris.cache.position.PositionCache;
 import com.soses.hris.common.EncryptionService;
-import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.dao.EmployeeDAO;
-import com.soses.hris.entity.ConfigParam;
-import com.soses.hris.entity.ConfigParamPK;
-import com.soses.hris.entity.Role;
-import com.soses.hris.entity.User;
+import com.soses.hris.entity.Division;
+import com.soses.hris.entity.Position;
+import com.soses.hris.repository.DivisionRepository;
 import com.soses.hris.repository.UserRepository;
 
 @SpringBootApplication
@@ -49,8 +45,25 @@ public class HrisApplication implements CommandLineRunner {
 	@Autowired
 	private EncryptionService encryptionService;
 	
+	@Autowired
+	private DivisionRepository divisionRepo;
+	
+	@Autowired
+	private PositionCache positionCache;
+	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		List<Division> diviList = divisionRepo.findAll();
+		
+		for (Division divi : diviList) {
+			log4.info(divi.toString());
+		}
+		
+		List<Position> positionList = positionCache.getPositionListByDivision("110");
+		for (Position position : positionList) {
+			log.info(position.toString());
+		}
 		
 //		User user = userRepo.findByUsername("admin");
 //		log.info(user.toString());
@@ -97,6 +110,8 @@ public class HrisApplication implements CommandLineRunner {
 //		log.info("LOGBACK INFO");
 //		log.trace("LOGBACK TRACE");
 //		log.info("TEST");
+		
+		
 		
 	}
 	
