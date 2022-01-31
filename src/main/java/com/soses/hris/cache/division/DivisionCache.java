@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class DivisionCache {
 		this.service = serviceService;
 	}
 
-//	@Cacheable(value="provinceCacheByRegion", key="#regionId")
+	@Cacheable(value="divisionCacheByCompany", key="#companyCode")
 	public List<Division> getDivisionListByCompany(String companyCode) {
 		List<Division> divisionList = null;
 		if (!StringUtil.isEmpty(companyCode)) {

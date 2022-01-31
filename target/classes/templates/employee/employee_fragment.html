@@ -84,13 +84,29 @@
 	                    <input type="date" name="terminationDate" id="terminationDate" class="form-control" th:value="${res.employee.terminationDate}" th:readonly="${!isUpdate}" readonly required>
 		        	</div >
 		        	<div class="col">
-		        		<label for="division" class="form-label">Division</label >
-	                    <input type="text" name="division" id="division" class="form-control" th:value="${res.employee.division}" th:readonly="true" required>
-		        	</div >
-		        	<div class="col">
-		        		<label for="position" class="form-label">Position</label >
-	                    <input type="text" name="position" id="position" class="form-control" th:value="${res.employee.position}" th:readonly="true" required>
-		        	</div >
+						<label for="company" class="form-label">Company</label>
+						<select th:disabled="${!isUpdate}" id="company" class="form-select form-control" aria-label="CompanySelect" name="company" required>
+							<option></option>
+							<option th:each="company : ${companyList}" th:value="${company.id.companyCode}" 
+								th:text="${company.companyName}" th:selected="${res.employee.companyCode == company.id.companyCode}" >Company</option>
+						</select>
+					</div>
+				    <div class="col">
+						<label for="division" class="form-label">Division</label>
+						<select th:disabled="${!isUpdate}" id="division" class="form-select form-control" aria-label="DivisionSelect" name="division" required>
+							<option></option>
+							<option th:each="division : ${divisionList}" th:value="${division.id.divisionCode}" 
+								th:text="${division.divisionName}" th:selected="${res.employee.divisionCode == division.id.divisionCode}" >Division</option>
+						</select>
+					</div>
+				    <div class="col">
+						<label for="position" class="form-label">Position</label>
+						<select th:disabled="${!isUpdate}" id="position" class="form-select form-control" aria-label="PositionSelect" name="position" required>
+							<option></option>
+							<option th:each="company : ${positionList}" th:value="${position.id.positionCode}" 
+								th:text="${position.positionName}" th:selected="${res.employee.positionCode == position.id.positionCode}" >Position</option>
+						</select>
+					</div>
 		        </div>
 		        <div th:if="${isUpdate}">
 		        	<hr>

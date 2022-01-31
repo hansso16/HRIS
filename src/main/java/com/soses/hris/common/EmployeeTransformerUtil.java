@@ -87,8 +87,9 @@ public class EmployeeTransformerUtil {
 			employeeTO.setHiringDate(employee.getHiringDate()); //date format
 			employeeTO.setTerminationDate(employee.getTerminationDate()); //date format
 			employeeTO.setRegularizationDate(employee.getRegularizationDate()); //date format
-			employeeTO.setDivision(employee.getDivision()); // derive
-			employeeTO.setPosition(employee.getPosition()); // derive
+			employeeTO.setDivisionCode(employee.getDivision());
+			employeeTO.setPositionCode(employee.getPosition()); 
+			employeeTO.setCompanyCode(employee.getCompany());
 		}
 		
 		return employeeTO;

@@ -2,16 +2,11 @@ package com.soses.hris.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 /**
  * The Class Division.
@@ -28,6 +23,10 @@ public class Division implements Serializable {
 	/** The id. */
 	@EmbeddedId
 	private DivisionPK id;
+	
+	/** The division code. */
+	@Column(name="DIVISION_CODE", insertable = false, updatable = false)
+	private String divisionCode;
     
     /** The last name. */
     @Column(name="DIVISION_SHORT_NAME", length=10)
@@ -53,16 +52,23 @@ public class Division implements Serializable {
     @Column(name="COMPANY_CODE")
     private String companyCode;
     
-    /** The position list. */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-    		name = "CFG_DIVISION_POSITION",
-    		joinColumns = @JoinColumn(
-    				name = "DIVISION_CODE", referencedColumnName = "DIVISION_CODE"),
-    		inverseJoinColumns = @JoinColumn(
-    				name = "POSITION_CODE", referencedColumnName = "POSITION_CODE")
-    		)
-    private List<Position> positionList;
+	/**
+	 * Gets the division code.
+	 *
+	 * @return the division code
+	 */
+	public String getDivisionCode() {
+		return divisionCode;
+	}
+
+	/**
+	 * Sets the division code.
+	 *
+	 * @param divisionCode the new division code
+	 */
+	public void setDivisionCode(String divisionCode) {
+		this.divisionCode = divisionCode;
+	}
 
 	/**
 	 * Gets the id.
@@ -125,15 +131,6 @@ public class Division implements Serializable {
 	 */
 	public String getCompanyCode() {
 		return companyCode;
-	}
-
-	/**
-	 * Gets the position list.
-	 *
-	 * @return the position list
-	 */
-	public List<Position> getPositionList() {
-		return positionList;
 	}
 
 	/**
@@ -200,24 +197,16 @@ public class Division implements Serializable {
 	}
 
 	/**
-	 * Sets the position list.
-	 *
-	 * @param positionList the new position list
-	 */
-	public void setPositionList(List<Position> positionList) {
-		this.positionList = positionList;
-	}
-
-	/**
 	 * To string.
 	 *
 	 * @return the string
 	 */
 	@Override
 	public String toString() {
-		return "Division [id=" + id + ", divisionShortName=" + divisionShortName + ", divisionName=" + divisionName
-				+ ", divisionShortDesc=" + divisionShortDesc + ", divisionDescription=" + divisionDescription
-				+ ", effDate=" + effDate + ", companyCode=" + companyCode + ", positionList=" + positionList + "]";
+		return "Division [id=" + id + ", divisionCode=" + divisionCode + ", divisionShortName=" + divisionShortName
+				+ ", divisionName=" + divisionName + ", divisionShortDesc=" + divisionShortDesc
+				+ ", divisionDescription=" + divisionDescription + ", effDate=" + effDate + ", companyCode="
+				+ companyCode + "]";
 	}
 
 	/**
@@ -227,8 +216,8 @@ public class Division implements Serializable {
 	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(companyCode, divisionDescription, divisionName, divisionShortDesc, divisionShortName,
-				effDate, id, positionList);
+		return Objects.hash(companyCode, divisionCode, divisionDescription, divisionName, divisionShortDesc,
+				divisionShortName, effDate, id);
 	}
 
 	/**
@@ -246,11 +235,11 @@ public class Division implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Division other = (Division) obj;
-		return Objects.equals(companyCode, other.companyCode)
+		return Objects.equals(companyCode, other.companyCode) && Objects.equals(divisionCode, other.divisionCode)
 				&& Objects.equals(divisionDescription, other.divisionDescription)
 				&& Objects.equals(divisionName, other.divisionName)
 				&& Objects.equals(divisionShortDesc, other.divisionShortDesc)
 				&& Objects.equals(divisionShortName, other.divisionShortName) && Objects.equals(effDate, other.effDate)
-				&& Objects.equals(id, other.id) && Objects.equals(positionList, other.positionList);
+				&& Objects.equals(id, other.id);
 	}
 }

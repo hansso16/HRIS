@@ -1,6 +1,11 @@
 package com.soses.hris.dto;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import com.soses.hris.entity.Company;
+import com.soses.hris.entity.Division;
+import com.soses.hris.entity.Position;
 
 /**
  * The Class EmployeeDTO.
@@ -52,11 +57,23 @@ public class EmployeeTO extends BaseEmployeeTO {
 	/** The regularization date. */
 	private LocalDate regularizationDate;
 	
+	/** The company code. */
+	private String companyCode;
+	
 	/** The division. */
-	private String division;
+	private String divisionCode;
 	
 	/** The position. */
-	private String position;
+	private String positionCode;
+	
+	/** The company list. */
+	private List<Company> companyList;
+	
+	/** The division list. */
+	private List<Division> divisionList;
+	
+	/** The position list. */
+	private List<Position> positionList;
 	
 	/**
 	 * Gets the last name.
@@ -309,43 +326,115 @@ public class EmployeeTO extends BaseEmployeeTO {
 	public void setRegularizationDate(LocalDate regularizationDate) {
 		this.regularizationDate = regularizationDate;
 	}
-	
+
 	/**
-	 * Gets the division.
+	 * Gets the company code.
 	 *
-	 * @return the division
+	 * @return the company code
 	 */
-	public String getDivision() {
-		return division;
+	public String getCompanyCode() {
+		return companyCode;
 	}
-	
+
 	/**
-	 * Sets the division.
+	 * Gets the division code.
 	 *
-	 * @param division the new division
+	 * @return the division code
 	 */
-	public void setDivision(String division) {
-		this.division = division;
+	public String getDivisionCode() {
+		return divisionCode;
 	}
-	
+
 	/**
-	 * Gets the position.
+	 * Gets the position code.
 	 *
-	 * @return the position
+	 * @return the position code
 	 */
-	public String getPosition() {
-		return position;
+	public String getPositionCode() {
+		return positionCode;
 	}
-	
+
 	/**
-	 * Sets the position.
+	 * Sets the company code.
 	 *
-	 * @param position the new position
+	 * @param companyCode the new company code
 	 */
-	public void setPosition(String position) {
-		this.position = position;
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
 	}
-	
+
+	/**
+	 * Sets the division code.
+	 *
+	 * @param divisionCode the new division code
+	 */
+	public void setDivisionCode(String divisionCode) {
+		this.divisionCode = divisionCode;
+	}
+
+	/**
+	 * Sets the position code.
+	 *
+	 * @param positionCode the new position code
+	 */
+	public void setPositionCode(String positionCode) {
+		this.positionCode = positionCode;
+	}
+
+	/**
+	 * Gets the company list.
+	 *
+	 * @return the company list
+	 */
+	public List<Company> getCompanyList() {
+		return companyList;
+	}
+
+	/**
+	 * Gets the division list.
+	 *
+	 * @return the division list
+	 */
+	public List<Division> getDivisionList() {
+		return divisionList;
+	}
+
+	/**
+	 * Gets the position list.
+	 *
+	 * @return the position list
+	 */
+	public List<Position> getPositionList() {
+		return positionList;
+	}
+
+	/**
+	 * Sets the company list.
+	 *
+	 * @param companyList the new company list
+	 */
+	public void setCompanyList(List<Company> companyList) {
+		this.companyList = companyList;
+	}
+
+	/**
+	 * Sets the division list.
+	 *
+	 * @param divisionList the new division list
+	 */
+	public void setDivisionList(List<Division> divisionList) {
+		this.divisionList = divisionList;
+	}
+
+	/**
+	 * Sets the position list.
+	 *
+	 * @param positionList the new position list
+	 */
+	public void setPositionList(List<Position> positionList) {
+		this.positionList = positionList;
+	}
+
 	/**
 	 * To string.
 	 *
@@ -353,13 +442,12 @@ public class EmployeeTO extends BaseEmployeeTO {
 	 */
 	@Override
 	public String toString() {
-		return "EmployeeDTO [lastName=" + lastName + ", firstName=" + firstName + ", suffix=" + suffix + ", middleName="
-				+ middleName + ", nickname=" + nickname + ", cellNo=" + cellNo + ", teleNo=" + teleNo + ", gender="
-				+ gender + ", birthdate=" + birthdate + ", maritalStatus=" + maritalStatus + ", hiringDate="
-				+ hiringDate + ", terminationDate=" + terminationDate + ", regularizationDate=" + regularizationDate
-				+ ", division=" + division + ", position=" + position + "]";
+		return "EmployeeTO [lastName=" + lastName + ", firstName=" + firstName + ", suffix=" + suffix + ", middleName="
+				+ middleName + ", nickname=" + nickname + ", cellNo=" + cellNo + ", teleNo=" + teleNo
+				+ ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate=" + birthdate
+				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
+				+ terminationDate + ", regularizationDate=" + regularizationDate + ", companyCode=" + companyCode
+				+ ", divisionCode=" + divisionCode + ", positionCode=" + positionCode + "]";
 	}
-	
-	
 	
 }

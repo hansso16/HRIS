@@ -19,11 +19,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
+import com.soses.hris.cache.company.CompanyCacheService;
 import com.soses.hris.cache.configparam.GenderCache;
 import com.soses.hris.cache.configparam.MaritalStatusCache;
 import com.soses.hris.cache.region.RegionCacheService;
 import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.common.StringUtil;
+import com.soses.hris.entity.Company;
 import com.soses.hris.entity.ConfigParam;
 import com.soses.hris.entity.Region;
 import com.soses.hris.service.EmployeeRegistrationService;
@@ -59,6 +61,8 @@ public class EmployeeRegistrationController {
 	/** The gender cache. */
 	private GenderCache genderCache;
 	
+	private CompanyCacheService companyCache;
+	
 	/**
 	 * Instantiates a new employee registration controller.
 	 *
@@ -68,11 +72,12 @@ public class EmployeeRegistrationController {
 	 */
 	@Autowired
 	public EmployeeRegistrationController(EmployeeRegistrationService employeeRegistrationService, MaritalStatusCache maritalStatusCache
-			, GenderCache genderCache, RegionCacheService regionCache) {
+			, GenderCache genderCache, RegionCacheService regionCache, CompanyCacheService companyCache) {
 		this.employeeRegistrationService = employeeRegistrationService;
 		this.maritalStatusCache = maritalStatusCache;
 		this.genderCache = genderCache;
 		this.regionCache = regionCache;
+		this.companyCache = companyCache;
 	}
 	
 	/**
@@ -87,10 +92,12 @@ public class EmployeeRegistrationController {
 		List<ConfigParam> maritalStatusList = maritalStatusCache.getMaritalStatusList();
 		List<ConfigParam> genderList = genderCache.getGenderList();
 		List<Region> regionList = regionCache.findAll();
+		List<Company> companyList = companyCache.findAll();
 		
 		model.addAttribute("maritalStatusList", maritalStatusList);
 		model.addAttribute("genderList", genderList);
 		model.addAttribute("regionList", regionList);
+		model.addAttribute("companyList", companyList);
 		
 		return ADD_EMP;
 	}

@@ -43,4 +43,7 @@ public class GlobalConstants {
 	
 	/** The Constant GENDER. */
 	public static final String GENDER = "GENDER";
+	
+	/** The Constant ALL_DIVISION_CODE. */
+	public static final String ALL_DIVISION_CODE = "000";
 }

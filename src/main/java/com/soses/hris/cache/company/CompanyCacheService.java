@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class CompanyCacheService {
 		this.factory = factory;
 	}
 	
-//	@Cacheable(value="regionCache")
+	@Cacheable(value="companyCache")
 	public List<Company> findAll() {
 		return factory.findAll();
 	}

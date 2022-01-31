@@ -5,9 +5,6 @@ package com.soses.hris.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -99,13 +96,18 @@ public class Employee implements Serializable {
     private LocalDateTime entryTimestamp;
     
     /** The division. */
-    @Column(name="DIVISION", length=5)
+    @Column(name="DIVISION", length=3)
     private String division;
     
     /** The position. */
-    @Column(name="POSITION", length=5)
+    @Column(name="POSITION", length=2)
     private String position;
+    
+    /** The company code. */
+    @Column(name="COMPANY", length=3)
+    private String company;
 
+    
     /** Default constructor. */
     public Employee() {
         super();
@@ -399,104 +401,73 @@ public class Employee implements Serializable {
         entryTimestamp = aEntryTimestamp;
     }
 
-    /**
-     * Access method for division.
-     *
-     * @return the current value of division
-     */
-    public String getDivision() {
-        return division;
-    }
-
-    /**
-     * Setter method for division.
-     *
-     * @param aDivision the new value for division
-     */
-    public void setDivision(String aDivision) {
-        division = aDivision;
-    }
-
-    /**
-     * Access method for position.
-     *
-     * @return the current value of position
-     */
-    public String getPosition() {
-        return position;
-    }
-
-    /**
-     * Setter method for position.
-     *
-     * @param aPosition the new value for position
-     */
-    public void setPosition(String aPosition) {
-        position = aPosition;
-    }
-
-    /**
-     * Equals.
-     *
-     * @param obj the obj
-     * @return true, if successful
-     */
-    @Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Employee other = (Employee) obj;
-		return Objects.equals(birthdate, other.birthdate) && Objects.equals(cellNo, other.cellNo)
-				&& Objects.equals(division, other.division) && Objects.equals(emailAddress, other.emailAddress)
-				&& Objects.equals(employeeId, other.employeeId) && Objects.equals(entryTimestamp, other.entryTimestamp)
-				&& Objects.equals(firstName, other.firstName) && Objects.equals(gender, other.gender)
-				&& Objects.equals(hiringDate, other.hiringDate) && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(maritalStatus, other.maritalStatus) && Objects.equals(middleName, other.middleName)
-				&& Objects.equals(nickname, other.nickname) && Objects.equals(position, other.position)
-				&& Objects.equals(regularizationDate, other.regularizationDate) && Objects.equals(suffix, other.suffix)
-				&& Objects.equals(telNo, other.telNo) && Objects.equals(terminationDate, other.terminationDate);
+	/**
+	 * Gets the division.
+	 *
+	 * @return the division
+	 */
+	public String getDivision() {
+		return division;
 	}
 
-    /**
-     * Hash code.
-     *
-     * @return the int
-     */
-    @Override
-	public int hashCode() {
-		return Objects.hash(birthdate, cellNo, division, emailAddress, employeeId, entryTimestamp, firstName, gender,
-				hiringDate, lastName, maritalStatus, middleName, nickname, position, regularizationDate, suffix, telNo,
-				terminationDate);
+	/**
+	 * Gets the position.
+	 *
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
 	}
 
-    /**
-     * To string.
-     *
-     * @return the string
-     */
-    @Override
+	/**
+	 * Gets the company.
+	 *
+	 * @return the company
+	 */
+	public String getCompany() {
+		return company;
+	}
+
+	/**
+	 * Sets the division.
+	 *
+	 * @param division the new division
+	 */
+	public void setDivision(String division) {
+		this.division = division;
+	}
+
+	/**
+	 * Sets the position.
+	 *
+	 * @param position the new position
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	/**
+	 * Sets the company.
+	 *
+	 * @param company the new company
+	 */
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", lastName=" + lastName + ", firstName=" + firstName
 				+ ", suffix=" + suffix + ", middleName=" + middleName + ", nickname=" + nickname + ", cellNo=" + cellNo
 				+ ", telNo=" + telNo + ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate="
 				+ birthdate + ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
 				+ terminationDate + ", regularizationDate=" + regularizationDate + ", entryTimestamp=" + entryTimestamp
-				+ ", division=" + division + ", position=" + position + "]";
+				+ ", division=" + division + ", position=" + position + ", company=" + company + "]";
 	}
-
-    /**
-     * Return all elements of the primary key.
-     *
-     * @return Map of key names to values
-     */
-    public Map<String, Object> getPrimaryKey() {
-        Map<String, Object> ret = new LinkedHashMap<String, Object>(6);
-        ret.put("employeeId", Integer.valueOf(getEmployeeId()));
-        return ret;
-    }
 
 }
