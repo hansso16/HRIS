@@ -15,8 +15,8 @@ public class UserController {
 
 	private static final String USER_PAGE = "/user/user";
 	
-	@GetMapping("/{employeeId}")
-	public String viewUser(@PathVariable String employeeId, Model model) {
+	@GetMapping("/{username}")
+	public String viewUser(@PathVariable String username, Model model) {
 		
 		
 		

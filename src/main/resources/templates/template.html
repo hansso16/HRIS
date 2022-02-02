@@ -22,14 +22,14 @@
 			    	
 				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				     	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					        <li class="nav-item">
+					        <!--<li class="nav-item">
 					         	<a class="nav-link active" aria-current="page" href="#" th:href="@{/}">Home</a>
-					        </li>
+					        </li>-->
 					        <li class="nav-item dropdown">
 					         	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 					            	Employee
 					         	</a>
-					  			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					  			<ul class="dropdown-menu" aria-labelledby="employeeDropdown">
 						            <li><a class="dropdown-item" href="#" th:href="@{/employee}">Search Employee</a></li>
 						            <li><a class="dropdown-item" href="#" th:href="@{/employee/add}">Add Employee</a></li>
 						            <!--<li><a class="dropdown-item" href="#">Another action</a></li>
@@ -37,32 +37,39 @@
 						            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
 					        	</ul>
 					        </li>
-					        <li>
-
+					        <li class="nav-item dropdown" sec:authorize="hasAnyRole('ROLE_SUPV')">
+					         	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					            	User Management
+					         	</a>
+					  			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMgmtDropdown">
+						            <li><a class="dropdown-item" href="#" th:href="@{/user}">Search Users (view and edit roles)</a></li>
+						            <li><a class="dropdown-item" href="#" th:href="@{#}">Add User</a></li>
+					        	</ul>
 					        </li>
 				     	</ul>
-		      			<div sec:authorize="hasAnyRole('ROLE_SUPV')">
-							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						        <li class="nav-item dropdown">
-						         	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						            	User Management
-						         	</a>
-						  			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							            <li><a class="dropdown-item" href="#" th:href="@{/user}">Search Users (view and edit roles)</a></li>
-							            <li><a class="dropdown-item" href="#" th:href="@{#}">Add User</a></li>
-							            <li><hr></li>
-							            <li><a class="dropdown-item" href="#" th:href="@{/changepassword}">Change my Password</a></li>
-							            
-						        	</ul>
-						        </li>
-							</ul>
-						</div>
-		     			<a sec:authentication="name" class="btn btn-light disabled">username</a>
+						<ul class="navbar-nav me-end mb-2 mb-lg-0">
+					        
+					        <li class="nav-item dropdown">
+					         	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+					            	<span sec:authentication="name">username</span>
+					         	</a>
+					  			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+						            <li><a class="dropdown-item" href="#" th:href="@{/changepassword}">Change my Password</a></li>
+						            <li><hr></li>
+						            <li sec:authorize="isAuthenticated()">
+										<form action="#" th:action="@{/logout}" method="POST">
+											<button type="submit" class="dropdown-item" th:text="'Logout'" >Logout</button>
+										</form>
+									</li>
+					        	</ul>
+					        </li>
+						</ul>
+		     			<!--<a sec:authentication="name" class="btn btn-light disabled">username</a>
 		      			<div sec:authorize="isAuthenticated()">
 							<form action="#" th:action="@{/logout}" method="POST">
 								<button type="submit" class="btn btn-secondary" th:text="${#strings.toUpperCase('logout')}" >Logout</button>
 							</form>
-						</div>
+						</div>-->
 				    </div>
 			 	</div>
 			</nav>
