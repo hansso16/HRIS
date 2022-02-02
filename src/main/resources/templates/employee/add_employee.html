@@ -48,11 +48,11 @@
 									<label for="telNo" class="form-label">Telephone Number</label>
 									<input type="text" class="form-control" name="employee.telNo" id="telNo" placeholder="1234567">
 								</div>
-							    <div class="col-auto">
+							    <div class="col-3">
 									<label for="emailAddress" class="form-label">Email Address</label>
 									<input type="email" class="form-control" name="employee.emailAddress" id="emailAddress" placeholder="juan.carlos@email.com">
 								</div>
-							    <div class="col">
+							    <div class="col-2">
 									<label for="gender" class="form-label">Gender</label>
 									<select class="form-select form-control" aria-label="GenderSelect" name="employee.gender" id="gender" required>
 										<option th:each="gender : ${genderList}" th:value="${gender.id.code}" th:text="${gender.description}">MaritalStatus</option>
@@ -123,7 +123,7 @@
 									<select id="barangay0" class="form-select form-control" aria-label="barangay0" name="employeeAddress[0].barangay" required></select>
 								</div>
 							    <div class="col">
-									<label for="presentStreet" class="form-label">House Number/Street Name</label>
+									<label for="presentStreet" class="form-label">Street Name & House No.</label>
 									<input type="text" class="form-control" name="employeeAddress[0].street" id="presentStreet" required>
 								</div>
 				 			</div>

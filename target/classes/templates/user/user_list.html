@@ -24,7 +24,7 @@
 						<th scope="col">Employee ID</th >
 						<th scope="col">Username</th >
 						<th scope="col">Full Name</th >
-						<th scope="col">Division-Position</th >
+						<th scope="col">User Termination Date</th >
 						<th scope="col">Access Role(s)</th >
 						<!--<th scope="col">Action</th >-->
 					</tr>
@@ -34,7 +34,7 @@
 						<td th:text="${user.employeeId}"></td>
 						<td><a href="#" th:href="@{/user/}+ ${user.username}" th:text="${user.username}"></a ></td><!--TODO: link-->
 						<td th:text="${user.employee.lastName+', '+user.employee.firstName}"></td>
-						<td th:text="${user.employee.division+'-'+user.employee.position}"></td>
+						<td th:text="${user.terminationDate}"></td>
 						<td><span th:each="role,i : ${user.roles}"><span th:text="${i.index>0? ', '+role.roleCode: role.roleCode}"></span ></span></td>
 						<!--<td th:text="${user.employee.terminationDate}"></td>-->
 					</tr >

@@ -22,7 +22,7 @@ public class PositionAccessor {
 		this.positionCache = positionCache;
 	}
 	
-	public Position getMaritalStatus(String positionCode, String divisionCode) {
+	public Position getPosition(String positionCode, String divisionCode) {
 		Position dto = null;
 		if (!StringUtil.isEmpty(positionCode) && !StringUtil.isEmpty(divisionCode)) {
 			List<Position> list = positionCache.getPositionListByDivision(divisionCode);

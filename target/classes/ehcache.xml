@@ -26,9 +26,9 @@
     </cache>
     <cache alias="maritalStatusCache">
         <value-type>java.util.ArrayList</value-type>
-        <expiry>
+        <!-- <expiry>
             <ttl unit="seconds">30</ttl>
-        </expiry>
+        </expiry> -->
         <listeners>
             <listener>
                 <class>com.soses.hris.config.CacheEventLogger</class>
@@ -45,9 +45,9 @@
     </cache>
     <cache alias="genderCache">
         <value-type>java.util.ArrayList</value-type>
-        <expiry>
+        <!-- <expiry>
             <ttl unit="seconds">30</ttl>
-        </expiry>
+        </expiry> -->
         <listeners>
             <listener>
                 <class>com.soses.hris.config.CacheEventLogger</class>

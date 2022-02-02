@@ -62,7 +62,7 @@
 		</div>
 		
 		<th:block th:replace="~{template :: footer}"></th:block >
-		<script th:if="${viewType} == 5 or ${viewType} == 2" type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
+		<script th:if="${viewType} == 5 or ${viewType} == 2 or ${viewType} == 1" type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
 		<th:block th:replace="~{template :: scripts}"></th:block>
 		<script th:if="${viewType} == 1" type="text/javascript" th:src="@{/js/employee_profile.js}"></script>
 		<script th:if="${viewType} == 2" type="text/javascript" th:src="@{/js/employee_address.js}"></script>

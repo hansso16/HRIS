@@ -60,10 +60,10 @@ public class EmployeeTO extends BaseEmployeeTO {
 	/** The company code. */
 	private String companyCode;
 	
-	/** The division. */
+	/** The division code. */
 	private String divisionCode;
 	
-	/** The position. */
+	/** The position code. */
 	private String positionCode;
 	
 	/** The company list. */
@@ -328,60 +328,6 @@ public class EmployeeTO extends BaseEmployeeTO {
 	}
 
 	/**
-	 * Gets the company code.
-	 *
-	 * @return the company code
-	 */
-	public String getCompanyCode() {
-		return companyCode;
-	}
-
-	/**
-	 * Gets the division code.
-	 *
-	 * @return the division code
-	 */
-	public String getDivisionCode() {
-		return divisionCode;
-	}
-
-	/**
-	 * Gets the position code.
-	 *
-	 * @return the position code
-	 */
-	public String getPositionCode() {
-		return positionCode;
-	}
-
-	/**
-	 * Sets the company code.
-	 *
-	 * @param companyCode the new company code
-	 */
-	public void setCompanyCode(String companyCode) {
-		this.companyCode = companyCode;
-	}
-
-	/**
-	 * Sets the division code.
-	 *
-	 * @param divisionCode the new division code
-	 */
-	public void setDivisionCode(String divisionCode) {
-		this.divisionCode = divisionCode;
-	}
-
-	/**
-	 * Sets the position code.
-	 *
-	 * @param positionCode the new position code
-	 */
-	public void setPositionCode(String positionCode) {
-		this.positionCode = positionCode;
-	}
-
-	/**
 	 * Gets the company list.
 	 *
 	 * @return the company list
@@ -436,18 +382,57 @@ public class EmployeeTO extends BaseEmployeeTO {
 	}
 
 	/**
-	 * To string.
+	 * Gets the company code.
 	 *
-	 * @return the string
+	 * @return the company code
 	 */
-	@Override
-	public String toString() {
-		return "EmployeeTO [lastName=" + lastName + ", firstName=" + firstName + ", suffix=" + suffix + ", middleName="
-				+ middleName + ", nickname=" + nickname + ", cellNo=" + cellNo + ", teleNo=" + teleNo
-				+ ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate=" + birthdate
-				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
-				+ terminationDate + ", regularizationDate=" + regularizationDate + ", companyCode=" + companyCode
-				+ ", divisionCode=" + divisionCode + ", positionCode=" + positionCode + "]";
+	public String getCompanyCode() {
+		return companyCode;
 	}
-	
+
+	/**
+	 * Gets the division code.
+	 *
+	 * @return the division code
+	 */
+	public String getDivisionCode() {
+		return divisionCode;
+	}
+
+	/**
+	 * Gets the position code.
+	 *
+	 * @return the position code
+	 */
+	public String getPositionCode() {
+		return positionCode;
+	}
+
+	/**
+	 * Sets the company code.
+	 *
+	 * @param companyCode the new company code
+	 */
+	public void setCompanyCode(String companyCode) {
+		this.companyCode = companyCode;
+	}
+
+	/**
+	 * Sets the division code.
+	 *
+	 * @param divisionCode the new division code
+	 */
+	public void setDivisionCode(String divisionCode) {
+		this.divisionCode = divisionCode;
+	}
+
+	/**
+	 * Sets the position code.
+	 *
+	 * @param positionCode the new position code
+	 */
+	public void setPositionCode(String positionCode) {
+		this.positionCode = positionCode;
+	}
+
 }

@@ -162,6 +162,7 @@ public class EmployeeTransformerUtil {
 			employee.setRegularizationDate(request.getRegularizationDate()); //date format
 			employee.setDivision(request.getDivision()); // derive
 			employee.setPosition(request.getPosition()); // derive
+			employee.setCompany(request.getCompany());
 		}
 		
 		return employee;

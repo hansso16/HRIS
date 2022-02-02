@@ -9,16 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.CacheManager;
 
-import com.soses.hris.cache.CacheService;
 import com.soses.hris.cache.position.PositionCache;
-import com.soses.hris.common.EncryptionService;
-import com.soses.hris.dao.EmployeeDAO;
 import com.soses.hris.entity.Division;
 import com.soses.hris.entity.Position;
 import com.soses.hris.repository.DivisionRepository;
-import com.soses.hris.repository.UserRepository;
 
 @SpringBootApplication
 public class HrisApplication implements CommandLineRunner {
@@ -30,21 +25,6 @@ public class HrisApplication implements CommandLineRunner {
 		SpringApplication.run(HrisApplication.class, args);
 	}
 
-	@Autowired
-	UserRepository userRepo;
-	
-	@Autowired
-	EmployeeDAO empDao;
-	
-	@Autowired
-	CacheService cacheService;
-	
-	@Autowired
-	private CacheManager cacheManager;
-	
-	@Autowired
-	private EncryptionService encryptionService;
-	
 	@Autowired
 	private DivisionRepository divisionRepo;
 	
@@ -65,76 +45,6 @@ public class HrisApplication implements CommandLineRunner {
 			log.info(position.toString());
 		}
 		
-//		User user = userRepo.findByUsername("admin");
-//		log.info(user.toString());
-//		
-//		List<Role> roles = user.getRoles();		
-//		if (roles != null) {
-//			for(Role role : roles) {
-//				log.info("ROLE: ROLE_" + role.getRoleCode());
-//			}
-//		}
-//		
-//		String ENCODED_PASSWORD = new BCryptPasswordEncoder().encode("test123");
-//		log.info(ENCODED_PASSWORD);
-//		
-//		log.info(empDao.getCount()+"");
-		
-		
-//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-//		log.info("TEST CACHE: " + cacheService.deriveMaritalStatus("S"));
-		
-//		Cache<ConfigParamPK, ConfigParam> p = cacheManager.getCache("configParamCache", ConfigParamPK.class, ConfigParam.class);
-//		Cache p = cacheManager.getCache("configParamCache");
-//		ConfigParamPK id = new ConfigParamPK();
-//		id.setCode("S");
-//		id.setEndDate(GeneralUtil.getMaxDate());
-//		id.setTableName(ConfigParamConstants.EMPLOYEE);
-//		id.setFieldName(ConfigParamConstants.MARITAL_STATUS);
-//		ConfigParam result = p.get(id, ConfigParam.class);
-//		log.info("RESULT FROM CACHE: " + result.toString());
-		
-//		String origString = "fdsafasdfasdfasdf";
-//		String enc = encryptionService.encrypt(origString);
-//		String dec = encryptionService.decrypt(enc);
-//		log.info("ORIG STRING: " + origString);
-//		log.info("ENCRYPTED: " + enc);
-//		log.info("DECRYPTED: " + dec);
-//		log.error("ERROR");
-//		log.warn("WARN");
-//		log4.fatal("FATAL LOG4J2");
-//		log4.info("LOG4J2 INFO");
-//		log.info("LOGBACK INFO");
-//		log.trace("LOGBACK TRACE");
-//		log.info("TEST");
-		
-		
-		
+		log4.info("Cache Completed. System ready");
 	}
-	
-	public static String maskCardNumber(String cardNumber, String mask) {
-
-	    // format the number
-	    int index = 0;
-	    StringBuilder maskedNumber = new StringBuilder();
-	    for (int i = 0; i < mask.length(); i++) {
-	        char c = mask.charAt(i);
-	        if (c == '#') {
-	            maskedNumber.append(cardNumber.charAt(index));
-	            index++;
-	        } else if (c == 'x') {
-	            maskedNumber.append(c);
-	            index++;
-	        } else {
-	            maskedNumber.append(c);
-	        }
-	    }
-
-	    // return the masked number
-	    return maskedNumber.toString();
-	}
-
 }

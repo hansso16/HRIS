@@ -64,6 +64,9 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 	
 	/** The position. */
 	private String position;
+	
+	/** The company. */
+	private String company;
 
 	/**
 	 * Gets the regularization date.
@@ -354,6 +357,24 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 	}
 
 	/**
+	 * Gets the company.
+	 *
+	 * @return the company
+	 */
+	public String getCompany() {
+		return company;
+	}
+
+	/**
+	 * Sets the company.
+	 *
+	 * @param company the new company
+	 */
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	/**
 	 * To string.
 	 *
 	 * @return the string
@@ -365,6 +386,6 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 				+ ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate=" + birthdate
 				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", regularizationDate="
 				+ regularizationDate + ", terminationDate=" + terminationDate + ", division=" + division + ", position="
-				+ position + "]";
+				+ position + ", company=" + company + "]";
 	}
 }

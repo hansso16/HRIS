@@ -106,7 +106,6 @@ public class Employee implements Serializable {
     /** The company code. */
     @Column(name="COMPANY", length=3)
     private String company;
-
     
     /** Default constructor. */
     public Employee() {
@@ -467,7 +466,7 @@ public class Employee implements Serializable {
 				+ ", telNo=" + telNo + ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate="
 				+ birthdate + ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
 				+ terminationDate + ", regularizationDate=" + regularizationDate + ", entryTimestamp=" + entryTimestamp
-				+ ", division=" + division + ", position=" + position + ", company=" + company + "]";
+				+ ", company=" + company + ", division=" + division + ", position=" + position + "]";
 	}
 
 }
