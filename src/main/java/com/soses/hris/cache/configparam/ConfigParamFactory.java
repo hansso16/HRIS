@@ -1,6 +1,5 @@
 package com.soses.hris.cache.configparam;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,6 @@ public class ConfigParamFactory {
 	}
 
 	public List<ConfigParam> findAll() {
-		return repo.findByEffDateLessThanEqualAndIdEndDateGreaterThan(LocalDate.now(), LocalDate.now());
+		return repo.findAll();
 	}
 }

@@ -1,6 +1,8 @@
 package com.soses.hris.cache.configparam;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -22,12 +24,23 @@ public class GenderAccessor {
 		this.genderCache = genderCache;
 	}
 	
-	public ConfigParam getMaritalStatus(String code) {
+	public ConfigParam getGender(String code) {
 		ConfigParam dto = null;
 		if (!StringUtil.isEmpty(code)) {
 			List<ConfigParam> list = genderCache.getGenderList();
 			dto = list.stream().filter(param -> (code.equals(param.getId().getCode()))) 
 					.findFirst().orElse(null);
+		}
+		return dto;
+	}
+	
+	public List<ConfigParam> getGenderList(String code, LocalDate processDate) {
+		List<ConfigParam> dto = null;
+		if (!StringUtil.isEmpty(code)) {
+			List<ConfigParam> list = genderCache.getGenderList();
+			dto = list.stream().filter(param -> param.getEffDate().isBefore(processDate) 
+					&& param.getId().getEndDate().isAfter(processDate)) 
+					.collect(Collectors.toList());
 		}
 		return dto;
 	}

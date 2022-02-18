@@ -1,5 +1,6 @@
 package com.soses.hris.cache.configparam;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,17 @@ public class MaritalStatusAccessor {
 		if (!StringUtil.isEmpty(code)) {
 			List<ConfigParam> list = msService.getMaritalStatusList();
 			dto = list.stream().filter(param -> (code.equals(param.getId().getCode()))) 
+					.findFirst().orElse(null);
+		}
+		return dto;
+	}
+	
+	public ConfigParam getMaritalStatusList(String code, LocalDate processDate) {
+		ConfigParam dto = null;
+		if (!StringUtil.isEmpty(code)) {
+			List<ConfigParam> list = msService.getMaritalStatusList();
+			dto = list.stream().filter(param -> param.getEffDate().isBefore(processDate)
+					&& param.getId().getEndDate().isAfter(processDate)) 
 					.findFirst().orElse(null);
 		}
 		return dto;
