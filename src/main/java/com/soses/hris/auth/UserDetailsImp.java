@@ -2,6 +2,7 @@ package com.soses.hris.auth;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.entity.Role;
 import com.soses.hris.entity.User;
 
@@ -35,14 +37,14 @@ public class UserDetailsImp implements UserDetails {
 		} else { 
 			this.isEnabled = true;
 		}
-		this.roles = user.getRoles();
+		this.roles = Arrays.asList(user.getRole());
 	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
-    	if (roles != null && !roles.isEmpty()) {
+    	if (!GeneralUtil.isListEmpty(roles)) {
             for (Role role: roles) {
             	authorities.add(new SimpleGrantedAuthority(role.getFullRoleCode()));
             }

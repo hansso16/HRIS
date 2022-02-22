@@ -3,15 +3,13 @@ package com.soses.hris.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
@@ -50,22 +48,16 @@ public class User implements Serializable {
     @Column(name="TERMINATION_DATE")
     private LocalDate terminationDate;
     
-    /** The roles. */
+    /** The employee. */
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
     private Employee employee;
-    
-    /** The roles. */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-    		name = "user_role",
-    		joinColumns = @JoinColumn(
-    				name = "employee_id", referencedColumnName = "employee_id"),
-    		inverseJoinColumns = @JoinColumn(
-    				name = "role_id", referencedColumnName = "role_id")
-    		)
-    private List<Role> roles;
 
+    /** The role. */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    private Role role;
+    
     /** Default constructor. */
     public User() {
         super();
@@ -179,34 +171,33 @@ public class User implements Serializable {
         terminationDate = aTerminationDate;
     }
 
-    /**
-     * Gets the roles.
-     *
-     * @return the roles
-     */
-    public List<Role> getRoles() {
-		return roles;
+	/**
+	 * Gets the role.
+	 *
+	 * @return the role
+	 */
+	public Role getRole() {
+		return role;
 	}
 
 	/**
-	 * Sets the roles.
+	 * Sets the role.
 	 *
-	 * @param roles the new roles
+	 * @param role the new role
 	 */
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
-    /**
-     * To string.
-     *
-     * @return the string
-     */
-    @Override
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
 	public String toString() {
 		return "User [employeeId=" + employeeId + ", username=" + username + ", password=" + password
 				+ ", entryTimestamp=" + entryTimestamp + ", terminationDate=" + terminationDate + ", employee="
-				+ employee + ", roles=" + roles + "]";
+				+ employee + ", role=" + role + "]";
 	}
-
 }

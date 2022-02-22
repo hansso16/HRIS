@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.user.UserSearchRequest;
-import com.soses.hris.common.StringUtil;
 import com.soses.hris.controller.BaseSearchController;
 import com.soses.hris.entity.User;
 import com.soses.hris.service.user.UserSearchService;
@@ -39,7 +38,7 @@ public class UserSearchController extends BaseSearchController {
 	public String searchEntity(@Valid UserSearchRequest userReq, Errors errors, Model model) {
 		
 		String username = userReq.getUsername();
-		if (!StringUtil.isEmpty(username)) {
+		if (userReq != null) {
 			Page<User> userPage = userSearchService.searchUser(userReq);
 			if (userPage != null) {
 				setPaginationVariables(userPage, model);

@@ -33,7 +33,7 @@
 						<td th:text="${user.employeeId}"></td>
 						<td><a href="#" th:href="@{/user/}+ ${user.username}" th:text="${user.username}"></a ></td><!--TODO: link-->
 						<td th:text="${user.employee.lastName+', '+user.employee.firstName}"></td>
-						<td><span th:each="role,i : ${user.roles}"><span th:text="${i.index>0? ', '+role.roleCode: role.roleCode}"></span ></span></td>
+						<td th:text="${user.role?.roleCode}"></td>
 						<!--<td th:text="${user.employee.terminationDate}"></td>-->
 					</tr >
 				</tbody >
