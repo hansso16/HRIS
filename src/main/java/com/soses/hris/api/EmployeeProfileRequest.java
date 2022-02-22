@@ -67,6 +67,90 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 	
 	/** The company. */
 	private String company;
+	
+	/** The sss no. */
+	private String sssNo;
+	
+	/** The phil health no. */
+	private String philHealthNo;
+	
+	/** The pagibig no. */
+	private String pagibigNo;
+	
+	/** The tin no. */
+	private String tinNo;
+
+	/**
+	 * Gets the sss no.
+	 *
+	 * @return the sss no
+	 */
+	public String getSssNo() {
+		return sssNo;
+	}
+
+	/**
+	 * Gets the phil health no.
+	 *
+	 * @return the phil health no
+	 */
+	public String getPhilHealthNo() {
+		return philHealthNo;
+	}
+
+	/**
+	 * Gets the pagibig no.
+	 *
+	 * @return the pagibig no
+	 */
+	public String getPagibigNo() {
+		return pagibigNo;
+	}
+
+	/**
+	 * Gets the tin no.
+	 *
+	 * @return the tin no
+	 */
+	public String getTinNo() {
+		return tinNo;
+	}
+
+	/**
+	 * Sets the sss no.
+	 *
+	 * @param sssNo the new sss no
+	 */
+	public void setSssNo(String sssNo) {
+		this.sssNo = sssNo;
+	}
+
+	/**
+	 * Sets the phil health no.
+	 *
+	 * @param philHealthNo the new phil health no
+	 */
+	public void setPhilHealthNo(String philHealthNo) {
+		this.philHealthNo = philHealthNo;
+	}
+
+	/**
+	 * Sets the pagibig no.
+	 *
+	 * @param pagibigNo the new pagibig no
+	 */
+	public void setPagibigNo(String pagibigNo) {
+		this.pagibigNo = pagibigNo;
+	}
+
+	/**
+	 * Sets the tin no.
+	 *
+	 * @param tinNo the new tin no
+	 */
+	public void setTinNo(String tinNo) {
+		this.tinNo = tinNo;
+	}
 
 	/**
 	 * Gets the regularization date.
@@ -386,6 +470,7 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 				+ ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate=" + birthdate
 				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", regularizationDate="
 				+ regularizationDate + ", terminationDate=" + terminationDate + ", division=" + division + ", position="
-				+ position + ", company=" + company + "]";
+				+ position + ", company=" + company + ", sssNo=" + sssNo + ", philHealthNo=" + philHealthNo
+				+ ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + "]";
 	}
 }

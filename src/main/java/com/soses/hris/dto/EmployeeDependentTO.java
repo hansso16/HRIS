@@ -21,6 +21,27 @@ public class EmployeeDependentTO extends BaseEmployeeTO {
 	
 	/** The gender. */
 	private String gender;
+	
+	/** The dependent relationship. */
+	private String dependentRelationship;
+
+	/**
+	 * Gets the dependent relationship.
+	 *
+	 * @return the dependent relationship
+	 */
+	public String getDependentRelationship() {
+		return dependentRelationship;
+	}
+
+	/**
+	 * Sets the dependent relationship.
+	 *
+	 * @param dependentRelationship the new dependent relationship
+	 */
+	public void setDependentRelationship(String dependentRelationship) {
+		this.dependentRelationship = dependentRelationship;
+	}
 
 	/**
 	 * Sets the dependent birthdate.
@@ -101,8 +122,9 @@ public class EmployeeDependentTO extends BaseEmployeeTO {
 	 */
 	@Override
 	public String toString() {
-		return "EmployeeDependent [dependentId=" + dependentId + ", dependentName=" + dependentName + ", gender="
-				+ gender + "]";
+		return "EmployeeDependentTO [dependentId=" + dependentId + ", dependentName=" + dependentName
+				+ ", dependentBirthdate=" + dependentBirthdate + ", gender=" + gender + ", dependentRelationship="
+				+ dependentRelationship + "]";
 	}
 	
 	

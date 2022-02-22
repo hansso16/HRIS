@@ -1,16 +1,6 @@
 package com.soses.hris.cache;
 
-import java.time.LocalDate;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.soses.hris.common.ConfigParamConstants;
-import com.soses.hris.common.GeneralUtil;
-import com.soses.hris.entity.ConfigParam;
-import com.soses.hris.entity.ConfigParamPK;
-import com.soses.hris.repository.ConfigParamRepository;
 
 @Component
 public class CacheFactory {

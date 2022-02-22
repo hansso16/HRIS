@@ -23,6 +23,13 @@ function addFields() {
 	nameWrapper.append(nameLabel);
 	nameWrapper.append(nameField);
 	
+	//Dependent Relationship
+	var relationshipWrapper = $("<div class=\"col-auto\" />");
+	var relationshipLabel = $("<label for=\"dependentRelationship"+intId+"\" class=\"form-label\">Dependent Relationship</label>");
+	var relationshipField = $("<input type=\"text\" name=\"employeeDependent["+intId+"].dependentRelationship\" id=\"dependentRelationship"+intId+"\" class=\"form-control\" required>");
+	relationshipWrapper.append(relationshipLabel);
+	relationshipWrapper.append(relationshipField);
+	
 	//Dependent Birthdate
 	var birthdateWrapper = $("<div class=\"col-auto\" />");
 	var birthdateLabel = $("<label for=\"dependentBirthdate"+intId+"\" class=\"form-label\">Birthdate</label >");
@@ -47,6 +54,7 @@ function addFields() {
         $(this).parent().parent().parent().remove();
     });
     fieldWrapper.append(nameWrapper);
+    fieldWrapper.append(relationshipWrapper);
 	fieldWrapper.append(birthdateWrapper);
 	fieldWrapper.append(genderWrapper);
     $("#addDependentForm").append(fieldWrapper);

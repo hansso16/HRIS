@@ -18,7 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, String>{
 
 //	List<Employee> findByEmployeeIdContains(String employeeId, Pageable pageable);
 	
-	Page<Employee> findByEmployeeIdContains(String employeeId, Pageable pageable);
+	Page<Employee> findByEmployeeIdContainsOrLastNameContainsOrFirstNameContains(String employeeId, String firstName, String lastName, Pageable pageable);
 
 	Employee findByEmployeeId(String employeeId);
 	

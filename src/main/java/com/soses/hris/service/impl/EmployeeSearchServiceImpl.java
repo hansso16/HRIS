@@ -34,17 +34,21 @@ public class EmployeeSearchServiceImpl implements EmployeeSearchService {
 
 		String employeeId = request.getEmployeeId();
 		Page<Employee> employeePage = null;
+		
+		int pageSize = 5;
+		if (!StringUtil.isEmpty(request.getSize())) {
+			pageSize = Integer.parseInt(request.getSize());
+		}
+		int currentPage = 0;
+		if (!StringUtil.isEmpty(request.getPage())) {
+			currentPage = Integer.parseInt(request.getPage()) - 1;
+		}
+		Pageable page = PageRequest.of(currentPage, pageSize);
+		
 		if (!StringUtil.isEmpty(employeeId)) {
-			int pageSize = 5;
-			if (!StringUtil.isEmpty(request.getSize())) {
-				pageSize = Integer.parseInt(request.getSize());
-			}
-	        int currentPage = 0;
-	        if (!StringUtil.isEmpty(request.getPage())) {
-	        	currentPage = Integer.parseInt(request.getPage()) - 1;
-	        }
-	        Pageable page = PageRequest.of(currentPage, pageSize);
-	        employeePage = employeeRepo.findByEmployeeIdContains(employeeId, page);
+	        employeePage = employeeRepo.findByEmployeeIdContainsOrLastNameContainsOrFirstNameContains(employeeId, employeeId, employeeId, page);
+		} else {
+			employeePage = employeeRepo.findAll(page);
 		}
 		return employeePage;
 	}

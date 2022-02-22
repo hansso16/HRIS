@@ -34,7 +34,7 @@ public class GenderAccessor {
 		return dto;
 	}
 	
-	public List<ConfigParam> getGenderList(String code, LocalDate processDate) {
+	public List<ConfigParam> getGenderListByDate(String code, LocalDate processDate) {
 		List<ConfigParam> dto = null;
 		if (!StringUtil.isEmpty(code)) {
 			List<ConfigParam> list = genderCache.getGenderList();

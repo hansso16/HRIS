@@ -35,6 +35,7 @@ public class EmployeeTransformerUtil {
 			employeeDependentTO.setDependentName(employeeDependent.getDependentName());
 			employeeDependentTO.setGender(employeeDependent.getGender());
 			employeeDependentTO.setEmployeeId(employeeDependent.getId().getEmployeeId());
+			employeeDependentTO.setDependentRelationship(employeeDependent.getDependentRelationship());
 		}
 		
 		return employeeDependentTO;
@@ -90,6 +91,10 @@ public class EmployeeTransformerUtil {
 			employeeTO.setDivisionCode(employee.getDivision());
 			employeeTO.setPositionCode(employee.getPosition()); 
 			employeeTO.setCompanyCode(employee.getCompany());
+			employeeTO.setSssNo(employee.getSssNo());
+			employeeTO.setPhilHealthNo(employee.getPhilHealthNo());
+			employeeTO.setPagibigNo(employee.getPagibigNo());
+			employeeTO.setTinNo(employee.getTinNo());
 		}
 		
 		return employeeTO;
@@ -163,6 +168,10 @@ public class EmployeeTransformerUtil {
 			employee.setDivision(request.getDivision()); // derive
 			employee.setPosition(request.getPosition()); // derive
 			employee.setCompany(request.getCompany());
+			employee.setSssNo(request.getSssNo());
+			employee.setPhilHealthNo(request.getPhilHealthNo());
+			employee.setPagibigNo(request.getPagibigNo());
+			employee.setTinNo(request.getTinNo());
 		}
 		
 		return employee;

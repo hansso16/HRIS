@@ -107,298 +107,170 @@ public class Employee implements Serializable {
     @Column(name="COMPANY", length=3)
     private String company;
     
+    /** The sss no. */
+    @Column(name="SSS_NO", length=20)
+    private String sssNo;
+    
+    /** The division. */
+    @Column(name="PHIL_HEALTH_NO", length=20)
+    private String philHealthNo;
+    
+    /** The position. */
+    @Column(name="PAGIBIG_NO", length=20)
+    private String pagibigNo;
+    
+    /** The company code. */
+    @Column(name="TIN_NO", length=20)
+    private String tinNo;
+    
     /** Default constructor. */
     public Employee() {
         super();
     }
 
-    /**
-     * Access method for employeeId.
-     *
-     * @return the current value of employeeId
-     */
-    public String getEmployeeId() {
-        return employeeId;
-    }
+	/**
+	 * Gets the employee id.
+	 *
+	 * @return the employee id
+	 */
+	public String getEmployeeId() {
+		return employeeId;
+	}
 
-    /**
-     * Setter method for employeeId.
-     *
-     * @param aEmployeeId the new value for employeeId
-     */
-    public void setEmployeeId(String aEmployeeId) {
-        employeeId = aEmployeeId;
-    }
+	/**
+	 * Gets the last name.
+	 *
+	 * @return the last name
+	 */
+	public String getLastName() {
+		return lastName;
+	}
 
-    /**
-     * Access method for lastName.
-     *
-     * @return the current value of lastName
-     */
-    public String getLastName() {
-        return lastName;
-    }
+	/**
+	 * Gets the first name.
+	 *
+	 * @return the first name
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
 
-    /**
-     * Setter method for lastName.
-     *
-     * @param aLastName the new value for lastName
-     */
-    public void setLastName(String aLastName) {
-        lastName = aLastName;
-    }
+	/**
+	 * Gets the suffix.
+	 *
+	 * @return the suffix
+	 */
+	public String getSuffix() {
+		return suffix;
+	}
 
-    /**
-     * Access method for firstName.
-     *
-     * @return the current value of firstName
-     */
-    public String getFirstName() {
-        return firstName;
-    }
+	/**
+	 * Gets the middle name.
+	 *
+	 * @return the middle name
+	 */
+	public String getMiddleName() {
+		return middleName;
+	}
 
-    /**
-     * Setter method for firstName.
-     *
-     * @param aFirstName the new value for firstName
-     */
-    public void setFirstName(String aFirstName) {
-        firstName = aFirstName;
-    }
+	/**
+	 * Gets the nickname.
+	 *
+	 * @return the nickname
+	 */
+	public String getNickname() {
+		return nickname;
+	}
 
-    /**
-     * Access method for suffix.
-     *
-     * @return the current value of suffix
-     */
-    public String getSuffix() {
-        return suffix;
-    }
+	/**
+	 * Gets the cell no.
+	 *
+	 * @return the cell no
+	 */
+	public String getCellNo() {
+		return cellNo;
+	}
 
-    /**
-     * Setter method for suffix.
-     *
-     * @param aSuffix the new value for suffix
-     */
-    public void setSuffix(String aSuffix) {
-        suffix = aSuffix;
-    }
+	/**
+	 * Gets the tel no.
+	 *
+	 * @return the tel no
+	 */
+	public String getTelNo() {
+		return telNo;
+	}
 
-    /**
-     * Access method for middleName.
-     *
-     * @return the current value of middleName
-     */
-    public String getMiddleName() {
-        return middleName;
-    }
+	/**
+	 * Gets the email address.
+	 *
+	 * @return the email address
+	 */
+	public String getEmailAddress() {
+		return emailAddress;
+	}
 
-    /**
-     * Setter method for middleName.
-     *
-     * @param aMiddleName the new value for middleName
-     */
-    public void setMiddleName(String aMiddleName) {
-        middleName = aMiddleName;
-    }
+	/**
+	 * Gets the gender.
+	 *
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
 
-    /**
-     * Access method for nickname.
-     *
-     * @return the current value of nickname
-     */
-    public String getNickname() {
-        return nickname;
-    }
+	/**
+	 * Gets the birthdate.
+	 *
+	 * @return the birthdate
+	 */
+	public LocalDate getBirthdate() {
+		return birthdate;
+	}
 
-    /**
-     * Setter method for nickname.
-     *
-     * @param aNickname the new value for nickname
-     */
-    public void setNickname(String aNickname) {
-        nickname = aNickname;
-    }
+	/**
+	 * Gets the marital status.
+	 *
+	 * @return the marital status
+	 */
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
 
-    /**
-     * Access method for cellNo.
-     *
-     * @return the current value of cellNo
-     */
-    public String getCellNo() {
-        return cellNo;
-    }
+	/**
+	 * Gets the hiring date.
+	 *
+	 * @return the hiring date
+	 */
+	public LocalDate getHiringDate() {
+		return hiringDate;
+	}
 
-    /**
-     * Setter method for cellNo.
-     *
-     * @param aCellNo the new value for cellNo
-     */
-    public void setCellNo(String aCellNo) {
-        cellNo = aCellNo;
-    }
+	/**
+	 * Gets the termination date.
+	 *
+	 * @return the termination date
+	 */
+	public LocalDate getTerminationDate() {
+		return terminationDate;
+	}
 
-    /**
-     * Access method for telNo.
-     *
-     * @return the current value of telNo
-     */
-    public String getTelNo() {
-        return telNo;
-    }
+	/**
+	 * Gets the regularization date.
+	 *
+	 * @return the regularization date
+	 */
+	public LocalDate getRegularizationDate() {
+		return regularizationDate;
+	}
 
-    /**
-     * Setter method for telNo.
-     *
-     * @param aTelNo the new value for telNo
-     */
-    public void setTelNo(String aTelNo) {
-        telNo = aTelNo;
-    }
-
-    /**
-     * Access method for emailAddress.
-     *
-     * @return the current value of emailAddress
-     */
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    /**
-     * Setter method for emailAddress.
-     *
-     * @param aEmailAddress the new value for emailAddress
-     */
-    public void setEmailAddress(String aEmailAddress) {
-        emailAddress = aEmailAddress;
-    }
-
-    /**
-     * Access method for gender.
-     *
-     * @return the current value of gender
-     */
-    public String getGender() {
-        return gender;
-    }
-
-    /**
-     * Setter method for gender.
-     *
-     * @param aGender the new value for gender
-     */
-    public void setGender(String aGender) {
-        gender = aGender;
-    }
-
-    /**
-     * Access method for birthdate.
-     *
-     * @return the current value of birthdate
-     */
-    public LocalDate getBirthdate() {
-        return birthdate;
-    }
-
-    /**
-     * Setter method for birthdate.
-     *
-     * @param aBirthdate the new value for birthdate
-     */
-    public void setBirthdate(LocalDate aBirthdate) {
-        birthdate = aBirthdate;
-    }
-
-    /**
-     * Access method for maritalStatus.
-     *
-     * @return the current value of maritalStatus
-     */
-    public String getMaritalStatus() {
-        return maritalStatus;
-    }
-
-    /**
-     * Setter method for maritalStatus.
-     *
-     * @param aMaritalStatus the new value for maritalStatus
-     */
-    public void setMaritalStatus(String aMaritalStatus) {
-        maritalStatus = aMaritalStatus;
-    }
-
-    /**
-     * Access method for hiringDate.
-     *
-     * @return the current value of hiringDate
-     */
-    public LocalDate getHiringDate() {
-        return hiringDate;
-    }
-
-    /**
-     * Setter method for hiringDate.
-     *
-     * @param aHiringDate the new value for hiringDate
-     */
-    public void setHiringDate(LocalDate aHiringDate) {
-        hiringDate = aHiringDate;
-    }
-
-    /**
-     * Access method for terminationDate.
-     *
-     * @return the current value of terminationDate
-     */
-    public LocalDate getTerminationDate() {
-        return terminationDate;
-    }
-
-    /**
-     * Setter method for terminationDate.
-     *
-     * @param aTerminationDate the new value for terminationDate
-     */
-    public void setTerminationDate(LocalDate aTerminationDate) {
-        terminationDate = aTerminationDate;
-    }
-
-    /**
-     * Access method for regularizationDate.
-     *
-     * @return the current value of regularizationDate
-     */
-    public LocalDate getRegularizationDate() {
-        return regularizationDate;
-    }
-
-    /**
-     * Setter method for regularizationDate.
-     *
-     * @param aRegularizationDate the new value for regularizationDate
-     */
-    public void setRegularizationDate(LocalDate aRegularizationDate) {
-        regularizationDate = aRegularizationDate;
-    }
-
-    /**
-     * Access method for entryTimestamp.
-     *
-     * @return the current value of entryTimestamp
-     */
-    public LocalDateTime getEntryTimestamp() {
-        return entryTimestamp;
-    }
-
-    /**
-     * Setter method for entryTimestamp.
-     *
-     * @param aEntryTimestamp the new value for entryTimestamp
-     */
-    public void setEntryTimestamp(LocalDateTime aEntryTimestamp) {
-        entryTimestamp = aEntryTimestamp;
-    }
+	/**
+	 * Gets the entry timestamp.
+	 *
+	 * @return the entry timestamp
+	 */
+	public LocalDateTime getEntryTimestamp() {
+		return entryTimestamp;
+	}
 
 	/**
 	 * Gets the division.
@@ -425,6 +297,186 @@ public class Employee implements Serializable {
 	 */
 	public String getCompany() {
 		return company;
+	}
+
+	/**
+	 * Gets the sss no.
+	 *
+	 * @return the sss no
+	 */
+	public String getSssNo() {
+		return sssNo;
+	}
+
+	/**
+	 * Gets the phil health no.
+	 *
+	 * @return the phil health no
+	 */
+	public String getPhilHealthNo() {
+		return philHealthNo;
+	}
+
+	/**
+	 * Gets the pagibig no.
+	 *
+	 * @return the pagibig no
+	 */
+	public String getPagibigNo() {
+		return pagibigNo;
+	}
+
+	/**
+	 * Gets the tin no.
+	 *
+	 * @return the tin no
+	 */
+	public String getTinNo() {
+		return tinNo;
+	}
+
+	/**
+	 * Sets the employee id.
+	 *
+	 * @param employeeId the new employee id
+	 */
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	/**
+	 * Sets the last name.
+	 *
+	 * @param lastName the new last name
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	/**
+	 * Sets the first name.
+	 *
+	 * @param firstName the new first name
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * Sets the suffix.
+	 *
+	 * @param suffix the new suffix
+	 */
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
+	}
+
+	/**
+	 * Sets the middle name.
+	 *
+	 * @param middleName the new middle name
+	 */
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	/**
+	 * Sets the nickname.
+	 *
+	 * @param nickname the new nickname
+	 */
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	/**
+	 * Sets the cell no.
+	 *
+	 * @param cellNo the new cell no
+	 */
+	public void setCellNo(String cellNo) {
+		this.cellNo = cellNo;
+	}
+
+	/**
+	 * Sets the tel no.
+	 *
+	 * @param telNo the new tel no
+	 */
+	public void setTelNo(String telNo) {
+		this.telNo = telNo;
+	}
+
+	/**
+	 * Sets the email address.
+	 *
+	 * @param emailAddress the new email address
+	 */
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	/**
+	 * Sets the gender.
+	 *
+	 * @param gender the new gender
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	/**
+	 * Sets the birthdate.
+	 *
+	 * @param birthdate the new birthdate
+	 */
+	public void setBirthdate(LocalDate birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	/**
+	 * Sets the marital status.
+	 *
+	 * @param maritalStatus the new marital status
+	 */
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
+	}
+
+	/**
+	 * Sets the hiring date.
+	 *
+	 * @param hiringDate the new hiring date
+	 */
+	public void setHiringDate(LocalDate hiringDate) {
+		this.hiringDate = hiringDate;
+	}
+
+	/**
+	 * Sets the termination date.
+	 *
+	 * @param terminationDate the new termination date
+	 */
+	public void setTerminationDate(LocalDate terminationDate) {
+		this.terminationDate = terminationDate;
+	}
+
+	/**
+	 * Sets the regularization date.
+	 *
+	 * @param regularizationDate the new regularization date
+	 */
+	public void setRegularizationDate(LocalDate regularizationDate) {
+		this.regularizationDate = regularizationDate;
+	}
+
+	/**
+	 * Sets the entry timestamp.
+	 *
+	 * @param entryTimestamp the new entry timestamp
+	 */
+	public void setEntryTimestamp(LocalDateTime entryTimestamp) {
+		this.entryTimestamp = entryTimestamp;
 	}
 
 	/**
@@ -455,6 +507,42 @@ public class Employee implements Serializable {
 	}
 
 	/**
+	 * Sets the sss no.
+	 *
+	 * @param sssNo the new sss no
+	 */
+	public void setSssNo(String sssNo) {
+		this.sssNo = sssNo;
+	}
+
+	/**
+	 * Sets the phil health no.
+	 *
+	 * @param philHealthNo the new phil health no
+	 */
+	public void setPhilHealthNo(String philHealthNo) {
+		this.philHealthNo = philHealthNo;
+	}
+
+	/**
+	 * Sets the pagibig no.
+	 *
+	 * @param pagibigNo the new pagibig no
+	 */
+	public void setPagibigNo(String pagibigNo) {
+		this.pagibigNo = pagibigNo;
+	}
+
+	/**
+	 * Sets the tin no.
+	 *
+	 * @param tinNo the new tin no
+	 */
+	public void setTinNo(String tinNo) {
+		this.tinNo = tinNo;
+	}
+
+	/**
 	 * To string.
 	 *
 	 * @return the string
@@ -466,7 +554,8 @@ public class Employee implements Serializable {
 				+ ", telNo=" + telNo + ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate="
 				+ birthdate + ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
 				+ terminationDate + ", regularizationDate=" + regularizationDate + ", entryTimestamp=" + entryTimestamp
-				+ ", company=" + company + ", division=" + division + ", position=" + position + "]";
+				+ ", division=" + division + ", position=" + position + ", company=" + company + ", sssNo=" + sssNo
+				+ ", philHealthNo=" + philHealthNo + ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + "]";
 	}
 
 }

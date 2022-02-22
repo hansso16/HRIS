@@ -33,6 +33,10 @@ public class EmployeeDependent implements Serializable {
     /** The dependent name. */
     @Column(name="DEPENDENT_NAME", length=50)
     private String dependentName;
+
+    /** The dependent relationship. */
+    @Column(name="DEPENDENT_RELATIONSHIP", length=50)
+    private String dependentRelationship;
     
     /** The dependent birthdate. */
     @Column(name="DEPENDENT_BIRTHDATE")
@@ -48,16 +52,50 @@ public class EmployeeDependent implements Serializable {
         super();
     }
 
-
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public EmployeeDependentPK getId() {
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public EmployeeDependentPK getId() {
 		return id;
 	}
 
+	/**
+	 * Gets the dependent name.
+	 *
+	 * @return the dependent name
+	 */
+	public String getDependentName() {
+		return dependentName;
+	}
+
+	/**
+	 * Gets the dependent relationship.
+	 *
+	 * @return the dependent relationship
+	 */
+	public String getDependentRelationship() {
+		return dependentRelationship;
+	}
+
+	/**
+	 * Gets the dependent birthdate.
+	 *
+	 * @return the dependent birthdate
+	 */
+	public LocalDate getDependentBirthdate() {
+		return dependentBirthdate;
+	}
+
+	/**
+	 * Gets the gender.
+	 *
+	 * @return the gender
+	 */
+	public String getGender() {
+		return gender;
+	}
 
 	/**
 	 * Sets the id.
@@ -68,67 +106,50 @@ public class EmployeeDependent implements Serializable {
 		this.id = id;
 	}
 
+	/**
+	 * Sets the dependent name.
+	 *
+	 * @param dependentName the new dependent name
+	 */
+	public void setDependentName(String dependentName) {
+		this.dependentName = dependentName;
+	}
 
 	/**
-     * Access method for dependentName.
-     *
-     * @return the current value of dependentName
-     */
-    public String getDependentName() {
-        return dependentName;
-    }
+	 * Sets the dependent relationship.
+	 *
+	 * @param dependentRelationship the new dependent relationship
+	 */
+	public void setDependentRelationship(String dependentRelationship) {
+		this.dependentRelationship = dependentRelationship;
+	}
 
-    /**
-     * Setter method for dependentName.
-     *
-     * @param aDependentName the new value for dependentName
-     */
-    public void setDependentName(String aDependentName) {
-        dependentName = aDependentName;
-    }
+	/**
+	 * Sets the dependent birthdate.
+	 *
+	 * @param dependentBirthdate the new dependent birthdate
+	 */
+	public void setDependentBirthdate(LocalDate dependentBirthdate) {
+		this.dependentBirthdate = dependentBirthdate;
+	}
 
-    /**
-     * Access method for dependentBirthdate.
-     *
-     * @return the current value of dependentBirthdate
-     */
-    public LocalDate getDependentBirthdate() {
-        return dependentBirthdate;
-    }
+	/**
+	 * Sets the gender.
+	 *
+	 * @param gender the new gender
+	 */
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 
-    /**
-     * Setter method for dependentBirthdate.
-     *
-     * @param aDependentBirthdate the new value for dependentBirthdate
-     */
-    public void setDependentBirthdate(LocalDate aDependentBirthdate) {
-        dependentBirthdate = aDependentBirthdate;
-    }
-
-    /**
-     * Access method for gender.
-     *
-     * @return the current value of gender
-     */
-    public String getGender() {
-        return gender;
-    }
-
-    /**
-     * Setter method for gender.
-     *
-     * @param aGender the new value for gender
-     */
-    public void setGender(String aGender) {
-        gender = aGender;
-    }
-
-
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
-		return "EmployeeDependent [id=" + id + ", dependentName=" + dependentName + ", dependentBirthdate="
-				+ dependentBirthdate + ", gender=" + gender + ", toString()=" + super.toString() + "]";
+		return "EmployeeDependent [id=" + id + ", dependentName=" + dependentName + ", dependentRelationship="
+				+ dependentRelationship + ", dependentBirthdate=" + dependentBirthdate + ", gender=" + gender + "]";
 	}
-    
-    
 }

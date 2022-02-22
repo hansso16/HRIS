@@ -35,7 +35,7 @@ public class MaritalStatusAccessor {
 		return dto;
 	}
 	
-	public ConfigParam getMaritalStatusList(String code, LocalDate processDate) {
+	public ConfigParam getMaritalStatusListByDate(String code, LocalDate processDate) {
 		ConfigParam dto = null;
 		if (!StringUtil.isEmpty(code)) {
 			List<ConfigParam> list = msService.getMaritalStatusList();

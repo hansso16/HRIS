@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.soses.hris.api.BaseSearchRequest;
 import com.soses.hris.api.employee.EmployeeSearchRequest;
-import com.soses.hris.common.StringUtil;
 import com.soses.hris.entity.Employee;
 import com.soses.hris.service.EmployeeSearchService;
 
@@ -59,7 +57,7 @@ public class EmployeeSearchController extends BaseSearchController{
 		log.info("ENTER employee(employeeReq,errors,model): employeeReq -> " + employeeReq.toString());
 		Page<Employee> employeePage = null;
 		String employeeId = employeeReq.getEmployeeId();
-		if (!StringUtil.isEmpty(employeeId)) {
+		if (employeeId != null) {
 			employeePage = employeeSearchService.searchEmployee(employeeReq);
 			if (employeePage != null) {
 				setPaginationVariables(employeePage, model);
@@ -67,10 +65,5 @@ public class EmployeeSearchController extends BaseSearchController{
 			}
 		}
 		return EMP_LIST;
-	}
-
-	String searchEntity(BaseSearchRequest request, Errors erorrs, Model model) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
