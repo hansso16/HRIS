@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     /** The employee id. */
     @Column(name="EMPLOYEE_ID", precision=10)
-    private int employeeId;
+    private String employeeId;
     
     /** The username. */
     @Id
@@ -89,25 +89,25 @@ public class User implements Serializable {
 		this.employee = employee;
 	}
 
+    /**
+     * Gets the employee id.
+     *
+     * @return the employee id
+     */
+    public String getEmployeeId() {
+		return employeeId;
+	}
+
 	/**
-     * Access method for employeeId.
-     *
-     * @return the current value of employeeId
-     */
-    public int getEmployeeId() {
-        return employeeId;
-    }
+	 * Sets the employee id.
+	 *
+	 * @param employeeId the new employee id
+	 */
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 
-    /**
-     * Setter method for employeeId.
-     *
-     * @param aEmployeeId the new value for employeeId
-     */
-    public void setEmployeeId(int aEmployeeId) {
-        employeeId = aEmployeeId;
-    }
-
-    /**
+	/**
      * Access method for username.
      *
      * @return the current value of username
