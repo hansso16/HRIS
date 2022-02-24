@@ -55,6 +55,28 @@ public class EmployeeAddress implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="region", referencedColumnName = "region_id")
     private Region region;
+    
+    /** The zip code. */
+    @Column(name="ZIP_CODE", length=10)
+    private String zipCode;
+    
+	/**
+	 * Gets the zip code.
+	 *
+	 * @return the zip code
+	 */
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	/**
+	 * Sets the zip code.
+	 *
+	 * @param zipCode the new zip code
+	 */
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
 
 	/**
 	 * Gets the id.
@@ -172,7 +194,7 @@ public class EmployeeAddress implements Serializable {
 	@Override
 	public String toString() {
 		return "EmployeeAddress [id=" + id + ", street=" + street + ", barangay=" + barangay + ", municipal="
-				+ municipal + ", province=" + province + ", region=" + region + "]";
+				+ municipal + ", province=" + province + ", region=" + region + ", zipCode=" + zipCode + "]";
 	}
 
 	/**

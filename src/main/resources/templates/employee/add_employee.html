@@ -97,9 +97,9 @@
 				 			<hr>
 				 			<h5>Employee Address</h5>
 				 			<h6>Present Address</h6>
+			 				<input type="hidden" th:name="employeeAddress[0].id.addressType" name="addressType" th:value="1" value="1" />
 				 			<div class="row">
-				 				<input type="hidden" th:name="employeeAddress[0].id.addressType" name="addressType" th:value="1" value="1" />
-							    <div class="col-2">
+							    <div class="col">
 									<label for="region0" class="form-label">Region</label>
 									<select id="region0" class="form-select form-control" aria-label="region0" name="employeeAddress[0].region" onchange="deriveAddress(this)" required>
 										<option></option>
@@ -107,30 +107,36 @@
 											th:text="${region.regionName}+' - '+${region.regionDescription}"  >Region</option>
 									</select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="province0" class="form-label">Province</label>
 									<select id="province0" class="form-select form-control" aria-label="province0" name="employeeAddress[0].province" onchange="deriveAddress(this)" required></select>
 									<!--<input type="text" class="form-control" name="employeeAddress[0].province" id="presentProvince" required>-->
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="municipal0" class="form-label">Municipal/City</label>
 									<!--<input type="text" class="form-control" name="employeeAddress[0].city" id="presentCity" required>-->
 									<select id="municipal0" class="form-select form-control" aria-label="municipal0" name="employeeAddress[0].municipal" onchange="deriveAddress(this)" required></select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="barangay0" class="form-label">Barangay</label>
 									<!--<input type="text" class="form-control" name="employeeAddress[0].barangay" id="presentBarangay" required>-->
 									<select id="barangay0" class="form-select form-control" aria-label="barangay0" name="employeeAddress[0].barangay" required></select>
 								</div>
+				 			</div>
+				 			<div class="row">
 							    <div class="col">
 									<label for="presentStreet" class="form-label">Street Name & House No.</label>
 									<input type="text" class="form-control" name="employeeAddress[0].street" id="presentStreet" required>
+								</div>
+								<div class="col-2">
+									<label for="zipCode1" class="form-label">Zip Code</label>
+									<input type="text" class="form-control" name="employeeAddress[0].zipCode" id="zipCode1" required>
 								</div>
 				 			</div>
 				 			<h6>Permanent Address</h6>
 				 			<div class="row">
 				 				<input type="hidden" th:name="employeeAddress[1].id.addressType" name="addressType" th:value="2" value="2" />
-				 				<div class="col-2">
+				 				<div class="col">
 									<label for="region1" class="form-label">Region</label>
 									<select id="region1" class="form-select form-control" aria-label="region1" name="employeeAddress[1].region" onchange="deriveAddress(this)" required>
 										<option></option>
@@ -138,27 +144,33 @@
 											th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
 									</select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="province1" class="form-label">Province</label>
 									<select id="province1" class="form-select form-control" aria-label="province1" name="employeeAddress[1].province" onchange="deriveAddress(this)" required></select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="municipal1" class="form-label">Municipal/City</label>
 									<select id="municipal1" class="form-select form-control" aria-label="municipal1" name="employeeAddress[1].municipal" onchange="deriveAddress(this)" required></select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="barangay1" class="form-label">Barangay</label>
 									<select id="barangay1" class="form-select form-control" aria-label="barangay1" name="employeeAddress[1].barangay" required></select>
 								</div>
-							    <div class="col">
+				 			</div>
+				 			<div class="row">
+				 				<div class="col">
 									<label for="houseNo" class="form-label">House Number/Street Name</label>
 									<input type="text" class="form-control" name="employeeAddress[1].street" id="houseNo" required>
+								</div>
+							    <div class="col-2">
+									<label for="zipCode2" class="form-label">Zip Code</label>
+									<input type="text" class="form-control" name="employeeAddress[1].zipCode" id="zipCode2" required>
 								</div>
 				 			</div>
 				 			<h6>Provincial Address</h6>
 				 			<div class="row">
 				 				<input type="hidden" th:name="employeeAddress[2].id.addressType" name="addressType" th:value="3" value="3" />
-				 				<div class="col-2">
+				 				<div class="col">
 									<label for="region2" class="form-label">Region</label>
 									<select id="region2" class="form-select form-control" aria-label="region2" name="employeeAddress[2].region" onchange="deriveAddress(this)" required>
 										<option></option>
@@ -166,21 +178,27 @@
 											th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
 									</select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="province2" class="form-label">Province - select</label>
 									<select id="province2" class="form-select form-control" aria-label="province2" name="employeeAddress[2].province" onchange="deriveAddress(this)" required></select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="municipal2" class="form-label">City - select</label>
 									<select id="municipal2" class="form-select form-control" aria-label="municipal2" name="employeeAddress[2].municipal" onchange="deriveAddress(this)" required></select>
 								</div>
-							    <div class="col-2">
+							    <div class="col">
 									<label for="barangay2" class="form-label">Barangay - select</label>
 									<select id="barangay2" class="form-select form-control" aria-label="barangay2" name="employeeAddress[2].barangay" required></select>
 								</div>
+				 			</div>
+				 			<div class="row">
 							    <div class="col">
 									<label for="houseNo" class="form-label">House Number/Street Name</label>
 									<input type="text" class="form-control" name="employeeAddress[2].street" id="provincialStreet" required>
+								</div>
+								<div class="col-2">
+									<label for="zipCode3" class="form-label">Zip Code</label>
+									<input type="text" class="form-control" name="employeeAddress[2].zipCode" id="zipCode3" required>
 								</div>
 				 			</div>
 				 			<br>
@@ -289,18 +307,6 @@
 			var employeeId = '';
 			
 			setInputFilter(document.getElementById("emergencyContact"), function(value) {
-				return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-			});
-			setInputFilter(document.getElementById("sssNo"), function(value) {
-				return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-			});
-			setInputFilter(document.getElementById("philHealthNo"), function(value) {
-				return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-			});
-			setInputFilter(document.getElementById("pagibigNo"), function(value) {
-				return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
-			});
-			setInputFilter(document.getElementById("tinNo"), function(value) {
 				return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
 			});
 		</script >

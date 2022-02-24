@@ -1,4 +1,11 @@
 
+$('input[id^="zipCode"]').keyup(function() {
+    var val = this.value.replace(/\D/g, '');
+    val = val.replace(/^(\d{4})./, '$1');
+    this.value = val;
+});
+
+
 function deriveAddress(element) {
 	let elementId = element.id;
 	let iter = elementId.slice(-1);

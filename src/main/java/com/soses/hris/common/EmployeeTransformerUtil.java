@@ -118,6 +118,7 @@ public class EmployeeTransformerUtil {
 			employeeAddressTO.setMunicipal(empAddress.getMunicipal());
 			employeeAddressTO.setProvince(empAddress.getProvince());
 			employeeAddressTO.setRegion(empAddress.getRegion());
+			employeeAddressTO.setZipCode(empAddress.getZipCode());
 		}
 	
 		return employeeAddressTO;

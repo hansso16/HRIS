@@ -47,8 +47,28 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 	
 	/** The barangay list. */
 	private List<Barangay> barangayList;
-
 	
+	/** The zip code. */
+	private String zipCode;
+	
+	/**
+	 * Gets the zip code.
+	 *
+	 * @return the zip code
+	 */
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	/**
+	 * Sets the zip code.
+	 *
+	 * @param zipCode the new zip code
+	 */
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
 	/**
 	 * Gets the region list.
 	 *
@@ -247,17 +267,12 @@ public class EmployeeAddressTO extends BaseEmployeeTO {
 		this.region = region;
 	}
 
-	/**
-	 * To string.
-	 *
-	 * @return the string
-	 */
 	@Override
 	public String toString() {
 		return "EmployeeAddressTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName + ", street="
 				+ street + ", barangay=" + barangay + ", municipal=" + municipal + ", province=" + province
 				+ ", region=" + region + ", regionList=" + regionList + ", provinceList=" + provinceList
-				+ ", municipalList=" + municipalList + ", barangayList=" + barangayList + "]";
+				+ ", municipalList=" + municipalList + ", barangayList=" + barangayList + ", zipCode=" + zipCode + "]";
 	}
 
 	/**
