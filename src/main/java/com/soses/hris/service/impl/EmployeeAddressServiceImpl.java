@@ -19,14 +19,18 @@ import com.soses.hris.cache.municipality.MunicipalCache;
 import com.soses.hris.cache.province.ProvinceCache;
 import com.soses.hris.cache.region.RegionCacheService;
 import com.soses.hris.common.AddressTypeEnum;
+import com.soses.hris.common.EmployeeAddressHelper;
 import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.common.GeneralUtil;
+import com.soses.hris.common.StringUtil;
 import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.entity.Barangay;
 import com.soses.hris.entity.EmployeeAddress;
+import com.soses.hris.entity.EmployeeAddressHistory;
 import com.soses.hris.entity.Municipal;
 import com.soses.hris.entity.Province;
 import com.soses.hris.entity.Region;
+import com.soses.hris.repository.EmployeeAddressHistoryRepository;
 import com.soses.hris.repository.EmployeeAddressRepository;
 import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeAddressService;
@@ -37,6 +41,8 @@ import com.soses.hris.service.EmployeeAddressService;
 public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 
 	private EmployeeAddressRepository employeeAddressRepo;
+
+	private EmployeeAddressHistoryRepository employeeAddressHistoryRepo;
 	
 	private EmployeeRepository employeeRepo;
 	
@@ -51,7 +57,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 	@Autowired
 	public EmployeeAddressServiceImpl(EmployeeAddressRepository employeeAddressRepo, EmployeeRepository employeeRepo,
 			RegionCacheService regionCache, ProvinceCache provinceCache, MunicipalCache municipalCache,
-			BarangayCache barangayCache) {
+			BarangayCache barangayCache, EmployeeAddressHistoryRepository employeeAddressHistoryRepo) {
 		super();
 		this.employeeAddressRepo = employeeAddressRepo;
 		this.employeeRepo = employeeRepo;
@@ -59,6 +65,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 		this.provinceCache = provinceCache;
 		this.municipalCache = municipalCache;
 		this.barangayCache = barangayCache;
+		this.employeeAddressHistoryRepo = employeeAddressHistoryRepo;
 	}
 
 	@Override
@@ -96,10 +103,27 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 		EmployeeAddressRequest request = (EmployeeAddressRequest) formReq;
 		
 		List<EmployeeAddress> employeeAddressList = request.getEmployeeAddress();
+		List<EmployeeAddressHistory> employeeAddressHistoryList = new ArrayList<>();
+		String employeeId = request.getEmployeeId();
 		boolean isSaved = false;
-		if (!GeneralUtil.isListEmpty(employeeAddressList)) {
-			// derive address cache
-//			deriveAddressCache(employeeAddressList);
+		if (!GeneralUtil.isListEmpty(employeeAddressList) && !StringUtil.isEmpty(employeeId)) {
+			
+			List<EmployeeAddress> dbEmployeeAddressList = employeeAddressRepo.findByIdEmployeeId(employeeId);
+			if (!GeneralUtil.isListEmpty(dbEmployeeAddressList)) {
+				for (int i = 0; i < dbEmployeeAddressList.size(); i++) {
+					EmployeeAddress dbEmpAddress = dbEmployeeAddressList.get(i);
+					if (EmployeeAddressHelper.isChanged(dbEmpAddress, employeeAddressList.get(i))) {
+						// create employee address history
+						EmployeeAddressHistory employeeAddressHistory = EmployeeAddressHelper.convertToEmpAddressHistory(dbEmpAddress);
+						employeeAddressHistoryList.add(employeeAddressHistory);
+					}
+				}
+				
+				if (!GeneralUtil.isListEmpty(employeeAddressHistoryList)) {
+					employeeAddressHistoryRepo.saveAll(employeeAddressHistoryList);
+				}
+			}
+			
 			employeeAddressList = employeeAddressRepo.saveAll(employeeAddressList);
 			isSaved = true;
 		}
