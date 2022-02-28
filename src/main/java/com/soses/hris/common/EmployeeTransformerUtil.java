@@ -1,6 +1,7 @@
 package com.soses.hris.common;
 
 import com.soses.hris.api.EmployeeProfileRequest;
+import com.soses.hris.dto.EmployeeAddressHistoryTO;
 import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.dto.EmployeeBenefitsTO;
 import com.soses.hris.dto.EmployeeDependentTO;
@@ -8,6 +9,7 @@ import com.soses.hris.dto.EmployeeInfoTO;
 import com.soses.hris.dto.EmployeeTO;
 import com.soses.hris.entity.Employee;
 import com.soses.hris.entity.EmployeeAddress;
+import com.soses.hris.entity.EmployeeAddressHistory;
 import com.soses.hris.entity.EmployeeBenefits;
 import com.soses.hris.entity.EmployeeDependent;
 import com.soses.hris.entity.EmployeeInfo;
@@ -176,5 +178,23 @@ public class EmployeeTransformerUtil {
 		}
 		
 		return employee;
+	}
+	
+	public static EmployeeAddressHistoryTO transformToEmployeeAddressHistoryTO(EmployeeAddressHistory empAddressHistory) {
+		EmployeeAddressHistoryTO employeeAddressHistoryTO = null;
+		if (empAddressHistory != null) {
+			employeeAddressHistoryTO = new EmployeeAddressHistoryTO();
+			employeeAddressHistoryTO.setEmployeeId(empAddressHistory.getId().getEmployeeId());
+			employeeAddressHistoryTO.setAddressType(empAddressHistory.getId().getAddressType());
+			employeeAddressHistoryTO.setAddressTypeName(AddressTypeEnum.valueOfAddressType(employeeAddressHistoryTO.getAddressType()).getAddressTypeName()); //derive
+			employeeAddressHistoryTO.setStreet(empAddressHistory.getStreet());
+			employeeAddressHistoryTO.setBarangay(empAddressHistory.getBarangay());
+			employeeAddressHistoryTO.setMunicipal(empAddressHistory.getMunicipal());
+			employeeAddressHistoryTO.setProvince(empAddressHistory.getProvince());
+			employeeAddressHistoryTO.setRegion(empAddressHistory.getRegion());
+			employeeAddressHistoryTO.setZipCode(empAddressHistory.getZipCode());
+		}
+	
+		return employeeAddressHistoryTO;
 	}
 }

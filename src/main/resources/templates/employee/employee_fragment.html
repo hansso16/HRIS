@@ -190,13 +190,25 @@
 			        	</div >
 		        	</div>
 				</th:block>
-		        <div th:if="${isUpdate}">
-		        	<hr>
-			        <button class="btn btn-primary" type="submit" id="submitBtn">Save</button >
-			        <button class="btn btn-secondary" type="reset">Reset</button >
-			        <!--<input class="btn btn-secondary" type="reset" value="Reset">-->
-			        <a class="btn btn-secondary" href="#" th:href="@{__${#httpServletRequest.requestURI}__}">Cancel</a>
-		        </div >
+	        	<hr>
+	        	<div class="d-flex">
+			        <div class="me-auto">
+				        <th:block  th:if="${isUpdate}">
+					        <button class="btn btn-primary" type="submit" id="submitBtn">Save</button >
+					        <button class="btn btn-secondary" type="reset">Reset</button >
+					        <!--<input class="btn btn-secondary" type="reset" value="Reset">-->
+					        <a class="btn btn-secondary" href="#" th:href="@{__${#httpServletRequest.requestURI}__}">Cancel</a>				        </th:block >			        </div>
+			        <a class="btn btn-primary" th:href="@{__${#httpServletRequest.requestURI}__/history}" type="button" id="addressHistoryBtn" href="#" >View Address History</a >
+	        	</div>
+			</form >
+		</tr>
+		
+		<!-- Employee Address History -->
+		<tr th:fragment="12">
+			<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="employeeForm" >
+		    	<h5>Address History</h5>
+				<input type="hidden" name="employeeId" th:value="${res.employeeId}" value="" />
+	        	<hr>
 			</form >
 		</tr>
 		

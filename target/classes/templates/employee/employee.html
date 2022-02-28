@@ -27,7 +27,7 @@
 			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('profile') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/profile}" th:text="Profile">Profile</a>
 			            </li>
 			            <li class="nav-item">
-			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('address') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address}" th:text="Address">Address</a>
+			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().contains('address') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address}" th:text="Address">Address</a>
 			            </li>
 			            <li class="nav-item">
 			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('info') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/info}">Info</a>
