@@ -248,9 +248,13 @@
 					    	</table>
 					    </div>
 					</div>
+					<div class="row">
+						<div class="col me-auto"></div>
+						<div class="col-auto">
+				        	<a class="btn btn-primary" th:href="@{/employee/} + ${res.employeeId} + @{/address}" type="button" id="empAddressBtn" href="#" >Go Back</a >
+						</div>
+					</div>
 				</div>
-				<br>
-	        	<a class="btn btn-primary" th:href="@{/employee/} + ${res.employeeId} + @{/address}" type="button" id="empAddressBtn" href="#" >Go Back</a >
 			</form >
 		</tr>
 		
