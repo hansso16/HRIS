@@ -19,7 +19,7 @@ import com.soses.hris.entity.EmployeeAddressHistory;
 import com.soses.hris.repository.EmployeeAddressHistoryRepository;
 import com.soses.hris.service.EmployeeAddressHistoryService;
 
-@Service("EmployeeAddressHistoryServiceImpl")
+@Service("EmployeeAddressHistoryService")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
 public class EmployeeAddressHistoryServiceImpl implements EmployeeAddressHistoryService {
@@ -38,16 +38,16 @@ public class EmployeeAddressHistoryServiceImpl implements EmployeeAddressHistory
 
 		EmployeeAddressHistoryResponse resp = new EmployeeAddressHistoryResponse();
 		if (!StringUtil.isEmpty(addressType) && !StringUtil.isEmpty(employeeId)) {
-			List<EmployeeAddressHistory> empAddressHistoryList = employeeAddressHistoryRepo.findByIdEmployeeIdByAddressType(employeeId, addressType);
-			List<EmployeeAddressHistoryTO> empAddressTOList = new ArrayList<>();
+			List<EmployeeAddressHistory> empAddressHistoryList = employeeAddressHistoryRepo.findByIdEmployeeIdAndIdAddressType(employeeId, addressType);
+			List<EmployeeAddressHistoryTO> empAddressHistoryTOList = new ArrayList<>();
 			if (!GeneralUtil.isListEmpty(empAddressHistoryList)) {
 				for (EmployeeAddressHistory empAddressHistory : empAddressHistoryList) {
 					EmployeeAddressHistoryTO empAddressHistoryTO = EmployeeTransformerUtil.transformToEmployeeAddressHistoryTO(empAddressHistory);
-					empAddressTOList.add(empAddressHistoryTO);
+					empAddressHistoryTOList.add(empAddressHistoryTO);
 				}
 			} 
-			
-			resp.setEmployeeAddressList(empAddressTOList);
+			resp.setEmployeeId(employeeId);
+			resp.setEmployeeAddressHistoryList(empAddressHistoryTOList);
 		}
 		return resp;
 	}

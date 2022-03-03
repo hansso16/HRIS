@@ -40,9 +40,10 @@ public class EmployeeAddressHistoryController {
 		log.info("EMPLOYEE ADDRESS HISTORY CONTROLLER");
 		BaseEmployeeResponse res = employeeAddressHistoryService.getEmployeeDetails(employeeId, addressType);
 		res.setEmployeeId(employeeId);
-		model.addAttribute("viewType", "12");
+		model.addAttribute("viewType", "21");
 		if (res!= null) {
 			model.addAttribute("res", res);
+			model.addAttribute("isUpdate", true);
 		}
 		return EMP_PAGE;
 	}

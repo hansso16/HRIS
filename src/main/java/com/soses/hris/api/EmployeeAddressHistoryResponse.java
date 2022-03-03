@@ -13,24 +13,24 @@ import com.soses.hris.dto.EmployeeAddressHistoryTO;
 public class EmployeeAddressHistoryResponse extends BaseEmployeeSearchResponse {
 
 	/** The employee address list. */
-	private List<EmployeeAddressHistoryTO> employeeAddressList;
+	private List<EmployeeAddressHistoryTO> employeeAddressHistoryList;
 
 	/**
-	 * Gets the employee address list.
+	 * Gets the employee address history list.
 	 *
-	 * @return the employee address list
+	 * @return the employee address history list
 	 */
-	public List<EmployeeAddressHistoryTO> getEmployeeAddressList() {
-		return employeeAddressList;
+	public List<EmployeeAddressHistoryTO> getEmployeeAddressHistoryList() {
+		return employeeAddressHistoryList;
 	}
 
 	/**
-	 * Sets the employee address list.
+	 * Sets the employee address history list.
 	 *
-	 * @param employeeAddressList the new employee address list
+	 * @param employeeAddressHistoryList the new employee address history list
 	 */
-	public void setEmployeeAddressList(List<EmployeeAddressHistoryTO> employeeAddressList) {
-		this.employeeAddressList = employeeAddressList;
+	public void setEmployeeAddressHistoryList(List<EmployeeAddressHistoryTO> employeeAddressHistoryList) {
+		this.employeeAddressHistoryList = employeeAddressHistoryList;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class EmployeeAddressHistoryResponse extends BaseEmployeeSearchResponse {
 	 */
 	@Override
 	public String toString() {
-		return "EmployeeAddressHistoryResponse [employeeAddressList=" + employeeAddressList + "]";
+		return "EmployeeAddressHistoryResponse [employeeAddressHistoryList=" + employeeAddressHistoryList + "]";
 	}
 	
 }

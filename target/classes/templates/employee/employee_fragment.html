@@ -198,17 +198,59 @@
 					        <button class="btn btn-secondary" type="reset">Reset</button >
 					        <!--<input class="btn btn-secondary" type="reset" value="Reset">-->
 					        <a class="btn btn-secondary" href="#" th:href="@{__${#httpServletRequest.requestURI}__}">Cancel</a>				        </th:block >			        </div>
-			        <a class="btn btn-primary" th:href="@{__${#httpServletRequest.requestURI}__/history}" type="button" id="addressHistoryBtn" href="#" >View Address History</a >
+			        <a class="btn btn-primary" th:href="@{__${#httpServletRequest.requestURI}__/history/1}" type="button" id="addressHistoryBtn" href="#" >View Address History</a >
 	        	</div>
 			</form >
 		</tr>
 		
 		<!-- Employee Address History -->
-		<tr th:fragment="12">
+		<tr th:fragment="21">
 			<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="employeeForm" >
 		    	<h5>Address History</h5>
 				<input type="hidden" name="employeeId" th:value="${res.employeeId}" value="" />
-	        	<hr>
+				<div class="container">
+					<div class="card my-4" th:if="${res != null}">
+					    <div class="card-header text-center">
+					        <ul class="nav nav-tabs card-header-tabs">
+					            <li class="nav-item">
+					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('1') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/1}" th:text="Profile">Present Address</a>
+					            </li>
+					            <li class="nav-item">
+					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('2') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/2}" th:text="Address">Permanent Address</a>
+					            </li>
+					            <li class="nav-item">
+					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('3') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/3}">Provincial Address</a>
+					            </li>
+					        </ul>
+					    </div>
+					    <div class="card-body">
+					    	<table class="table table-hover" th:if="${res.employeeAddressHistoryList != null}">
+					    		<thead>
+					    			<tr>
+					    				<th colspan="2">House No./Street</th>
+					    				<th>Barangay</th>
+					    				<th>Municipal</th>
+					    				<th>Province</th>
+					    				<th>Region</th>
+					    				<th>Timestamp</th>
+					    			</tr>
+					    		</thead>
+					    		<tbody>
+					    			<tr th:each="empAddressHistory,iter : ${res.employeeAddressHistoryList}">
+					    				<td colspan="2" th:text="${empAddressHistory.street}">HOUSE NO./STREET</td>
+					    				<td th:text="${empAddressHistory.barangay.barangayName}">BARANGAY</td>
+					    				<td th:text="${empAddressHistory.municipal.municipalName}">MUNICIPAL/CITY</td>
+					    				<td th:text="${empAddressHistory.province.provinceName}">PROVINCE</td>
+					    				<td th:text="${empAddressHistory.region.regionDescription}">REGION</td>
+					    				<td th:text="${#temporals.format(empAddressHistory.entryTimestamp, 'MM/dd/yyyy hh:mma')}">ENTRY_TIMESTAMP</td>
+					    			</tr>
+					    		</tbody>
+					    	</table>
+					    </div>
+					</div>
+				</div>
+				<br>
+	        	<a class="btn btn-primary" th:href="@{/employee/} + ${res.employeeId} + @{/address}" type="button" id="empAddressBtn" href="#" >Go Back</a >
 			</form >
 		</tr>
 		

@@ -1,5 +1,7 @@
 package com.soses.hris.dto;
 
+import java.time.LocalDateTime;
+
 import com.soses.hris.entity.Barangay;
 import com.soses.hris.entity.Municipal;
 import com.soses.hris.entity.Province;
@@ -36,6 +38,27 @@ public class EmployeeAddressHistoryTO extends BaseEmployeeTO {
 	
 	/** The zip code. */
 	private String zipCode;
+	
+	/** The entry timestamp. */
+	private LocalDateTime entryTimestamp;
+
+	/**
+	 * Gets the entry timestamp.
+	 *
+	 * @return the entry timestamp
+	 */
+	public LocalDateTime getEntryTimestamp() {
+		return entryTimestamp;
+	}
+
+	/**
+	 * Sets the entry timestamp.
+	 *
+	 * @param entryTimestamp the new entry timestamp
+	 */
+	public void setEntryTimestamp(LocalDateTime entryTimestamp) {
+		this.entryTimestamp = entryTimestamp;
+	}
 
 	/**
 	 * Gets the address type.
@@ -181,16 +204,11 @@ public class EmployeeAddressHistoryTO extends BaseEmployeeTO {
 		this.zipCode = zipCode;
 	}
 
-	/**
-	 * To string.
-	 *
-	 * @return the string
-	 */
 	@Override
 	public String toString() {
 		return "EmployeeAddressHistoryTO [addressType=" + addressType + ", addressTypeName=" + addressTypeName
 				+ ", street=" + street + ", barangay=" + barangay + ", municipal=" + municipal + ", province="
-				+ province + ", region=" + region + ", zipCode=" + zipCode + "]";
+				+ province + ", region=" + region + ", zipCode=" + zipCode + ", entryTimestamp=" + entryTimestamp + "]";
 	}
 	
 	

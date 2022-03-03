@@ -193,6 +193,7 @@ public class EmployeeTransformerUtil {
 			employeeAddressHistoryTO.setProvince(empAddressHistory.getProvince());
 			employeeAddressHistoryTO.setRegion(empAddressHistory.getRegion());
 			employeeAddressHistoryTO.setZipCode(empAddressHistory.getZipCode());
+			employeeAddressHistoryTO.setEntryTimestamp(empAddressHistory.getId().getEntryTimestamp());
 		}
 	
 		return employeeAddressHistoryTO;
