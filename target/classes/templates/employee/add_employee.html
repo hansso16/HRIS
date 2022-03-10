@@ -11,7 +11,7 @@
 			  	<span th:text="${errorMessage}"></span >
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
-			<form class="" action="#" th:action="@{/employee/add}" method="POST" autocomplete="off">
+			<form class="" action="#" th:action="@{/employee/add}" method="POST" autocomplete="off" id="employeeRegistrationForm">
 				<div class="card mb-4">
 				 	<h4 class="card-header">Register Employee</h4>
 			 		<div class="card-body">
@@ -129,77 +129,83 @@
 									<input type="text" class="form-control" name="employeeAddress[0].street" id="presentStreet" required>
 								</div>
 								<div class="col-2">
-									<label for="zipCode1" class="form-label">Zip Code</label>
-									<input type="text" class="form-control" name="employeeAddress[0].zipCode" id="zipCode1" required>
+									<label for="zipCode0" class="form-label">Zip Code</label>
+									<input type="text" class="form-control" name="employeeAddress[0].zipCode" id="zipCode0" required>
 								</div>
 				 			</div>
-				 			<h6>Permanent Address</h6>
-				 			<div class="row">
-				 				<input type="hidden" th:name="employeeAddress[1].id.addressType" name="addressType" th:value="2" value="2" />
-				 				<div class="col">
-									<label for="region1" class="form-label">Region</label>
-									<select id="region1" class="form-select form-control" aria-label="region1" name="employeeAddress[1].region" onchange="deriveAddress(this)" required>
-										<option></option>
-										<option th:each="region : ${regionList}" th:value="${region.regionId}" 
-											th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
-									</select>
-								</div>
-							    <div class="col">
-									<label for="province1" class="form-label">Province</label>
-									<select id="province1" class="form-select form-control" aria-label="province1" name="employeeAddress[1].province" onchange="deriveAddress(this)" required></select>
-								</div>
-							    <div class="col">
-									<label for="municipal1" class="form-label">Municipal/City</label>
-									<select id="municipal1" class="form-select form-control" aria-label="municipal1" name="employeeAddress[1].municipal" onchange="deriveAddress(this)" required></select>
-								</div>
-							    <div class="col">
-									<label for="barangay1" class="form-label">Barangay</label>
-									<select id="barangay1" class="form-select form-control" aria-label="barangay1" name="employeeAddress[1].barangay" required></select>
-								</div>
-				 			</div>
-				 			<div class="row">
-				 				<div class="col">
-									<label for="houseNo" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="employeeAddress[1].street" id="houseNo" required>
-								</div>
-							    <div class="col-2">
-									<label for="zipCode2" class="form-label">Zip Code</label>
-									<input type="text" class="form-control" name="employeeAddress[1].zipCode" id="zipCode2" required>
-								</div>
+				 			<h6>Permanent Address</h6> 
+				 			<span>Same as Present Address? </span><input type="checkbox" id="fillPermAddress" name="fillPermAddress" value="1"/>
+				 			<div id="permanentAddress">
+					 			<div class="row">
+					 				<input type="hidden" th:name="employeeAddress[1].id.addressType" name="addressType" th:value="2" value="2" />
+					 				<div class="col">
+										<label for="region1" class="form-label">Region</label>
+										<select id="region1" class="form-select form-control" aria-label="region1" name="employeeAddress[1].region" onchange="deriveAddress(this)" required>
+											<option></option>
+											<option th:each="region : ${regionList}" th:value="${region.regionId}" 
+												th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
+										</select>
+									</div>
+								    <div class="col">
+										<label for="province1" class="form-label">Province</label>
+										<select id="province1" class="form-select form-control" aria-label="province1" name="employeeAddress[1].province" onchange="deriveAddress(this)" required></select>
+									</div>
+								    <div class="col">
+										<label for="municipal1" class="form-label">Municipal/City</label>
+										<select id="municipal1" class="form-select form-control" aria-label="municipal1" name="employeeAddress[1].municipal" onchange="deriveAddress(this)" required></select>
+									</div>
+								    <div class="col">
+										<label for="barangay1" class="form-label">Barangay</label>
+										<select id="barangay1" class="form-select form-control" aria-label="barangay1" name="employeeAddress[1].barangay" required></select>
+									</div>
+					 			</div>
+					 			<div class="row">
+					 				<div class="col">
+										<label for="permanentStreet" class="form-label">House Number/Street Name</label>
+										<input type="text" class="form-control" name="employeeAddress[1].street" id="permanentStreet" required>
+									</div>
+								    <div class="col-2">
+										<label for="zipCode1" class="form-label">Zip Code</label>
+										<input type="text" class="form-control" name="employeeAddress[1].zipCode" id="zipCode1" required>
+									</div>
+					 			</div>
 				 			</div>
 				 			<h6>Provincial Address</h6>
-				 			<div class="row">
-				 				<input type="hidden" th:name="employeeAddress[2].id.addressType" name="addressType" th:value="3" value="3" />
-				 				<div class="col">
-									<label for="region2" class="form-label">Region</label>
-									<select id="region2" class="form-select form-control" aria-label="region2" name="employeeAddress[2].region" onchange="deriveAddress(this)" required>
-										<option></option>
-										<option th:each="region : ${regionList}" th:value="${region.regionId}" 
-											th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
-									</select>
-								</div>
-							    <div class="col">
-									<label for="province2" class="form-label">Province - select</label>
-									<select id="province2" class="form-select form-control" aria-label="province2" name="employeeAddress[2].province" onchange="deriveAddress(this)" required></select>
-								</div>
-							    <div class="col">
-									<label for="municipal2" class="form-label">City - select</label>
-									<select id="municipal2" class="form-select form-control" aria-label="municipal2" name="employeeAddress[2].municipal" onchange="deriveAddress(this)" required></select>
-								</div>
-							    <div class="col">
-									<label for="barangay2" class="form-label">Barangay - select</label>
-									<select id="barangay2" class="form-select form-control" aria-label="barangay2" name="employeeAddress[2].barangay" required></select>
-								</div>
-				 			</div>
-				 			<div class="row">
-							    <div class="col">
-									<label for="houseNo" class="form-label">House Number/Street Name</label>
-									<input type="text" class="form-control" name="employeeAddress[2].street" id="provincialStreet" required>
-								</div>
-								<div class="col-2">
-									<label for="zipCode3" class="form-label">Zip Code</label>
-									<input type="text" class="form-control" name="employeeAddress[2].zipCode" id="zipCode3" required>
-								</div>
+				 			<span>Same as Present Address? </span><input type="checkbox" id="fillProvAddress" name="fillProvAddress" value="2" />
+				 			<div id="provincialAddress">
+					 			<div class="row">
+					 				<input type="hidden" th:name="employeeAddress[2].id.addressType" name="addressType" th:value="3" value="3" />
+					 				<div class="col">
+										<label for="region2" class="form-label">Region</label>
+										<select id="region2" class="form-select form-control" aria-label="region2" name="employeeAddress[2].region" onchange="deriveAddress(this)" required>
+											<option></option>
+											<option th:each="region : ${regionList}" th:value="${region.regionId}" 
+												th:text="${region.regionName}+' - '+${region.regionDescription}" >Region</option>
+										</select>
+									</div>
+								    <div class="col">
+										<label for="province2" class="form-label">Province</label>
+										<select id="province2" class="form-select form-control" aria-label="province2" name="employeeAddress[2].province" onchange="deriveAddress(this)" required></select>
+									</div>
+								    <div class="col">
+										<label for="municipal2" class="form-label">City</label>
+										<select id="municipal2" class="form-select form-control" aria-label="municipal2" name="employeeAddress[2].municipal" onchange="deriveAddress(this)" required></select>
+									</div>
+								    <div class="col">
+										<label for="barangay2" class="form-label">Barangay</label>
+										<select id="barangay2" class="form-select form-control" aria-label="barangay2" name="employeeAddress[2].barangay" required></select>
+									</div>
+					 			</div>
+					 			<div class="row">
+								    <div class="col">
+										<label for="provincialStreet" class="form-label">House Number/Street Name</label>
+										<input type="text" class="form-control" name="employeeAddress[2].street" id="provincialStreet" required>
+									</div>
+									<div class="col-2">
+										<label for="zipCode2" class="form-label">Zip Code</label>
+										<input type="text" class="form-control" name="employeeAddress[2].zipCode" id="zipCode2" required>
+									</div>
+					 			</div>
 				 			</div>
 				 			<br>
 				 			<hr>
@@ -308,6 +314,94 @@
 			
 			setInputFilter(document.getElementById("emergencyContact"), function(value) {
 				return /^\d*?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+			});
+			
+			function copyAddress(addressType) {
+				$("#region"+addressType).find('option').remove().end().append($("#region0 > option").clone()).val($("#region0").val());
+                //$("#region1").val($("#region0").val());
+                
+                $("#province"+addressType).find('option').remove().end().append($("#province0 > option").clone()).val($("#province0").val());
+                //$("#province1").val($("#province0").val());
+                
+                $("#municipal"+addressType).find('option').remove().end().append($("#municipal0 > option").clone()).val($("#municipal0").val());
+                //$("#municipal1").val($("#municipal0").val());
+                
+                $("#barangay"+addressType).find('option').remove().end().append($("#barangay0 > option").clone()).val($("#barangay0").val());
+                //$("#barangay1").val($("#barangay0").val());
+                
+                $("#zipCode"+addressType).val($("#zipCode0").val());
+			}
+			
+			function sameAddress(addressType, isRequired) {
+				$("#region"+addressType).prop('required', isRequired);
+		        $("#province"+addressType).prop('required', isRequired);
+		        $("#municipal"+addressType).prop('required', isRequired);           
+                $("#barangay"+addressType).prop('required', isRequired);
+                $("#zipCode"+addressType).prop('required', isRequired);
+
+                //$("#permanentStreet").prop('required', isSame);
+			}
+			
+			function clearSelectedVal(addressType) {
+				$("#region"+addressType).val('');
+		        $("#province"+addressType).val('');
+		        $("#municipal"+addressType).val('');           
+                $("#barangay"+addressType).val('');
+                $("#zipCode"+addressType).val('');
+			}
+			
+			$(document).ready(function(){
+			    $("#fillPermAddress").on("click", function(){
+					if (this.checked) { 
+	                	copyAddress(this.value);
+	                	sameAddress(this.value, false);
+		                
+		                $("#permanentStreet").prop('required', false);
+		                $("#permanentStreet").val($("#presentStreet").val());
+		                
+		                $("#permanentAddress").hide();
+			    	} else {
+	                	sameAddress(this.value, true);
+						clearSelectedVal(this.value);
+						
+		                $("#permanentStreet").prop('required', true);
+		                $("#permanentStreet").val('');
+		                
+						$("#permanentAddress").show();
+					}
+			    });
+			    
+			    $("#fillProvAddress").on("click", function(){
+					if (this.checked) { 
+	                	copyAddress(this.value);
+	                	sameAddress(this.value, false);
+		                
+		                $("#provincialStreet").prop('required', false);
+		                $("#provincialStreet").val($("#presentStreet").val());
+		                
+		                $("#provincialAddress").hide();
+			    	} else {
+	                	sameAddress(this.value, true);
+						clearSelectedVal(this.value);
+						
+		                $("#provincialStreet").prop('required', true);
+		                $("#provincialStreet").val('');
+		                
+						$("#provincialAddress").show();
+					}
+			    });
+			    
+			    $("#employeeRegistrationForm").on("submit", function() {
+					if($("#fillPermAddress").is(":checked")) {
+						copyAddress($("#fillPermAddress").val());
+						$("#permanentStreet").val($("#presentStreet").val());
+					}
+					if($("#fillProvAddress").is(":checked")) {
+						copyAddress($("#fillProvAddress").val());
+						$("#provincialStreet").val($("#presentStreet").val());
+					}
+				});
+			    
 			});
 		</script >
 	</body>
