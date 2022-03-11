@@ -1,5 +1,6 @@
 package com.soses.hris.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.soses.hris.api.BaseEmployeeRequest;
@@ -18,12 +20,15 @@ import com.soses.hris.cache.barangay.BarangayCache;
 import com.soses.hris.cache.municipality.MunicipalCache;
 import com.soses.hris.cache.province.ProvinceCache;
 import com.soses.hris.cache.region.RegionCacheService;
+import com.soses.hris.common.ActivityHistoryConstants;
 import com.soses.hris.common.AddressTypeEnum;
 import com.soses.hris.common.EmployeeAddressHelper;
 import com.soses.hris.common.EmployeeTransformerUtil;
 import com.soses.hris.common.GeneralUtil;
+import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.common.StringUtil;
 import com.soses.hris.dto.EmployeeAddressTO;
+import com.soses.hris.entity.ActivityHistory;
 import com.soses.hris.entity.Barangay;
 import com.soses.hris.entity.EmployeeAddress;
 import com.soses.hris.entity.EmployeeAddressHistory;
@@ -33,31 +38,61 @@ import com.soses.hris.entity.Region;
 import com.soses.hris.repository.EmployeeAddressHistoryRepository;
 import com.soses.hris.repository.EmployeeAddressRepository;
 import com.soses.hris.repository.EmployeeRepository;
+import com.soses.hris.service.ActivityHistoryService;
 import com.soses.hris.service.EmployeeAddressService;
 
+/**
+ * The Class EmployeeAddressServiceImpl.
+ *
+ * @author hso
+ * @since Mar 10, 2022
+ */
 @Service("EmployeeAddressServiceImpl")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
 public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 
+	/** The employee address repo. */
 	private EmployeeAddressRepository employeeAddressRepo;
 
+	/** The employee address history repo. */
 	private EmployeeAddressHistoryRepository employeeAddressHistoryRepo;
 	
+	/** The employee repo. */
 	private EmployeeRepository employeeRepo;
 	
+	/** The region cache. */
 	private RegionCacheService regionCache;
 	
+	/** The province cache. */
 	private ProvinceCache provinceCache;
 	
+	/** The municipal cache. */
 	private MunicipalCache municipalCache;
 	
+	/** The barangay cache. */
 	private BarangayCache barangayCache;
 	
+	/** The activity history service. */
+	private ActivityHistoryService activityHistoryService;
+	
+	/**
+	 * Instantiates a new employee address service impl.
+	 *
+	 * @param employeeAddressRepo the employee address repo
+	 * @param employeeRepo the employee repo
+	 * @param regionCache the region cache
+	 * @param provinceCache the province cache
+	 * @param municipalCache the municipal cache
+	 * @param barangayCache the barangay cache
+	 * @param employeeAddressHistoryRepo the employee address history repo
+	 * @param activityHistoryService the activity history service
+	 */
 	@Autowired
 	public EmployeeAddressServiceImpl(EmployeeAddressRepository employeeAddressRepo, EmployeeRepository employeeRepo,
 			RegionCacheService regionCache, ProvinceCache provinceCache, MunicipalCache municipalCache,
-			BarangayCache barangayCache, EmployeeAddressHistoryRepository employeeAddressHistoryRepo) {
+			BarangayCache barangayCache, EmployeeAddressHistoryRepository employeeAddressHistoryRepo
+			, ActivityHistoryService activityHistoryService) {
 		super();
 		this.employeeAddressRepo = employeeAddressRepo;
 		this.employeeRepo = employeeRepo;
@@ -66,8 +101,15 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 		this.municipalCache = municipalCache;
 		this.barangayCache = barangayCache;
 		this.employeeAddressHistoryRepo = employeeAddressHistoryRepo;
+		this.activityHistoryService = activityHistoryService;
 	}
 
+	/**
+	 * Gets the employee details.
+	 *
+	 * @param employeeId the employee id
+	 * @return the employee details
+	 */
 	@Override
 	public BaseEmployeeResponse getEmployeeDetails(String employeeId) {
 		
@@ -97,6 +139,12 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 		return resp;
 	}
 
+	/**
+	 * Update employee details.
+	 *
+	 * @param formReq the form req
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean updateEmployeeDetails(BaseEmployeeRequest formReq) {
 
@@ -104,6 +152,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 		
 		List<EmployeeAddress> employeeAddressList = request.getEmployeeAddress();
 		List<EmployeeAddressHistory> employeeAddressHistoryList = new ArrayList<>();
+		List<ActivityHistory> activityList = new ArrayList<>();
 		String employeeId = request.getEmployeeId();
 		boolean isSaved = false;
 		if (!GeneralUtil.isListEmpty(employeeAddressList) && !StringUtil.isEmpty(employeeId)) {
@@ -116,6 +165,19 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 						// create employee address history
 						EmployeeAddressHistory employeeAddressHistory = EmployeeAddressHelper.convertToEmpAddressHistory(dbEmpAddress);
 						employeeAddressHistoryList.add(employeeAddressHistory);
+
+						StringBuilder sb = new StringBuilder();
+						sb.append(AddressTypeEnum.deriveAddressType(employeeAddressHistory.getId().getAddressType()));
+						sb.append(GlobalConstants.EMPTY_SPACE);
+						sb.append(ActivityHistoryConstants.IS_UPDATED);
+						String activityText = sb.toString();
+
+						ActivityHistory activityHistory = new ActivityHistory();
+						activityHistory.setEmployeeId(employeeId);
+						activityHistory.setActivityText(activityText);
+						activityHistory.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+						activityHistory.setEntryTimestamp(LocalDateTime.now());
+						activityList.add(activityHistory);
 					}
 				}
 				
@@ -125,12 +187,20 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 			}
 			
 			employeeAddressList = employeeAddressRepo.saveAll(employeeAddressList);
+			activityHistoryService.saveAll(activityList);
+			
 			isSaved = true;
 		}
 
 		return isSaved;
 	}
 	
+	/**
+	 * Derive address cache.
+	 *
+	 * @param empAddress the emp address
+	 * @param empAddressTO the emp address TO
+	 */
 	private void deriveAddressCache(EmployeeAddress empAddress, EmployeeAddressTO empAddressTO) {
 		if (empAddressTO != null && empAddressTO != null) {
 			Region region = empAddress.getRegion();

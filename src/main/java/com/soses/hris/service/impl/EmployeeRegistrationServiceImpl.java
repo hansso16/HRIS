@@ -10,12 +10,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
+import com.soses.hris.common.ActivityHistoryConstants;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.controller.EmployeeRegistrationController;
+import com.soses.hris.entity.ActivityHistory;
 import com.soses.hris.entity.Employee;
 import com.soses.hris.entity.EmployeeAddress;
 import com.soses.hris.entity.EmployeeBenefits;
@@ -27,6 +30,7 @@ import com.soses.hris.repository.EmployeeBenefitsRepository;
 import com.soses.hris.repository.EmployeeDependentRepository;
 import com.soses.hris.repository.EmployeeInfoRepository;
 import com.soses.hris.repository.EmployeeRepository;
+import com.soses.hris.service.ActivityHistoryService;
 import com.soses.hris.service.EmployeeRegistrationService;
 
 /**
@@ -57,6 +61,8 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	
 	/** The employee benefits repository. */
 	private EmployeeBenefitsRepository employeeBenefitsRepository;
+	
+	private ActivityHistoryService activityHistoryService;
 
 	/**
 	 * Instantiates a new employee registration service impl.
@@ -71,13 +77,14 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	public EmployeeRegistrationServiceImpl(EmployeeRepository employeeRepository,
 			EmployeeAddressRepository employeeAddressRepository, EmployeeInfoRepository employeeInfoRepository,
 			EmployeeDependentRepository employeeDependentRepository,
-			EmployeeBenefitsRepository employeeBenefitsRepository) {
+			EmployeeBenefitsRepository employeeBenefitsRepository, ActivityHistoryService activityHistoryService) {
 		super();
 		this.employeeRepository = employeeRepository;
 		this.employeeAddressRepository = employeeAddressRepository;
 		this.employeeInfoRepository = employeeInfoRepository;
 		this.employeeDependentRepository = employeeDependentRepository;
 		this.employeeBenefitsRepository = employeeBenefitsRepository;
+		this.activityHistoryService = activityHistoryService;
 	}
 
 
@@ -146,6 +153,13 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 			employeeBenefits.setEmployeeId(employeeId);
 			employeeBenefits = employeeBenefitsRepository.save(employeeBenefits);
 		}
+		
+		ActivityHistory activityHistory = new ActivityHistory();
+		activityHistory.setEmployeeId(employeeId);
+		activityHistory.setActivityText(ActivityHistoryConstants.EMPLOYEE_REGISTER);
+		activityHistory.setUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+		activityHistory.setEntryTimestamp(LocalDateTime.now());
+		activityHistoryService.saveActivity(activityHistory);
 		
 		response.setEmployeeId(String.valueOf(employeeId));
 		return response;

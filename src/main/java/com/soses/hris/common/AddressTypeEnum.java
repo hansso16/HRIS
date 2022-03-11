@@ -62,4 +62,13 @@ public enum AddressTypeEnum {
 	    }
 	    return null;
 	}
+
+	public static String deriveAddressType(String addressType) {
+		for (AddressTypeEnum e : values()) {
+			if (e.addressType.equals(addressType)) {
+				return e.getAddressTypeName();
+			}
+		}
+		return null;
+	}
 }

@@ -46,4 +46,6 @@ public class GlobalConstants {
 	
 	/** The Constant ALL_DIVISION_CODE. */
 	public static final String ALL_DIVISION_CODE = "000";
+	
+	public static final String EMPTY_SPACE = " ";
 }
