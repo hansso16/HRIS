@@ -87,6 +87,27 @@ public class EmployeeTO extends BaseEmployeeTO {
 	/** The tin no. */
 	private String tinNo;
 	
+	/** The emp photo base 64. */
+	private String empPhotoBase64;
+
+	/**
+	 * Gets the emp photo base 64.
+	 *
+	 * @return the emp photo base 64
+	 */
+	public String getEmpPhotoBase64() {
+		return empPhotoBase64;
+	}
+
+	/**
+	 * Sets the emp photo base 64.
+	 *
+	 * @param empPhotoBase64 the new emp photo base 64
+	 */
+	public void setEmpPhotoBase64(String empPhotoBase64) {
+		this.empPhotoBase64 = empPhotoBase64;
+	}
+
 	/**
 	 * Gets the sss no.
 	 *

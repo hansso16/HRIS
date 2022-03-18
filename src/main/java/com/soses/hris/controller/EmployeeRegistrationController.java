@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
@@ -114,6 +115,13 @@ public class EmployeeRegistrationController {
 	public String addEmployee(@Valid @ModelAttribute AddEmployeeRequest addEmployeeRequest, Errors errors, Model model) {
 		
 		log.info("Add Employee Request: " + addEmployeeRequest.toString());
+		
+		String dir = "C:\\apps\\hris\\img\\employee\\";
+		MultipartFile file= addEmployeeRequest.getFile();
+		log.info("FILE NAME: " + file.getName());
+		log.info("FILE NAME: " + file.getOriginalFilename());
+		
+		
 		BaseEmployeeResponse response = employeeRegistrationService.registerEmployee(addEmployeeRequest);
 		
 		if (response == null || StringUtil.isEmpty(response.getEmployeeId())) {

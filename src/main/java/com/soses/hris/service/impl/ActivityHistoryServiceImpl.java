@@ -1,6 +1,5 @@
 package com.soses.hris.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,11 +7,15 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.soses.hris.api.EmployeeActivityRequest;
+import com.soses.hris.api.EmployeeActivityResponse;
 import com.soses.hris.common.GeneralUtil;
 import com.soses.hris.common.StringUtil;
-import com.soses.hris.dto.ActivityHistoryTO;
 import com.soses.hris.entity.ActivityHistory;
 import com.soses.hris.repository.ActivityHistoryRepository;
 import com.soses.hris.service.ActivityHistoryService;
@@ -40,20 +43,28 @@ public class ActivityHistoryServiceImpl implements ActivityHistoryService {
 	}
 
 	@Override
-	public List<ActivityHistoryTO> retrieveEmployeeActivity(String employeeId) {
+	public EmployeeActivityResponse retrieveEmployeeActivity(EmployeeActivityRequest request) {
 		
-		List<ActivityHistoryTO> retList = new ArrayList<>();
+		EmployeeActivityResponse response = new EmployeeActivityResponse();
+		Page<ActivityHistory> activityPage = null;
+		String employeeId = request.getEmployeeId();
+		int pageSize = 5;
+		if (!StringUtil.isEmpty(request.getSize())) {
+			pageSize = Integer.parseInt(request.getSize());
+		}
+		int currentPage = 0;
+		if (!StringUtil.isEmpty(request.getPage())) {
+			currentPage = Integer.parseInt(request.getPage()) - 1;
+		}
+		Pageable page = PageRequest.of(currentPage, pageSize);
 		if (!StringUtil.isEmpty(employeeId)) {
-			List<ActivityHistory> repoList = activityHistoryRepo.findByEmployeeId(employeeId);
-			if (!GeneralUtil.isListEmpty(repoList)) {
-				for (ActivityHistory activityHistory : repoList) {
-					ActivityHistoryTO activityHistoryTO = null; //transform
-					retList.add(activityHistoryTO);
-				}
-			}
+	        activityPage = activityHistoryRepo.findByEmployeeIdOrderByEntryTimestampDesc(employeeId, page);
 		}
 		
-		return retList;
+		response.setActivityHistoryPage(activityPage);
+		response.setEmployeeId(employeeId);
+		
+		return response;
 	}
 
 	@Override

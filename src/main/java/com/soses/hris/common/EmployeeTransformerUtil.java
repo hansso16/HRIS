@@ -1,12 +1,14 @@
 package com.soses.hris.common;
 
 import com.soses.hris.api.EmployeeProfileRequest;
+import com.soses.hris.dto.ActivityHistoryTO;
 import com.soses.hris.dto.EmployeeAddressHistoryTO;
 import com.soses.hris.dto.EmployeeAddressTO;
 import com.soses.hris.dto.EmployeeBenefitsTO;
 import com.soses.hris.dto.EmployeeDependentTO;
 import com.soses.hris.dto.EmployeeInfoTO;
 import com.soses.hris.dto.EmployeeTO;
+import com.soses.hris.entity.ActivityHistory;
 import com.soses.hris.entity.Employee;
 import com.soses.hris.entity.EmployeeAddress;
 import com.soses.hris.entity.EmployeeAddressHistory;
@@ -197,5 +199,18 @@ public class EmployeeTransformerUtil {
 		}
 	
 		return employeeAddressHistoryTO;
+	}
+	
+	public static ActivityHistoryTO transformActivityDTO(ActivityHistory activityHistory) {
+		ActivityHistoryTO activityHistoryTO = null;
+		if (activityHistory != null) {
+			activityHistoryTO = new ActivityHistoryTO();
+			activityHistoryTO.setActivityId(activityHistory.getActivityId());
+			activityHistoryTO.setActivityText(activityHistory.getActivityText());
+			activityHistoryTO.setEmployeeId(activityHistory.getEmployeeId());
+			activityHistoryTO.setEntryTimestamp(activityHistory.getEntryTimestamp());
+			activityHistoryTO.setUsername(activityHistory.getUsername());
+		}
+		return activityHistoryTO;
 	}
 }

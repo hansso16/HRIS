@@ -19,15 +19,29 @@ import com.soses.hris.entity.Employee;
 import com.soses.hris.repository.EmployeeRepository;
 import com.soses.hris.service.EmployeeProfileService;
 
+/**
+ * The Class EmployeeProfileServiceImpl.
+ *
+ * @author hso
+ * @since Mar 17, 2022
+ */
 @Service("EmployeeProfileServiceImpl")
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @Transactional
 public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 
+	/** The employee BO. */
 	private EmployeeBO employeeBO;
 	
+	/** The employee repo. */
 	private EmployeeRepository employeeRepo;
 	
+	/**
+	 * Instantiates a new employee profile service impl.
+	 *
+	 * @param employeeBO the employee BO
+	 * @param employeeRepo the employee repo
+	 */
 	@Autowired
 	public EmployeeProfileServiceImpl(EmployeeBO employeeBO, EmployeeRepository employeeRepo) {
 		super();
@@ -35,6 +49,12 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 		this.employeeRepo = employeeRepo;
 	}
 
+	/**
+	 * Gets the employee details.
+	 *
+	 * @param employeeId the employee id
+	 * @return the employee details
+	 */
 	@Override
 	public BaseEmployeeResponse getEmployeeDetails(String employeeId) {
 
@@ -51,6 +71,12 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 		return resp;
 	}
 
+	/**
+	 * Update employee details.
+	 *
+	 * @param request the request
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean updateEmployeeDetails(EmployeeProfileRequest request) {
 		
@@ -66,6 +92,12 @@ public class EmployeeProfileServiceImpl implements EmployeeProfileService {
 		return isSuccess;
 	}
 
+	/**
+	 * Update employee details.
+	 *
+	 * @param request the request
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean updateEmployeeDetails(BaseEmployeeRequest request) {
 		// TODO Auto-generated method stub

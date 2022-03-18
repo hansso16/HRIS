@@ -47,5 +47,9 @@ public class GlobalConstants {
 	/** The Constant ALL_DIVISION_CODE. */
 	public static final String ALL_DIVISION_CODE = "000";
 	
+	/** The Constant EMPTY_SPACE. */
 	public static final String EMPTY_SPACE = " ";
+	
+	/** The Constant PERIOD. */
+	public static final String PERIOD = ".";
 }

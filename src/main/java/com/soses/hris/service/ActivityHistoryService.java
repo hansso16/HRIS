@@ -2,7 +2,8 @@ package com.soses.hris.service;
 
 import java.util.List;
 
-import com.soses.hris.dto.ActivityHistoryTO;
+import com.soses.hris.api.EmployeeActivityRequest;
+import com.soses.hris.api.EmployeeActivityResponse;
 import com.soses.hris.entity.ActivityHistory;
 
 public interface ActivityHistoryService {
@@ -11,5 +12,5 @@ public interface ActivityHistoryService {
 
 	boolean saveActivity(ActivityHistory activityHistory);
 	
-	List<ActivityHistoryTO> retrieveEmployeeActivity(String employeeId);
+	EmployeeActivityResponse retrieveEmployeeActivity(EmployeeActivityRequest employeeActivityReq);
 }

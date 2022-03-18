@@ -123,10 +123,35 @@ public class Employee implements Serializable {
     @Column(name="TIN_NO", length=20)
     private String tinNo;
     
+    /** The photo. */
+    @Column(name="PHOTO", length=20)
+    private String photo;
+    
     /** Default constructor. */
     public Employee() {
         super();
     }
+
+    
+	/**
+	 * Gets the photo.
+	 *
+	 * @return the photo
+	 */
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	/**
+	 * Sets the photo.
+	 *
+	 * @param photo the new photo
+	 */
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
 
 	/**
 	 * Gets the employee id.
@@ -555,7 +580,8 @@ public class Employee implements Serializable {
 				+ birthdate + ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
 				+ terminationDate + ", regularizationDate=" + regularizationDate + ", entryTimestamp=" + entryTimestamp
 				+ ", division=" + division + ", position=" + position + ", company=" + company + ", sssNo=" + sssNo
-				+ ", philHealthNo=" + philHealthNo + ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + "]";
+				+ ", philHealthNo=" + philHealthNo + ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + ", photo="
+				+ photo + "]";
 	}
 
 }

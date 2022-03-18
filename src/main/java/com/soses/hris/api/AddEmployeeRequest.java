@@ -2,6 +2,8 @@ package com.soses.hris.api;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.soses.hris.entity.Employee;
 import com.soses.hris.entity.EmployeeAddress;
 import com.soses.hris.entity.EmployeeBenefits;
@@ -31,6 +33,27 @@ public class AddEmployeeRequest {
 	/** The employee benefits. */
 	private EmployeeBenefits employeeBenefits;
 	
+	/** The file. */
+	private MultipartFile file;
+	
+	/**
+	 * Gets the file.
+	 *
+	 * @return the file
+	 */
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	/**
+	 * Sets the file.
+	 *
+	 * @param file the new file
+	 */
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	/**
 	 *  The employee dependent.
 	 *

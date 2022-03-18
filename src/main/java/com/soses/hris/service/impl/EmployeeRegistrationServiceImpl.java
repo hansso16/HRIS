@@ -1,5 +1,6 @@
 package com.soses.hris.service.impl;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,11 +13,14 @@ import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.soses.hris.api.AddEmployeeRequest;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.common.ActivityHistoryConstants;
+import com.soses.hris.common.FlatFileService;
 import com.soses.hris.common.GeneralUtil;
+import com.soses.hris.common.StringUtil;
 import com.soses.hris.controller.EmployeeRegistrationController;
 import com.soses.hris.entity.ActivityHistory;
 import com.soses.hris.entity.Employee;
@@ -63,6 +67,8 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	private EmployeeBenefitsRepository employeeBenefitsRepository;
 	
 	private ActivityHistoryService activityHistoryService;
+	
+	private FlatFileService flatFileService;
 
 	/**
 	 * Instantiates a new employee registration service impl.
@@ -77,7 +83,8 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	public EmployeeRegistrationServiceImpl(EmployeeRepository employeeRepository,
 			EmployeeAddressRepository employeeAddressRepository, EmployeeInfoRepository employeeInfoRepository,
 			EmployeeDependentRepository employeeDependentRepository,
-			EmployeeBenefitsRepository employeeBenefitsRepository, ActivityHistoryService activityHistoryService) {
+			EmployeeBenefitsRepository employeeBenefitsRepository, ActivityHistoryService activityHistoryService
+			, FlatFileService flatFileService) {
 		super();
 		this.employeeRepository = employeeRepository;
 		this.employeeAddressRepository = employeeAddressRepository;
@@ -85,6 +92,7 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 		this.employeeDependentRepository = employeeDependentRepository;
 		this.employeeBenefitsRepository = employeeBenefitsRepository;
 		this.activityHistoryService = activityHistoryService;
+		this.flatFileService = flatFileService;
 	}
 
 
@@ -100,8 +108,20 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 
 		BaseEmployeeResponse response = new BaseEmployeeResponse();
 		String employeeId = employeeRepository.getNextEmployeeId().toString();
+		String fileName = null;
 		log.info("EmployeeId: " + employeeId);
 		
+		// Upload photo
+		MultipartFile file = request.getFile();
+		if (file != null) {
+			try {
+				fileName = flatFileService.uploadEmployeePhoto(file, employeeId);
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}
+		}
+
 		// Employee
 		Employee employee = request.getEmployee();
 		if (employee == null) {
@@ -109,6 +129,9 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 		}
 		employee.setEmployeeId(employeeId);
 		employee.setEntryTimestamp(LocalDateTime.now());
+		if (!StringUtil.isEmpty(fileName)) {
+			employee.setPhoto(fileName);
+		}
 		employee = employeeRepository.save(employee);
 		
 		//permanent address
