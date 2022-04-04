@@ -8,7 +8,7 @@
 	<body>
 		<th:block th:replace="~{template :: menu}"></th:block>
 		<br>
-		<div class="container-fluid">
+		<div class="container">
 			<div th:if="${errorMessage != null && !#strings.isEmpty(errorMessage)}" class="alert alert-danger alert-dismissible fade show" role="alert">
 			  	<span th:text="${errorMessage}"></span >
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -17,10 +17,152 @@
 			  	<span th:text="${successMessage}"></span >
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
+			<div class="card mb-4" th:if="${res != null}">
+				<div class="card-body">
+			    	<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="userForm" th:with="user=${res.user}">
+						<h4>User Details</h4>
+						<input type="hidden" name="user.employeeId" th:value="${user.employeeId}" value="asdf" />
+				        <div class="row mb-2">
+				        	<div class="col">
+				        		<label for="username" class="form-label">Username</label >
+			                    <input type="text" name="user.username" id="username" class="form-control" th:value="${user.username}" required readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="role" class="form-label">Access Level</label >
+			                    <select id="role" class="form-select form-control" aria-label="RoleSelect" name="user.role" required disabled>
+									<option></option>
+									<option th:each="role : ${user.roleList}" th:value="${role.roleId}" th:if="${role.roleId >= user.role.roleId}"
+										th:text="${role.roleName}" th:selected="${user.role.roleId == role.roleId}" >Role</option>
+								</select>
+				        	</div>
+				        	<div class="col">
+				        		<label for="entryTimestamp" class="form-label">Date Registered</label >
+			                    <input type="text" name="entryTimestamp" id="entryTimestamp" class="form-control" th:value="${#temporals.format(user.entryTimestamp, 'MM/dd/yyyy hh:mma')}" required readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="terminationDate" class="form-label">User Termination Date</label >
+			                    <input type="date" name="terminationDate" id="terminationDate" class="form-control" th:value="${#temporals.format(user.terminationDate, 'MM/dd/yyyy')}" readonly>
+				        	</div>
+				        </div>
+			    	</form>
+			    	<hr>
+			    	<h4>Basic Details</h4>
+			    	<th:block th:with="employee=${res.employee}">
+				        <div class="row mb-2">
+				        	<div class="col">
+				        		<label for="username" class="form-label">First Name</label >
+			                    <input type="text" name="user.username" id="username" class="form-control" th:value="${employee.firstName}" readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="entryTimestamp" class="form-label">Last Name</label >
+			                    <input type="text" name="entryTimestamp" id="entryTimestamp" class="form-control" th:value="${employee.lastName}" readonly>
+				        	</div>
+				        	<div class="col-2">
+				        		<label for="terminationDate" class="form-label">Suffix</label >
+			                    <input type="text" name="terminationDate" id="terminationDate" class="form-control" th:value="${employee.suffix}" readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="role" class="form-label">Middle Name</label >
+			                    <input type="text" name="role" id="role" class="form-control" th:value="${employee.middleName}" readonly>
+				        	</div>
+				        </div>
+				        <div class="row mb-2">
+				        	<div class="col">
+				        		<label for="username" class="form-label">Hiring Date</label >
+			                    <input type="date" name="user.username" id="username" class="form-control" th:value="${employee.hiringDate}" readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="entryTimestamp" class="form-label">Regularization Date</label >
+			                    <input type="date" name="entryTimestamp" id="entryTimestamp" class="form-control" th:value="${employee.regularizationDate}" readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="terminationDate" class="form-label">Employee Termination Date</label >
+			                    <input type="date" name="terminationDate" id="terminationDate" class="form-control" th:value="${employee.terminationDate}" readonly>
+				        	</div>
+				        </div>
+				        <div class="row mb-2">
+				        	<div class="col">
+				        		<label for="username" class="form-label">Company</label >
+			                    <input type="text" name="user.username" id="username" class="form-control" th:value="${res.company.companyName}" readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="entryTimestamp" class="form-label">Division</label >
+			                    <input type="text" name="entryTimestamp" id="entryTimestamp" class="form-control" 
+			                    	th:value="${(res.division.divisionDescription != null)? res.division.divisionShortName + ' - '+res.division.divisionDescription : res.division.divisionName}" 
+			                    	readonly>
+				        	</div>
+				        	<div class="col">
+				        		<label for="terminationDate" class="form-label">Position</label >
+			                    <input type="text" name="terminationDate" id="terminationDate" class="form-control" th:value="${res.position.positionName}" readonly>
+				        	</div>
+				        </div>
+			    	</th:block>
+			    	<th:block th:if="${res.user.terminationDate == null}">
+				    	<hr>
+				    	<div>
+	 				    	<button class="btn btn-secondary" type="button" id="submitBtn">Update Access - supv</button >
+					    	<button class="btn btn-secondary" type="button" id="changePasswordBtn" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password - supv</button >
+					    	<button class="btn btn-warning" type="button" id="terminateUserBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" sec:authorize="hasAnyRole('ROLE_MGR')">Terminate User Access - mgr</button >
+												    	<!-- Termination Date -->
+							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" sec:authorize="hasAnyRole('ROLE_MGR')">
+							   <div class="modal-dialog">
+							      <div class="modal-content">
+							         <div class="modal-header">
+							            <h5 class="modal-title" id="exampleModalLabel">Terminate User Access</h5>
+							            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							         </div>
+							         <form action="#" th:action="@{__${#httpServletRequest.requestURI}__/terminate}" method="POST" id="userForm" th:with="user=${res.user}">
+							            <div class="modal-body">
+							               <input type="hidden" name="user.employeeId" th:value="${user.employeeId}" value="asdf" />
+							               <input type="hidden" name="user.username" th:value="${user.username}" value="asdf" />
+							               <div class="col">
+							                  <label for="terminationDate" class="form-label">Termination Date</label >
+							                  <input type="date" name="terminationDate" id="terminationDate" class="form-control" required>
+							               </div>
+							            </div>
+							            <div class="modal-footer">
+							               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							               <button type="submit" class="btn btn-warning">Terminate User</button>
+							            </div>
+							         </form>
+							      </div>
+							   </div>
+							</div>
+														
+					    	<!-- Change Password -->
+							<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true">
+							   <div class="modal-dialog">
+							      <div class="modal-content">
+							         <div class="modal-header">
+							            <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+							            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							         </div>
+							         <form action="#" th:action="@{__${#httpServletRequest.requestURI}__/changepassword}" method="POST" id="userForm" th:with="user=${res.user}">
+							            <div class="modal-body">
+							               <input type="hidden" name="user.employeeId" th:value="${user.employeeId}" value="asdf" />
+							               <input type="hidden" name="user.username" th:value="${user.username}" value="asdf" />
+							               <div class="col">
+							                  <label for="terminationDate" class="form-label">New Password</label >
+							                  <input type="password" name="password" id="terminationDate" class="form-control" required>
+							               </div>
+							               <div class="col">
+							                  <label for="terminationDate" class="form-label">Confirm New Password</label >
+							                  <input type="password" name="password" id="terminationDate" class="form-control" required>
+							               </div>
+							            </div>
+							            <div class="modal-footer">
+							               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							               <button type="submit" class="btn btn-primary">Save changes</button>
+							            </div>
+							         </form>
+							      </div>
+							   </div>
+							</div>				    	</div>
+			    	</th:block>				</div>
+			</div>
 		</div>
-		
 		<th:block th:replace="~{template :: footer}"></th:block >
-		<script th:if="${viewType} == 5 or ${viewType} == 2 or ${viewType} == 1" type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
 		<th:block th:replace="~{template :: scripts}"></th:block>
 		<script th:inline="javascript">
 		</script >

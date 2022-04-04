@@ -18,15 +18,28 @@ import com.soses.hris.controller.BaseSearchController;
 import com.soses.hris.entity.User;
 import com.soses.hris.service.user.UserSearchService;
 
+/**
+ * The Class UserSearchController.
+ *
+ * @author hso
+ * @since Mar 21, 2022
+ */
 @Controller
 @RequestMapping("/user")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class UserSearchController extends BaseSearchController {
 
+	/** The Constant USER_LIST. */
 	private static final String USER_LIST = "/user/user_list";
 	
+	/** The user search service. */
 	private UserSearchService<User> userSearchService;
 	
+	/**
+	 * Instantiates a new user search controller.
+	 *
+	 * @param userSearchService the user search service
+	 */
 	@Autowired
 	public UserSearchController(@Qualifier("UserSearchServiceImpl")UserSearchService<User> userSearchService) {
 		super();
@@ -34,6 +47,14 @@ public class UserSearchController extends BaseSearchController {
 	}
 
 
+	/**
+	 * Search entity.
+	 *
+	 * @param userReq the user req
+	 * @param errors the errors
+	 * @param model the model
+	 * @return the string
+	 */
 	@GetMapping("")
 	public String searchEntity(@Valid UserSearchRequest userReq, Errors errors, Model model) {
 		

@@ -22,12 +22,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.soses.hris.framework.property.FlatFileProperties;
 
+/**
+ * The Class FlatFileService.
+ *
+ * @author hso
+ * @since Mar 21, 2022
+ */
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class FlatFileService {
 
+	/** The flat file properties. */
 	private FlatFileProperties flatFileProperties;
 	
+	/**
+	 * Instantiates a new flat file service.
+	 *
+	 * @param flatFileProperties the flat file properties
+	 */
 	@Autowired
 	public FlatFileService(FlatFileProperties flatFileProperties) {
 		super();
@@ -35,6 +47,12 @@ public class FlatFileService {
 	}
 
 
+	/**
+	 * Generate base 64 img string.
+	 *
+	 * @param fileName the file name
+	 * @return the string
+	 */
 	public String generateBase64ImgString(String fileName) {
 		
 		if (StringUtil.isEmpty(fileName)) { return null;}
@@ -56,12 +74,26 @@ public class FlatFileService {
 		return encodedString;
 	}
 	
+	/**
+	 * Check dir.
+	 *
+	 * @param uploadPath the upload path
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static void checkDir(Path uploadPath) throws IOException {
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
 	}
 	
+	/**
+	 * Upload employee photo.
+	 *
+	 * @param file the file
+	 * @param employeeId the employee id
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public String uploadEmployeePhoto(MultipartFile file, String employeeId) throws IOException {
 		String finalPath = flatFileProperties.getEmpImgPath();
         Path uploadPath = Paths.get(finalPath);

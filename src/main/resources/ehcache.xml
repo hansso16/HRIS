@@ -270,4 +270,22 @@
         </resources>
     </cache>   
     
+    <!-- CFG_ROLE -->
+    <cache alias="roleCache">
+        <value-type>java.util.ArrayList</value-type>
+        <listeners>
+            <listener>
+                <class>com.soses.hris.config.CacheEventLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <event-ordering-mode>UNORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+            </listener>
+        </listeners>
+        <resources>
+            <heap unit="entries">100</heap>
+            <offheap unit="MB">100</offheap>
+        </resources>
+    </cache>  
+    
 </config>
