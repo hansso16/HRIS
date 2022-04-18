@@ -41,7 +41,7 @@
 				        	</div>
 				        	<div class="col">
 				        		<label for="terminationDate" class="form-label">User Termination Date</label >
-			                    <input type="date" name="terminationDate" id="terminationDate" class="form-control" th:value="${#temporals.format(user.terminationDate, 'MM/dd/yyyy')}" readonly>
+			                    <input type="text" name="terminationDate" id="terminationDate" class="form-control" th:value="${#temporals.format(user.terminationDate, 'MM/dd/yyyy')}" readonly>
 				        	</div>
 				        </div>
 			    	</form>

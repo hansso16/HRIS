@@ -1,8 +1,13 @@
 package com.soses.hris.repository;
 
+import java.time.LocalDate;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.soses.hris.entity.User;
@@ -50,4 +55,8 @@ public interface UserRepository extends JpaRepository<User, String> {
 	 * @return the user
 	 */
 	User findByEmployeeId(String employeeId);
+	
+	@Modifying
+	@Query("UPDATE user u SET u.terminationDate = :terminationDate WHERE u.username = :username")
+	void terminateUser(@Param("terminationDate") LocalDate terminationDate, @Param("username") String username);
 }

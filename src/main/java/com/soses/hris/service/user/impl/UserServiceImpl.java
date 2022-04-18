@@ -1,5 +1,6 @@
 package com.soses.hris.service.user.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -101,6 +102,17 @@ public class UserServiceImpl implements UserService {
 		response.setUsername(username);
 		
 		return response;
+	}
+	
+	@Override
+	public boolean terminateUser(LocalDate terminationDate, String username) {
+		
+		if (terminationDate != null && !StringUtil.isEmpty(username)) {
+			userRepo.terminateUser(terminationDate, username);
+			return true;
+		}
+		
+		return false;
 	}
 
 }

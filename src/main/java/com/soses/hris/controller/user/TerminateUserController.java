@@ -28,8 +28,6 @@ public class TerminateUserController {
 
 	private static final Logger log = LoggerFactory.getLogger(TerminateUserController.class);
 	
-	private static final String USER_PAGE = "/user/user";
-
 	private UserService userSerivce;
 	
 	@Autowired
@@ -42,15 +40,13 @@ public class TerminateUserController {
 	public RedirectView terminateUser(@PathVariable String username, Model model, RedirectAttributes redirectAttrs
 			, @RequestParam(name="terminationDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate terminationDate) {
 		log.info("viewUser(username,model)");
-		log.info("USERNAME: " + username + "; TERMINATION DATE: " + terminationDate);
 		
 		String redirectUrl = "/user/" + username;
 		RedirectView redirectView = new RedirectView(redirectUrl, true);
 		redirectView.setExposeModelAttributes(false);
 		
 		// service to update Termination Date
-//		if (employeeService.updateEmployeeDetails(request)) {
-		if (true) {
+		if (userSerivce.terminateUser(terminationDate, username)) {
 			redirectAttrs.addFlashAttribute(GlobalConstants.SUCCESS_MESSAGE, "User Access terminated successfully.");
 		} else {
 			redirectAttrs.addFlashAttribute(GlobalConstants.ERROR_MESSAGE, GlobalConstants.GENERIC_ERROR_MESSAGE_DESC);

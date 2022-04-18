@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * The Class User.
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
  * @since 11 Nov 2021
  */
 @Entity(name="user")
+@Table(name="user")
 public class User implements Serializable {
 
 	/** The Constant serialVersionUID. */
