@@ -21,7 +21,7 @@ public class UserTransformerUtil {
 		UserTO userTO = null;
 		if (user != null) {
 			userTO = new UserTO();
-			userTO.setEmployeeId(user.getEmployeeId());
+//			userTO.setEmployeeId(user.getEmployeeId());
 			userTO.setEntryTimestamp(user.getEntryTimestamp());
 			userTO.setRole(user.getRole());
 			userTO.setTerminationDate(user.getTerminationDate());

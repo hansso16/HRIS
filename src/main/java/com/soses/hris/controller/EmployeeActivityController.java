@@ -15,12 +15,13 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.EmployeeActivityRequest;
 import com.soses.hris.api.EmployeeActivityResponse;
+import com.soses.hris.repository.UserRepository;
 import com.soses.hris.service.ActivityHistoryService;
 
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeActivityController extends BaseSearchController {
+public class EmployeeActivityController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeActivityController.class);
 	
@@ -29,8 +30,8 @@ public class EmployeeActivityController extends BaseSearchController {
 	private ActivityHistoryService activityHistoryService;
 	
 	@Autowired
-	public EmployeeActivityController(@Qualifier("ActivityHistoryServiceImpl") ActivityHistoryService activityHistoryService) {
-		super();
+	public EmployeeActivityController(@Qualifier("ActivityHistoryServiceImpl") ActivityHistoryService activityHistoryService, UserRepository userRepo) {
+		super(userRepo);
 		this.activityHistoryService = activityHistoryService;
 	}
 	
@@ -47,6 +48,7 @@ public class EmployeeActivityController extends BaseSearchController {
 			model.addAttribute("res", res);
 		}
 		model.addAttribute("isUpdate", true);
+		model.addAttribute("isUser", isUser(employeeId));
 		return ACTIVITY_PAGE;
 	}
 }

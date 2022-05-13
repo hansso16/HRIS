@@ -5,9 +5,11 @@
 	<body>
 		<!-- General -->
 		<tr th:fragment="1">
-			<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="employeeForm" th:with="employee=${res.employee}">
+			<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="employeeForm" 
+					enctype="multipart/form-data" th:with="employee=${res.employee}" autocomplete="off">
 				<h5>Employee Details</h5>
 				<input type="hidden" name="employeeId" th:value="${res.employeeId}" value="asdf" />
+				<input type="hidden" name="photo" th:value="${employee.photo}" value="asdf" />
 		        <div class="row mb-2">
 		        	<div class="col-3">
 		        		<label for="image" class="form-label">Employee Photo</label >
@@ -40,11 +42,11 @@
 				        	</div >
 				        	<div class="col">
 				        		<label for="cellNo" class="form-label">Cellphone Number</label >
-			                    <input type="text" name="cellNo" id="cellNo" class="form-control digits" th:value="${employee.cellNo}" th:readonly="${!isUpdate}" readonly required>
+			                    <input type="text" name="cellNo" id="cellNo" class="form-control digits" th:value="${employee.cellNo}" maxlength="11" th:readonly="${!isUpdate}" readonly required>
 				        	</div >
 				        	<div class="col">
 				        		<label for="telNo" class="form-label">Telephone Number</label >
-			                    <input type="text" name="telNo" id="telNo" class="form-control digits" th:value="${employee.teleNo}" th:readonly="${!isUpdate}" readonly required>
+			                    <input type="text" name="telNo" id="telNo" class="form-control digits" th:value="${employee.teleNo}" maxlength="7" th:readonly="${!isUpdate}" readonly required>
 				        	</div >
 		        		</div>
 		        		<div class="row">
@@ -132,6 +134,16 @@
 	                    <input type="text" name="tinNo" id="tinNo" class="form-control" th:value="${employee.tinNo}" th:readonly="${!isUpdate}" readonly>
 		        	</div >
 		        </div>
+		        <div th:if="${isUpdate}">
+		 			<hr>
+		 			<h5>Employee Picture</h5>
+		 			<br>
+		 			<div class="row">
+		 				<div class="col-auto">
+				 			<input type="file" name="file" class="form-control" accept="image/png, image/jpeg">
+		 				</div>
+		 			</div>
+	 			</div>
 		        <div th:if="${isUpdate}">
 		        	<hr>
 			        <button class="btn btn-primary" type="submit" id="submitBtn">Save</button >

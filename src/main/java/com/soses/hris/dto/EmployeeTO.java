@@ -7,6 +7,7 @@ import com.soses.hris.entity.Company;
 import com.soses.hris.entity.Division;
 import com.soses.hris.entity.Position;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeeDTO.
  *
@@ -87,8 +88,48 @@ public class EmployeeTO extends BaseEmployeeTO {
 	/** The tin no. */
 	private String tinNo;
 	
+	/** The photo. */
+	private String photo;
+	
 	/** The emp photo base 64. */
 	private String empPhotoBase64;
+
+	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return "EmployeeTO [lastName=" + lastName + ", firstName=" + firstName + ", suffix=" + suffix + ", middleName="
+				+ middleName + ", nickname=" + nickname + ", cellNo=" + cellNo + ", teleNo=" + teleNo
+				+ ", emailAddress=" + emailAddress + ", gender=" + gender + ", birthdate=" + birthdate
+				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", terminationDate="
+				+ terminationDate + ", regularizationDate=" + regularizationDate + ", companyCode=" + companyCode
+				+ ", divisionCode=" + divisionCode + ", positionCode=" + positionCode + ", companyList=" + companyList
+				+ ", divisionList=" + divisionList + ", positionList=" + positionList + ", sssNo=" + sssNo
+				+ ", philHealthNo=" + philHealthNo + ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + ", photo="
+				+ photo + ", empPhotoBase64=" + empPhotoBase64 + "]";
+	}
+
+	/**
+	 * Gets the photo.
+	 *
+	 * @return the photo
+	 */
+	public String getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * Sets the photo.
+	 *
+	 * @param photo the new photo
+	 */
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 	/**
 	 * Gets the emp photo base 64.

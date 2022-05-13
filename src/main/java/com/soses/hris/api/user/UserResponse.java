@@ -5,7 +5,9 @@ import com.soses.hris.dto.UserTO;
 import com.soses.hris.entity.Company;
 import com.soses.hris.entity.Division;
 import com.soses.hris.entity.Position;
+import com.soses.hris.entity.Role;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserResponse.
  *
@@ -28,6 +30,27 @@ public class UserResponse extends BaseUserResponse {
 	
 	/** The position. */
 	private Position position;
+	
+	/** The user role. */
+	private Role userRole;
+
+	/**
+	 * Gets the user role.
+	 *
+	 * @return the user role
+	 */
+	public Role getUserRole() {
+		return userRole;
+	}
+
+	/**
+	 * Sets the user role.
+	 *
+	 * @param userRole the new user role
+	 */
+	public void setUserRole(Role userRole) {
+		this.userRole = userRole;
+	}
 
 	/**
 	 * Gets the user.

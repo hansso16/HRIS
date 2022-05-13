@@ -20,12 +20,13 @@ import org.springframework.web.context.WebApplicationContext;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeAddressRequest;
 import com.soses.hris.common.GlobalConstants;
+import com.soses.hris.repository.UserRepository;
 import com.soses.hris.service.EmployeeAddressService;
 
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeAddressController {
+public class EmployeeAddressController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeAddressController.class);
 	
@@ -34,8 +35,9 @@ public class EmployeeAddressController {
 	private EmployeeAddressService employeeAddressService;
 	
 	@Autowired
-	public EmployeeAddressController(@Qualifier("EmployeeAddressServiceImpl") EmployeeAddressService employeeAddressService) {
-		super();
+	public EmployeeAddressController(@Qualifier("EmployeeAddressServiceImpl") EmployeeAddressService employeeAddressService
+			, UserRepository userRepo) {
+		super(userRepo);
 		this.employeeAddressService = employeeAddressService;
 	}
 
@@ -51,6 +53,7 @@ public class EmployeeAddressController {
 		if (res!= null) {
 			model.addAttribute("res", res);
 			model.addAttribute("isUpdate", isUpdate);
+			model.addAttribute("isUser", isUser(employeeId));
 		}
 		return EMP_PAGE;
 	}

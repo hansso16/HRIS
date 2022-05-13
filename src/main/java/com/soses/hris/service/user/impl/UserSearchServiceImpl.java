@@ -57,7 +57,7 @@ public class UserSearchServiceImpl implements UserSearchService<User> {
 			
 			Pageable page = PageRequest.of(currentPage, pageSize);
 			if (!StringUtil.isEmpty(username)) {
-				userPage = userRepo.findByUsernameContainsOrEmployeeIdContains(username, username, page);
+				userPage = userRepo.findByUsernameContains(username, page);
 			} else {
 				userPage = userRepo.findAll(page);
 			}

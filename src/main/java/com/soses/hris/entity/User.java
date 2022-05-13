@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class User.
  *
@@ -29,9 +30,8 @@ public class User implements Serializable {
 	/** Primary key. */
     protected static final String PK = "username";
 
-    /** The employee id. */
-    @Column(name="EMPLOYEE_ID", precision=10)
-    private String employeeId;
+//    @Column(name="EMPLOYEE_ID", precision=10)
+//    private String employeeId;
     
     /** The username. */
     @Id
@@ -81,24 +81,6 @@ public class User implements Serializable {
 	 */
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-    /**
-     * Gets the employee id.
-     *
-     * @return the employee id
-     */
-    public String getEmployeeId() {
-		return employeeId;
-	}
-
-	/**
-	 * Sets the employee id.
-	 *
-	 * @param employeeId the new employee id
-	 */
-	public void setEmployeeId(String employeeId) {
-		this.employeeId = employeeId;
 	}
 
 	/**
@@ -198,8 +180,7 @@ public class User implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "User [employeeId=" + employeeId + ", username=" + username + ", password=" + password
-				+ ", entryTimestamp=" + entryTimestamp + ", terminationDate=" + terminationDate + ", employee="
-				+ employee + ", role=" + role + "]";
-	}
+		return "User [username=" + username + ", password=" + password + ", entryTimestamp=" + entryTimestamp
+				+ ", terminationDate=" + terminationDate + ", employee=" + employee + ", role=" + role + "]";
+	}	
 }

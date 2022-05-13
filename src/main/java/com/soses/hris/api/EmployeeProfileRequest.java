@@ -3,7 +3,9 @@ package com.soses.hris.api;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeeProfileRequest.
  *
@@ -79,6 +81,48 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 	
 	/** The tin no. */
 	private String tinNo;
+	
+	/** The photo. */
+	private String photo;
+	
+	/** The file. */
+	private MultipartFile file;
+	
+	/**
+	 * Gets the file.
+	 *
+	 * @return the file
+	 */
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	/**
+	 * Sets the file.
+	 *
+	 * @param file the new file
+	 */
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
+	/**
+	 * Gets the photo.
+	 *
+	 * @return the photo
+	 */
+	public String getPhoto() {
+		return photo;
+	}
+
+	/**
+	 * Sets the photo.
+	 *
+	 * @param photo the new photo
+	 */
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 	/**
 	 * Gets the sss no.
@@ -471,6 +515,6 @@ public class EmployeeProfileRequest extends BaseEmployeeRequest {
 				+ ", maritalStatus=" + maritalStatus + ", hiringDate=" + hiringDate + ", regularizationDate="
 				+ regularizationDate + ", terminationDate=" + terminationDate + ", division=" + division + ", position="
 				+ position + ", company=" + company + ", sssNo=" + sssNo + ", philHealthNo=" + philHealthNo
-				+ ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + "]";
+				+ ", pagibigNo=" + pagibigNo + ", tinNo=" + tinNo + ", photo=" + photo + ", file=" + file + "]";
 	}
 }

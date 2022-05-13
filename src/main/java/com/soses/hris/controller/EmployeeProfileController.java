@@ -25,8 +25,10 @@ import com.soses.hris.cache.configparam.GenderCache;
 import com.soses.hris.cache.configparam.MaritalStatusCache;
 import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.entity.ConfigParam;
+import com.soses.hris.repository.UserRepository;
 import com.soses.hris.service.EmployeeProfileService;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeeProfileController.
  *
@@ -36,7 +38,7 @@ import com.soses.hris.service.EmployeeProfileService;
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeProfileController {
+public class EmployeeProfileController extends BaseEmployeeController {
 
 	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(EmployeeProfileController.class);
@@ -62,8 +64,8 @@ public class EmployeeProfileController {
 	 */
 	@Autowired
 	public EmployeeProfileController(@Qualifier("EmployeeProfileServiceImpl") EmployeeProfileService employeeService, MaritalStatusCache maritalStatusCache
-			, GenderCache genderCache) {
-		super();
+			, GenderCache genderCache, UserRepository userRepo) {
+		super(userRepo);
 		this.employeeService = employeeService;
 		this.maritalStatusCache = maritalStatusCache;
 		this.genderCache = genderCache;
@@ -93,6 +95,7 @@ public class EmployeeProfileController {
 			model.addAttribute("genderList", genderList);
 			model.addAttribute("res", res);
 			model.addAttribute("isUpdate", isUpdate);
+			model.addAttribute("isUser", isUser(employeeId));
 		}
 		model.addAttribute("employeeProfileRequest", new EmployeeProfileRequest());
 		return EMP_PAGE;

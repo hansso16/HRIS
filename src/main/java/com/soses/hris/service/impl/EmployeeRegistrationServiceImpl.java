@@ -107,8 +107,49 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 	public BaseEmployeeResponse registerEmployee(AddEmployeeRequest request) {
 
 		BaseEmployeeResponse response = new BaseEmployeeResponse();
-		String employeeId = employeeRepository.getNextEmployeeId().toString();
 		String fileName = null;
+		
+		StringBuilder sb = new StringBuilder();
+		Employee employee = request.getEmployee();
+		if (employee == null) {
+			//throw error
+		}
+		String company = employee.getCompany();
+		String division = employee.getDivision();
+		String position = employee.getPosition();
+		
+		if ("50".equals(position)) { // Top Mgmt
+			sb.append("A");
+			sb.append(employeeRepository.getNextEmployeeIdA());
+		} else if ("010".equals(company)) { // SOSES
+			if ("110".equals(division) || "120".equals(division) || "130".equals(division)) { // WH, STORE, MP
+				sb.append("B");
+				sb.append(employeeRepository.getNextEmployeeIdB());
+			} else if ("140".equals(division) || "150".equals(division) || "160".equals(division)
+					|| "170".equals(division) || "180".equals(division)) { // AACHM
+				sb.append("A");
+				sb.append(employeeRepository.getNextEmployeeIdA());
+			} 
+		} else if ("020".equals(company)) { // PROS
+			if ("230".equals(division)) { // DBG Bulacan
+				sb.append("C");
+				sb.append(employeeRepository.getNextEmployeeIdC());
+			} else if ("240".equals(division)) { // DBG NETA 
+				sb.append("D");
+				sb.append(employeeRepository.getNextEmployeeIdD());
+			} else if ("210".equals(division)) { // UL
+				sb.append("E");
+				sb.append(employeeRepository.getNextEmployeeIdE());
+			} else if ("220".equals(division)) { // ML 
+				sb.append("F");
+				sb.append(employeeRepository.getNextEmployeeIdF());
+			} 
+		} else if ("030".equals(company)) { // PHARMA
+			sb.append("G"); // Pharma
+			sb.append(employeeRepository.getNextEmployeeIdG());
+		}
+		
+		String employeeId = sb.toString();
 		log.info("EmployeeId: " + employeeId);
 		
 		// Upload photo
@@ -123,10 +164,6 @@ public class EmployeeRegistrationServiceImpl implements EmployeeRegistrationServ
 		}
 
 		// Employee
-		Employee employee = request.getEmployee();
-		if (employee == null) {
-			//throw error
-		}
 		employee.setEmployeeId(employeeId);
 		employee.setEntryTimestamp(LocalDateTime.now());
 		if (!StringUtil.isEmpty(fileName)) {

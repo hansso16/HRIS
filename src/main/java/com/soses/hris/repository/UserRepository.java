@@ -10,8 +10,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.soses.hris.entity.Employee;
+import com.soses.hris.entity.Role;
 import com.soses.hris.entity.User;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface UserRepository.
  *
@@ -46,17 +49,58 @@ public interface UserRepository extends JpaRepository<User, String> {
 	 * @param pageable the pageable
 	 * @return the page
 	 */
-	Page<User> findByUsernameContainsOrEmployeeIdContains(String username, String employeeId, Pageable pageable);
+	Page<User> findByUsernameContainsOrEmployeeContains(String username, Employee employee, Pageable pageable);
 	
 	/**
-	 * Find by employee id.
+	 * Exists by employee.
 	 *
-	 * @param employeeId the employee id
-	 * @return the user
+	 * @param employee the employee
+	 * @return true, if successful
 	 */
-	User findByEmployeeId(String employeeId);
+	boolean existsByEmployee(Employee employee);
 	
+	/**
+	 * Exists by id.
+	 *
+	 * @param username the username
+	 * @return true, if successful
+	 */
+	boolean existsById(String username);
+	
+	/**
+	 * Terminate user.
+	 *
+	 * @param terminationDate the termination date
+	 * @param username the username
+	 */
 	@Modifying
 	@Query("UPDATE user u SET u.terminationDate = :terminationDate WHERE u.username = :username")
+	
+	/**
+	 * Terminate user.
+	 *
+	 * @param terminationDate the termination date
+	 * @param username the username
+	 */
 	void terminateUser(@Param("terminationDate") LocalDate terminationDate, @Param("username") String username);
+
+	/**
+	 * Update password.
+	 *
+	 * @param password the password
+	 * @param username the username
+	 */
+	@Modifying
+	@Query("UPDATE user u SET u.password = :password WHERE u.username = :username")
+	void updatePassword(@Param("password") String password, @Param("username") String username);
+	
+	/**
+	 * Update acess.
+	 *
+	 * @param role the role
+	 * @param username the username
+	 */
+	@Modifying
+	@Query("UPDATE user u SET u.role = :role WHERE u.username = :username")
+	void updateAcess(@Param("role") Role role, @Param("username") String username);		
 }

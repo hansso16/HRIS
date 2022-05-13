@@ -20,12 +20,13 @@ import org.springframework.web.context.WebApplicationContext;
 import com.soses.hris.api.BaseEmployeeResponse;
 import com.soses.hris.api.EmployeeInfoRequest;
 import com.soses.hris.common.GlobalConstants;
+import com.soses.hris.repository.UserRepository;
 import com.soses.hris.service.EmployeeInfoService;
 
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeInfoController {
+public class EmployeeInfoController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeInfoController.class);
 	
@@ -34,8 +35,8 @@ public class EmployeeInfoController {
 	private EmployeeInfoService employeeInfoService;
 	
 	@Autowired
-	public EmployeeInfoController(@Qualifier("EmployeeInfoServiceImpl") EmployeeInfoService employeeInfoService) {
-		super();
+	public EmployeeInfoController(@Qualifier("EmployeeInfoServiceImpl") EmployeeInfoService employeeInfoService, UserRepository userRepo) {
+		super(userRepo);
 		this.employeeInfoService = employeeInfoService;
 	}
 
@@ -51,11 +52,8 @@ public class EmployeeInfoController {
 		model.addAttribute("viewType", "3");
 		if (res!= null) {
 			model.addAttribute("res", res);
-			if(isUpdate) {
-				model.addAttribute("isUpdate", true);
-			} else {
-				model.addAttribute("isUpdate", false);
-			}
+			model.addAttribute("isUpdate", isUpdate);
+			model.addAttribute("isUser", isUser(employeeId));
 		}
 		return EMP_PAGE;
 	}

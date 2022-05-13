@@ -26,6 +26,7 @@ import com.soses.hris.api.EmployeeDependentRequest;
 import com.soses.hris.cache.configparam.GenderCache;
 import com.soses.hris.common.GlobalConstants;
 import com.soses.hris.entity.ConfigParam;
+import com.soses.hris.repository.UserRepository;
 import com.soses.hris.service.EmployeeDependentService;
 
 /**
@@ -37,7 +38,7 @@ import com.soses.hris.service.EmployeeDependentService;
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeDependentController {
+public class EmployeeDependentController extends BaseEmployeeController {
 
 	/** The Constant log. */
 	private static final Logger log = LoggerFactory.getLogger(EmployeeDependentController.class);
@@ -58,8 +59,9 @@ public class EmployeeDependentController {
 	 * @param genderCache the gender cache
 	 */
 	@Autowired
-	public EmployeeDependentController(@Qualifier("EmployeeDependentServiceImpl") EmployeeDependentService employeeDependentService, GenderCache genderCache) {
-		super();
+	public EmployeeDependentController(@Qualifier("EmployeeDependentServiceImpl") EmployeeDependentService employeeDependentService, GenderCache genderCache
+			, UserRepository userRepo) {
+		super(userRepo);
 		this.employeeDependentService = employeeDependentService;
 		this.genderCache = genderCache;
 	}
@@ -87,6 +89,7 @@ public class EmployeeDependentController {
 			model.addAttribute("genderList", genderList);
 			model.addAttribute("res", res);
 			model.addAttribute("isUpdate", isUpdate);
+			model.addAttribute("isUser", isUser(employeeId));
 		}
 		return EMP_PAGE;
 	}
@@ -165,6 +168,7 @@ public class EmployeeDependentController {
 		res.setEmployeeId(employeeId);
 		model.addAttribute("res", res);
 		model.addAttribute("isUpdate", true);
+		model.addAttribute("isUser", isUser(employeeId));
 		return EMP_PAGE;
 	}
 	

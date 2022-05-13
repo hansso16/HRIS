@@ -31,6 +31,14 @@ $('#philHealthNo').keyup(function() {
     this.value = val;
 });
 
+$('#pagibigNo').keyup(function() {
+    var val = this.value.replace(/\D/g, '');
+    val = val.replace(/^(\d{4})/, '$1-');
+    val = val.replace(/^(\d{4})-(\d{4})/, '$1-$2-');
+    val = val.replace(/^(\d{4})-(\d{4})-(\d{4}).*/, '$1-$2-$3');
+    this.value = val;
+});
+
 $('#tinNo').keyup(function() {
     var val = this.value.replace(/\D/g, '');
     val = val.replace(/^(\d{3})/, '$1-');

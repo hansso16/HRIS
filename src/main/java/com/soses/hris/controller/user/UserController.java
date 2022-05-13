@@ -1,5 +1,7 @@
 package com.soses.hris.controller.user;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +38,11 @@ public class UserController {
 
 
 	@GetMapping("/{username}")
-	public String viewUser(@PathVariable String username, Model model) {
+	public String viewUser(@PathVariable String username, Model model, Principal principal) {
 		log.info("viewUser(username,model)");
-		
+
 		if (!StringUtil.isEmpty(username)) {
-			BaseUserResponse res = userSerivce.getUserDetails(username);
+			BaseUserResponse res = userSerivce.getUserDetails(username, principal);
 			if (res != null) {
 				model.addAttribute("res", res);
 			}

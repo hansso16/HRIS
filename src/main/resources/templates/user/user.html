@@ -19,7 +19,7 @@
 			</div>
 			<div class="card mb-4" th:if="${res != null}">
 				<div class="card-body">
-			    	<form action="#" th:action="@{__${#httpServletRequest.requestURI}__}" method="POST" id="userForm" th:with="user=${res.user}">
+			    	<form action="#" id="userForm" th:with="user=${res.user}">
 						<h4>User Details</h4>
 						<input type="hidden" name="user.employeeId" th:value="${user.employeeId}" value="asdf" />
 				        <div class="row mb-2">
@@ -30,9 +30,7 @@
 				        	<div class="col">
 				        		<label for="role" class="form-label">Access Level</label >
 			                    <select id="role" class="form-select form-control" aria-label="RoleSelect" name="user.role" required disabled>
-									<option></option>
-									<option th:each="role : ${user.roleList}" th:value="${role.roleId}" th:if="${role.roleId >= user.role.roleId}"
-										th:text="${role.roleName}" th:selected="${user.role.roleId == role.roleId}" >Role</option>
+									<option th:value="${user.role.roleId}" th:text="${user.role.roleName}">Role</option>
 								</select>
 				        	</div>
 				        	<div class="col">
@@ -44,10 +42,15 @@
 			                    <input type="text" name="terminationDate" id="terminationDate" class="form-control" th:value="${#temporals.format(user.terminationDate, 'MM/dd/yyyy')}" readonly>
 				        	</div>
 				        </div>
-			    	</form>
 			    	<hr>
 			    	<h4>Basic Details</h4>
 			    	<th:block th:with="employee=${res.employee}">
+			    		<div class="row"> 
+					    	<h5>
+					    		<span th:text="'Employee ID: '"></span >
+					    		<em><span th:text="${employee.employeeId}"></span ></em>
+					    	</h5>
+			    		</div >
 				        <div class="row mb-2">
 				        	<div class="col">
 				        		<label for="username" class="form-label">First Name</label >
@@ -100,10 +103,40 @@
 			    	<th:block th:if="${res.user.terminationDate == null}">
 				    	<hr>
 				    	<div>
-	 				    	<button class="btn btn-secondary" type="button" id="submitBtn">Update Access - supv</button >
-					    	<button class="btn btn-secondary" type="button" id="changePasswordBtn" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Change Password - supv</button >
-					    	<button class="btn btn-warning" type="button" id="terminateUserBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" sec:authorize="hasAnyRole('ROLE_MGR')">Terminate User Access - mgr</button >
-												    	<!-- Termination Date -->
+					    	<button class="btn btn-secondary" type="button" id="changePasswordBtn" data-bs-toggle="modal" data-bs-target="#changePasswordModal" sec:authorize="hasAnyRole('ROLE_MGR')">Reset Password</button >
+	 				    	<button class="btn btn-secondary" type="button" id="updateAccessBtn" data-bs-toggle="modal" data-bs-target="#accessModal" sec:authorize="hasAnyRole('ROLE_MGR')">Update Access</button >
+					    	<button class="btn btn-warning" type="button" id="terminateUserBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" sec:authorize="hasAnyRole('ROLE_MGR')">Terminate User Access</button >
+							
+							<!-- Update Access Level -->
+							<div class="modal fade" id="accessModal" tabindex="-1" aria-labelledby="accessModalLabel" aria-hidden="true" sec:authorize="hasAnyRole('ROLE_MGR')">
+							   <div class="modal-dialog">
+							      <div class="modal-content">
+							         <div class="modal-header">
+							            <h5 class="modal-title" id="exampleModalLabel">Update Access</h5>
+							            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							         </div>
+							         <form action="#" th:action="@{__${#httpServletRequest.requestURI}__/updateaccess}" method="POST" id="userForm" th:with="user=${res.user}">
+							            <div class="modal-body">
+							               <input type="hidden" name="employeeId" th:value="${user.employeeId}" value="asdf" />
+							               <input type="hidden" name="username" th:value="${user.username}" value="asdf" />
+							               <div class="col">
+								        		<label for="role" class="form-label">Access Level</label >
+							                    <select id="role" class="form-select form-control" aria-label="RoleSelect" name="role" required>
+													<option></option>
+													<option th:each="role : ${user.roleList}" th:value="${role.roleId}" th:if="${role.roleId >= res.userRole.roleId}"
+														th:text="${role.roleName}" th:selected="${user.role.roleId == role.roleId}" >Role</option>
+												</select>
+								        	</div>
+							            </div>
+							            <div class="modal-footer">
+							               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							               <button type="submit" class="btn btn-warning">Update</button>
+							            </div>
+							         </form>
+							      </div>
+							   </div>
+							</div>							
+					    	<!-- Termination Date -->
 							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" sec:authorize="hasAnyRole('ROLE_MGR')">
 							   <div class="modal-dialog">
 							      <div class="modal-content">
@@ -130,24 +163,29 @@
 							</div>
 														
 					    	<!-- Change Password -->
-							<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true">
+							<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModal" aria-hidden="true" sec:authorize="hasAnyRole('ROLE_MGR')">
 							   <div class="modal-dialog">
 							      <div class="modal-content">
 							         <div class="modal-header">
-							            <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+							            <h5 class="modal-title" id="exampleModalLabel">Reset password</h5>
 							            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							         </div>
-							         <form action="#" th:action="@{__${#httpServletRequest.requestURI}__/changepassword}" method="POST" id="userForm" th:with="user=${res.user}">
+							         <form action="#" th:action="@{__${#httpServletRequest.requestURI}__/changepassword}" method="POST" id="changePasswordForm" th:with="user=${res.user}"
+							         		autocomplete="off" onsubmit="return validatePassword();">
 							            <div class="modal-body">
-							               <input type="hidden" name="user.employeeId" th:value="${user.employeeId}" value="asdf" />
-							               <input type="hidden" name="user.username" th:value="${user.username}" value="asdf" />
+							               <input type="hidden" name="employeeId" th:value="${user.employeeId}" value="asdf" />
+							               <input type="hidden" name="username" th:value="${user.username}" value="asdf" />
 							               <div class="col">
 							                  <label for="terminationDate" class="form-label">New Password</label >
-							                  <input type="password" name="password" id="terminationDate" class="form-control" required>
+							                  <input type="password" name="password" id="password" class="form-control" required maxlength="16"
+							                  	pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
 							               </div>
 							               <div class="col">
 							                  <label for="terminationDate" class="form-label">Confirm New Password</label >
-							                  <input type="password" name="password" id="terminationDate" class="form-control" required>
+							                  <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" required maxlength="16"
+							                  	pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+							               </div>
+							               <div class="col" id="passwordError">
 							               </div>
 							            </div>
 							            <div class="modal-footer">
@@ -165,6 +203,18 @@
 		<script type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
 		<th:block th:replace="~{template :: scripts}"></th:block>
 		<script th:inline="javascript">
+		
+			//var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+			function validatePassword() {
+			    var password1 = $('#password').val();
+			    var password2 = $('#passwordConfirmation').val();
+			    $('#passwordError').empty();
+			    if(password1 != password2) {
+					var passwordError = document.getElementById("passwordError");
+					passwordError.innerHTML = "<span style='color: red;'>The passwords you entered do not match</span>"
+					return false;
+				}
+			}
 		</script >
 	</body>
 </HTML >

@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.soses.hris.api.BaseEmployeeResponse;
+import com.soses.hris.repository.UserRepository;
 import com.soses.hris.service.EmployeeAddressHistoryService;
 
 @Controller
 @RequestMapping("/employee")
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
-public class EmployeeAddressHistoryController {
+public class EmployeeAddressHistoryController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeAddressHistoryController.class);
 	
@@ -28,8 +29,9 @@ public class EmployeeAddressHistoryController {
 	private EmployeeAddressHistoryService employeeAddressHistoryService;
 	
 	@Autowired
-	public EmployeeAddressHistoryController(@Qualifier("EmployeeAddressHistoryService") EmployeeAddressHistoryService employeeAddressHistoryService) {
-		super();
+	public EmployeeAddressHistoryController(@Qualifier("EmployeeAddressHistoryService") EmployeeAddressHistoryService employeeAddressHistoryService
+			, UserRepository userRepo) {
+		super(userRepo);
 		this.employeeAddressHistoryService = employeeAddressHistoryService;
 	}
 	
@@ -44,6 +46,7 @@ public class EmployeeAddressHistoryController {
 		if (res!= null) {
 			model.addAttribute("res", res);
 			model.addAttribute("isUpdate", true);
+			model.addAttribute("isUser", isUser(employeeId));
 		}
 		return EMP_PAGE;
 	}

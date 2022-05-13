@@ -16,15 +16,34 @@ public interface EmployeeRepository extends JpaRepository<Employee, String>{
 
 	List<Employee> findByEmployeeIdContains(String employeeId);
 
-//	List<Employee> findByEmployeeIdContains(String employeeId, Pageable pageable);
-	
 	Page<Employee> findByEmployeeIdContainsOrLastNameContainsOrFirstNameContains(String employeeId, String firstName, String lastName, Pageable pageable);
 
 	Employee findByEmployeeId(String employeeId);
 	
-	@Query(value= "select NEXTVAL(sqx_employee_id)", nativeQuery=true)
-	BigDecimal getNextEmployeeId();
+//	@Query(value= "select NEXTVAL(sqx_employee_id)", nativeQuery=true)
+//	BigDecimal getNextEmployeeIdA();
 
-//	@Query("SELECT e FROM employee e WHERE e.employeeId LIKE %:employeeId%")
-//	Employee findByEmployeeIdLike(String employeeId);
+	@Query(value= "select NEXTVAL(sqx_employee_id_a)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdA();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_b)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdB();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_c)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdC();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_d)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdD();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_e)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdE();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_f)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdF();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_g)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdG();
+	
+	@Query(value= "select NEXTVAL(sqx_employee_id_h)", nativeQuery=true)
+	BigDecimal getNextEmployeeIdH();
 }

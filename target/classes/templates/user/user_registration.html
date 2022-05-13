@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<HTML lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<th:block th:replace="~{template :: headfiles}"></th:block>
+	</head>
+	<body>
+		<th:block th:replace="~{template :: menu}"></th:block >
+		<br>
+		<div class="container">
+			<div th:if="${errorMessage != null && !#strings.isEmpty(errorMessage)}" class="alert alert-danger alert-dismissible fade show" role="alert">
+			  	<span th:text="${errorMessage}"></span >
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<form action="#" th:action="@{/user/add}" method="POST" autocomplete="off" id="userRegistrationForm" onsubmit="return validatePassword();">
+				<div class="card mb-4">
+				 	<h4 class="card-header">Add New User</h4>
+			 		<div class="card-body">
+			 			<h5>User Details</h5>
+			 			<input type="hidden" th:value="${res.employee.employeeId}" name="employeeId"/>
+				        <div class="row mb-2">
+				        	<div class="col">
+				        		<label for="username" class="form-label">Username</label >
+			                    <input type="text" name="username" id="username" class="form-control" maxlength="16" required>
+				        	</div>
+				        	<div class="col">
+				        		<label for="role" class="form-label">Access Level</label >
+			                    <select id="role" class="form-select form-control" aria-label="RoleSelect" name="roleId" required>
+									<option></option>
+									<option th:each="role : ${roleList}" th:value="${role.roleId}" th:if="${role.roleId >= loggedUser.role.roleId}"
+										th:text="${role.roleName}">Role</option>
+								</select>
+				        	</div>
+				        </div>
+				        <div class="row">
+							<div class="col-4">
+				        		<label for="password" class="form-label">Password</label >
+			                    <input type="password" name="password" id="password" class="form-control" required maxlength="16"
+			                  		pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" 
+			                  		title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+				        	</div>			        
+				        </div>
+				        <div class="row">
+							<div class="col-4">
+				        		<label for="passwordConfirmation" class="form-label">Confirm Password</label >
+			                    <input type="password" name="passwordConfirmation" id="passwordConfirmation" class="form-control" required maxlength="16"
+			                  		pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" 
+			                  		title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+				        	</div>			        
+				        </div>
+				        <div class="row" id="passwordError">
+		               </div>
+			 			<br>
+			 			<hr>
+			 			<h5>Employee</h5>
+			 			<th:block th:with="employee=${res.employee}">
+					    	<div class="row"> 
+						    	<h4>
+						    		<span th:text="'Employee ID: '"></span >
+						    		<em><span th:text="${employee.employeeId}"></span ></em>
+						    	</h4>
+				    		</div >
+				 			<div class="row">
+							    <div class="col">
+									<label for="firstName" class="form-label">First Name</label>
+									<input type="text" class="form-control" th:value="${employee.firstName}" id="firstName" disabled>
+								</div>
+							    <div class="col">
+									<label for="lastName" class="form-label">Last Name</label>
+									<input type="text" class="form-control" th:value="${employee.lastName}" id="lastName" disabled>
+								</div>
+							    <div class="col-1">
+									<label for="suffix" class="form-label">Suffix</label>
+									<input type="text" class="form-control" th:value="${employee.suffix}" id="suffix" disabled>
+								</div>
+							    <div class="col">
+									<label for="middleName" class="form-label">Middle Name</label>
+									<input type="text" class="form-control" th:value="${employee.middleName}" id="middleName" disabled>
+								</div>
+							    <div class="col">
+									<label for="nickname" class="form-label">Nickname</label>
+									<input type="text" class="form-control" th:value="${employee.nickname}" id="nickname" disabled>
+								</div>
+				 			</div>
+				 			<div class="row">
+							    <div class="col">
+									<label for="cellNo" class="form-label">Cellphone Number</label>
+									<input type="text" class="form-control" th:value="${employee.cellNo}" id="cellNo" disabled>
+								</div>
+							    <div class="col">
+									<label for="telNo" class="form-label">Telephone Number</label>
+									<input type="text" class="form-control" th:value="${employee.teleNo}" id="telNo" disabled>
+								</div>
+							    <div class="col-3">
+									<label for="emailAddress" class="form-label">Email Address</label>
+									<input type="email" class="form-control" th:value="${employee.emailAddress}" id="emailAddress" disabled>
+								</div>
+							    <div class="col-2">
+									<label for="gender" class="form-label">Gender</label>
+									<select class="form-select form-control" aria-label="GenderSelect" name="employee.gender" id="gender" disabled>
+										<option th:each="gender : ${genderList}" th:value="${gender.id.code}" th:text="${gender.description}"
+											th:selected="${employee.gender == gender.id.code}">Gender</option>
+									</select>
+								</div>
+							    <div class="col">
+									<label for="birthdate" class="form-label">Birthdate</label>
+									<input type="date" class="form-control" th:value="${employee.birthdate}" id="birthdate" disabled>
+								</div>
+				 			</div>
+				 			<div class="row">
+							    <div class="col">
+									<label for="maritalStatus" class="form-label">Marital Status</label>
+				                    <select id="maritalStatus" class="form-select form-control" aria-label="MaritalStatusSelect" name="employee.maritalStatus" disabled>
+										<option th:each="maritalStatus : ${maritalStatusList}" th:value="${maritalStatus.id.code}" 
+											th:text="${maritalStatus.description}" th:selected="${employee.maritalStatus == maritalStatus.id.code}">MaritalStatus</option>
+									</select>
+								</div>
+							    <div class="col">
+									<label for="hiringDate" class="form-label">Hiring Date</label>
+									<input type="date" class="form-control" th:value="${employee.hiringDate}" id="hiringDate" disabled>
+								</div>
+							    <div class="col">
+									<label for="company" class="form-label">Company</label>
+									<select id="company" class="form-select form-control" aria-label="CompanySelect" name="employee.company" disabled>
+										<option></option>
+										<option th:each="company : ${employee.companyList}" th:value="${company.id.companyCode}" 
+											th:text="${company.companyName}" th:selected="${employee.companyCode == company.id.companyCode}" >Company</option>
+									</select>
+								</div>
+							    <div class="col">
+									<label for="division" class="form-label">Division</label>
+									<select id="division" class="form-select form-control" aria-label="division" name="employee.division" disabled>
+										<option th:each="division : ${employee.divisionList}" th:value="${division.id.divisionCode}" 
+											th:text="${(division.divisionDescription != null)? division.divisionShortName + '-'+division.divisionDescription : division.divisionName}" 
+											th:selected="${employee.divisionCode == division.id.divisionCode}" >Division
+										</option>
+									</select>
+								</div>
+							    <div class="col">
+									<label for="position" class="form-label">Position</label>
+									<select id="position" class="form-select form-control" aria-label="position" name="employee.position" disabled>
+										<option th:each="position : ${employee.positionList}" th:value="${position.id.positionCode}" 
+											th:text="${position.positionName}" th:selected="${employee.positionCode == position.id.positionCode}" >Position</option>
+									</select>
+								</div>
+				 			</div>
+			 			</th:block>
+			 			<br>
+			 			<hr>
+					    <input class="btn btn-primary" type="submit" value="Submit">
+						<input class="btn btn-secondary" type="reset" value="Reset">
+				 	</div> 
+				</div>
+			</form >
+		</div>
+		<th:block th:replace="~{template :: footer}"></th:block >
+		<script type="text/javascript" th:src="@{/js/public/jquery-3.6.0.min.js}"></script>
+		<th:block th:replace="~{template :: scripts}"></th:block>
+		<script th:inline="javascript">
+		
+			//var regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+			function validatePassword() {
+			    var password1 = $('#password').val();
+			    var password2 = $('#passwordConfirmation').val();
+			    $('#passwordError').empty();
+			    if(password1 != password2) {
+					var passwordError = document.getElementById("passwordError");
+					passwordError.innerHTML = "<span style='color: red;'>The password you entered does not match</span>"
+					return false;
+				}
+			}
+		</script >
+	</body>
+</HTML>

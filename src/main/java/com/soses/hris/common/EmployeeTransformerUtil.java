@@ -99,6 +99,7 @@ public class EmployeeTransformerUtil {
 			employeeTO.setPhilHealthNo(employee.getPhilHealthNo());
 			employeeTO.setPagibigNo(employee.getPagibigNo());
 			employeeTO.setTinNo(employee.getTinNo());
+			employeeTO.setPhoto(employee.getPhoto());
 		}
 		
 		return employeeTO;
@@ -177,6 +178,7 @@ public class EmployeeTransformerUtil {
 			employee.setPhilHealthNo(request.getPhilHealthNo());
 			employee.setPagibigNo(request.getPagibigNo());
 			employee.setTinNo(request.getTinNo());
+			employee.setPhoto(request.getPhoto());
 		}
 		
 		return employee;

@@ -38,6 +38,9 @@
 			            <li class="nav-item me-auto">
 			                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('activity') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/activity}">Activity</a>
 			            </li>
+			            <li class="nav-item" th:if="${!isUser}" sec:authorize="hasAnyRole('ROLE_SUPV')">
+			                <a class="nav-link" href="#" th:href="@{/user/add/} + ${res.employeeId}">Add User</a>
+			            </li>
 			            <li class="nav-item" th:if="${!isUpdate}">
 			                <a class="nav-link" href="#" th:href="@{__${#httpServletRequest.requestURI}__} + @{?isUpdate=true}">Update</a>
 			            </li>
