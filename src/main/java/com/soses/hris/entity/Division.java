@@ -14,7 +14,7 @@ import javax.persistence.Entity;
  * @author hso
  * @since Jan 26, 2022
  */
-@Entity(name="CFG_DIVISION")
+@Entity(name="cfg_division")
 public class Division implements Serializable {
 
 	/** The Constant serialVersionUID. */

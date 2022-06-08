@@ -29,7 +29,7 @@ public class EmployeeBenefitsController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeBenefitsController.class);
 	
-	private static final String EMP_PAGE = "/employee/employee";
+	private static final String EMP_PAGE = "employee/employee";
 	
 	private EmployeeBenefitsService employeeBenefitsService;
 	

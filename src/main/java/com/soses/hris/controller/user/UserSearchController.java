@@ -30,7 +30,7 @@ import com.soses.hris.service.user.UserSearchService;
 public class UserSearchController extends BaseSearchController {
 
 	/** The Constant USER_LIST. */
-	private static final String USER_LIST = "/user/user_list";
+	private static final String USER_LIST = "user/user_list";
 	
 	/** The user search service. */
 	private UserSearchService<User> userSearchService;

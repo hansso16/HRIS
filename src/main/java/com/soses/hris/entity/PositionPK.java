@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class PositionPK.
  *
@@ -26,6 +27,28 @@ public class PositionPK implements Serializable {
 	/** The end date. */
 	@Column(name="END_DATE")
 	private LocalDate endDate;
+	
+    /** The division code. */
+    @Column(name="DIVISION_CODE")
+    private String divisionCode;
+
+	/**
+	 * Gets the division code.
+	 *
+	 * @return the division code
+	 */
+	public String getDivisionCode() {
+		return divisionCode;
+	}
+
+	/**
+	 * Sets the division code.
+	 *
+	 * @param divisionCode the new division code
+	 */
+	public void setDivisionCode(String divisionCode) {
+		this.divisionCode = divisionCode;
+	}
 
 	/**
 	 * Gets the position code.

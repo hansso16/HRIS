@@ -25,7 +25,7 @@ public class UserController {
 
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
-	private static final String USER_PAGE = "/user/user";
+	private static final String USER_PAGE = "user/user";
 
 	private UserService userSerivce;
 	

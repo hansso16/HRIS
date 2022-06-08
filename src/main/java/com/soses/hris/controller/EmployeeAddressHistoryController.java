@@ -24,7 +24,7 @@ public class EmployeeAddressHistoryController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeAddressHistoryController.class);
 	
-	private static final String EMP_PAGE = "/employee/employee";
+	private static final String EMP_PAGE = "employee/employee";
 	
 	private EmployeeAddressHistoryService employeeAddressHistoryService;
 	

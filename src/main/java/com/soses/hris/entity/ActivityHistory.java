@@ -16,7 +16,7 @@ import javax.persistence.Id;
  * @author hso
  * @since Mar 10, 2022
  */
-@Entity(name="ACTIVITY_HISTORY")
+@Entity(name="activity_history")
 public class ActivityHistory implements Serializable {
 
 	/** The Constant serialVersionUID. */

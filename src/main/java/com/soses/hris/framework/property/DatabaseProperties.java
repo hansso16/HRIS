@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
  * The Class DatabaseProperties.
  */
 @Configuration
-@PropertySource("classpath:/properties/${hris.env}/database.properties")
+@PropertySource("classpath:/properties/${hris_env}/database.properties")
 public class DatabaseProperties {
 
 	/** The driver class name. */

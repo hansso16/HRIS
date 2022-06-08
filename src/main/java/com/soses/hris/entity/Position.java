@@ -14,7 +14,7 @@ import javax.persistence.Entity;
  * @author hso
  * @since Jan 26, 2022
  */
-@Entity(name="CFG_POSITION")
+@Entity(name="cfg_position")
 public class Position implements Serializable {
 
 	/** The Constant serialVersionUID. */
@@ -35,10 +35,6 @@ public class Position implements Serializable {
     /** The suffix. */
     @Column(name="EFF_DATE")
     private LocalDate effDate;
-    
-    /** The company code. */
-    @Column(name="DIVISION_CODE")
-    private String divisionCode;
 
 	/**
 	 * Gets the id.
@@ -77,15 +73,6 @@ public class Position implements Serializable {
 	}
 
 	/**
-	 * Gets the division code.
-	 *
-	 * @return the division code
-	 */
-	public String getDivisionCode() {
-		return divisionCode;
-	}
-
-	/**
 	 * Sets the id.
 	 *
 	 * @param id the new id
@@ -121,42 +108,11 @@ public class Position implements Serializable {
 		this.effDate = effDate;
 	}
 
-	/**
-	 * Sets the division code.
-	 *
-	 * @param divisionCode the new division code
-	 */
-	public void setDivisionCode(String divisionCode) {
-		this.divisionCode = divisionCode;
-	}
-
-	/**
-	 * To string.
-	 *
-	 * @return the string
-	 */
-	@Override
-	public String toString() {
-		return "Position [id=" + id + ", positionShortName=" + positionShortName + ", positionName=" + positionName
-				+ ", effDate=" + effDate + ", divisionCode=" + divisionCode + "]";
-	}
-
-	/**
-	 * Hash code.
-	 *
-	 * @return the int
-	 */
 	@Override
 	public int hashCode() {
-		return Objects.hash(divisionCode, effDate, id, positionName, positionShortName);
+		return Objects.hash(effDate, id, positionName, positionShortName);
 	}
 
-	/**
-	 * Equals.
-	 *
-	 * @param obj the obj
-	 * @return true, if successful
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -166,8 +122,8 @@ public class Position implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Position other = (Position) obj;
-		return Objects.equals(divisionCode, other.divisionCode) && Objects.equals(effDate, other.effDate)
-				&& Objects.equals(id, other.id) && Objects.equals(positionName, other.positionName)
+		return Objects.equals(effDate, other.effDate) && Objects.equals(id, other.id)
+				&& Objects.equals(positionName, other.positionName)
 				&& Objects.equals(positionShortName, other.positionShortName);
 	}
 }

@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author hso
  * @since Jan 20, 2022
  */
-@Entity(name="CFG_BARANGAY")
+@Entity(name="cfg_barangay")
 public class Barangay implements Serializable {
 
 	/** The Constant serialVersionUID. */

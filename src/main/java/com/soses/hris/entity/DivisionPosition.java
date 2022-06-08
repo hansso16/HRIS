@@ -12,7 +12,7 @@ import javax.persistence.Entity;
  * @author hso
  * @since Jan 26, 2022
  */
-@Entity(name="CFG_DIVISION_POSITION")
+@Entity(name="cfg_division_position")
 public class DivisionPosition implements Serializable {
 
 	/** The Constant serialVersionUID. */

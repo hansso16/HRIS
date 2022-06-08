@@ -14,7 +14,7 @@ import javax.persistence.Entity;
  * @author hso
  * @since Jan 26, 2022
  */
-@Entity(name="CFG_COMPANY")
+@Entity(name="cfg_company")
 public class Company implements Serializable {
 
 	/** The Constant serialVersionUID. */

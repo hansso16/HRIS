@@ -56,7 +56,7 @@
 				    			th:text="${res.employee.terminationDate == null? 'Active' : 'Terminated'}">Employment Status</span>-->
 				    	</h4>
 			    	</div >
-			        <th:block><div th:replace="/employee/employee_fragment :: ${viewType}"></div></th:block>
+			        <th:block><div th:replace="employee/employee_fragment :: ${viewType}"></div></th:block>
 			    </div>
 			</div>
 		</div>

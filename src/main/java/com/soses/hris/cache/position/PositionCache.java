@@ -31,8 +31,8 @@ public class PositionCache {
 		if (!StringUtil.isEmpty(divisionCode)) {
 			List<Position> list = service.findAll();
 			divisionList = list.stream()
-					.filter(param -> divisionCode.equals(param.getDivisionCode()) 
-							|| GlobalConstants.ALL_DIVISION_CODE.equals(param.getDivisionCode()))
+					.filter(param -> divisionCode.equals(param.getId().getDivisionCode()) 
+							|| GlobalConstants.ALL_DIVISION_CODE.equals(param.getId().getDivisionCode()))
 					.collect(Collectors.toList());
 		}
 		return divisionList;

@@ -22,7 +22,7 @@ import com.soses.hris.service.ChangeMyPasswordService;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST)
 public class ChangePasswordController {
 
-	private static final String CHANGE_PWD = "/user/change_password";
+	private static final String CHANGE_PWD = "user/change_password";
 	
 	private ChangeMyPasswordService changeMyPasswordService;
 	

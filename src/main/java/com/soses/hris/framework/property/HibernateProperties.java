@@ -11,7 +11,7 @@ import org.springframework.context.annotation.PropertySource;
  * @since Dec 21, 2021
  */
 @Configuration
-@PropertySource("classpath:/properties/${hris.env}/hibernate.properties")
+@PropertySource("classpath:/properties/${hris_env}/hibernate.properties")
 public class HibernateProperties {
 
 	/** The dialect. */

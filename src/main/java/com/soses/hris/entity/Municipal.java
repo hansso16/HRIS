@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author hso
  * @since Jan 20, 2022
  */
-@Entity(name="CFG_MUNICIPAL")
+@Entity(name="cfg_municipal")
 public class Municipal implements Serializable {
 
 	/** The Constant serialVersionUID. */

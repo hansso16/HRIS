@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author hso
  * @since Mar 17, 2022
  */
-@PropertySource("classpath:/properties/${hris.env}/flatfile.properties")
+@PropertySource("classpath:/properties/${hris_env}/flatfile.properties")
 @Component
 public class FlatFileProperties {
 

@@ -33,7 +33,7 @@ public class EmployeeSearchController extends BaseSearchController{
 	private static final Logger log = LoggerFactory.getLogger(EmployeeSearchController.class);
 	
 	/** The Constant EMP_LIST. */
-	private static final String EMP_LIST = "/employee/employee_list";
+	private static final String EMP_LIST = "employee/employee_list";
 
 	private EmployeeSearchService employeeSearchService;
 	

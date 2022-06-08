@@ -236,10 +236,10 @@
 					    <div class="card-header text-center">
 					        <ul class="nav nav-tabs card-header-tabs">
 					            <li class="nav-item">
-					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('1') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/1}" th:text="Profile">Present Address</a>
+					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('1') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/1}">Present Address</a>
 					            </li>
 					            <li class="nav-item">
-					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('2') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/2}" th:text="Address">Permanent Address</a>
+					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('2') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/2}">Permanent Address</a>
 					            </li>
 					            <li class="nav-item">
 					                <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().endsWith('3') ? 'active disabled' : ''}" href="#" th:href="@{/employee/} + ${res.employeeId} + @{/address/history/3}">Provincial Address</a>

@@ -40,7 +40,7 @@ public class UserRegistrationController {
 
 	private static final Logger log = LoggerFactory.getLogger(UserRegistrationController.class);
 	
-	private static final String USER_REGISTRATION = "/user/user_registration";
+	private static final String USER_REGISTRATION = "user/user_registration";
 	
 	private RoleCacheService roleCache;
 	

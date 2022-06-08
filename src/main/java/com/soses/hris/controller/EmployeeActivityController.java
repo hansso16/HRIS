@@ -25,7 +25,7 @@ public class EmployeeActivityController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeActivityController.class);
 	
-	private static final String ACTIVITY_PAGE = "/employee/employee";
+	private static final String ACTIVITY_PAGE = "employee/employee";
 	
 	private ActivityHistoryService activityHistoryService;
 	

@@ -13,7 +13,7 @@ import javax.persistence.Entity;
  * @author hso
  * @since 15 Nov 2021
  */
-@Entity(name="CONFIG_PARAM")
+@Entity(name="config_param")
 public class ConfigParam implements Serializable {
 
 	/** The Constant serialVersionUID. */

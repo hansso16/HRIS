@@ -45,10 +45,10 @@ public class EmployeeRegistrationController {
 	private static final Logger log = LoggerFactory.getLogger(EmployeeRegistrationController.class);
 	
 	/** The Constant ADD_EMP. */
-	private static final String ADD_EMP = "/employee/add_employee";
+	private static final String ADD_EMP = "employee/add_employee";
 
 	/** The Constant ADD_EMP_SUC. */
-	private static final String ADD_EMP_SUC = "/employee/add_employee_success";
+	private static final String ADD_EMP_SUC = "employee/add_employee_success";
 	
 	/** The employee registration service. */
 	private EmployeeRegistrationService employeeRegistrationService;

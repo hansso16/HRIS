@@ -44,7 +44,7 @@ public class EmployeeDependentController extends BaseEmployeeController {
 	private static final Logger log = LoggerFactory.getLogger(EmployeeDependentController.class);
 	
 	/** The Constant EMP_PAGE. */
-	private static final String EMP_PAGE = "/employee/employee";
+	private static final String EMP_PAGE = "employee/employee";
 	
 	/** The employee dependent service. */
 	private EmployeeDependentService employeeDependentService;

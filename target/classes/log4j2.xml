@@ -8,8 +8,8 @@
         </Console>
 
         <RollingFile name="RollingFile"
-            fileName="C:/apps/logs/hris.log"
-            filePattern="C:/apps/logs/hris-%d{-dd-MMMM-yyyy}-%i.log.gz">
+            fileName="/apps/logs/hris.log"
+            filePattern="/apps/logs/hris-%d{-dd-MMMM-yyyy}-%i.log.gz">
             <PatternLayout>
                 <pattern>%d{DEFAULT} %p %C{1.}: %msg%n%throwable</pattern>
             </PatternLayout>

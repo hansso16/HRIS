@@ -21,7 +21,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     <cache alias="maritalStatusCache">
@@ -40,7 +40,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     <cache alias="genderCache">
@@ -59,7 +59,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     
@@ -77,7 +77,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>    
     
@@ -95,7 +95,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     <cache alias="provinceCacheByRegion">
@@ -112,7 +112,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     
@@ -130,7 +130,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     <cache alias="municipalCacheByProvince">
@@ -147,7 +147,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">20</offheap>
         </resources>
     </cache>
     
@@ -165,7 +165,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">30</offheap>
         </resources>
     </cache>
     <cache alias="barangayCacheByMunicipal">
@@ -181,7 +181,7 @@
             </listener>
         </listeners>
         <resources>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">30</offheap>
         </resources>
     </cache>
     
@@ -217,7 +217,7 @@
         </listeners>
         <resources>
             <heap unit="entries">50</heap>
-            <offheap unit="MB">50</offheap>
+            <offheap unit="MB">10</offheap>
         </resources>
     </cache>
     <cache alias="divisionCacheByCompany">
@@ -233,7 +233,7 @@
             </listener>
         </listeners>
         <resources>
-            <offheap unit="MB">50</offheap>
+            <offheap unit="MB">10</offheap>
         </resources>
     </cache>   
     
@@ -250,7 +250,7 @@
             </listener>
         </listeners>
         <resources>
-            <offheap unit="MB">50</offheap>
+            <offheap unit="MB">10</offheap>
         </resources>
     </cache>
     <cache alias="positionCacheByDivision">
@@ -266,7 +266,7 @@
             </listener>
         </listeners>
         <resources>
-            <offheap unit="MB">50</offheap>
+            <offheap unit="MB">10</offheap>
         </resources>
     </cache>   
     
@@ -284,7 +284,7 @@
         </listeners>
         <resources>
             <heap unit="entries">100</heap>
-            <offheap unit="MB">100</offheap>
+            <offheap unit="MB">10</offheap>
         </resources>
     </cache>  
     

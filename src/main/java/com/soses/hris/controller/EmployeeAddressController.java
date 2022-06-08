@@ -30,7 +30,7 @@ public class EmployeeAddressController extends BaseEmployeeController {
 
 	private static final Logger log = LoggerFactory.getLogger(EmployeeAddressController.class);
 	
-	private static final String EMP_PAGE = "/employee/employee";
+	private static final String EMP_PAGE = "employee/employee";
 	
 	private EmployeeAddressService employeeAddressService;
 	

@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author hso
  * @since Jan 20, 2022
  */
-@Entity(name="CFG_REGION")
+@Entity(name="cfg_region")
 public class Region implements Serializable {
 
 	/** The Constant serialVersionUID. */

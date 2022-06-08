@@ -13,7 +13,7 @@ import javax.persistence.Id;
  * @author hso
  * @since Jan 20, 2022
  */
-@Entity(name="CFG_PROVINCE")
+@Entity(name="cfg_province")
 public class Province implements Serializable{
 
 	/** The Constant serialVersionUID. */
